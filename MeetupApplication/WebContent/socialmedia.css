@@ -1,0 +1,211 @@
+/*all items */
+* {
+	font-family: "Times New Roman";
+	font-size: 15px;
+	color: #707070;
+}
+
+.category_socialmedia {
+	background-color: #F0F0F0;
+	text-align: left;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 215px;
+	height: 30px;
+	font-size: 20px;
+	font-weight: 500;
+	padding-top: 6px;
+	padding-left: 6px;
+}
+
+.category_socialmedia img {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	margin: 5px 8px;
+}
+
+/* navigation*/
+.socialmedia_navigation nav {
+	width: 100%;
+	height: 30px;
+	margin-top: -45px;
+}
+
+.socialmedia_navigation nav ul li {
+	list-style: none;
+	position: relative;
+	z-index: 2;
+	float: right;
+}
+
+.socialmedia_navigation nav ul li a { 
+	text-decoration: none;
+	display: flex;
+	font-family: "Times New Roman";
+	color: #707070;
+	font-size: 20px;
+	cursor: pointer;
+	float: left;
+	margin: 0px 10px;
+}
+
+/* add and settings */
+.socialmedia_navigation img{
+	margin-top: -3px;
+	width: 25px;
+	height: 25px;
+	margin: 0px 5px;
+}
+
+table.socialmedia {
+	width: 100%;
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+table.socialmedia thead th { 
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+}
+
+table.socialmedia tbody {
+	background: #F0F0F0;
+}
+
+table.socialmedia tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.socialmedia tbody img {
+	width: 30px;
+	height: 30px;
+	cursor: pointer;
+}
+
+/* Background Pop-Up-Window*/
+.socialmedia_addBlock {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.addBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Schlieﬂ-Button */
+.close {
+	color: #707070;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.popupHeader {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+.popupHeader img {
+	width: 35px;
+	height: 35px;
+	margin-bottom: -10px;
+}
+
+.popupBody {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 2px 15px;
+	text-align: left;
+	font-size: 20px;
+	color: #707070;
+	/* Style the Image Used to Trigger the Modal */
+}
+
+textarea {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+}
+
+textarea:focus {
+	border: thin #707070;
+	border-radius: 5px;
+}
+
+form {
+	margin: 5px -15px;
+}
+
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  width: 100%;
+  height: 40px;
+  -moz-padding-start: calc(10px-3px);
+  padding-left: 10px;
+  background: url(fff-0-2.png) repeat;
+  box-shadow: 2px 2px 5px 1px rgba(0,0,0,0.3);
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select option {
+  color: #666;
+}
+
+select:focus::-ms-value {
+  background-color: transparent;
+}
+
+.select-wrapper {
+  /* ... */
+  position: relative;
+}
+.select-wrapper::before {
+  font-family: fontello;
+  content: url(pictures/splitButton);
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #fff;
+  pointer-events: none;
+}

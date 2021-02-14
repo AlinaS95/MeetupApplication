@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Notification</title>
+	<link rel="stylesheet" type="text/css" href="inbox.css">
+<script type="text/javascript" src="inbox.js"></script>
+</head>
+<body>
+	<nav>
+		<div class="logo">Inbox</div>
+		<div class="icon" onclick="toggleNotifi()">
+			<img src="pictures/inbox.png" alt=""> <span>17</span>
+		</div>
+		<div class="notifi-box" id="box">
+			<h2>Notifications <span>17</span></h2>
+			<div class="notifi-item">
+				<img src="pictures/avatar1.png" alt="img">
+				<div class="text">
+				   <h4>Jana Podschaske</h4>
+				   <p>@lorem ipsum dolor sit amet</p>
+			    </div> 
+			</div>
+
+			<div class="notifi-item">
+				<img src="pictures/avatar2.png" alt="img">
+				<div class="text">
+				   <h4>Alina Schomacher</h4>
+				   <p>@lorem ipsum dolor sit amet</p>
+			    </div> 
+			</div>
+
+			<div class="notifi-item">
+				<img src="pictures/avatar3.png" alt="img">
+				<div class="text">
+				   <h4>Lea-Marie Brüggemann</h4>
+				   <p>@lorem ipsum dolor sit amet</p>
+			    </div> 
+			</div>
+
+			<div class="notifi-item">
+				<img src="pictures/avatar4.png" alt="img">
+				<div class="text">
+				   <h4>Max Mustermann</h4>
+				   <p>@lorem ipsum dolor sit amet</p>
+			    </div> 
+			</div>
+
+			<div class="notifi-item">
+				<img src="pictures/avatar5.png" alt="img">
+				<div class="text">
+				   <h4>Chantal Podschaske</h4>
+				   <p>@lorem ipsum dolor sit amet</p>
+			    </div> 
+			</div>
+
+		</div>
+	</nav>
+<script>
+var box  = document.getElementById('box');
+var down = false;
+
+
+function toggleNotifi(){
+	if (down) {
+		box.style.height  = '0px';
+		box.style.opacity = 0;
+		down = false;
+	}else {
+		box.style.height  = '510px';
+		box.style.opacity = 1;
+		down = true;
+	}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+@charset "ISO-8859-1";
+html {
+  background-color: #E3E0E0;
+}
+.archive{
+	width: 320px;
+	height: 100px;
+	background: #F0F0F0;
+	color: black;
+	top: 53%;
+	left: 64%;
+	position: relative;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 20px 20px;
+}
+.archive p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.archive input{
+	width: 100%;
+	margin-bottom: 20px;	
+}
+
+.archive input[type="text"], input[type="password"]
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+}
+
+.archive input[type="submit"]
+{
+	border: none;
+	height: 40px;
+	background: #fff;
+	color: black;
+	font-size: 18px;
+	border-radius: 20px;
+	
+}
+
+.archive input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #E3E0E0;
+	color: black;
+	
+}
+
+.archive a{
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: black;
+	
+}
+
+.archive a:hover {
+	color: darkgrey;
+	
+	
+}
+.archive1{
+	width: 320px;
+	height: 100px;
+	background: #F0F0F0;
+	color: black;
+	margin-bottom: 100px;
+	position: relative;
+	transform: translate(-50%,-50%);
+	box-sizing: border-box;
+	padding: 20px 20px;
+}
+.archive1 p{
+	margin: 0;
+	padding: 0;
+	font-weight: bold;
+}
+
+.archive1 input{
+	width: 100%;
+	margin-bottom: 20px;	
+}
+
+.archive1 input[type="text"], input[type="password"]
+{
+	border: none;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+	outline: none;
+	height: 40px;
+	color: #fff;
+	font-size: 16px;
+}
+
+.archive1 input[type="submit"]
+{
+	border: none;
+	height: 40px;
+	background: #fff;
+	color: black;
+	font-size: 18px;
+	border-radius: 20px;
+	
+}
+
+.archive1 input[type="submit"]:hover
+{
+	cursor: pointer;
+	background: #E3E0E0;
+	color: black;
+	
+}
+
+.archive1 a{
+	text-decoration: none;
+	font-size: 12px;
+	line-height: 20px;
+	color: black;
+	
+}
+
+.archive1 a:hover {
+	color: darkgrey;
+	
+}
+
+.box1, .box2, .box3, .box4 {
+    float: left;
+    width: 23%;
+    margin-right: 2%;
+    margin-top: 8%;
+    padding: 20px;
+    background: #eee;
+    box-sizing: border-box;
+}
+.box4 {
+     margin-right: 0;
+}
+.task1, .task2, .task3, .task4 {
+    float: left;
+    width: 23%;
+    margin-right: 2%;
+    margin-top: 1%;
+    padding: 149px;
+    background: #eee;
+    box-sizing: border-box;
+}
+.task4 {
+     margin-right: 0;
+}
+
+
+
+section,
+aside {
+	border: 2px solid #808080;
+	padding: 5px;
+	width: 320px;
+	height: 335px;
+	margin-left: -143px;
+    margin-top: -138px;
+}
+
+.rechteck1 {
+    background-color: green;
+    position: absolute;
+    width: 123px;
+    height: 9px;
+    bottom: 270px;
+    left: 119px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 80px;
+}
+.rechteck2 {
+    background-color: red;
+    position: absolute;
+    width: 123px;
+    height: 9px;
+    bottom: 58px;
+    left: 119px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 80px;
+}
+.rechteck3 {
+    background-color: green;
+    position: absolute;
+    width: 123px;
+    height: 9px;
+    bottom: 270px;
+    left: 491px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 80px;
+}
+.rechteck4 {
+    background-color: red;
+    position: absolute;
+    width: 123px;
+    height: 9px;
+    bottom: 58px;
+    left: 491px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 80px;
+}
+.rechteck5 {
+    background-color: yellow;
+    position: absolute;
+    width: 123px;
+    height: 9px;
+    bottom: 270px;
+    left: 870px;
+    border: 1px solid black;
+    text-align: center;
+    border-radius: 80px;
+}
+
+
+.profiletask {
+	margin-left: 20px;
+	margin-top: 240px;
+	position: absolute;
+}
+.profiletask1 {
+	margin-left: 390px;
+	margin-top: 240px;
+	position: absolute;
+}
+.profiletask2 {
+	margin-left: 770px;
+	margin-top: 240px;
+	position: absolute;
+}
+.profiletask3 {
+	margin-left: 20px;
+	margin-top: 440px;
+	position: absolute;
+}
+.profiletask4 {
+	margin-left: 390px;
+	margin-top: 440px;
+	position: absolute;
+}
+
+/* add and settings */
+.addnewtask img {
+    margin-left: -985px;
+    margin-top: 134px;
+    width: 37px;
+    height: 37px;
+    position: absolute;
+}
+
+
+/* Background Pop-Up-Window*/
+.list_addnewtaskBlock {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.addnewtaskBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Background Pop-Up-Window*/
+.navigation_addnewtaskBlock {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.addnewtaskBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+textarea {
+	background-color: white;
+	border: none;
+	border-radius: 10px;
+	position: absolute;
+	margin: 68.575px -5px 0px;
+    width: 234px;
+    height: 84px;
+}
+
+textarea:focus {
+	border: thin #707070;
+	border-radius: 5px;
+}
+/*Datum*/
+form {
+	width: 5em;
+}
+
+input {
+	padding: .5em;
+	background-color: #fffbf0;
+	border: 1px solid #e7c157;
+	width: 10em;
+	height: 1em;
+	position: absolute;
+	margin-left: 3px;
+    margin-top: 33px;
+}
+
+label {
+	display: inline-block;
+	width: 3em;
+	margin-bottom: 1em;
+	line-height: 1em;
+	text-align: right;
+
+}
+

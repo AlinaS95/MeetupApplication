@@ -1,0 +1,383 @@
+/*all items */
+* {
+	font-family: "Times New Roman";
+	font-size: 15px;
+	color: #707070;
+}
+
+.welcome {
+	text-align: left;
+	background-color: #F0F0F0;
+	margin-left: 120px;
+	margin-right: 840px;
+	color: #707070;
+	position: relative;
+	border-radius: 5px;
+	margin-top: -34px;
+}
+
+.welcome hr {
+	width: 40%;
+	margin: -43px 125px;
+	color: #707070;
+}
+
+.welcome h3 {
+	text-align: left;
+	padding: 20px;
+	font-size: 22px;
+	letter-spacing: 2px;
+}
+
+.welcome nav {
+	width: 290px;
+	height: 65px;
+	letter-spacing: 2px;
+	padding-top: 10px;
+}
+
+.welcome nav ul {
+	float: right;
+	flex-direction: column;
+	padding: 0px 0px;
+}
+
+.welcome nav ul li a { /* menu bar a */
+	text-decoration: none;
+	display: flex;
+	font-family: "Times New Roman";
+	color: #707070;
+	font-size: 30px;
+	padding: 0px 0px;
+	cursor: pointer;
+}
+
+.welcome nav ul li ul { /* Downdrop */
+	text-decoration: none;
+	display: none;
+	position: absolute;
+}
+
+.welcome nav ul li:hover ul { 
+	display: block;
+}
+
+.welcome nav ul li ul li { 
+	width: 185px;
+	height: 50px;
+	margin: 15px -185px;
+	background-color: #F0F0F0;
+}
+
+.welcome nav ul li ul li a {
+	padding: 10px 25px;
+	font-size: 22px;
+}
+
+.welcome nav ul li ul li a:hover {
+	background-color: #d1d1d1;
+}
+
+.welcome img{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	margin: 0px -5px;
+}
+
+.profile_title {
+	background-color: #F0F0F0;
+	text-align: center;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 35px;
+	margin-left: 500px;
+	margin-bottom: 160px;
+	padding-top: 10px;
+}
+
+.profile_overview {
+	text-align: center;
+	background-color: #F0F0F0;
+	border-style: solid;
+	border-color: #707070;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 300px;
+	margin: 0px 485px;
+	margin-top: -170px;
+	padding: 15px 15px;
+}
+
+.profile_icon img{
+	width: 117px;
+	height: 117px;
+	position: relative;
+	padding-bottom: 20px;
+}
+
+.profile_info img{
+	width: 28px;
+	height: 28px;
+	float: left;
+	margin-top: -5px;
+}
+
+.profile_settings img{
+	width: 30px;
+	height: 30px;
+	margin-bottom: -9px;
+	padding-right: 5px;
+}
+
+.profile_info{
+	text-align: center;
+	text-transform: uppercase;
+	margin-right: 25px;
+}
+
+.profile_settings {
+	text-align: center;
+	margin-right: 25px;
+	cursor: pointer;
+}
+
+/* Background Pop-Up-Window*/
+.profile_popup {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.popupBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+.popupHeader {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+.popupBody {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 2px 15px;
+	text-align: left;
+	font-size: 20px;
+	color: #707070;
+	/* Style the Image Used to Trigger the Modal */
+}
+
+.workspace_title {
+	background-color: #F0F0F0;
+	text-align: center;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 35px;
+	margin-left: 65px;
+	margin-top: 50px;
+	padding-top: 10px;
+	margin-bottom: -10px;
+}
+
+.workspace {
+	text-align: left;
+	background-color: #F0F0F0;
+	border-style: solid;
+	border-color: #707070;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 260px;
+	margin: 0px 50px;
+	padding: 15px 15px;
+}
+
+.project_name {
+	text-align: center;
+	text-decoration: underline;
+}
+
+.workspace img {
+	width: 35px;
+	height: 35px;
+	padding: 2px 5px;
+}
+
+.workspace_members {
+	cursor: pointer;
+}
+
+.workspace_addmembers {
+	cursor: pointer;
+}
+
+.workspace_tasks {
+	cursor: pointer;
+}
+
+.organization_title {
+	background-color: #F0F0F0;
+	text-align: center;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 35px;
+	margin-left: 915px;
+	margin-top: -340px;
+	padding-top: 10px;
+	margin-bottom: 270px;
+}
+
+.organization {
+	text-align: left;
+	background-color: #F0F0F0;
+	border-style: solid;
+	border-color: #707070;
+	border-width: 1px;
+	border-radius: 5px;
+	color: #707070;
+	width: 340px;
+	height: 260px;
+	margin: 0px 900px;
+	margin-top: -280px;
+	padding: 15px 15px;
+}
+
+.workingtime {
+	text-align: center;
+	text-decoration: underline;
+}
+
+.organization img {
+	width: 50px;
+	height: 50px;
+	padding: 8px 10px;
+}
+
+.workingtime_Buttons {
+	cursor: pointer;
+}
+
+.workingtime_Buttons input {
+	width: 50px;
+	height: 50px;
+	padding: 8px 10px;
+}
+
+.workingtime_Buttons p {
+	margin: -45px 70px;
+	position: absolute;
+}
+
+.clock {
+	margin-left: 180px;
+	margin-top: -200px;
+	margin-bottom: 70px;
+	position: relative;
+}
+
+.logout img {
+	width: 50px;
+	height: 50px;
+}
+
+.logout {
+	text-transform: uppercase;
+	text-align: right;
+}
+
+.logout a {
+	text-decoration: none;
+}
+
+.addBlock .popupBody input {
+	width: 30px;
+	height: 30px;
+}
+
+.addBlock .popupBody textarea {
+	height: 25px;
+	width: 330px;
+	font-size: 15px;
+}
+
+.addBlock .popupBody a {
+	font-size: 22px;
+	font-weight: bold;
+	margin: 0px 5px;
+}
+
+.popupBody .membersList input {
+	width: 30px;
+	height: 30px;
+	margin-bottom: -8px;
+	margin-right: 2px;
+}
+
+.addBlock .popupFooter button {
+    margin-right: 30px;
+    border-width: 5px;
+}
+
+.addBlock button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+} 
+
+.addBlock button:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
+table {
+	border-spacing: 5px;
+}
+td {
+	font-size: 15px; 
+	font-weight: 100;
+}
+
+h4 {
+	margin: -46px 68px;
+	position: absolute;
+}

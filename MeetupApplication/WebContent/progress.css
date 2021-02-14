@@ -1,0 +1,75 @@
+/*background*/
+html {
+  background-color: #E3E0E0;
+}
+
+/*box*/
+.box1, .box2, .box3 {
+	float: right;
+    background: #F0F0F0;
+    width: 23%;
+    padding: 60px;
+    margin: 33px;
+    margin-right: 3px;
+    box-sizing: border-box;
+    margin-top: 43px;
+}
+
+.box3 {
+     margin-right: -3px;
+}
+
+
+h5 {
+	 float: right;
+	 margin-top: 230px;
+	 margin-right: 237px;
+	
+}
+
+.projectstatus {
+	float: right;
+    background: #F0F0F0;
+    width: 23%;
+    padding: 60px;
+    padding-left: 70%;
+    margin: 33px;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.teamstatus {
+	float: right;
+    background: #F0F0F0;
+    width: 23%;
+    padding: 60px;
+    padding-left: 70%;
+    margin: 33px;
+    margin-right: 20px;
+    margin-top: 8px;
+}
+
+h6 {
+	 float: left;
+	 margin-top: 70px;
+	 margin-right: 280px;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+
+   
+   
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  width: 10%;
+  height: 30px;
+  background-color: #4CAF50;
+  text-align: center; /* To center it horizontally (if you want) */
+  line-height: 30px; /* To center it vertically */
+  color: white;
+}
