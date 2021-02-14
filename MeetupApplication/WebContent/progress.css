@@ -58,18 +58,16 @@ h6 {
 #myProgress {
   width: 100%;
   background-color: grey;
-
-   
-   
-}
+  position: relative;
+  right: 1000px;
+  }
 
 #myBar {
   width: 1%;
   height: 30px;
   width: 10%;
-  height: 30px;
-  background-color: #4CAF50;
+  background-color: #E3E0E0;
   text-align: center; /* To center it horizontally (if you want) */
-  line-height: 30px; /* To center it vertically */
+  line-height: 80px; /* To center it vertically */
   color: white;
 }
