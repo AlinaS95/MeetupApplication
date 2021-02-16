@@ -21,8 +21,8 @@
 			<input type="text" name="email" placeholder="Enter E-Mail" />
 			<p>Password</p>
 			<input type="password" name="password" placeholder="Enter Password" />
-			<input type="submit" value="Submit"> 
-			<input type="submit" name="" value="Not a member?" onClick="register()"><br>
+			<input type="submit" value="Submit"> <input type="submit"
+				name="" value="Not a member?" onClick="register()"><br>
 		</form>
 	</div>
 </body>

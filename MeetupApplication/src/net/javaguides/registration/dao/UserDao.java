@@ -8,7 +8,9 @@ import java.sql.SQLException;
 import net.javaguides.registration.model.User;
 
 public class UserDao {
-
+	
+//Methode um Anmeldeinformationen vom Benutzer mit den Daten der Datenbank vergleicht
+	
 	public int registerUser(User user) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO user" + " (firstName, lastName, email, company, position, password) VALUES " + " (?,?,?,?,?,?);";
 	

@@ -33,13 +33,13 @@ public class LoginServlet extends HttpServlet {
 
         try {
             if (loginDao.validate(loginBean)) {
-                //HttpSession session = request.getSession();
-                // session.setAttribute("email",email);
-                response.sendRedirect("home.html");
+                HttpSession session = request.getSession();
+                session.setAttribute("email",email);
+                response.sendRedirect("profile.jsp");
             } else {
                 HttpSession session = request.getSession();
-                //session.setAttribute("user", email);
-                //response.sendRedirect("login.jsp");
+                session.setAttribute("user", email);
+                response.sendRedirect("login.jsp");
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
