@@ -16,6 +16,15 @@
 	margin-top: -34px;
 }
 
+.welcome .firstname {
+	float: left;
+    padding: 20px;
+    margin: -27px;
+    text-align: center;
+    margin-left: 45px;
+    text-decoration: underline;
+}
+
 .welcome hr {
 	width: 40%;
 	margin: -43px 125px;
@@ -24,9 +33,10 @@
 
 .welcome h3 {
 	text-align: left;
-	padding: 20px;
-	font-size: 22px;
-	letter-spacing: 2px;
+    padding: 0px;
+    font-size: 22px;
+    letter-spacing: 2px;
+    float: left;
 }
 
 .welcome nav {

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,7 +77,7 @@ function checkTime(i) {
 			<a href="javascript:home()"><img src="pictures/meetup_logo.png" alt="Home"></a>
 		</div>
 		<div class="welcome">
-			<h3>Welcome</h3>
+			<h3>Welcome <a class="firstname">${user.firstName}</a></h3>
 			<hr>
 			<nav>
 			<ul>
@@ -145,7 +147,7 @@ function checkTime(i) {
 		<div class="popupBlock">
 			<div class="popupHeader"><img src="pictures/settings.png">Settings
 				<span onclick="document.getElementById('p_settings').style.display='none'
-					"class="close" title="Schließen">&times;</span>
+					"class="close" title="SchlieÃŸen">&times;</span>
 			</div>
 			<div class="popupBody">
 			<img src="pictures/usericon.png" alt="Members">
@@ -206,7 +208,7 @@ function checkTime(i) {
 			<div class="popupHeader">
 				Project<span
 					onclick="document.getElementById('w_members').style.display='none'"
-					class="close" title="Schließen">&times;</span>
+					class="close" title="SchlieÃŸen">&times;</span>
 			</div>
 			<div class="popupBody">
 			</div>
@@ -220,7 +222,7 @@ function checkTime(i) {
 		<div class="addBlock">
 			<div class="popupHeader">Manage your Team
 				<span onclick="document.getElementById('t_add').style.display='none'
-					"class="close" title="Schließen">&times;
+					"class="close" title="SchlieÃŸen">&times;
 				</span>
 			</div>
 			<div class="popupBody">
@@ -258,7 +260,7 @@ function checkTime(i) {
 			<div class="popupHeader">
 				Project<span
 					onclick="document.getElementById('w_tasks').style.display='none'"
-					class="close" title="Schließen">&times;</span>
+					class="close" title="SchlieÃŸen">&times;</span>
 			</div>
 			<div class="popupBody">
 			</div>
