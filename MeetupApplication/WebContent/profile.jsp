@@ -78,7 +78,6 @@ function checkTime(i) {
 		</div>
 		<div class="welcome">
 			<h3>Welcome <a class="firstname">${user.firstName}</a></h3>
-			<hr>
 			<nav>
 			<ul>
 			<li><a class="favorites" onclick="document.getElementById('p_favorites').style.display='block'"
@@ -227,6 +226,37 @@ function checkTime(i) {
 			</div>
 			<div class="popupBody">
 			<a>Add new member</a>
+			<form action="<%= request.getContextPath() %>/workspace" method="post">
+			<p>*First Name</p>
+			<input type="text" id="firstName" name="firstName"
+				placeholder="Enter First Name" />
+
+			<p>*Last Name</p>
+			<input type="text" id="lastName" name="lastName"
+				placeholder="Enter Last Name" />
+
+			<p>*Email</p>
+			<input type="text" id="email" name="email" placeholder="Enter Email"
+				/>
+
+			<p>*Company</p>
+			<input type="text" id="company" name="company"
+				placeholder="Enter Company" />
+
+			<p>*Position</p>
+			<input type="text" id="position" name="position"
+				placeholder="Enter Position" />
+
+			<p>*Password</p>
+			<input type="password" id="password" name="password"
+				placeholder="Enter Password" />
+
+			<p>*Password reply</p>
+			<input type="password" name="" placeholder="Reply Password">
+
+			<input type="submit" value="submit">
+
+		</form>
 			<form action="check-input.php" method="post">
   				<label><textarea class="textPopup" name="html_elemente" cols="1" rows="1" maxlength="100" wrap="soft" placeholder="Enter name or mail"></textarea>
   				</label><input type="image" src="pictures/add.png" alt="Add"></form>

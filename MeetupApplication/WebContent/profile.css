@@ -8,16 +8,15 @@
 .welcome {
 	text-align: left;
 	background-color: #F0F0F0;
-	margin-left: 120px;
-	margin-right: 840px;
+	margin-left: 121px;
+	margin-right: 841px;
 	color: #707070;
 	position: relative;
 	border-radius: 5px;
-	margin-top: -34px;
+	margin-top: -35px;
 }
 
 .welcome .firstname {
-	float: left;
     padding: 20px;
     margin: -27px;
     text-align: center;
@@ -32,16 +31,15 @@
 }
 
 .welcome h3 {
-	text-align: left;
-    padding: 0px;
-    font-size: 22px;
-    letter-spacing: 2px;
-    float: left;
+	padding: 15px;
+	font-size: 22px;
+	letter-spacing: 2px;
+	margin: 0px 25px;
 }
 
 .welcome nav {
-	width: 290px;
-	height: 65px;
+	width: 270px;
+	height: 0px;
 	letter-spacing: 2px;
 	padding-top: 10px;
 }

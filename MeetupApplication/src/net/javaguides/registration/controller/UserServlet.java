@@ -64,7 +64,7 @@ public class UserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/profile.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/profile.jsp");
 		dispatcher.forward(request, response);
 	}
 
