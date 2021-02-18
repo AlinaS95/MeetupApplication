@@ -1,4 +1,4 @@
-package net.javaguides.loginUser;
+package net.meetup.login;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

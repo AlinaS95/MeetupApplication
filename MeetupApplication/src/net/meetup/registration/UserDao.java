@@ -1,14 +1,14 @@
-package net.javaguides.registration.dao;
+package net.meetup.registration;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import net.javaguides.registration.model.User;
+import net.meetup.registration.User;
 
 public class UserDao {
-	
+
 	public int registerUser(User user) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO user" + " (firstName, lastName, email, company, position, password) VALUES " + " (?,?,?,?,?,?);";
 	

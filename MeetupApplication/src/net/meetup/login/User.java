@@ -1,4 +1,4 @@
-package net.javaguides.registration.model;
+package net.meetup.login;
 
 public class User {
 	private String firstName;

@@ -1,4 +1,4 @@
-package net.javaguides.registration.controller;
+package net.meetup.registration;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.javaguides.registration.dao.UserDao;
-import net.javaguides.registration.model.User;
+import net.meetup.registration.UserDao;
+import net.meetup.registration.User;
 
 /**
  * Servlet implementation class EmployeeServlet
@@ -35,7 +35,7 @@ public class UserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WebContent/registration.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("registration.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -64,7 +64,7 @@ public class UserServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/profile.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
 		dispatcher.forward(request, response);
 	}
 

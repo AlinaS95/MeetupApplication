@@ -1,4 +1,4 @@
-package net.javaguides.loginUser;
+package net.meetup.registration;
 
 public class User {
 	private String firstName;
@@ -45,4 +45,3 @@ public class User {
 		this.password = password;
 	}
 }
-

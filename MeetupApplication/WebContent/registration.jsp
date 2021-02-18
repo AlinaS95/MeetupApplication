@@ -7,6 +7,11 @@
 <link rel="stylesheet" type="text/css" href="login.css">
 <script type="text/javascript" src="methods.js"></script>
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
 </head>
 <body>
 	<div class="logo">
@@ -15,7 +20,7 @@
 
 	<div class="loginbox">
 		<h1>Create a Account</h1>
-		<form action="<%= request.getContextPath() %>/register" method="post">
+		<form action="register" method="post" id="loginForm">
 			<p>*First Name</p>
 			<input type="text" id="firstName" name="firstName"
 				placeholder="Enter First Name" />
@@ -43,9 +48,33 @@
 			<p>*Password reply</p>
 			<input type="password" name="" placeholder="Reply Password">
 
-			<input type="submit" value="submit">
+			<input type="submit" value="Submit">${message}
 
 		</form>
 	</div>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#loginForm").validate({
+			rules : {
+				email : {
+					required : true,
+					email : true
+				},
+
+				password : "required",
+			},
+
+			messages : {
+				email : {
+					required : "Please enter email",
+					email : "Please enter a valid email address"
+				},
+
+				password : "Please enter password"
+			}
+		});
+
+	});
+</script>
 </html>

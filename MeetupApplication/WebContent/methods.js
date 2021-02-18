@@ -28,7 +28,7 @@ function socialmedia() {
 }
 
 function profile() {
-	window.setTimeout('window.location="profile.html", 2000');
+	window.setTimeout('window.location="profile.jsp", 2000');
 }
 
 function login() {
