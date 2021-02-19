@@ -200,4 +200,9 @@ textarea:focus {
   pointer-events: none;
   padding: 0em;
 }
+img.middle { 
+	vertical-align: middle; 
+	position: relative;
+	margin-left: 34%;
+}
 

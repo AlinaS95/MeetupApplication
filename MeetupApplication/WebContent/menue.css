@@ -20,7 +20,7 @@ button {
 
 #start:hover,
 #start:focus {
-	background-color: #333;
+	background-color: rgb(192, 192, 192);
 	transform: translateY(2px);
 }
 

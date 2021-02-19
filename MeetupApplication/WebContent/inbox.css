@@ -6,11 +6,11 @@ body {
 	font-family: sans-serif;
 }
 nav {
-	display: flex;
-	align-items: center;
-	background: #F0F0F0;
-	height: 60px;
-	position: relative;
+    display: flex;
+    align-items: center;
+    background: #F0F0F0;
+    height: 1px;
+    position: relative;
 }
 .icon {
 	cursor: pointer;
