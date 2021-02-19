@@ -1,4 +1,4 @@
-package net.meetup.registration;
+package net.meetup.usermanagement;
 
 public class User {
 	private String firstName;

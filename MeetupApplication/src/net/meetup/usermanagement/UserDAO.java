@@ -1,11 +1,11 @@
-package net.meetup.registration;
+package net.meetup.usermanagement;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import net.meetup.registration.User;
+import net.meetup.usermanagement.User;
 
 public class UserDAO {
 

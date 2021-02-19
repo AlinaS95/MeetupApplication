@@ -58,7 +58,7 @@ public class WorkspaceAddServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("home.html");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("profile.jsp");
 		dispatcher.forward(request, response);
 	}
 

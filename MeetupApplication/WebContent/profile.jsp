@@ -199,7 +199,7 @@
 				</div>
 				<div class="popupFooter">
 					<button onClick="save()">Save</button>
-					<button onClick="deleteProfile()">Delete profile</button>
+					<button type="submit" value="Submit" onClick="deleteProfile()">Delete profile</button>
 				</div>
 			</div>
 		</div>
@@ -336,7 +336,7 @@
 		<br>
 		<br>
 		<div class="logout">
-			<a href="logout"><img src="pictures/logout.png"
+			<a href="login.jsp"><img src="pictures/logout.png"
 				alt="Logout" />Logout</a>
 		</div>
 	</div>

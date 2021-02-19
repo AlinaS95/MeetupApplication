@@ -1,4 +1,4 @@
-package net.meetup.registration;
+package net.meetup.usermanagement;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.meetup.registration.UserDAO;
-import net.meetup.registration.User;
+import net.meetup.usermanagement.UserDAO;
+import net.meetup.usermanagement.User;
 
 /**
  * Servlet implementation class UserServlet
