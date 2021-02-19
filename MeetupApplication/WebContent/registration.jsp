@@ -20,7 +20,7 @@
 
 	<div class="loginbox">
 		<h1>Create a Account</h1>
-		<form action="register" method="post" id="loginForm">
+		<form action="register" method="post" id="registerForm">
 			<p>*First Name</p>
 			<input type="text" id="firstName" name="firstName"
 				placeholder="Enter First Name" />
@@ -55,13 +55,16 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
-		$("#loginForm").validate({
+		$("#registerForm").validate({
 			rules : {
 				email : {
 					required : true,
 					email : true
 				},
-
+				firstName : "required",
+				lastName : "required",
+				company : "required",
+				position: "required",
 				password : "required",
 			},
 
@@ -70,7 +73,10 @@
 					required : "Please enter email",
 					email : "Please enter a valid email address"
 				},
-
+				firstName : "Please enter your first name",
+				lastName : "Please enter your last name",
+				company : "Please enter a company",
+				position: "Please enter a position",
 				password : "Please enter password"
 			}
 		});

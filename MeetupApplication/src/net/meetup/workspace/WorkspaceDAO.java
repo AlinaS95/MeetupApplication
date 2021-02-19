@@ -9,8 +9,8 @@ import net.meetup.workspace.Workspace;
 
 public class WorkspaceDAO {
 	
-	public int registerUser(Workspace workspace) throws ClassNotFoundException {
-		String INSERT_WORKSPACE_SQL = "INSERT INTO workspace" + " (teamName, fullName, email) VALUES " + " (?,?,?);";
+	public int addWorkspace(Workspace workspace) throws ClassNotFoundException {
+		String INSERT_WORKSPACES_SQL = "INSERT INTO workspace" + " (teamName, fullName, email) VALUES " + " (?,?,?);";
 	
 	int result = 0;
 	
@@ -19,7 +19,7 @@ public class WorkspaceDAO {
 	try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup","root","");
 			
 			// Step 2:Create a statement using connection object
-			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WORKSPACE_SQL)) {
+			PreparedStatement preparedStatement = connection.prepareStatement(INSERT_WORKSPACES_SQL)) {
 			preparedStatement.setString(1, workspace.getTeamName());
 			preparedStatement.setString(2, workspace.getFullName());
 			preparedStatement.setString(3, workspace.getEmail());

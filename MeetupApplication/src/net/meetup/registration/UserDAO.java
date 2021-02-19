@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import net.meetup.registration.User;
 
-public class UserDao {
+public class UserDAO {
 
 	public int registerUser(User user) throws ClassNotFoundException {
 		String INSERT_USERS_SQL = "INSERT INTO user" + " (firstName, lastName, email, company, position, password) VALUES " + " (?,?,?,?,?,?);";

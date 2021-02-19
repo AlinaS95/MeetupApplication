@@ -331,14 +331,7 @@
 }
 
 .addBlock .popupBody input {
-	width: 30px;
 	height: 30px;
-}
-
-.addBlock .popupBody textarea {
-	height: 25px;
-	width: 330px;
-	font-size: 15px;
 }
 
 .addBlock .popupBody a {

@@ -9,17 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.meetup.registration.UserDao;
+import net.meetup.registration.UserDAO;
 import net.meetup.registration.User;
 
 /**
- * Servlet implementation class EmployeeServlet
+ * Servlet implementation class UserServlet
  */
 @WebServlet("/register")
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private UserDao userDao = new UserDao();
+	private UserDAO userDao = new UserDAO();
     /**
      * @see HttpServlet#HttpServlet()
      */

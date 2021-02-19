@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAO {
+public class LoginDAO {
 
 	public User checkLogin(String email, String password) throws SQLException, 
 			ClassNotFoundException {
