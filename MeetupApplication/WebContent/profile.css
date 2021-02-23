@@ -289,31 +289,28 @@
 }
 
 .organization img {
-	width: 50px;
-	height: 50px;
-	padding: 8px 10px;
-}
-
-.workingtime_Buttons {
-	cursor: pointer;
-}
-
-.workingtime_Buttons input {
-	width: 50px;
-	height: 50px;
-	padding: 8px 10px;
+	width: 35px;
+	height: 35px;
 }
 
 .workingtime_Buttons p {
-	margin: -45px 70px;
-	position: absolute;
+	margin: 0px 11px;
 }
 
+.workingtime_Buttons input {
+	width: 130px;
+	height: 20px;
+	margin: 5px 5px;
+}
+
+.workingtime_Buttons input calcButton{
+	width: 90px;
+	height: 30px;
+	margin: 0px 5px;
+}
 .clock {
-	margin-left: 180px;
-	margin-top: -200px;
-	margin-bottom: 70px;
-	position: relative;
+	margin: 20px 200px;
+	position: absolute;
 }
 
 .logout img {

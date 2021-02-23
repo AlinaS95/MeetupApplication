@@ -23,54 +23,6 @@
 		}
 	}
 </script>
-<script>
-	function checkTime(i) {
-		if (i < 10) {
-			i = "0" + i;
-		}
-		return i;
-	}
-
-	function timeStart() {
-		var date = new Date();
-		var hh = date.getHours();
-		var mm = date.getMinutes();
-		var ss = date.getSeconds();
-
-		// adding 0 for single digits
-
-		mm = checkTime(mm);
-		ss = checkTime(ss);
-		document.getElementById('Startbtn').innerHTML = hh + ":" + mm + ":"
-				+ ss;
-	}
-
-	function timePause() {
-		var date = new Date();
-		var hh = date.getHours();
-		var mm = date.getMinutes();
-		var ss = date.getSeconds();
-
-		// adding 0 for single digits
-
-		mm = checkTime(mm);
-		ss = checkTime(ss);
-		document.getElementById('Pausebtn').innerHTML = hh + ":" + mm + " - ";
-	}
-
-	function timeStop() {
-		var date = new Date();
-		var hh = date.getHours();
-		var mm = date.getMinutes();
-		var ss = date.getSeconds();
-
-		// adding 0 for single digits
-
-		mm = checkTime(mm);
-		ss = checkTime(ss);
-		document.getElementById('Stopbtn').innerHTML = hh + ":" + mm + ":" + ss;
-	}
-</script>
 </head>
 <body>
 	<div class="background1">
@@ -144,8 +96,8 @@
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
 				src="pictures/infoicon.png" alt="information" />Max Mustermann</a> <br>
-			<br>maxmustermann@gmx.de <br>
-			<br> <a class="profile_settings"
+			<br>maxmustermann@gmx.de <br> <br> <a
+				class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
 				alt="Settings">Settings</a>
@@ -199,7 +151,8 @@
 				</div>
 				<div class="popupFooter">
 					<button onClick="save()">Save</button>
-					<button type="submit" value="Submit" onClick="deleteProfile()">Delete profile</button>
+					<button type="submit" value="Submit" onClick="deleteProfile()">Delete
+						profile</button>
 				</div>
 			</div>
 		</div>
@@ -208,8 +161,8 @@
 		<br>
 		<div class="workspace">
 			<div class="project_name">University</div>
-			<br>Team<br> <br>
-			<br>Members<br> <a class="workspace_members"
+			<br>Team<br> <br> <br>Members<br> <a
+				class="workspace_members"
 				onclick="document.getElementById('w_members').style.display='block'
 				"
 				style="width: auto;"><img src="pictures/usericon.png"
@@ -221,9 +174,8 @@
 				onclick="document.getElementById('t_add').style.display='block'
 				"
 				style="width: auto;"><img src="pictures/add.png"
-				alt="Add Members"></a> <br>
-			<br> Tasks<br>
-			<a class="workspace_tasks"
+				alt="Add Members"></a> <br> <br> Tasks<br> <a
+				class="workspace_tasks"
 				onclick="document.getElementById('w_tasks').style.display='block'"
 				style="width: auto;"><img src="pictures/workspaceTasks.png"
 				alt="Tasks"></a>
@@ -264,8 +216,8 @@
 							placeholder="Enter your full Name" />
 						<p>Email</p>
 						<input type="text" id="email" name="email"
-							placeholder="Enter Email" />
-						<input type="submit" src="pictures/add.png" alt="Add" value="Submit">
+							placeholder="Enter Email" /> <input type="submit"
+							src="pictures/add.png" alt="Add" value="Submit">
 					</form>
 					<hr>
 					<div class="membersList">
@@ -314,30 +266,48 @@
 		<div class="organization">
 			<div class="workingtime">Working Time</div>
 			<br>
-			<div class="workingtime_Buttons">
-				<input type="image" onclick="timeStart()"
-					src="pictures/playButton.png" alt="set Time">
-				<p id="Startbtn"></p>
-				<br> <input type="image" class="play" onclick="pauseButton()"
-					src="pictures/pauseButton.png" alt="start Pause">
-				<h4>0</h4>
-				<input type="image" class="pause" onclick="pauseButton()"
-					src="pictures/stopButton.png" alt="stop Pause"> <br> <input
-					type="image" onclick="timeStop()" src="pictures/stopButton.png"
-					alt="set Time">
-				<p id="Stopbtn"></p>
-			</div>
 			<div class="clock">
 				<canvas id="profileClock">
 			</canvas>
 				<script src="profile.js"></script>
 			</div>
+			<div class="workingtime_Buttons">
+				<img src="pictures/playButton.png" alt="set Time"> <input
+					type="text" placeholder='input entry time' id='entry'> <br>
+				<img src="pictures/pauseButton.png" alt="start Pause"> <input
+					type="text" placeholder='input pause time' id='pause'> <br>
+				<img src="pictures/stopButton.png" alt="set Time"> <input
+					type="text" placeholder="input exit time" id='exit'><br> <input
+					type="button" id='calcButton' value='calculate' onclick='calculateTime()'><br>
+				<p>You worked today:</p>
+				<input type="text" placeholder="Working hours" id='total'>Hours
+			</div>
+			<script>
+				function calculateTime() {
+					var entry = document.getElementById('entry');
+					var exit = document.getElementById('exit');
+					var pause = document.getElementById('pause');
+
+					var entryTime = entry.value.split(':');
+					var entryTimeInMins = entryTime[0] + entryTime[1];
+
+					var pauseTime = pause.value.split(':');
+					var pauseTimeInMins = pauseTime[0] + pauseTime[1];
+
+					var exitTime = exit.value.split(':');
+					var exitTimeInMins = exitTime[0] + exitTime[1];
+
+					var totalTime = exitTimeInMins - entryTimeInMins;
+					var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
+
+					document.getElementById('total').value = totalTimeHour;
+
+				}
+			</script>
 		</div>
-		<br>
-		<br>
+		<br> <br>
 		<div class="logout">
-			<a href="login.jsp"><img src="pictures/logout.png"
-				alt="Logout" />Logout</a>
+			<a href="login.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
 </body>
