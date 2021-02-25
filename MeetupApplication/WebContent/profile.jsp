@@ -35,16 +35,12 @@
 				<h3>
 					Welcome <a class="firstname">${user.firstName}</a>
 				</h3>
-				<nav>
-					<ul>
-						<li><a class="favorites"
+				<a class="favorites"
 							onclick="document.getElementById('p_favorites').style.display='block'"
 							style="width: auto;"><img src="pictures/favorite.png"
-								alt="Favorites"></a></li>
-						<li><a class="status" href="javascript:progress()"><img
-								src="pictures/greenCircle.png" alt="Status"></a></li>
-					</ul>
-				</nav>
+								alt="Favorites"></a>
+				<a class="status" href="javascript:progress()"><img
+								src="pictures/greenCircle.png" alt="Status"></a>
 			</div>
 			<br>
 			<div class="secondblock">

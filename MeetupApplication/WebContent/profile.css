@@ -8,8 +8,8 @@
 .welcome {
 	text-align: left;
 	background-color: #F0F0F0;
-	margin-left: 121px;
-	margin-right: 841px;
+	margin-left: 120px;
+	margin-right: 870px;
 	color: #707070;
 	position: relative;
 	border-radius: 5px;
@@ -24,17 +24,12 @@
     text-decoration: underline;
 }
 
-.welcome hr {
-	width: 40%;
-	margin: -43px 125px;
-	color: #707070;
-}
-
 .welcome h3 {
 	padding: 15px;
 	font-size: 22px;
 	letter-spacing: 2px;
-	margin: 0px 25px;
+	margin: 0px 5px;
+	text-align: left;
 }
 
 .welcome nav {
@@ -303,7 +298,7 @@
 	margin: 5px 5px;
 }
 
-.workingtime_Buttons input calcButton{
+.workingtime_Buttons input #calcButton{
 	width: 90px;
 	height: 30px;
 	margin: 0px 5px;
