@@ -19,7 +19,7 @@ import net.meetup.usermanagement.User;
 public class UserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
-	private UserDAO userDao = new UserDAO();
+	private UserDAO userDAO = new UserDAO();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -59,7 +59,7 @@ public class UserServlet extends HttpServlet {
 		user.setPassword(password);
 		
 		try {
-			userDao.registerUser(user);
+			userDAO.registerUser(user);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

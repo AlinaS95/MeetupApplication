@@ -7,7 +7,6 @@ public class User {
 	private String company;
 	private String position;
 	private String password;
-	
 	public String getFirstName() {
 		return firstName;
 	}
