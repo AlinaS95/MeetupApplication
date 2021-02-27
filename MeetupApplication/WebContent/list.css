@@ -4,7 +4,7 @@
 	border-collapse: collapse;
 	margin: 25px 0;
 	font-size: 0.9en;
-	min-width: 400px;
+	min-width: 300px;
 	border-radius: 5px 5px 0 0;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -18,7 +18,7 @@
 }
 
 .list-table th, .list-table td {
-	padding: 30px 120px;
+	padding: 30px 100px;
 }
 
 .list-table tbody tr {
