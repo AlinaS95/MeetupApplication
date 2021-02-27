@@ -13,6 +13,7 @@ html {
     margin-right: 3px;
     box-sizing: border-box;
     margin-top: 43px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .box3 {
@@ -36,6 +37,7 @@ h5 {
     margin: 33px;
     margin-right: 20px;
     margin-top: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .teamstatus {
@@ -47,6 +49,7 @@ h5 {
     margin: 33px;
     margin-right: 20px;
     margin-top: 8px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
 h6 {
