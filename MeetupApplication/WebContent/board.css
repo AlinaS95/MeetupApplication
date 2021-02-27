@@ -137,7 +137,7 @@ html {
     float: left;
     width: 23%;
     margin-right: 2%;
-    margin-top: 8%;
+    margin-top: -1%;
     padding: 20px;
     background: #eee;
     box-shadow: 10px 10px 15px silver;
@@ -174,11 +174,11 @@ aside {
 }
 
 .rechteck1 {
-    background-color: green;
+    background-color: #A3F5A8;
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 200px;
+    bottom: -20px;
     left: 119px;
     border: 1px solid black;
     text-align: center;
@@ -189,18 +189,18 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: -10px;
+    bottom: 190px;
     left: 119px;
     border: 1px solid black;
     text-align: center;
     border-radius: 80px;
 }
 .rechteck3 {
-    background-color: green;
+    background-color:#A3F5A8;
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 200px;
+    bottom: -20px;
     left: 491px;
     border: 1px solid black;
     text-align: center;
@@ -211,7 +211,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: -10px;
+    bottom: 190px;
     left: 491px;
     border: 1px solid black;
     text-align: center;
@@ -222,7 +222,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 200px;
+    bottom: 190px;
     left: 870px;
     border: 1px solid black;
     text-align: center;
@@ -232,34 +232,34 @@ aside {
 
 .profiletask {
 	margin-left: 20px;
-	margin-top: 240px;
+	margin-top: 90px;
 	position: absolute;
 }
 .profiletask1 {
 	margin-left: 390px;
-	margin-top: 240px;
+	margin-top: 90px;
 	position: absolute;
 }
 .profiletask2 {
 	margin-left: 770px;
-	margin-top: 240px;
+	margin-top: 90px;
 	position: absolute;
 }
 .profiletask3 {
 	margin-left: 20px;
-	margin-top: 440px;
+	margin-top: 300px;
 	position: absolute;
 }
 .profiletask4 {
 	margin-left: 390px;
-	margin-top: 440px;
+	margin-top: 3001px;
 	position: absolute;
 }
 
 /* add and settings */
 .addnewtask img {
     margin-left: -1208px;
-    margin-top: 134px;
+    margin-top: -2px;
     width: 37px;
     height: 37px;
     position: absolute;
@@ -367,3 +367,112 @@ label {
 
 }
 
+/* ArchiveButtons */
+/*all items */
+* {
+	font-family: "Times New Roman";
+	font-size: 15px;
+	color: #707070;
+}
+
+.category_socialmedia {
+    background-color: #F0F0F0;
+    text-align: left;
+    border: solid 1px #707070;
+    border-radius: 5px;
+    color: #707070;
+    width: 104px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    padding-top: 6px;
+    padding-left: 6px;
+}
+
+.category_socialmedia img {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	margin: 5px 8px;
+}
+
+/* navigation*/
+.socialmedia_navigation nav {
+	width: 100%;
+	height: 30px;
+	margin-top: -45px;
+}
+
+.socialmedia_navigation nav ul li {
+	list-style: none;
+	position: relative;
+	z-index: 2;
+	float: right;
+}
+
+.socialmedia_navigation nav ul li a { 
+	text-decoration: none;
+	display: flex;
+	font-family: "Times New Roman";
+	color: #707070;
+	font-size: 20px;
+	cursor: pointer;
+	float: left;
+	margin: 0px 10px;
+}
+
+/* add and settings */
+.socialmedia_navigation img{
+	margin-top: -3px;
+	width: 25px;
+	height: 25px;
+	margin: 0px 5px;
+}
+/* Pop-Up-Window Content */
+.addBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Schlieﬂ-Button */
+.close {
+	color: #707070;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+}
+popupHeader {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+.popupHeader img {
+	width: 35px;
+	height: 35px;
+	margin-bottom: -10px;
+}
+
+.popupBody {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 2px 15px;
+	text-align: left;
+	font-size: 20px;
+	color: #707070;
+	/* Style the Image Used to Trigger the Modal */
+}
