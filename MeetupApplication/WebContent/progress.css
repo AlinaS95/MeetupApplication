@@ -23,7 +23,7 @@ html {
 
 h5 {
 	 float: left;
-	 margin-top: 230px;
+	 margin-top: 20px;
 	 margin-right: 237px;
 	
 }
@@ -70,7 +70,7 @@ h6 {
   width: 1%;
   height: 50px;
   width: 10%;
-  background-color: #59ea63;
+  background-color: #A3F5A8;
   text-align: center; /* To center it horizontally (if you want) */
   line-height: 80px; /* To center it vertically */
   color: white;
