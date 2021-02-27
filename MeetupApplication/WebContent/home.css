@@ -71,6 +71,7 @@ form {
 	margin: 1em auto -1em;
 	padding: 3em;
 	border-radius: 0 1em 1em;
+	box-shadow: 10px 10px 15px silver;
 }
 
 .box1, .box2, .box3 {
@@ -81,6 +82,7 @@ form {
      padding: 20px;
      background: #eee;
      box-sizing: border-box;
+     box-shadow: 10px 10px 15px silver;
 }
 .box3 {
      margin-right: 0;

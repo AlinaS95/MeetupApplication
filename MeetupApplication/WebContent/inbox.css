@@ -14,46 +14,48 @@ nav {
 }
 .icon {
 	cursor: pointer;
-	margin-right: 50px;
-	line-height: 60px;
+	margin-right: 85px;
+	line-height: 25px;
+	font-size: 20px;
+
 }
 .icon span {
-	background: #f00;
-	padding: 7px;
-	border-radius: 50%;
-	color: #fff;
-	vertical-align: top;
-	margin-left: -25px;
+    background: #f00;
+    height: 25px;
+    width: 25px;
+    padding: 3px;
+    border-radius: 53%;
+    color: #fff;
+    vertical-align: top;
+    margin-left: 1126px;
+    margin-top: 334px;
+    position: absolute;
 }
+
 .icon img {
-	display: inline-block;
-	width: 40px;
-	margin-top: 20px;
+    display: inline-block;
+    position: absolute;
+    width: 84px;
+    margin-top: 340px;
+    margin-left: 1081px;
 }
 .icon:hover {
 	opacity: .7;
 }
 
-.logo {
-	flex: 1;
-	margin-left: 50px;
-	color: darkgrey;
-	font-size: 20px;
-	font-family: monospace;
-}
 
 .notifi-box {
 	width: 300px;
 	height: 0px;
 	opacity: 0;
 	position: absolute;
-	top: 63px;
+	top: 357px;
 	right: 35px;
 	transition: 1s opacity, 250ms height;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .notifi-box h2 {
-	font-size: 14px;
+	font-size: 20px;
 	padding: 10px;
 	border-bottom: 1px solid #eee;
 	color: #999;

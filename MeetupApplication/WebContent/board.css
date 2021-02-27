@@ -140,6 +140,7 @@ html {
     margin-top: 8%;
     padding: 20px;
     background: #eee;
+    box-shadow: 10px 10px 15px silver;
     box-sizing: border-box;
 }
 .box4 {
@@ -148,11 +149,13 @@ html {
 .task1, .task2, .task3, .task4 {
     float: left;
     width: 23%;
+    height: 22%;
     margin-right: 2%;
     margin-top: 1%;
     padding: 149px;
     background: #eee;
     box-sizing: border-box;
+    box-shadow: 10px 10px 15px silver;
 }
 .task4 {
      margin-right: 0;
@@ -175,7 +178,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 270px;
+    bottom: 200px;
     left: 119px;
     border: 1px solid black;
     text-align: center;
@@ -186,7 +189,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 58px;
+    bottom: -10px;
     left: 119px;
     border: 1px solid black;
     text-align: center;
@@ -197,7 +200,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 270px;
+    bottom: 200px;
     left: 491px;
     border: 1px solid black;
     text-align: center;
@@ -208,7 +211,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 58px;
+    bottom: -10px;
     left: 491px;
     border: 1px solid black;
     text-align: center;
@@ -219,7 +222,7 @@ aside {
     position: absolute;
     width: 123px;
     height: 9px;
-    bottom: 270px;
+    bottom: 200px;
     left: 870px;
     border: 1px solid black;
     text-align: center;
@@ -255,7 +258,7 @@ aside {
 
 /* add and settings */
 .addnewtask img {
-    margin-left: -985px;
+    margin-left: -1208px;
     margin-top: 134px;
     width: 37px;
     height: 37px;
