@@ -1,12 +1,43 @@
 package net.meetup.usermanagement;
 
 public class User {
-	private String firstName;
-	private String lastName;
-	private String email;
-	private String company;
-	private String position;
-	private String password;
+	protected int userID;
+	protected String firstName;
+	protected String lastName;
+	protected String email;
+	protected String company;
+	protected String position;
+	protected String password;
+	
+	public User() {
+	}
+	
+	public User(String firstName, String lastName, String email, String company, String position, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.company = company;
+		this.position = position;
+		this.password = password;
+	}
+
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String password) {
+		super();
+		this.userID = userID;
+		this.firstName = firstName;
+		this.email = email;
+		this.company = company;
+		this.position = position;
+		this.password = password;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

@@ -146,9 +146,8 @@
 					</div>
 				</div>
 				<div class="popupFooter">
-					<button onClick="save()">Save</button>
-					<button type="submit" value="Submit" onClick="deleteProfile()">Delete
-						profile</button>
+					<button onClick="save()">Save</button> 
+					<a href="delete">Delete profile</a>
 				</div>
 			</div>
 		</div>
@@ -212,8 +211,8 @@
 							placeholder="Enter your full Name" />
 						<p>Email</p>
 						<input type="text" id="email" name="email"
-							placeholder="Enter Email" /> <input type="submit"
-							src="pictures/add.png" alt="Add" value="Submit">
+							placeholder="Enter Email" /> <input type="image"
+							src="pictures/add.png" alt="Add">
 					</form>
 					<hr>
 					<div class="membersList">
@@ -267,16 +266,16 @@
 			</canvas>
 				<script src="profile.js"></script>
 			</div>
-			<div class="workingtime_Buttons">
+			<div class="workingtime_Buttons" style="margin: -15px 2px;">
 				<img src="pictures/playButton.png" alt="set Time"> <input
 					type="text" placeholder='input entry time' id='entry'> <br>
 				<img src="pictures/pauseButton.png" alt="start Pause"> <input
 					type="text" placeholder='input pause time' id='pause'> <br>
 				<img src="pictures/stopButton.png" alt="set Time"> <input
 					type="text" placeholder="input exit time" id='exit'><br> <input
-					type="button" id='calcButton' value='calculate' onclick='calculateTime()'><br>
+					type="button" value='calculate' onclick='calculateTime()' style="width:100px; height:30px;">
 				<p>You worked today:</p>
-				<input type="text" placeholder="Working hours" id='total'>Hours
+				<input type="text" placeholder="Working hours" id='total'><a style="text-align">Hours</a>
 			</div>
 			<script>
 				function calculateTime() {

@@ -1,12 +1,21 @@
 package net.meetup.login;
 
 public class User {
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String company;
 	private String position;
 	private String password;
+	
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	
 	public String getFirstName() {
 		return firstName;

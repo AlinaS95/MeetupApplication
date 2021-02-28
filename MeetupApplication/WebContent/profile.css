@@ -296,13 +296,9 @@
 	width: 130px;
 	height: 20px;
 	margin: 5px 5px;
+	position: absolute;
 }
 
-.workingtime_Buttons input #calcButton{
-	width: 90px;
-	height: 30px;
-	margin: 0px 5px;
-}
 .clock {
 	margin: 20px 200px;
 	position: absolute;
