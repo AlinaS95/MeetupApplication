@@ -1,21 +1,12 @@
-package net.meetup.login;
+package net.meetup.bean;
 
-public class User {
-	private int userID;
+public class LoginBean {
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String company;
 	private String position;
 	private String password;
-	
-	public int getUserID() {
-		return userID;
-	}
-
-	public void setUserID(int userID) {
-		this.userID = userID;
-	}
 	
 	public String getFirstName() {
 		return firstName;

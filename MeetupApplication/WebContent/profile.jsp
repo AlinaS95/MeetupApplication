@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +10,6 @@
 <link rel="stylesheet" type="text/css" href="profile.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="methods.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -33,14 +33,20 @@
 			</div>
 			<div class="welcome">
 				<h3>
-					Welcome <a class="firstname">${user.firstName}</a>
+				<%
+				if(session.getAttribute("login")==null || session.getAttribute("login")=="")
+				{
+					response.sendRedirect("login.jsp");
+				}
+				%>
+					Welcome <a class="firstname">${loginBean.fullname}</a>
 				</h3>
 				<a class="favorites"
-							onclick="document.getElementById('p_favorites').style.display='block'"
-							style="width: auto;"><img src="pictures/favorite.png"
-								alt="Favorites"></a>
-				<a class="status" href="javascript:progress()"><img
-								src="pictures/greenCircle.png" alt="Status"></a>
+					onclick="document.getElementById('p_favorites').style.display='block'"
+					style="width: auto;"><img src="pictures/favorite.png"
+					alt="Favorites"></a> <a class="status"
+					href="javascript:progress()"><img
+					src="pictures/greenCircle.png" alt="Status"></a>
 			</div>
 			<br>
 			<div class="secondblock">
@@ -92,7 +98,8 @@
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
 				src="pictures/infoicon.png" alt="information" />Max Mustermann</a> <br>
-			<br>maxmustermann@gmx.de <br> <br> <a
+			<br>
+				<%=session.getAttribute("login2") %> <br> <br> <a
 				class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
@@ -146,7 +153,7 @@
 					</div>
 				</div>
 				<div class="popupFooter">
-					<button onClick="save()">Save</button> 
+					<button onClick="save()">Save</button>
 					<a href="delete">Delete profile</a>
 				</div>
 			</div>
@@ -191,7 +198,6 @@
 
 		<!-- Pop-Up-Window Add Members-->
 		<div id="t_add" class="navigation_addBlock">
-
 			<!-- Window content -->
 			<div class="addBlock">
 				<div class="popupHeader">
@@ -201,39 +207,64 @@
 						class="close" title="Schließen">&times; </span>
 				</div>
 				<div class="popupBody">
+					<c:if test="${workspace != null}">
+						<input type="hidden" name="workspaceID"
+							value="<c:out value='${workspace.workspaceID}' />" />
+					</c:if>
 					<a>Add new member</a>
-					<form action="workspace" method="post">
+					<c:if test="${workspace != null}">
+						<form action="updateW" method="post">
+					</c:if>
+					<c:if test="${workspace == null}">
+						<form action="insertW" method="post">
+					</c:if>
+					<caption>
+			<h2>
+				<c:if test="${workspace != null}">
+            			Edit Workspace
+            		</c:if>
+				<c:if test="${workspace == null}">
+            			Add New Workspace
+            		</c:if>
+			</h2>
+		</caption>
+					<c:if test="${workspace != null}">
+					<input type="hidden" name="workspaceID" value="<c:out value='${workspace.workspaceID}' />" />
+				</c:if>
+					<form>
 						<p>Team name</p>
-						<input type="text" id="teamName" name="teamName"
+						<input type="text" id="teamName"
+							value="<c:out value='${workspace.teamName}' />" name="teamName"
 							placeholder="Enter team name" />
 						<p>Full name</p>
-						<input type="text" id="fullName" name="fullName"
+						<input type="text" id="fullName"
+							value="<c:out value='${workspace.fullName}' />" name="fullName"
 							placeholder="Enter your full Name" />
 						<p>Email</p>
-						<input type="text" id="email" name="email"
-							placeholder="Enter Email" /> <input type="image"
-							src="pictures/add.png" alt="Add">
+						<input type="text" id="email"
+							value="<c:out value='${workspace.email}' />" name="email"
+							placeholder="Enter Email" />
+						<input type="image" src="pictures/add.png" alt="Add">
 					</form>
 					<hr>
 					<div class="membersList">
-						<a>Members</a><br>
+						<a href="<%=request.getContextPath()%>/workspaceManagement"
+							class="nav-link">Members</a><br>
 						<table>
-							<tr>
-								<td><input type="image" src="pictures/usericon.png"
-									alt="Member"></td>
-								<td>Max Mustermann | max.mustermann@gmx.de</td>
-								<td><input type="image" src="pictures/delete.png"
-									alt="delete member"
-									style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
-							</tr>
-							<tr>
-								<td><input type="image" src="pictures/usericon.png"
-									alt="Member"></td>
-								<td>Susi Strolch | susi.strolch@gmx.de</td>
-								<td><input type="image" src="pictures/delete.png"
-									alt="delete member"
-									style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
-							</tr>
+							<c:forEach var="workspace" items="${listWorkspace}">
+								<tr>
+									<td><input type="image" src="pictures/usericon.png"
+										alt="Member"></td>
+									<td><c:out value="${workspace.workspaceID}" /></td>
+									<td><c:out value="${workspace.teamName}" /></td>
+									<td><c:out value="${workspace.fullName}" /></td>
+									<td><c:out value="${workspace.email}" /></td>
+									<td><input
+										src="delete?workspaceID=<c:out value='${workspace.workspaceID}' />"
+										type="image" src="pictures/delete.png" alt="delete member"
+										style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>
@@ -272,10 +303,12 @@
 				<img src="pictures/pauseButton.png" alt="start Pause"> <input
 					type="text" placeholder='input pause time' id='pause'> <br>
 				<img src="pictures/stopButton.png" alt="set Time"> <input
-					type="text" placeholder="input exit time" id='exit'><br> <input
-					type="button" value='calculate' onclick='calculateTime()' style="width:100px; height:30px;">
+					type="text" placeholder="input exit time" id='exit'><br>
+				<input type="button" value='calculate' onclick='calculateTime()'
+					style="width: 100px; height: 30px;">
 				<p>You worked today:</p>
-				<input type="text" placeholder="Working hours" id='total'><a style="text-align">Hours</a>
+				<input type="text" placeholder="Working hours" id='total'><a
+					style="">Hours</a>
 			</div>
 			<script>
 				function calculateTime() {
@@ -302,7 +335,7 @@
 		</div>
 		<br> <br>
 		<div class="logout">
-			<a href="login.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
+			<a href="logout.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
 </body>

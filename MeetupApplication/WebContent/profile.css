@@ -152,7 +152,6 @@
 /* Background Pop-Up-Window*/
 .profile_popup {
 	display: none;
-	position: fixed; 
 	z-index: 4;
 	padding-top: 150px;
 	left: 0;
