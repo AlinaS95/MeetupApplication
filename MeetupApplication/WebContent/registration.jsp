@@ -16,10 +16,8 @@
 </head>
 <body>
 	<div class="logo">
-	 <img src="<%=common.url %>/pictures/meetup_logo.png" alt="Meetup"/>
+	 <img src="<%=common.url %>pictures/meetup_logo.png" alt="Meetup"/>
 	</div>
-	<img src="${pageContext.request.contextPath}/pictures/meetup_logo.png">
-	<img src="/pictures/meetup_logo.png" alt="Meetup"/>
 	<div class="loginbox">
 		<h1>Create a Account</h1>
 		<c:if test="${user != null}">
