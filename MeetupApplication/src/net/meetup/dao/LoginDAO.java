@@ -6,50 +6,36 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class LoginDAO {
 
-	public String authorizeLogin(LoginBean loginBean)
+	public LoginBean checkLogin(String email, String password) throws SQLException, ClassNotFoundException
 	{
-		String email=loginBean.getEmail();
-		String password=loginBean.getPassword();
-		
-		String dbEmail="";
-		String dbPassword="";
-		
 		String jdbcURL = "jdbc:mysql://localhost:3306/meetup";
-		String jdbcName = "root";
-		String jdbcPassword = "";
+        String dbUser = "root";
+        String dbPassword = "";
+ 
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
+        String sql = "SELECT * FROM user WHERE email = ? and password = ?";
+        PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, email);
+        statement.setString(2, password);
 
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection(jdbcURL, jdbcName, jdbcPassword);
-			
-			PreparedStatement statement=null;
-			
-			statement = con.prepareStatement("select * from user where email=? and password=?");
-			statement.setString(1, email);
-			statement.setString(2, password);
-			ResultSet rs=statement.executeQuery();
-			
-			while(rs.next())
-			{
-				dbEmail=rs.getString("email");
-				dbPassword=rs.getString("password");
-				
-				if(email.equals(dbEmail) && password.equals(dbPassword))
-					{
-					return "SUCCESS LOGIN";
-					}
-			}
-			statement.close();
-			con.close();
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return "WRONG Email and Password";
-	}
+        ResultSet result = statement.executeQuery();
+        
+        LoginBean loginBean = null;
+ 
+        if (result.next()) {
+            loginBean = new LoginBean();
+            loginBean.setFirstName(result.getString("firstName"));
+            loginBean.setLastName(result.getString("lastName"));
+            loginBean.setEmail(email);
+        }
+ 
+        connection.close();
+ 
+        return loginBean;
+    }
 }

@@ -32,15 +32,7 @@
 					alt="Home"></a>
 			</div>
 			<div class="welcome">
-				<h3>
-				<%
-				if(session.getAttribute("login")==null || session.getAttribute("login")=="")
-				{
-					response.sendRedirect("login.jsp");
-				}
-				%>
-					Welcome <a class="firstname">${loginBean.fullname}</a>
-				</h3>
+				<h3>Welcome <a class="firstname">${login.firstName}</a></h3>
 				<a class="favorites"
 					onclick="document.getElementById('p_favorites').style.display='block'"
 					style="width: auto;"><img src="pictures/favorite.png"
@@ -97,9 +89,8 @@
 				<img src="pictures/usericon.png" alt="user" />
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
-				src="pictures/infoicon.png" alt="information" />Max Mustermann</a> <br>
-			<br>
-				<%=session.getAttribute("login2") %> <br> <br> <a
+				src="pictures/infoicon.png" alt="information" /><a>${login.firstName} </a><a style="margin-right:50px">${login.lastName}</a></a><br>
+			<br><a>${login.email}</a><br> <br> <a
 				class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
@@ -305,10 +296,9 @@
 				<img src="pictures/stopButton.png" alt="set Time"> <input
 					type="text" placeholder="input exit time" id='exit'><br>
 				<input type="button" value='calculate' onclick='calculateTime()'
-					style="width: 100px; height: 30px;">
+					style="width: 100px; height: 30px; position:relative"><br>
 				<p>You worked today:</p>
-				<input type="text" placeholder="Working hours" id='total'><a
-					style="">Hours</a>
+				<input type="text" placeholder="Working hours" id='total'>
 			</div>
 			<script>
 				function calculateTime() {

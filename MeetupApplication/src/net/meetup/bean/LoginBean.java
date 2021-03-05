@@ -1,6 +1,7 @@
 package net.meetup.bean;
 
 public class LoginBean {
+	private int userID;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -8,6 +9,12 @@ public class LoginBean {
 	private String position;
 	private String password;
 	
+	public int getUserID() {
+		return userID;
+	}
+	public void setUserID(int userID) {
+		this.userID = userID;
+	}
 	public String getFirstName() {
 		return firstName;
 	}
