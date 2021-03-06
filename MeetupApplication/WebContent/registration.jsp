@@ -21,7 +21,7 @@
 
 	<div class="loginbox">
 		<h1>Create a Account</h1>
-		<form action="RegisterController" method="post" onsubmit="return validate();" id="registerForm">
+		<form action="register" method="post" onsubmit="return validate();" id="registerForm">
 			<p>*First Name</p>
 			<input type="text" id="firstName" name="firstName"
 				placeholder="Enter First Name" />

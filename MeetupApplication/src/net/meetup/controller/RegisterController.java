@@ -3,18 +3,34 @@ package net.meetup.controller;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import net.meetup.bean.RegisterBean;
+import net.meetup.bean.User;
 import net.meetup.dao.RegisterDAO;
 
+@WebServlet("/register")
 public class RegisterController extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private RegisterDAO registerDAO;
+	
+	public void init() {
+		registerDAO = new RegisterDAO();
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		if(request.getParameter("btn_register")!=null)
-		{
+		register(request, response);
+	}
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		response.sendRedirect("registration.jsp");
+	}
+	private void register(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String email = request.getParameter("email");
@@ -22,31 +38,26 @@ public class RegisterController extends HttpServlet {
 			String position = request.getParameter("position");
 			String password = request.getParameter("password");
 			
-			RegisterBean registerBean = new RegisterBean();
+			User user = new User();
+			user.setFirstName(firstName);
+			user.setLastName(lastName);
+			user.setEmail(email);
+			user.setCompany(company);
+			user.setPosition(position);
+			user.setPassword(password);
 			
-			registerBean.setFirstName(firstName);
-			registerBean.setLastName(lastName);
-			registerBean.setEmail(email);
-			registerBean.setCompany(company);
-			registerBean.setPosition(position);
-			registerBean.setPassword(password);
-			
-			RegisterDAO registerDAO = new RegisterDAO();
-			
-			String registerValidate = registerDAO.authorizeRegister(registerBean);
-			
-			if(registerValidate.equals("SUCCESS REGISTER"))
-			{
-				request.setAttribute("RegisterSuccessMsg",registerValidate);
-				RequestDispatcher rd=request.getRequestDispatcher("login.jsp");
-				rd.forward(request, response);
+			try {
+				int result = registerDAO.registerUser(user);
+				String destPage = "registration.jsp";
+				if (result == 1) {
+					HttpSession session = request.getSession();
+					session.setAttribute("login", user);
+					destPage = "profile.jsp";
+				}
+				RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
+				dispatcher.forward(request, response);
+			}catch (Exception e) {
+				e.printStackTrace();
 			}
-			else
-			{
-				request.setAttribute("RegisterErrorMsg", registerValidate);
-				RequestDispatcher rd=request.getRequestDispatcher("registration.jsp");
-				rd.include(request, response);
-			}
-		}
 	}
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Welcome</title>
 <link rel="stylesheet" type="text/css" href="<%=common.url%>/login.css">
 <link rel="icon" type="image/png"
 	href="<%=common.url%>pictures/meetup_logo.png">
@@ -14,14 +14,13 @@
 	crossorigin="anonymous"></script>
 <script type="text/javascript"
 	src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
-<script type="text/javascript" src="methods.js"></script>
 </head>
 <body>
 	<div class="logo">
 		<img src="pictures/meetup_logo.png" alt="Meetup">
 	</div>
 	<div class="loginbox">
-		<h1>Already a Member?</h1>
+		<h1>Welcome<a>${register.firstName}</a></h1>
 		<h1>Login here</h1>
 		<form action="login" method="post" id="loginForm">
 			<p>E-Mail</p>
@@ -32,29 +31,30 @@
 			<input type="submit" value="Not a member?" onClick="register()"><br>
 		</form>
 	</div>
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$("#loginForm").validate({
-				rules : {
-					email : {
-						required : true,
-						email : true
-					},
-
-					password : "required",
-				},
-
-				messages : {
-					email : {
-						required : "Please enter email",
-						email : "Please enter a valid email address"
-					},
-
-					password : "Please enter password"
-				}
-			});
-
-		});
-	</script>
+<script type="text/javascript">
+ 
+    $(document).ready(function() {
+        $("#loginForm").validate({
+            rules: {
+                email: {
+                    required: true,
+                    email: true
+                },
+         
+                password: "required",
+            },
+             
+            messages: {
+                email: {
+                    required: "Please enter email",
+                    email: "Please enter a valid email address"
+                },
+                 
+                password: "Please enter password"
+            }
+        });
+ 
+    });
+</script>
 </body>
 </html>

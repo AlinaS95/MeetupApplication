@@ -1,6 +1,6 @@
 package net.meetup.dao;
 
-import net.meetup.bean.LoginBean;
+import net.meetup.bean.User;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,32 +10,34 @@ import java.sql.SQLException;
 
 public class LoginDAO {
 
-	public LoginBean checkLogin(String email, String password) throws SQLException, ClassNotFoundException
+	public User checkLogin(String email, String password) throws SQLException, ClassNotFoundException
 	{
 		String jdbcURL = "jdbc:mysql://localhost:3306/meetup";
-        String dbUser = "root";
-        String dbPassword = "";
+        String jdbcName = "root";
+        String jdbcPassword = "";
  
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
-        String sql = "SELECT * FROM user WHERE email = ? and password = ?";
-        PreparedStatement statement = connection.prepareStatement(sql);
+        Connection connection = DriverManager.getConnection(jdbcURL, jdbcName, jdbcPassword);
+        String sqlLogin = "SELECT * FROM user WHERE email = ? and password = ?";
+        PreparedStatement statement = connection.prepareStatement(sqlLogin);
         statement.setString(1, email);
         statement.setString(2, password);
 
         ResultSet result = statement.executeQuery();
         
-        LoginBean loginBean = null;
+        User user = null;
  
         if (result.next()) {
-            loginBean = new LoginBean();
-            loginBean.setFirstName(result.getString("firstName"));
-            loginBean.setLastName(result.getString("lastName"));
-            loginBean.setEmail(email);
+            user = new User();
+            user.setUserID(result.getInt("userID"));
+            user.setFirstName(result.getString("firstName"));
+            user.setLastName(result.getString("lastName"));
+            user.setEmail(email);
+            user.setCompany(result.getString("company"));
         }
  
         connection.close();
  
-        return loginBean;
+        return user;
     }
 }

@@ -1,6 +1,6 @@
 package net.meetup.controller;
 
-import net.meetup.bean.LoginBean;
+import net.meetup.bean.User;
 import net.meetup.dao.LoginDAO;
 
 import java.io.IOException;
@@ -32,12 +32,12 @@ public class LoginController extends HttpServlet {
 											// operation
 
 		try {
-			LoginBean loginBean = loginDAO.checkLogin(email, password); // this class contain setting up all received values from login.jsp
+			User user = loginDAO.checkLogin(email, password); // this class contain setting up all received values from login.jsp
 			String destPage = "login.jsp";
 
-			if (loginBean != null) {
+			if (user != null) {
 				HttpSession session = request.getSession();
-				session.setAttribute("login", loginBean);
+				session.setAttribute("login", user);
 				destPage = "profile.jsp";
 			} else {
 				String message = "Invalid email/password";

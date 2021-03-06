@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="net.meetup.usermanagement.model.common"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,9 @@
 					alt="Home"></a>
 			</div>
 			<div class="welcome">
-				<h3>Welcome <a class="firstname">${login.firstName}</a></h3>
+				<h3>
+					Welcome <a class="firstname">${login.firstName}</a>
+				</h3>
 				<a class="favorites"
 					onclick="document.getElementById('p_favorites').style.display='block'"
 					style="width: auto;"><img src="pictures/favorite.png"
@@ -47,7 +50,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
+					<a href="profile.jsp"><img src="pictures/usericon.png"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -58,12 +61,12 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="javascript:home()">Home</a></li>
+					<li><a href="home.html">Home</a></li>
 					<li><a href="javascript:list()">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
-					<li><a href="javascript:calendar()">Calendar</a></li>
+					<li><a href="calendar.jsp">Calendar</a></li>
 					<li><a href="javascript:progress()">Progress</a></li>
-					<li><a href="javascript:socialmedia()">Social Media</a></li>
+					<li><a href="socialmedia.jsp">Social Media</a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
@@ -89,9 +92,9 @@
 				<img src="pictures/usericon.png" alt="user" />
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
-				src="pictures/infoicon.png" alt="information" /><a>${login.firstName} </a><a style="margin-right:50px">${login.lastName}</a></a><br>
-			<br><a>${login.email}</a><br> <br> <a
-				class="profile_settings"
+				src="pictures/infoicon.png" alt="information" /><a>${login.firstName}
+			</a><a style="margin-right: 50px">${login.lastName}</a></a><br> <br>
+			<a>${login.email}</a><br> <br> <a class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
 				alt="Settings">Settings</a>
@@ -113,39 +116,64 @@
 					<button onClick="changePicture()">Upload new photo</button>
 					<button onClick="deletePicture()">Remove photo</button>
 					<br>
+					<div class="popupBody">
+					<c:if test="${user != null}">
+						<input type="hidden" name="userID"
+							value="<c:out value='${user.userID}' />" />
+					</c:if>
+					<caption>
+						<h2>
+							<c:if test="${user != null}">
+            			Edit User
+            		</c:if>
+							<c:if test="${user == null}">
+            			Add New User
+            		</c:if>
+						</h2>
+					</caption>
+					<c:if test="${user != null}">
+						<input type="hidden" name="userID"
+							value="<c:out value='${user.userID}' />" />
+					</c:if>
+					<c:if test="${user != null}">
+						<form action="update" method="post">
+					</c:if>
+					<c:if test="${workspace != null}">
+            			Edit Workspace
+            		</c:if>
+					<hr>
+					<div class="membersList">
+						<a href="<%=request.getContextPath()%>/list"
+							class="nav-link">Users</a><br>
+						<table>
+							<c:forEach var="user" items="${listUser}">
+								<tr>
+									<td><input type="image" src="pictures/usericon.png"
+										alt="User"></td>
+									<td><c:out value="${user.userID}" /></td>
+									<td><c:out value="${user.firstName}" /></td>
+									<td><c:out value="${user.lastName}" /></td>
+									<td><c:out value="${user.email}" /></td>
+									<td><c:out value="${user.company}" /></td>
+									<td><c:out value="${user.position}" /></td>
+									<td><input
+										src="delete?userID=<c:out value='${user.userID}' />"
+										type="image" src="pictures/delete.png" alt="delete user"
+										style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
 					<div class="popupInfo">
-						<a>Name:</a>
-						<button onclick="myFunction()">
-							<img src="pictures/settings.png">
-						</button>
-						<div id="settingsText">
-							<form action="check-input.php" method="post">
-								<label><textarea class="textPopup" name="html_elemente"
-										cols="20" rows="10" maxlength="10000" wrap="soft"></textarea>
-								</label>
-							</form>
-						</div>
-						<br> <a>E-Mail:</a>
-						<div id="settingsText">
-							<form action="check-input.php" method="post">
-								<label><textarea class="textPopup" name="html_elemente"
-										cols="20" rows="10" maxlength="10000" wrap="soft"></textarea>
-								</label>
-							</form>
-						</div>
-						<br> <a>Company:</a>
-						<div id="settingsText">
-							<form action="check-input.php" method="post">
-								<label><textarea class="textPopup" name="html_elemente"
-										cols="20" rows="10" maxlength="10000" wrap="soft"></textarea>
-								</label>
-							</form>
-						</div>
+						<a>First name: </a><a>${login.firstName}</a><br> <a>Last
+							name: </a><a>${login.lastName}</a><br> <a>Email: </a><a>${login.email}</a><br>
+						<a>Company: </a><a>${login.company}</a><br>
 					</div>
 				</div>
 				<div class="popupFooter">
 					<button onClick="save()">Save</button>
-					<a href="delete">Delete profile</a>
+					<a href="delete?id=<c:out value='${user.userID}'/>">Delete</a>
 				</div>
 			</div>
 		</div>
@@ -210,18 +238,19 @@
 						<form action="insertW" method="post">
 					</c:if>
 					<caption>
-			<h2>
-				<c:if test="${workspace != null}">
+						<h2>
+							<c:if test="${workspace != null}">
             			Edit Workspace
             		</c:if>
-				<c:if test="${workspace == null}">
+							<c:if test="${workspace == null}">
             			Add New Workspace
             		</c:if>
-			</h2>
-		</caption>
+						</h2>
+					</caption>
 					<c:if test="${workspace != null}">
-					<input type="hidden" name="workspaceID" value="<c:out value='${workspace.workspaceID}' />" />
-				</c:if>
+						<input type="hidden" name="workspaceID"
+							value="<c:out value='${workspace.workspaceID}' />" />
+					</c:if>
 					<form>
 						<p>Team name</p>
 						<input type="text" id="teamName"
@@ -234,8 +263,8 @@
 						<p>Email</p>
 						<input type="text" id="email"
 							value="<c:out value='${workspace.email}' />" name="email"
-							placeholder="Enter Email" />
-						<input type="image" src="pictures/add.png" alt="Add">
+							placeholder="Enter Email" /> <input type="image"
+							src="pictures/add.png" alt="Add">
 					</form>
 					<hr>
 					<div class="membersList">
@@ -296,7 +325,7 @@
 				<img src="pictures/stopButton.png" alt="set Time"> <input
 					type="text" placeholder="input exit time" id='exit'><br>
 				<input type="button" value='calculate' onclick='calculateTime()'
-					style="width: 100px; height: 30px; position:relative"><br>
+					style="width: 100px; height: 30px; position: relative"><br>
 				<p>You worked today:</p>
 				<input type="text" placeholder="Working hours" id='total'>
 			</div>
@@ -325,7 +354,7 @@
 		</div>
 		<br> <br>
 		<div class="logout">
-			<a href="logout.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
+			<a href="logout"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
 </body>
