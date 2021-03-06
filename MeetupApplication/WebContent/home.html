@@ -131,6 +131,8 @@
 		</div>
 		
 	<p id="uhr"></p>
+	<div id="datum"></div>
+
 		
 <nav>
 		<div class="icon" onclick="toggleNotifi()">
@@ -180,6 +182,28 @@
 
 		</div>
 	</nav>
+	<script language="javascript" type="text/javascript">
+window.setInterval("datum()",60000);
+
+function datum() {
+	var d = new Date();
+
+	var wochentage = new Array ("Sonntag", "Montag", "Dienstag",
+	"Mittwoch", "Donnerstag", "Freitag", "Samstag");
+
+	var monate = new Array ("Januar", "Februar", "März", "April",
+	"Mai", "Juni", "Juli", "August", "September",
+	"Oktober", "November", "Dezember");
+
+	document.getElementById("datum").innerHTML = ' '
+	+ wochentage[d.getDay()] + ', der ' + d.getDate() + '. '
+	+ monate[d.getMonth()] + ' ' + d.getFullYear();
+
+}
+
+window.onload=datum   
+</script>
+
 	<script>
 var box  = document.getElementById('box');
 var down = false;
