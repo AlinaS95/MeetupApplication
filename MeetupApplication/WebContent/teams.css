@@ -62,8 +62,6 @@
   to {opacity:1 ;}
 }
 
-
-
 .chip {
   display: inline-block;
   padding: 0 55px;
@@ -82,15 +80,105 @@
   border-radius: 50%;
 }
 
-.closebtn {
-  padding-left: 10px;
-  color: #888;
-  font-weight: bold;
-  float: right;
-  font-size: 20px;
-  cursor: pointer;
+.chip1 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
 }
 
-.closebtn:hover {
-  color: #000;
+.chip1 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.chip2 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+.chip2 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.chip3 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+.chip3 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.chip4 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+.chip4 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.chip5 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+.chip5 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
+.chip6 {
+  display: inline-block;
+  padding: 0 55px;
+  height: 50px;
+  font-size: 18px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: #ffffff;
+}
+
+.chip6 img {
+  float: left;
+  margin: 0 10px 0 -55px;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
 }
