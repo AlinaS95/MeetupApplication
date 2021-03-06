@@ -208,3 +208,10 @@ img.middle {
 	margin-left: 34%;
 }
 
+#uhr {
+	font-size: 2em;
+	margin: 1em auto;
+	position: relative;
+	margin-left: 45%;
+}
+}

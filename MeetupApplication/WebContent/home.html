@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="inbox.css">
 <link rel="stylesheet" type="text/css" href="home.css">
 <link rel="stylesheet" type="text/css" href="menue.css">
+<link rel="stylesheet" type="text/css" href="teams.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
 </head>
@@ -53,6 +54,8 @@
 		<br>
 	</div>
 	<main>
+	
+
 
 	<dialog id="dialog">
 	<div class="button" id="menuebutton"></div>
@@ -127,9 +130,9 @@
 		</div>
 		</div>
 		
-<nav>
-
+	<p id="uhr"></p>
 		
+<nav>
 		<div class="icon" onclick="toggleNotifi()">
 			<img src="pictures/notificationring.png" alt="">
 		</div>
@@ -188,7 +191,7 @@ function toggleNotifi(){
 		box.style.opacity = 0;
 		down = false;
 	}else {
-		box.style.height  = '510px';
+		box.style.height  = '530px';
 		box.style.opacity = 1;
 		down = true;
 	}
@@ -216,7 +219,29 @@ function toggleNotifi(){
 		</p>
 	</form>
 
+
+<div class="popup" onclick="myFunction()"><img src="pictures/mannschaft.png" alt="">
+  <span class="popuptext" id="myPopup"><p>Marketing</p>
+  <div class="chip">
+  <img src="pictures/avatar1.png" alt="Person" width="96" height="96">
+  John Doe
+  <span class="closebtn" onclick="this.parentElement.style.display='none'">&times;</span>
+</div>
+  </span>
+</div>
+
 </main>
+
+
+<script>
+// When the user clicks on div, open the popup
+function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
+
+
 <script>
 	var startbutton = document.getElementById("start"),
 		dialog = document.getElementById('dialog'),
@@ -232,6 +257,28 @@ function toggleNotifi(){
 		dialog.close();
 	}
 
+</script>
+<script>
+'use strict';
+(function () {
+	function uhrzeit() {
+		var jetzt = new Date(),
+			h = jetzt.getHours(),
+			m = jetzt.getMinutes(),
+			s = jetzt.getSeconds();
+		m = fuehrendeNull(m);
+		s = fuehrendeNull(s);
+		document.getElementById('uhr')
+			.innerHTML = h + ':' + m + ':' + s;
+		setTimeout(uhrzeit, 500);
+	}
+
+	function fuehrendeNull(zahl) {
+		zahl = (zahl < 10 ? '0' : '') + zahl;
+		return zahl;
+	}
+	document.addEventListener('DOMContentLoaded', uhrzeit);
+}());
 </script>
 
 </body>
