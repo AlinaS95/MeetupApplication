@@ -494,3 +494,34 @@ nav ul li {
 	height: 20px;
 	margin-top: -15px;
 }
+/* Infocards */
+
+.tooltip {
+	color: #707070;
+	cursor: fixed;
+	position: relative;
+	font-size: 25px;
+	font-family: "Times New Roman";
+}
+
+.tooltip span[role=tooltip] {
+	display: none;
+}
+
+.tooltip:hover span[role=tooltip] {
+	display: block;
+	position: absolute;
+	bottom: 1em;
+	left: 2em;
+	width: 15em;
+	padding: 0.5em;
+	z-index: 100;
+	color: #707070;
+	background-color: #eee;
+	border: solid 1px #707070;
+	border-radius: 0.2em;
+}
+
+dfn{
+	font-style: normal;
+}
