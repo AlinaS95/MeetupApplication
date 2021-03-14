@@ -2,26 +2,28 @@ package net.meetup.workspace;
 
 public class Workspace {
 	protected int workspaceID;
-	private String teamName;
-	private String fullName;
-	private String email;
+	protected String fullName;
+	protected String email;
+	protected String workspace;
+	protected String position;
 	
-	public Workspace() {
-	}
+	public Workspace() {}
 	
-	public Workspace(String teamName, String fullName, String email) {
+	public Workspace (String fullName, String email, String workspace, String position) {
 		super();
-		this.teamName = teamName;
 		this.fullName = fullName;
 		this.email = email;
+		this.workspace = workspace;
+		this.position = position;
 	}
 	
-	public Workspace(int workspaceID, String teamName, String fullName, String email) {
+	public Workspace(int workspaceID, String fullName, String email, String workspace, String position) {
 		super();
 		this.workspaceID = workspaceID;
-		this.teamName = teamName;
 		this.fullName = fullName;
 		this.email = email;
+		this.workspace = workspace;
+		this.position = position;
 	}
 	
 	public int getWorkspaceID() {
@@ -29,12 +31,6 @@ public class Workspace {
 	}
 	public void setWorkspaceID(int workspaceID) {
 		this.workspaceID = workspaceID;
-	}
-	public String getTeamName() {
-		return teamName;
-	}
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
 	}
 	public String getFullName() {
 		return fullName;
@@ -47,5 +43,17 @@ public class Workspace {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getWorkspace() {
+		return workspace;
+	}
+	public void setWorkspace(String workspace) {
+		this.workspace = workspace;
+	}
+	public String getPosition() {
+		return position;
+	}
+	public void setPosition(String position) {
+		this.position = position;
 	}
 }

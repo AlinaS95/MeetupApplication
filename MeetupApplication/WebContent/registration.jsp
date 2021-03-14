@@ -40,6 +40,10 @@
 			<p>*Position</p>
 			<input type="text" id="position" name="position"
 				placeholder="Enter Position" />
+				
+			<p>*Workspace</p>
+			<input type="text" id="workspace" name="workspace"
+				placeholder="Enter Workspace" />
 
 			<p>*Password</p>
 			<input type="password" id="password" name="password"

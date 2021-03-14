@@ -7,21 +7,23 @@ public class User {
 	protected String email;
 	protected String company;
 	protected String position;
+	protected String workspace;
 	protected String password;
 	
 	public User() {}
 	
-	public User (String firstName, String lastName, String email, String company, String position, String password) {
+	public User (String firstName, String lastName, String email, String company, String position, String workspace, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.company = company;
 		this.position = position;
+		this.workspace = workspace;
 		this.password = password;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position, String password) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String password) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -29,10 +31,11 @@ public class User {
 		this.email = email;
 		this.company = company;
 		this.position = position;
+		this.workspace = workspace;
 		this.password = password;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -40,6 +43,7 @@ public class User {
 		this.email = email;
 		this.company = company;
 		this.position = position;
+		this.workspace = workspace;
 	}
 	
 	public int getUserID() {
@@ -77,6 +81,12 @@ public class User {
 	}
 	public void setPosition(String position) {
 		this.position = position;
+	}
+	public String getWorkspace() {
+		return workspace;
+	}
+	public void setWorkspace(String workspace) {
+		this.workspace = workspace;
 	}
 	public String getPassword() {
 		return password;

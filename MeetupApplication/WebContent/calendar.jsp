@@ -19,12 +19,14 @@
 				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
-			<div class="welcome">
-				<h3>Welcome <a class="firstname">${login.firstName}</a></h3>
-				<a class="favorites"
-					onclick="document.getElementById('p_favorites').style.display='block'"
-					style="width: auto;"><img src="pictures/favorite.png"
-					alt="Favorites"></a> <a class="status"
+			<div class="firstBox">
+				<h3>
+					Workspace: <a class="workspace">${login.workspace}</a>
+				</h3>
+				<a class="information"
+					onclick="document.getElementById('p_info').style.display='block'"
+					style="width: auto;"><img src="pictures/infoicon.png"
+					alt="Information"></a> <a class="status"
 					href="javascript:progress()"><img
 					src="pictures/greenCircle.png" alt="Status"></a>
 			</div>
@@ -35,21 +37,21 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp"><img src="pictures/usericon.png"
+					<a href="javascript:profile()"><img src="pictures/usericon.png"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
 		</div>
-		<div class="mainmenu">
+	<div class="mainmenu">
 			<nav>
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.html">Home</a></li>
+					<li><a href="home.jsp">Home</a></li>
 					<li><a href="javascript:list()">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
-					<li><a href="calendar.jsp">Calendar</a></li>
+					<li><a href="calendar.jsp"style="font-weight: bold">Calendar</a></li>
 					<li><a href="javascript:progress()">Progress</a></li>
 					<li><a href="socialmedia.jsp">Social Media</a></li>
 				</ul>
@@ -67,6 +69,21 @@
 			</nav>
 		</div>
 	</div>
+	<!-- Pop-Up-Window -->
+		<div id="l_add" class="navigation_addBlock">
+
+		<!-- Window content -->
+		<div class="addBlock">
+			<div class="popupHeader">
+				Add<span
+					onclick="document.getElementById('l_add').style.display='none'"
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody">
+			</div>
+		</div>
+		</div>
+		
 	<div class="background2">
 	<br>
 	<div class="month">Dezember 2020

@@ -13,8 +13,8 @@ public class RegisterDAO {
 	private String jdbcName = "root";
 	private String jdbcPassword = "";
 	
-	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, position, password) VALUES (?,?,?,?,?,?)";
-	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, position, password from user where userID=?";
+	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, position, workspace,password) VALUES (?,?,?,?,?,?,?)";
+	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, position, workspace, password from user where userID=?";
 	
 	public RegisterDAO() {}
 	
@@ -43,7 +43,8 @@ public class RegisterDAO {
 			statement.setString(3, user.getEmail());
 			statement.setString(4, user.getCompany());
 			statement.setString(5, user.getPosition());
-			statement.setString(6, user.getPassword());
+			statement.setString(6, user.getWorkspace());
+			statement.setString(7, user.getPassword());
 			
 			System.out.println(statement);
 			
@@ -73,8 +74,9 @@ public class RegisterDAO {
                 String email = result.getString("email");
                 String company = result.getString("company");
                 String position = result.getString("position");
+                String workspace = result.getString("workspace");
                 String password = result.getString("password");
-                user = new User(userID, firstName, lastName, email, company, position, password);
+                user = new User(userID, firstName, lastName, email, company, position, workspace, password);
             }
         } catch (SQLException e) {
             printSQLException(e);

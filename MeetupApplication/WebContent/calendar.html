@@ -12,64 +12,60 @@
 </head>
 <body>
 <div class="background1">
-	<div class="headliner_block">
-		<div class="logo">
-			<a href="javascript:home()"><img src="pictures/meetup_logo.png" alt="Home"></a>
+		<div class="headliner_block">
+			<div class="logo">
+				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+					alt="Home"></a>
+			</div>
+			<div class="firstBox">
+				<h3>
+					Workspace: <a class="workspace">${login.workspace}</a>
+				</h3>
+				<a class="information"
+					onclick="document.getElementById('p_info').style.display='block'"
+					style="width: auto;"><img src="pictures/infoicon.png"
+					alt="Information"></a> <a class="status"
+					href="javascript:progress()"><img
+					src="pictures/greenCircle.png" alt="Status"></a>
+			</div>
+			<br>
+			<div class="secondblock">
+				<div class="searchbox">
+					<span class="searchicon"><img src="pictures/search.png"></span>
+					<input type="search" id="search" placeholder="Search..." />
+				</div>
+				<div class="user">
+					<a href="profile.jsp"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
+				</div>
+			</div>
+			<br>
 		</div>
-		<div class="project">
-			<h3>Project</h3>
+	<div class="mainmenu">
 			<nav>
-			<ul>
-			<li><img src="pictures/splitButton.png">
 				<ul>
-					<li><a href="javascript:anotherproject()">Website</a>
+					<li><a href="javascript:menue()"><img
+							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a href="home.jsp">Home</a></li>
+					<li><a href="javascript:list()">List</a></li>
+					<li><a href="javascript:board()">Board</a></li>
+					<li><a href="calendar.jsp">Calendar</a></li>
+					<li><a href="javascript:progress()">Progress</a></li>
+					<li><a href="socialmedia.jsp">Social Media</a></li>
 				</ul>
-			</li>
-			</ul>
-			<ul>
-			<li><a class="information" onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png" alt="Information"></a></li>	
-			<li><a class="favorites" onclick="document.getElementById('pr_favorites').style.display='block'"
-					style="width: auto;"><img src="pictures/favorite.png" alt="Favorites"></a></li>
-			<li><a class="status" href="javascript:progress()"><img src="pictures/greenCircle.png" alt="Status"></a></li>
-			</ul>
+				<div class="secondNavigation">
+					<ul>
+						<li><a class="add"
+							onclick="document.getElementById('add').style.display='block'"
+							style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>
+						<li><a class="profile_settings"
+							onclick="document.getElementById('p_settings').style.display='block'"
+							style="width: auto;"><img src="pictures/settings.png"
+								alt="Settings"></a></li>
+					</ul>
+				</div>
 			</nav>
 		</div>
-		<br>
-		<div class="secondblock">
-			<div class
-			="searchbox">
-				<span class="searchicon"><img src="pictures/search.png"></span>
-				<input type="search" id="search" placeholder="Search..."/>
-			</div>
-			<div class="user">
-				<a href="javascript:profile()"><img src="pictures/usericon.png"
-					alt="Profil Icon"/></a>
-			</div>
-		</div>
-		<br>
-	</div>
-	<div class="mainmenu">
-	<nav>
-		<ul>
-			<li><a href="javascript:menue()"><img src="pictures/navigation.png" alt="Menu"></a></li>
-			<li><a href="javascript:home()">Home</a></li>
-			<li><a href="javascript:list()">List</a></li>
-			<li><a href="javascript:board()">Board</a></li>
-			<li><a href="javascript:calendar()" style="font-weight: bold">Calendar</a></li>
-			<li><a href="javascript:progress()">Progress</a></li>
-			<li><a href="javascript:socialmedia()">Social Media</a></li>
-		</ul>
-		<div class="secondNavigation">
-		<ul>
-			<li><a class="add" onclick="document.getElementById('l_add').style.display='block'"
-					style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>	
-			<li><a class="profile_settings" onclick="document.getElementById('p_settings').style.display='block'"
-					style="width: auto;"><img src="pictures/settings.png" alt="Settings"></a></li>
-		</ul>
-	</div>
-	</nav>
-	</div>
 	</div>
 	<!-- Pop-Up-Window -->
 		<div id="l_add" class="navigation_addBlock">

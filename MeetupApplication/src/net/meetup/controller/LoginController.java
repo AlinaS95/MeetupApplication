@@ -27,12 +27,13 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String workspace = request.getParameter("workspace");
 
 		LoginDAO loginDAO = new LoginDAO(); // this class contain main logic to perform function calling and database
 											// operation
 
 		try {
-			User user = loginDAO.checkLogin(email, password); // this class contain setting up all received values from login.jsp
+			User user = loginDAO.checkLogin(email, password, workspace); // this class contain setting up all received values from login.jsp
 			String destPage = "login.jsp";
 
 			if (user != null) {

@@ -27,7 +27,9 @@
 			<p>E-Mail</p>
 			<input type="text" name="email" placeholder="Enter E-Mail" />
 			<p>Password</p>
-			<input type="password" name="password" placeholder="Enter Password" /><br>${message}<br>
+			<input type="password" name="password" placeholder="Enter Password" /><br>${message}
+			<p>Workspace</p>
+			<input type="text" name="workspace" placeholder="Enter Workspace" />
 			<input type="submit" value="Login">
 			<input type="submit" value="Not a member?" onClick="register()"><br>
 		</form>

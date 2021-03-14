@@ -1,4 +1,4 @@
-package net.meetup.controller;
+package net.meetup.workspace;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -9,51 +9,42 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.meetup.bean.User;
-import net.meetup.dao.RegisterDAO;
-
-@WebServlet("/register")
-public class RegisterController extends HttpServlet {
+@WebServlet("/addMember")
+public class WorkspaceController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private RegisterDAO registerDAO;
+	private WorkspaceDAO workspaceDAO;
 	
 	public void init() {
-		registerDAO = new RegisterDAO();
+		workspaceDAO = new WorkspaceDAO();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		register(request, response);
+		addMember(request, response);
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.sendRedirect("registration.jsp");
 	}
-	private void register(HttpServletRequest request, HttpServletResponse response)
+	private void addMember(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-			String firstName = request.getParameter("firstName");
-			String lastName = request.getParameter("lastName");
+			String fullName = request.getParameter("fullName");
 			String email = request.getParameter("email");
-			String company = request.getParameter("company");
-			String position = request.getParameter("position");
 			String workspace = request.getParameter("workspace");
-			String password = request.getParameter("password");
+			String position = request.getParameter("position");
 			
-			User user = new User();
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(email);
-			user.setCompany(company);
-			user.setPosition(position);
-			user.setWorkspace(workspace);
-			user.setPassword(password);
+			Workspace addWorkspace = new Workspace();
+			addWorkspace.setFullName(fullName);
+			addWorkspace.setEmail(email);
+			addWorkspace.setWorkspace(workspace);
+			addWorkspace.setPosition(position);
 			
 			try {
-				int result = registerDAO.registerUser(user);
+				int result = workspaceDAO.addMember(addWorkspace);
 				String destPage = "registration.jsp";
 				if (result == 1) {
 					HttpSession session = request.getSession();
-					session.setAttribute("login", user);
+					session.setAttribute("workspace", addWorkspace);
 					destPage = "profile.jsp";
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
