@@ -4,60 +4,44 @@
 <meta charset="ISO-8859-1">
 <title>Home</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="leiste.css">
-<link rel="stylesheet" type="text/css" href="inbox.css">
 <link rel="stylesheet" type="text/css" href="home.css">
-<link rel="stylesheet" type="text/css" href="menue.css">
-<link rel="stylesheet" type="text/css" href="teams.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
 </head>
 <body>
 
 <div class="background1">
-	<div class="headliner_block">
-		<div class="logo">
-			<a href="javascript:home()"><img src="pictures/meetup_logo.png" alt="Home"></a>
-		</div>
-		<div class="project">
-			<h3>Project</h3>
-			<hr>
-			<nav>
-			<ul>
-			<li><img src="pictures/splitButton.png">
-				<ul>
-					<li><a href="javascript:anotherproject()">Website</a>
-				</ul>
-			</li>
-			</ul>
-			<ul>
-			<li><a class="information" onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png" alt="Information"></a></li>	
-			<li><a class="favorites" onclick="document.getElementById('pr_favorites').style.display='block'"
-					style="width: auto;"><img src="pictures/favorite.png" alt="Favorites"></a></li>
-			<li><a class="status" href="javascript:progress()"><img src="pictures/greenCircle.png" alt="Status"></a></li>
-			</ul>
-			</nav>
-		</div>
-		<br>
-		<div class="secondblock">
-			<div class
-			="searchbox">
-				<span class="searchicon"><img src="pictures/search.png"></span>
-				<input type="search" id="search" placeholder="Search..."/>
+		<div class="headliner_block">
+			<div class="logo">
+				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+					alt="Home"></a>
 			</div>
-			<div class="user">
-				<a href="javascript:profile()"><img src="pictures/usericon.png"
-					alt="Profil Icon"/></a>
+			<div class="welcome">
+				<h3>
+					Workspace: <a class="firstname">${login.workspace}</a>
+				</h3>
+				<a class="information"
+					onclick="document.getElementById('p_info').style.display='block'"
+					style="width: auto;"><img src="pictures/infoicon.png"
+					alt="Information"></a> <a class="status"
+					href="javascript:progress()"><img
+					src="pictures/greenCircle.png" alt="Status"></a>
 			</div>
+			<br>
+			<div class="secondblock">
+				<div class="searchbox">
+					<span class="searchicon"><img src="pictures/search.png"></span>
+					<input type="search" id="search" placeholder="Search..." />
+				</div>
+				<div class="user">
+					<a href="profile.jsp"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
+				</div>
+			</div>
+			<br>
 		</div>
-		<br>
-	</div>
-	<main>
-	
-
-
-	<dialog id="dialog">
+			<main>
+		<dialog id="dialog">
 	<div class="button" id="menuebutton"></div>
         <div><img class="middle" src="pictures/meetup_logo.png" alt="link" width="80" height="70" /></div>
         <br>
@@ -90,19 +74,18 @@
 		<div id="punkte">
 </div>
 	</dialog>
-</main>
+	</main>
 	<div class="mainmenu">
 	<nav>
+	
 		<ul>
-		
-		    <li><button id="start"><img src="pictures/navigation.png" height="50" width="50" align="left" alt="navigation"></button></a></li>
+			 <li><button id="start"><img src="pictures/navigation.png" height="50" width="50" align="left" alt="navigation"></button></a></li>
 			<li><a href="javascript:home()" style="font-weight: bold">Home</a></li>
 			<li><a href="javascript:list()">List</a></li>
 			<li><a href="javascript:board()">Board</a></li>
 			<li><a href="javascript:calendar()">Calendar</a></li>
 			<li><a href="javascript:progress()">Progress</a></li>
 			<li><a href="javascript:socialmedia()">Social Media</a></li>
-		 	
 		</ul>
 		<div class="secondNavigation">
 		<ul>
@@ -130,6 +113,10 @@
 		</div>
 		</div>
 		
+	<div class="background2">
+	<br>
+	<main>
+	
 	<p id="uhr"></p>
 	<div id="datum"></div>
 
@@ -182,6 +169,8 @@
 
 		</div>
 	</nav>
+	
+<!-- Date -->
 	<script language="javascript" type="text/javascript">
 window.setInterval("datum()",60000);
 
@@ -204,6 +193,7 @@ function datum() {
 window.onload=datum   
 </script>
 
+<!-- Inbox -->
 	<script>
 var box  = document.getElementById('box');
 var down = false;
@@ -299,7 +289,7 @@ function toggleNotifi(){
 
 </main>
 
-
+<!-- Teams Pop Up -->
 <script>
 // When the user clicks on div, open the popup
 function myFunction() {
@@ -325,6 +315,8 @@ function myFunction() {
 	}
 
 </script>
+
+<!-- Watch -->
 <script>
 'use strict';
 (function () {
@@ -347,6 +339,6 @@ function myFunction() {
 	document.addEventListener('DOMContentLoaded', uhrzeit);
 }());
 </script>
-
+</div>
 </body>
 </html>
