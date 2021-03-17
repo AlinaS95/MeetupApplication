@@ -10,5 +10,160 @@
 </head>
 <body>
 
+<div class="background1">
+		<div class="headliner_block">
+			<div class="logo">
+				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+					alt="Home"></a>
+			</div>
+			<div class="welcome">
+				<h3>
+					Workspace: <a class="firstname">${login.workspace}</a>
+				</h3>
+				<a class="information"
+					onclick="document.getElementById('p_info').style.display='block'"
+					style="width: auto;"><img src="pictures/infoicon.png"
+					alt="Information"></a> <a class="status"
+					href="javascript:progress()"><img
+					src="pictures/greenCircle.png" alt="Status"></a>
+			</div>
+			<br>
+			<div class="secondblock">
+				<div class="searchbox">
+					<span class="searchicon"><img src="pictures/search.png"></span>
+					<input type="search" id="search" placeholder="Search..." />
+				</div>
+				<div class="user">
+					<a href="profile.jsp"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
+				</div>
+			</div>
+			<br>
+		</div>
+
+	<div class="mainmenu">
+	<nav>
+		<ul>
+			 <li><button id="start"><img src="pictures/navigation.png" height="50" width="50" align="left" alt="navigation"></button></a></li>
+			<li><a href="javascript:home()" style="font-weight: bold">Home</a></li>
+			<li><a href="javascript:list()">List</a></li>
+			<li><a href="javascript:board()">Board</a></li>
+			<li><a href="javascript:calendar()">Calendar</a></li>
+			<li><a href="javascript:progress()">Progress</a></li>
+			<li><a href="javascript:socialmedia()">Social Media</a></li>
+		</ul>
+		
+		<div class="secondNavigation">
+		<ul>
+			<li><a class="add" onclick="document.getElementById('l_add').style.display='block'"
+					style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>	
+			<li><a class="profile_settings" onclick="document.getElementById('p_settings').style.display='block'"
+					style="width: auto;"><img src="pictures/settings.png" alt="Settings"></a></li>
+		</ul>
+	</div>
+	</nav>
+	</div>
+	</div>
+	<!-- Pop-Up-Window -->
+		<div id="l_add" class="navigation_addBlock">
+
+		<!-- Window content -->
+		<div class="addBlock">
+			<div class="popupHeader">
+				Add<span
+					onclick="document.getElementById('l_add').style.display='none'"
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody">
+			</div>
+		</div>
+		</div>
+	<div class="background2">
+
+<h1>Inbox</h1>
+<div class="notifi-item">
+			<img src="pictures/notificationring.png" alt="">
+		</div>
+	<p id="uhr"></p>
+	<div id="datum"></div>
+	
+	<div class="inboxbox"></div>
+	<div class="inboxbox1"></div>
+	<div class="inboxbox2"></div>
+	<div class="inboxbox3"></div>
+	
+
+
+<!-- Watch -->
+<script>
+'use strict';
+(function () {
+	function uhrzeit() {
+		var jetzt = new Date(),
+			h = jetzt.getHours(),
+			m = jetzt.getMinutes(),
+			s = jetzt.getSeconds();
+		m = fuehrendeNull(m);
+		s = fuehrendeNull(s);
+		document.getElementById('uhr')
+			.innerHTML = h + ':' + m + ':' + s;
+		setTimeout(uhrzeit, 500);
+	}
+
+	function fuehrendeNull(zahl) {
+		zahl = (zahl < 10 ? '0' : '') + zahl;
+		return zahl;
+	}
+	document.addEventListener('DOMContentLoaded', uhrzeit);
+}());
+</script>
+<!-- Date -->
+	<script language="javascript" type="text/javascript">
+window.setInterval("datum()",60000);
+
+function datum() {
+	var d = new Date();
+
+	var wochentage = new Array ("Sonntag", "Montag", "Dienstag",
+	"Mittwoch", "Donnerstag", "Freitag", "Samstag");
+
+	var monate = new Array ("Januar", "Februar", "März", "April",
+	"Mai", "Juni", "Juli", "August", "September",
+	"Oktober", "November", "Dezember");
+
+	document.getElementById("datum").innerHTML = ' '
+	+ wochentage[d.getDay()] + ', der ' + d.getDate() + '. '
+	+ monate[d.getMonth()] + ' ' + d.getFullYear();
+
+}
+
+window.onload=datum   
+</script>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
+<br><br>
+<br>
+</div>
+
 </body>
 </html>
