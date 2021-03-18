@@ -4,22 +4,72 @@
 	font-family: "Times New Roman";
 	color: #707070;
 }
-#uhr {
-    font-size: 1.0em;
-    margin: 1em auto;
-    position: relative;
-    margin-left: -99%;
-    margin-top: -11%;
+  /* Drop Down */
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border: none;
+    position: absolute;
+    margin-top: 1%;
+    margin-left: -50%;
+    width: 99%;
+    height: 40px;
+    -moz-padding-start: calc(10px-3px);
+    padding-left: 10px;
+    background: url(fff-0-2.png) repeat;
+    box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 30%);
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
 }
 
-#datum {
-    font-size: 1em;
-    margin: 1em auto;
-    position: relative;
-    margin-left: -88%;
-    margin-top: 0%;
+select::-ms-expand {
+  display: none;
 }
 
+select option {
+  color: #666;
+}
+
+select:focus::-ms-value {
+  background-color: transparent;
+}
+
+.select-wrapper {
+  /* ... */
+  position: relative;
+}
+
+.select-wrapper::before {
+  font-family: fontello;
+  content: url(pictures/splitButton);
+  font-size: 20px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: #eaeaea;
+  pointer-events: none;
+}
+
+
+.select-wrapper .signtonavigate img {
+    position: relative;
+    margin-top: 1.5%;
+    margin-left: 94%;
+    width: 23px;
+    height: 28px;
+}
+
+.button-group #button .button {
+    margin: 9;
+    padding: 0;
+    border: 1px solid #aca9a9 ;
+    box-shadow: 10px 10px 15px silver;
+    position: relative;
+    margin-top: 11%;
+    margin-left: -199%;
+}
 .inboxbox {
     width: 31%;
     background-color: white;
@@ -55,7 +105,7 @@
 }
 .inboxbox3 {
     width: 31%;
-    height: 57%;
+    height: 46%;
     background-color: white;
     padding: 74px;
     border: 2px solid #aca9a9;

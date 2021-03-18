@@ -84,9 +84,21 @@
 <div class="notifi-item">
 			<img src="pictures/notificationring.png" alt="">
 		</div>
-	<p id="uhr"></p>
-	<div id="datum"></div>
+
+	<div class="button-group">
+    <button type="button" class="button">All</button><button type="button" class="button">Assigned to me</button><button type="button" class="button">Assigned by me</button>
+	</div>
 	
+	<div class="select-wrapper">
+  				<select>
+   			 	<option value="imagePost">Today</option>
+    			<option value="story">Last 7 days</option>
+    			<option value="linkPost">Last month</option>
+  			    </select>
+  			  <div class="signtonavigate">
+				<img src="pictures/pfeil-nach-unten-skizze.png" alt="img">
+  			</div>
+  			
 	<div class="inboxbox"></div>
 	<div class="inboxbox1"></div>
 	<div class="inboxbox2"></div>
@@ -94,51 +106,7 @@
 	
 
 
-<!-- Watch -->
-<script>
-'use strict';
-(function () {
-	function uhrzeit() {
-		var jetzt = new Date(),
-			h = jetzt.getHours(),
-			m = jetzt.getMinutes(),
-			s = jetzt.getSeconds();
-		m = fuehrendeNull(m);
-		s = fuehrendeNull(s);
-		document.getElementById('uhr')
-			.innerHTML = h + ':' + m + ':' + s;
-		setTimeout(uhrzeit, 500);
-	}
 
-	function fuehrendeNull(zahl) {
-		zahl = (zahl < 10 ? '0' : '') + zahl;
-		return zahl;
-	}
-	document.addEventListener('DOMContentLoaded', uhrzeit);
-}());
-</script>
-<!-- Date -->
-	<script language="javascript" type="text/javascript">
-window.setInterval("datum()",60000);
-
-function datum() {
-	var d = new Date();
-
-	var wochentage = new Array ("Sonntag", "Montag", "Dienstag",
-	"Mittwoch", "Donnerstag", "Freitag", "Samstag");
-
-	var monate = new Array ("Januar", "Februar", "März", "April",
-	"Mai", "Juni", "Juli", "August", "September",
-	"Oktober", "November", "Dezember");
-
-	document.getElementById("datum").innerHTML = ' '
-	+ wochentage[d.getDay()] + ', der ' + d.getDate() + '. '
-	+ monate[d.getMonth()] + ' ' + d.getFullYear();
-
-}
-
-window.onload=datum   
-</script>
 <br>
 <br>
 <br>
