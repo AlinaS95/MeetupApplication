@@ -4,6 +4,110 @@
 	font-family: "Times New Roman";
 	color: #707070;
 }
+/*Pop-up new notification*/
+dialog {
+	display: none;
+	position: relative;
+	background: white;
+	border: 1px solid grey;
+	border-radius: 0 .5em .5em;
+	z-index: 1002;
+	padding: .5em 1em;
+	width: 100%;
+	height: auto;
+}
+
+dialog[open="open"] {
+	display: block;
+}
+
+@media (min-width: 30em) {
+	dialog {
+		position: absolute;
+		top: 50%;
+		margin-top: -10em;
+		left: 50%;
+		margin-left: -10em;
+		width: 20em;
+	}
+}
+
+dialog::backdrop {
+	/* Ebene zwischen Hintergrund und Dialog-Box, Pseudoelement noch nicht implementiert */
+	
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#mybackdrop {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+dialog #close-dialog {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 2em;
+    cursor: pointer;
+    background-color: #e5e5e5;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5em;
+    border-radius: 0 0 .5em 0.5em;
+    border-color: white;
+}
+
+/*Wichtigkeits-Balken*/
+.inboxbox3 #rechteck7 {
+    background-color: #FFDEAD;
+    position: absolute;
+    width: 354px;
+    height: 9px;
+    bottom: 12px;
+    left: 125px;
+    border: 1px solid #d7d7d7;
+    text-align: center;
+    border-radius: 80px;
+}
+/*Leiste Einstellungen*/
+ul#navigation {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+  
+}
+ul#navigation li {
+	padding: 0px;
+	margin: 0px;
+	display: inline;
+}
+
+ul#navigation li a:link {
+    border: 1px solid #cab9b9;
+    background-color: #dfdfdf;
+    padding: 2px 5px 2px 5px;
+    font-size: 18px;
+    color: #847c7c;
+    font-family: "Times New Roman";
+    text-decoration: none;
+    box-shadow: 3px 3px 5px silver;
+}
+
+ul#navigation li a:hover {
+	border: 1px solid #c0c0c0;
+	background-color: #707070;
+	padding: 2px 5px 2px 5px;
+	color: #fff;
+}
 /*Line */
 .bl {
     padding: 8px;
