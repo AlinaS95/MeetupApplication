@@ -5,13 +5,52 @@
 	color: #707070;
 }
 /*Line */
-.bl
-{
-padding: 8px;
-border-left: 2px solid #aca9a9;
-position: absolute;
-margin-left:10px;
-margin-top:10px;
+.bl {
+    padding: 8px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -2px;
+}
+.bl1 {
+    padding: 8px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -56px;
+}
+  /*Time Posting*/
+.bl2 {
+    padding: 2px;
+    font-size: 12px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -56px;
+}
+.bl3 {
+    padding: 2px;
+    font-size: 12px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -56px;
+}
+.bl4 {
+    padding: 2px;
+    font-size: 12px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -56px;
+}
+.bl5 {
+    padding: 2px;
+    font-size: 12px;
+    border-left: 2px solid #aca9a9;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: -56px;
 }
   /* Drop Down */
 select {
@@ -69,17 +108,54 @@ select:focus::-ms-value {
     width: 23px;
     height: 28px;
 }
-
-/* Button-Reihe*/
-.button-group #button .button {
-    margin: 9;
-    padding: 0;
-    border: 1px solid #aca9a9 ;
-    box-shadow: 10px 10px 15px silver;
-    position: relative;
-    margin-top: 11%;
-    margin-left: -199%;
+/* profile*/
+.inboxbox3 #avatar img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -10%;
+    margin-left: -9%;
+    border: 1px solid #aca9a9;
+    border-radius: 100px;
 }
+/* delete*/
+.inboxbox3 #delete img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -11%;
+    margin-left: 60%;
+}
+/* reply*/
+.inboxbox3 #reply img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -10%;
+    margin-left: 69%;
+}
+.inboxbox #reply img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 69%;
+}
+.inboxbox1 #reply img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 69%;
+}
+.inboxbox2 #reply img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 69%;
+}
+
 /* Kreise */
 .inboxbox #kreis1 {
     background-color: #A3F5A8;
@@ -111,6 +187,7 @@ select:focus::-ms-value {
     border: 1px solid #aca9a9;
     border-radius: 100px;
 }
+/* Message-Icon*/
 .inboxbox #message img {
     display: block;
     width: 30px;
@@ -132,7 +209,36 @@ select:focus::-ms-value {
     margin-top: -11%;
     margin-left: -7%;
 }
-
+/* Setting Dots */
+.inboxbox3 #settings img {
+    display: block;
+    width: 41px;
+    position: absolute;
+    margin-top: -11%;
+    margin-left: 78%;
+}
+.inboxbox #settings img {
+    display: block;
+    width: 31px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 79%;
+}
+.inboxbox1 #settings img {
+    display: block;
+    width: 31px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 79%;
+}
+.inboxbox2 #settings img {
+    display: block;
+    width: 31px;
+    position: absolute;
+    margin-top: -15%;
+    margin-left: 79%;
+}
+/* Boxen*/
 .inboxbox {
     width: 31%;
     background-color: white;
@@ -141,7 +247,7 @@ select:focus::-ms-value {
     margin: 8px;
     position: absolute;
     margin-left: 4%;
-    margin-top: 5%;
+    margin-top: 3%;
     box-shadow: 10px 10px 15px silver;
 }
 .inboxbox1 {
@@ -163,7 +269,7 @@ select:focus::-ms-value {
     margin: 8px;
     position: absolute;
     margin-left: 4%;
-    margin-top: 27%;
+    margin-top: 29%;
     box-shadow: 10px 10px 15px silver;
 }
 .inboxbox3 {
