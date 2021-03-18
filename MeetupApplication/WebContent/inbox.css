@@ -4,6 +4,15 @@
 	font-family: "Times New Roman";
 	color: #707070;
 }
+/*Line */
+.bl
+{
+padding: 8px;
+border-left: 2px solid #aca9a9;
+position: absolute;
+margin-left:10px;
+margin-top:10px;
+}
   /* Drop Down */
 select {
     -moz-appearance: none;
@@ -61,6 +70,7 @@ select:focus::-ms-value {
     height: 28px;
 }
 
+/* Button-Reihe*/
 .button-group #button .button {
     margin: 9;
     padding: 0;
@@ -70,6 +80,59 @@ select:focus::-ms-value {
     margin-top: 11%;
     margin-left: -199%;
 }
+/* Kreise */
+.inboxbox #kreis1 {
+    background-color: #A3F5A8;
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    top: 13px;
+    left: 15px;
+    border: 1px solid #aca9a9;
+    border-radius: 100px;
+}
+.inboxbox1 #kreis2 {
+    background-color: #A3F5A8;
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    top: 14px;
+    left: 15px;
+    border: 1px solid #aca9a9;
+    border-radius: 100px;
+}
+.inboxbox2 #kreis3 {
+    background-color: #FFDEAD;
+    position: absolute;
+    width: 29px;
+    height: 29px;
+    top: 13px;
+    left: 15px;
+    border: 1px solid #aca9a9;
+    border-radius: 100px;
+}
+.inboxbox #message img {
+    display: block;
+    width: 30px;
+    position: absolute;
+    margin-top: -11%;
+    margin-left: -7%;
+}
+.inboxbox1 #message img {
+    display: block;
+    width: 30px;
+    position: absolute;
+    margin-top: -11%;
+    margin-left: -7%;
+}
+.inboxbox2 #message img {
+    display: block;
+    width: 30px;
+    position: absolute;
+    margin-top: -11%;
+    margin-left: -7%;
+}
+
 .inboxbox {
     width: 31%;
     background-color: white;
@@ -77,7 +140,7 @@ select:focus::-ms-value {
     border: 2px solid #aca9a9;
     margin: 8px;
     position: absolute;
-    margin-left: -2%;
+    margin-left: 4%;
     margin-top: 5%;
     box-shadow: 10px 10px 15px silver;
 }
@@ -88,7 +151,7 @@ select:focus::-ms-value {
     border: 2px solid #aca9a9;
     margin: 8px;
     position: absolute;
-    margin-left: -2%;
+    margin-left: 4%;
     margin-top: 16%;
     box-shadow: 10px 10px 15px silver;
 }
@@ -99,7 +162,7 @@ select:focus::-ms-value {
     border: 2px solid #aca9a9;
     margin: 8px;
     position: absolute;
-    margin-left: -2%;
+    margin-left: 4%;
     margin-top: 27%;
     box-shadow: 10px 10px 15px silver;
 }
