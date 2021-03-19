@@ -4,11 +4,11 @@ function menu() {
 }
 
 function home() {
-	window.setTimeout('window.location="home.html", 2000');
+	window.setTimeout('window.location="home.jsp", 2000');
 }
 
 function list() {
-	window.setTimeout('window.location="list.html", 2000');
+	window.setTimeout('window.location="list.jsp", 2000');
 }
 
 function board() {
@@ -16,7 +16,7 @@ function board() {
 }
 
 function calendar() {
-	window.setTimeout('window.location="calendar.html", 2000');
+	window.setTimeout('window.location="calendar.jsp", 2000');
 }
 
 function progress() {
@@ -24,7 +24,7 @@ function progress() {
 }
 
 function socialmedia() {
-	window.setTimeout('window.location="socialmedia.html", 2000');
+	window.setTimeout('window.location="socialmedia.jsp", 2000');
 }
 
 function profile() {

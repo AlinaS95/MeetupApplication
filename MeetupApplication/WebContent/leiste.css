@@ -41,7 +41,9 @@ h3 {
 	padding: 40px 40px;
 	margin-top: 0px;
 }
-.welcome {
+
+/*First box */
+.firstBox {
 	text-align: left;
 	background-color: #F0F0F0;
 	margin-left: 120px;
@@ -52,7 +54,7 @@ h3 {
 	margin-top: -35px;
 }
 
-.welcome .firstname {
+.firstBox .firstname {
     padding: 20px;
     margin: -27px;
     text-align: center;
@@ -60,7 +62,33 @@ h3 {
     text-decoration: underline;
 }
 
-.welcome h3 {
+.firstBox .workspace{
+    padding: 20px;
+    margin: -27px;
+    text-align: center;
+    margin-left: 0px;
+    text-decoration: underline;
+}
+
+.firstBox .information img {
+	width: 20px;
+	height: 20px;
+	margin: -37px 315px;
+}
+
+.firstBox .favorites img {
+	width: 24px;
+	height: 24px;
+	margin: -40px 300px;
+}
+
+.firstBox .status img {
+	width: 16px;
+	height: 16px;
+	margin: -34px 349px;
+}
+
+.firstBox h3 {
 	padding: 15px;
 	font-size: 22px;
 	letter-spacing: 2px;
@@ -68,20 +96,20 @@ h3 {
 	text-align: left;
 }
 
-.welcome nav {
+.firstBox nav {
 	width: 270px;
 	height: 0px;
 	letter-spacing: 2px;
 	padding-top: 10px;
 }
 
-.welcome nav ul {
+.firstBox nav ul {
 	float: right;
 	flex-direction: column;
 	padding: 0px 0px;
 }
 
-.welcome nav ul li a { /* menu bar a */
+.firstBox nav ul li a { /* menu bar a */
 	text-decoration: none;
 	display: flex;
 	font-family: "Times New Roman";
@@ -91,33 +119,33 @@ h3 {
 	cursor: pointer;
 }
 
-.welcome nav ul li ul { /* Downdrop */
+.firstBox nav ul li ul { /* Downdrop */
 	text-decoration: none;
 	display: none;
 	position: absolute;
 }
 
-.welcome nav ul li:hover ul { 
+.firstBox nav ul li:hover ul { 
 	display: block;
 }
 
-.welcome nav ul li ul li { 
+.firstBox nav ul li ul li { 
 	width: 185px;
 	height: 50px;
 	margin: 15px -185px;
 	background-color: #F0F0F0;
 }
 
-.welcome nav ul li ul li a {
+.firstBox nav ul li ul li a {
 	padding: 10px 25px;
 	font-size: 22px;
 }
 
-.welcome nav ul li ul li a:hover {
+.firstBox nav ul li ul li a:hover {
 	background-color: #d1d1d1;
 }
 
-.welcome img{
+.firstBox img{
 	width: 20px;
 	height: 20px;
 	position: absolute;
@@ -223,24 +251,6 @@ nav ul li {
 	height: 20px;
 	position: absolute;
 	margin: 0px -5px;
-}
-
-.information img {
-	width: 25px;
-	height: 25px;
-	margin: -5px 25px;
-}
-
-.favorites img {
-	width: 24px;
-	height: 24px;
-	margin: -40px 300px;
-}
-
-.status img {
-	width: 16px;
-	height: 15px;
-	margin: -35px 349px;
 }
 
 .secondblock{
@@ -399,7 +409,7 @@ nav ul li {
 	position: relative;
 	background-color: #F0F0F0;
 	margin: auto;
-	padding: 0px;
+	padding: 2px;
 	border: 1px solid #707070;
 	border-radius: 5px;
 	width: 30%;
@@ -477,14 +487,28 @@ nav ul li {
     border-width: 5px;
 }
 
-.popupBody textarea {
+.popupBody input, select {
 	background-color: white;
 	border: none;
 	border-radius: 5px;
 	height: 30px;
 }
 
-.popupBody textarea:focus {
+.popupBody .listBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody input,textarea:focus {
 	border: none;
 	border-radius: 5px;
 }

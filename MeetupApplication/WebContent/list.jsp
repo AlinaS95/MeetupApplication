@@ -143,63 +143,63 @@
 			<!-- Window content -->
 			<div class="addBlock">
 				<span
-						onclick="document.getElementById('task_add').style.display='none'
+					onclick="document.getElementById('task_add').style.display='none'
 					"
-						class="close" title="Schließen">&times; </span>
-					<div class="listBody">
+					class="close" title="Schließen">&times; </span>
+				<div class="listBody">
+					<div>
 						<div>
-							<div>
-								<c:if test="${task != null}">
-									<form action="update" method="post">
-								</c:if>
-								<c:if test="${task == null}">
-									<form action="insert" method="post">
-								</c:if>
+							<c:if test="${task != null}">
+								<form action="update" method="post">
+							</c:if>
+							<c:if test="${task == null}">
+								<form action="insert" method="post">
+							</c:if>
 
-								<caption>
-									<h2>
-										<c:if test="${task != null}">Edit Task</c:if>
-										<c:if test="${task == null}">Add New Task</c:if>
-									</h2>
-								</caption>
-							</div>
-							<div class="popupBody">
-								<c:if test="${task != null}">
-									<input type="hidden" name="taskID"
-										value="<c:out value='${task.taskID}' />" />
-								</c:if>
-								<fieldset>
-									<label>Task Name</label> <input type="text"
-										value="<c:out value='${task.title}' />" class="form-control"
-										name="title" required="required" minlength="5">
-								</fieldset>
+							<caption>
+								<h2>
+									<c:if test="${task != null}">Edit Task</c:if>
+									<c:if test="${task == null}">Add New Task</c:if>
+								</h2>
+							</caption>
+						</div>
+						<div class="popupBody">
+							<c:if test="${task != null}">
+								<input type="hidden" name="taskID"
+									value="<c:out value='${task.taskID}' />" />
+							</c:if>
+							<fieldset>
+								<label>Task Name</label> <input type="text"
+									value="<c:out value='${task.title}' />" class="form-control"
+									name="title" required="required" minlength="5">
+							</fieldset>
 
-								<fieldset>
-									<label>Description</label> <input type="text"
-										value="<c:out value='${task.description}' />"
-										class="form-control" name="description" minlength="5">
-								</fieldset>
+							<fieldset>
+								<label>Description</label> <input type="text"
+									value="<c:out value='${task.description}' />"
+									class="form-control" name="description" minlength="5">
+							</fieldset>
 
-								<fieldset>
-									<label>Due Date</label> <input type="date"
-										value="<c:out value='${task.targetDate}' />"
-										class="form-control" name="targetDate" required="required">
-								</fieldset>
+							<fieldset>
+								<label>Due Date</label> <input type="date"
+									value="<c:out value='${task.targetDate}' />"
+									class="form-control" name="targetDate" required="required">
+							</fieldset>
 
-								<fieldset>
-									<label>Task Status</label> <select class="form-control"
-										name="isDone">
-										<option value="false">In Progress</option>
-										<option value="true">Complete</option>
-									</select>
-								</fieldset>
+							<fieldset>
+								<label>Task Status</label> <select class="form-control"
+									name="isDone">
+									<option value="false">In Progress</option>
+									<option value="true">Complete</option>
+								</select>
+							</fieldset>
 
-								<fieldset>
-									<label>Assignee</label> <input type="text"
-										value="<c:out value='${task.assignee}' />"
-										class="form-control" name="assignee" required="required">
-								</fieldset>
-								<div class="popupFooter">
+							<fieldset>
+								<label>Assignee</label> <input type="text"
+									value="<c:out value='${task.assignee}' />" class="form-control"
+									name="assignee" required="required">
+							</fieldset>
+							<div class="popupFooter">
 								<button type="submit">Save</button>
 
 							</div>
@@ -231,7 +231,14 @@
 			<tbody>
 				<!--   for (Task task: tasks) {  -->
 				<c:forEach var="task" items="${listTasks}">
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
 
+					</tr>
 					<tr>
 						<td><c:out value="${task.title}" /></td>
 						<td><c:out value="${task.description}" /></td>
@@ -250,7 +257,7 @@
 			</tbody>
 
 		</table>
-<div></div>
+		<div></div>
 	</div>
 
 

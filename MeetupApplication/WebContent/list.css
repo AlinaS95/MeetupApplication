@@ -13,16 +13,16 @@
 .list-table thead tr {
 	background-color: #E3E0E0;
 	color: #707070;
-	text-align: left;
+	text-align: center;
 	font-weight: bold;
 }
 
 .list-table th, .list-table td {
-	padding: 30px 100px;
+	padding: 20px 48px;
 }
 
 .list-table tbody tr {
-	border-bottom: 1px solid #dddddd;
+	border: 1px solid #dddddd;
 }
 
 .list-table tbody tr:nth-of-type(even) {
@@ -71,14 +71,6 @@
 	margin: 0px 5px;
 }
 
-
-
-
-
-
-
-
-
 /* Pop-Up-Window Content New Task */
 .popupBlock {
 	position: relative;
@@ -104,7 +96,7 @@
 	letter-spacing: 2px;
 }
 
-.popupBody {
+.listBody .popupBody {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	padding: 2px 15px;
@@ -117,6 +109,7 @@
 .addBlock .popupFooter button {
     margin-right: 30px;
     border-width: 5px;
+    margin-left: 172px;
 }
 
 .addBlock button {
@@ -128,7 +121,20 @@
 	border-radius: 5px;
 	padding: 1px 5px;
 	cursor: pointer;
+
 } 
+
+.popupBody .listBody input, select {
+	margin: 5px;
+}
+
+.popupBody .listBody {
+	margin-top: 0px;
+}
+
+.listBody h2 {
+	padding: 0px 130px;
+}
 
 .addBlock button:hover{
 	outline: none;
