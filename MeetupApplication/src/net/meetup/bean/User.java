@@ -1,5 +1,7 @@
 package net.meetup.bean;
 
+import java.io.InputStream;
+
 public class User {
 	protected int userID;
 	protected String firstName;

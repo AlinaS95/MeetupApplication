@@ -120,7 +120,18 @@
 						<a>First name: </a><a>${login.firstName}</a><br> <a>Last
 							name: </a><a>${login.lastName}</a><br> <a>Email: </a><a>${login.email}</a><br>
 						<a>Company: </a><a>${login.company}</a><br> <a>Workspace:
-						</a><a>${login.workspace}</a><br>
+						</a><a>${login.workspace}</a><br> <a>Add File</a>
+						<form name="form1" method="post" action="imageProcess.jsp" enctype="multipart/form-data">
+							<div>
+								<label>Name</label> <input type="text" name="fname"
+									size="50" />
+							</div>
+							<div>
+								<label>Profile Photo: </label> <input type="file" name="photo"
+									size="50" />
+							</div>
+							<input type="submit" value="Save">
+						</form>
 					</div>
 				</div>
 				<div class="popupFooter">
@@ -158,236 +169,236 @@
 				style="width: auto;"><img src="pictures/add.png" alt="Add Tasks"></a>
 		</div>
 
-	<!-- Pop-Up-Window Add Members-->
-	<div id="members_add" class="navigation_addBlock">
-		<!-- Window content -->
-		<div class="addBlock">
-			<div class="popupHeader">
-				Manage your Team <span
-					onclick="document.getElementById('members_add').style.display='none'
+		<!-- Pop-Up-Window Add Members-->
+		<div id="members_add" class="navigation_addBlock">
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Manage your Team <span
+						onclick="document.getElementById('members_add').style.display='none'
 					"
-					class="close" title="Schließen">&times; </span>
-			</div>
-			<div class="popupBody">
-				<a>Add new member</a>
-				<form action="addMember" method="post" id="addMemberForm">
-					<p>Full Name</p>
-					<input type="text" id="fullName" name="fullName"
-						placeholder="Enter full name" />
-					<p>Email</p>
-					<input type="text" id="email" name="email"
-						placeholder="Enter email" />
-					<p>Workspace</p>
-					<input type="text" id="workspace" name="workspace"
-						placeholder="Enter workspace" />
-					<p>Position</p>
-					<input type="text" id="position" name="position"
-						placeholder="Enter position" /> <input type="submit"
-						name="btn_addMember" value="Add Member"> <input
-						type="image" src="pictures/add.png" alt="Add">
-				</form>
-				<hr>
-				<div class="membersList">
-					<a href="<%=request.getContextPath()%>/workspaceManagement"
-						class="nav-link">Members</a><br>
-					<table>
-						<c:forEach var="workspace" items="${listWorkspace}">
-							<tr>
-								<td><input type="image" src="pictures/usericon.png"
-									alt="Member"></td>
-								<td><c:out value="${workspace.workspaceID}" /></td>
-								<td><c:out value="${workspace.teamName}" /></td>
-								<td><c:out value="${workspace.fullName}" /></td>
-								<td><c:out value="${workspace.email}" /></td>
-								<td><input
-									src="delete?workspaceID=<c:out value='${workspace.workspaceID}' />"
-									type="image" src="pictures/delete.png" alt="delete member"
-									style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
-							</tr>
-						</c:forEach>
-					</table>
+						class="close" title="Schließen">&times; </span>
+				</div>
+				<div class="popupBody">
+					<a>Add new member</a>
+					<form action="addMember" method="post" id="addMemberForm">
+						<p>Full Name</p>
+						<input type="text" id="fullName" name="fullName"
+							placeholder="Enter full name" />
+						<p>Email</p>
+						<input type="text" id="email" name="email"
+							placeholder="Enter email" />
+						<p>Workspace</p>
+						<input type="text" id="workspace" name="workspace"
+							placeholder="Enter workspace" />
+						<p>Position</p>
+						<input type="text" id="position" name="position"
+							placeholder="Enter position" /> <input type="submit"
+							name="btn_addMember" value="Add Member"> <input
+							type="image" src="pictures/add.png" alt="Add">
+					</form>
+					<hr>
+					<div class="membersList">
+						<a href="<%=request.getContextPath()%>/workspaceManagement"
+							class="nav-link">Members</a><br>
+						<table>
+							<c:forEach var="workspace" items="${listWorkspace}">
+								<tr>
+									<td><input type="image" src="pictures/usericon.png"
+										alt="Member"></td>
+									<td><c:out value="${workspace.workspaceID}" /></td>
+									<td><c:out value="${workspace.teamName}" /></td>
+									<td><c:out value="${workspace.fullName}" /></td>
+									<td><c:out value="${workspace.email}" /></td>
+									<td><input
+										src="delete?workspaceID=<c:out value='${workspace.workspaceID}' />"
+										type="image" src="pictures/delete.png" alt="delete member"
+										style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				</div>
+				<div class="popupFooter">
+					<button onClick="save()">Save</button>
 				</div>
 			</div>
-			<div class="popupFooter">
-				<button onClick="save()">Save</button>
-			</div>
 		</div>
-	</div>
 
-	<!-- Pop-Up-Window Workspace Add Tasks -->
-	<div id="task_add" class="navigation_addBlock">
+		<!-- Pop-Up-Window Workspace Add Tasks -->
+		<div id="task_add" class="navigation_addBlock">
 
-		<!-- Window content -->
-		<div class="addBlock">
-			<div class="popupHeader">
-				Create a Task <span
-					onclick="document.getElementById('task_add').style.display='none'
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Create a Task <span
+						onclick="document.getElementById('task_add').style.display='none'
 					"
-					class="close" title="Schließen">&times; </span>
-			</div>
-			<div class="popupBody">
-				<div class="container col-md-5">
-					<div class="card">
-						<div class="card-body">
-							<c:if test="${todo != null}">
-								<form action="update" method="post">
-							</c:if>
-							<c:if test="${todo == null}">
-								<form action="insert" method="post">
-							</c:if>
+						class="close" title="Schließen">&times; </span>
+				</div>
+				<div class="popupBody">
+					<div class="container col-md-5">
+						<div class="card">
+							<div class="card-body">
+								<c:if test="${todo != null}">
+									<form action="update" method="post">
+								</c:if>
+								<c:if test="${todo == null}">
+									<form action="insert" method="post">
+								</c:if>
 
-							<caption>
-								<h2>
-									<c:if test="${task != null}">
+								<caption>
+									<h2>
+										<c:if test="${task != null}">
                Edit Task
               </c:if>
-									<c:if test="${task == null}">
+										<c:if test="${task == null}">
                Add New Task
               </c:if>
-								</h2>
-							</caption>
+									</h2>
+								</caption>
 
-							<c:if test="${task != null}">
-								<input type="hidden" name="taskID"
-									value="<c:out value='${task.taskID}' />" />
-							</c:if>
-							<form>
-								<fieldset class="form-group">
-									<label>Task Title</label> <input type="text"
-										value="<c:out value='${task.title}' />" class="form-control"
-										name="title" required="required" minlength="5">
-								</fieldset>
+								<c:if test="${task != null}">
+									<input type="hidden" name="taskID"
+										value="<c:out value='${task.taskID}' />" />
+								</c:if>
+								<form>
+									<fieldset class="form-group">
+										<label>Task Title</label> <input type="text"
+											value="<c:out value='${task.title}' />" class="form-control"
+											name="title" required="required" minlength="5">
+									</fieldset>
 
-								<fieldset class="form-group">
-									<label>Task Description</label> <input type="text"
-										value="<c:out value='${task.description}' />"
-										class="form-control" name="description" minlength="5">
-								</fieldset>
+									<fieldset class="form-group">
+										<label>Task Description</label> <input type="text"
+											value="<c:out value='${task.description}' />"
+											class="form-control" name="description" minlength="5">
+									</fieldset>
 
-								<fieldset class="form-group">
-									<label>Task Status</label> <select class="form-control"
-										name="isDone">
-										<option value="false">In Progress</option>
-										<option value="true">Complete</option>
-									</select>
-								</fieldset>
+									<fieldset class="form-group">
+										<label>Task Status</label> <select class="form-control"
+											name="isDone">
+											<option value="false">In Progress</option>
+											<option value="true">Complete</option>
+										</select>
+									</fieldset>
 
-								<fieldset class="form-group">
-									<label>Task Target Date</label> <input type="date"
-										value="<c:out value='${task.targetDate}' />"
-										class="form-control" name="targetDate" required="required">
-								</fieldset>
+									<fieldset class="form-group">
+										<label>Task Target Date</label> <input type="date"
+											value="<c:out value='${task.targetDate}' />"
+											class="form-control" name="targetDate" required="required">
+									</fieldset>
 
-								<button type="submit" class="btn btn-success">Save</button>
-							</form>
+									<button type="submit" class="btn btn-success">Save</button>
+								</form>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- Pop-Up-Window Workspace Info Tasks -->
-	<div id="task_info" class="navigation_addBlock">
+		<!-- Pop-Up-Window Workspace Info Tasks -->
+		<div id="task_info" class="navigation_addBlock">
 
-		<!-- Window content -->
-		<div class="addBlock">
-			<div class="popupHeader">
-				Create a Task <span
-					onclick="document.getElementById('task_info').style.display='none'
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Create a Task <span
+						onclick="document.getElementById('task_info').style.display='none'
 					"
-					class="close" title="Schließen">&times; </span>
-			</div>
-			<div class="popupBody">
-				<ul class="navbar-nav">
-					<li><a href="<%=request.getContextPath()%>/list"
-						class="nav-link">Tasks</a></li>
-				</ul>
-				<div class="row">
-					<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
-					<table>
-						<thead>
-							<tr>
-								<th>Title</th>
-								<th>Target Date</th>
-								<th>Task Status</th>
-								<th>Actions</th>
-							</tr>
-						</thead>
-						<tbody>
-							<!--   for (Task task: tasks) {  -->
-							<c:forEach var="task" items="${listTasks}">
-
+						class="close" title="Schließen">&times; </span>
+				</div>
+				<div class="popupBody">
+					<ul class="navbar-nav">
+						<li><a href="<%=request.getContextPath()%>/list"
+							class="nav-link">Tasks</a></li>
+					</ul>
+					<div class="row">
+						<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
+						<table>
+							<thead>
 								<tr>
-									<td><c:out value="${task.title}" /></td>
-									<td><c:out value="${task.targetDate}" /></td>
-									<td><c:out value="${task.status}" /></td>
-
-									<td><a href="edit?taskID=<c:out value='${task.taskID}' />">Edit</a>
-										&nbsp;&nbsp;&nbsp;&nbsp; <a
-										href="delete?taskID=<c:out value='${task.taskID}' />">Delete</a></td>
-
-									<!--  <td><button (click)="updateTask(task.taskID)" class="btn btn-success">Update</button>
-                 <button (click)="deleteTask(task.taskID)" class="btn btn-warning">Delete</button></td> -->
+									<th>Title</th>
+									<th>Target Date</th>
+									<th>Task Status</th>
+									<th>Actions</th>
 								</tr>
-							</c:forEach>
-							<!-- } -->
-						</tbody>
+							</thead>
+							<tbody>
+								<!--   for (Task task: tasks) {  -->
+								<c:forEach var="task" items="${listTasks}">
 
-					</table>
+									<tr>
+										<td><c:out value="${task.title}" /></td>
+										<td><c:out value="${task.targetDate}" /></td>
+										<td><c:out value="${task.status}" /></td>
+
+										<td><a
+											href="edit?taskID=<c:out value='${task.taskID}' />">Edit</a>
+											&nbsp;&nbsp;&nbsp;&nbsp; <a
+											href="delete?taskID=<c:out value='${task.taskID}' />">Delete</a></td>
+
+										<!--  <td><button (click)="updateTask(task.taskID)" class="btn btn-success">Update</button>
+                 <button (click)="deleteTask(task.taskID)" class="btn btn-warning">Delete</button></td> -->
+									</tr>
+								</c:forEach>
+								<!-- } -->
+							</tbody>
+
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="organization_title">Organization</div>
-	<br>
-	<div class="organization">
-		<div class="workingtime">Working Time</div>
+		<div class="organization_title">Organization</div>
 		<br>
-		<div class="clock">
-			<canvas id="profileClock">
+		<div class="organization">
+			<div class="workingtime">Working Time</div>
+			<br>
+			<div class="clock">
+				<canvas id="profileClock">
 			</canvas>
-			<script src="profile.js"></script>
+				<script src="profile.js"></script>
+			</div>
+			<div class="workingtime_Buttons" style="margin: -15px 2px;">
+				<img src="pictures/playButton.png" alt="set Time"> <input
+					type="text" placeholder='input entry time' id='entry'> <br>
+				<img src="pictures/pauseButton.png" alt="start Pause"> <input
+					type="text" placeholder='input pause time' id='pause'> <br>
+				<img src="pictures/stopButton.png" alt="set Time"> <input
+					type="text" placeholder="input exit time" id='exit'><br>
+				<input type="button" value='calculate' onclick='calculateTime()'
+					style="width: 100px; height: 30px; position: relative"><br>
+				<p>You worked today:</p>
+				<input type="text" placeholder="Working hours" id='total'>
+			</div>
+			<script>
+				function calculateTime() {
+					var entry = document.getElementById('entry');
+					var exit = document.getElementById('exit');
+					var pause = document.getElementById('pause');
+
+					var entryTime = entry.value.split(':');
+					var entryTimeInMins = entryTime[0] + entryTime[1];
+
+					var pauseTime = pause.value.split(':');
+					var pauseTimeInMins = pauseTime[0] + pauseTime[1];
+
+					var exitTime = exit.value.split(':');
+					var exitTimeInMins = exitTime[0] + exitTime[1];
+
+					var totalTime = exitTimeInMins - entryTimeInMins;
+					var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
+
+					document.getElementById('total').value = totalTimeHour;
+
+				}
+			</script>
 		</div>
-		<div class="workingtime_Buttons" style="margin: -15px 2px;">
-			<img src="pictures/playButton.png" alt="set Time"> <input
-				type="text" placeholder='input entry time' id='entry'> <br>
-			<img src="pictures/pauseButton.png" alt="start Pause"> <input
-				type="text" placeholder='input pause time' id='pause'> <br>
-			<img src="pictures/stopButton.png" alt="set Time"> <input
-				type="text" placeholder="input exit time" id='exit'><br>
-			<input type="button" value='calculate' onclick='calculateTime()'
-				style="width: 100px; height: 30px; position: relative"><br>
-			<p>You worked today:</p>
-			<input type="text" placeholder="Working hours" id='total'>
+		<br> <br>
+		<div class="logout">
+			<a href="logout"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
-		<script>
-			function calculateTime() {
-				var entry = document.getElementById('entry');
-				var exit = document.getElementById('exit');
-				var pause = document.getElementById('pause');
-
-				var entryTime = entry.value.split(':');
-				var entryTimeInMins = entryTime[0] + entryTime[1];
-
-				var pauseTime = pause.value.split(':');
-				var pauseTimeInMins = pauseTime[0] + pauseTime[1];
-
-				var exitTime = exit.value.split(':');
-				var exitTimeInMins = exitTime[0] + exitTime[1];
-
-				var totalTime = exitTimeInMins - entryTimeInMins;
-				var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
-
-				document.getElementById('total').value = totalTimeHour;
-
-			}
-		</script>
-	</div>
-	<br>
-	<br>
-	<div class="logout">
-		<a href="logout"><img src="pictures/logout.png" alt="Logout" />Logout</a>
-	</div>
 	</div>
 </body>
 </html>

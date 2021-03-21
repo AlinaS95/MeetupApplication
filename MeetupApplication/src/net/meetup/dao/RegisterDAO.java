@@ -13,7 +13,7 @@ public class RegisterDAO {
 	private String jdbcName = "root";
 	private String jdbcPassword = "";
 	
-	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, position, workspace,password) VALUES (?,?,?,?,?,?,?)";
+	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, position, workspace, password) VALUES (?,?,?,?,?,?,?)";
 	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, position, workspace, password from user where userID=?";
 	
 	public RegisterDAO() {}
@@ -35,6 +35,7 @@ public class RegisterDAO {
 		System.out.println("REGISTER_USER_SQL");
 		
 		int result = 0;
+		
 		// try-with-resource statement will auto close the connection
 		try (Connection connection = getConnection();
 			PreparedStatement statement = connection.prepareStatement(REGISTER_USER_SQL)) {
