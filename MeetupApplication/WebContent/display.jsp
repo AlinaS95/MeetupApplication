@@ -208,93 +208,42 @@
 			</div>
 		</div>
 		<hr>
-		<br>
-		<%
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM socialmedia";
-				ResultSet rs = st.executeQuery(sql);
-				while (rs.next()) {
-					String person = rs.getString("person");
-					String channel = rs.getString("channel");
-					String category = rs.getString("category");
-					String filename = rs.getString("filename");
-		%>
-		<table class="socialmedia">
-			<thead>
-				<tr>
-					<th>Week</th>
-					<th>Person</th>
-					<th>Channel</th>
-					<th>Category</th>
-					<th>Design</th>
-					<th>Text</th>
-					<th>Status</th>
-					<th>Date</th>
-				</tr>
-			</thead>
-			<tr>
-				<td><p>
-						<button onclick="printWeekNumber()">Week Number</button>
-					</p> <a id="result"></a></td>
-				<td><%=person%></td>
-				<td><%=channel%></td>
-				<td><%=category%></td>
-				<td><image src="pictures/<%=filename%>" width="150"
-						height="200" /></td>
-				<td><form action="check-input.php" method="post">
-						<label><textarea class="text" name="html_elemente"
-								cols="20" rows="10" maxlength="10000" wrap="soft"></textarea> </label>
-					</form></td>
-				<td>Published</td>
-				<td><p align="center">
-						<input type="date" id="dateInput"></td>
-			</tr>
-			<tr>
-				<td><p>
-						<button onclick="printWeekNumber()">Week Number</button>
-					</p> <a id="result"></a></td>
-				<td>Max Mustermann</td>
-				<td>Facebook</td>
-				<td><div class="select-wrapper">
-						<select>
-							<option value="imagePost">Image Post</option>
-							<option value="story">Story</option>
-							<option value="linkPost">Link Post</option>
-						</select>
-					</div></td>
-				<td><p>
-						<input type="file" accept="image/*" name="image" id="file"
-							onchange="loadFile(event)" style="display: none;">
-					</p>
-					<p>
-						<label for="file" style="cursor: pointer;"><img
-							src="pictures/add.png" alt="Add"></label>
-					</p>
-					<p>
-						<img id="output" width="200" />
-					</p></td>
-				<td><form action="check-input.php" method="post">
-						<label><textarea class="text" name="html_elemente"
-								cols="20" rows="10" maxlength="10000" wrap="soft"></textarea> </label>
-					</form></td>
-				<td>Published</td>
-				<td><p align="center">
-						<input type="date" id="dateInput"></td>
-			</tr>
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		<br>
+		<br> <br>
 		<hr>
 		<br>
 	</div>
+	<%
+		int imageid = Integer.parseInt(request.getParameter("number"));
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+			Statement st = con.createStatement();
+			String sql = "SELECT filename FROM socialmedia where number=" + imageid + "";
+			ResultSet rs = st.executeQuery(sql);
+			while (rs.next()) {
+				String filename = rs.getString("filename");
+	%>
+
+	<table style="width: 100%">
+		<tr>
+			<th>Number</th>
+			<th>Design</th>
+
+		</tr>
+		<tr>
+			<td><%=imageid%></td>
+			<td><image src="pictures/<%=filename%>" width="200" height="200" /></td>
+
+		</tr>
+	</table>
+	<%
+		}
+		} catch (Exception e) {
+			out.println(e);
+		}
+	%><br>
+	<center>
+		<a href="viewAll.jsp">View All </a>
+	</center>
 </body>
 </html>
