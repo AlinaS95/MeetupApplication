@@ -213,12 +213,12 @@
 		<br>
 	</div>
 	<%
-		int imageid = Integer.parseInt(request.getParameter("number"));
+		String person = request.getParameter("person");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			Statement st = con.createStatement();
-			String sql = "SELECT filename FROM socialmedia where number=" + imageid + "";
+			String sql = "SELECT filename FROM socialmedia where person=" + person + "";
 			ResultSet rs = st.executeQuery(sql);
 			while (rs.next()) {
 				String filename = rs.getString("filename");
@@ -231,7 +231,7 @@
 
 		</tr>
 		<tr>
-			<td><%=imageid%></td>
+			<td><%=person%></td>
 			<td><image src="pictures/<%=filename%>" width="200" height="200" /></td>
 
 		</tr>
@@ -242,8 +242,5 @@
 			out.println(e);
 		}
 	%><br>
-	<center>
-		<a href="viewAll.jsp">View All </a>
-	</center>
 </body>
 </html>

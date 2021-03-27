@@ -3,6 +3,7 @@ package net.meetup.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -29,7 +30,6 @@ public class FileUploadServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        int number = Integer.parseInt(request.getParameter("number"));
         String person = request.getParameter("person");
         String channel = request.getParameter("channel");
         String category = request.getParameter("category");
@@ -44,16 +44,16 @@ public class FileUploadServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-            PreparedStatement pst = con.prepareStatement("insert into socialmedia values(?,?,?,?,?,?)");
-            pst.setInt(1, number);
-            pst.setString(2, person);
-            pst.setString(3, channel);
-            pst.setString(4, category);
-            pst.setString(5, fileName);
-            pst.setString(6, savePath);
+            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path) VALUES (?,?,?,?,?)");
+            pst.setString(1, person);
+            pst.setString(2, channel);
+            pst.setString(3, category);
+            pst.setString(4, fileName);
+            pst.setString(5, savePath);
             pst.executeUpdate();
-            String redirectURL = "display.jsp?number=" + number + "";
-            response.sendRedirect(redirectURL);
+            String message = "New Post";
+            request.setAttribute("message", message);
+            request.getRequestDispatcher("socialmedia.jsp").forward(request, response);
         } catch (Exception e) {
             out.println(e);
         }

@@ -11,7 +11,7 @@
 	border: solid 1px #707070;
 	border-radius: 5px;
 	color: #707070;
-	width: 215px;
+	width: 190px;
 	height: 30px;
 	font-size: 20px;
 	font-weight: 500;
@@ -83,8 +83,8 @@ table.socialmedia tbody td {
 }
 
 table.socialmedia tbody img {
-	width: 30px;
-	height: 30px;
+	width: 100px;
+	height: 100px;
 	cursor: pointer;
 }
 

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
@@ -144,9 +145,7 @@
 
 	<div class="background2">
 		<br>
-		<div class="category_socialmedia">
-			Social Media Schedule <img src="pictures/splitButton.png">
-		</div>
+		<div class="category_socialmedia">Social Media Schedule</div>
 		<div class="socialmedia_navigation">
 			<nav>
 				<ul>
@@ -184,9 +183,6 @@
 						<form action="FileUploadServlet" method="post"
 							enctype="multipart/form-data">
 							<div>
-								<label>Number</label> <input type="number" name="number" />
-							</div>
-							<div>
 								<label>Person</label> <input type="text" name="person" />
 							</div>
 							<div>
@@ -209,6 +205,21 @@
 		</div>
 		<hr>
 		<br>
+		<p>${message}</p>
+		<table class="socialmedia">
+			<thead>
+				<tr>
+					<th>Week</th>
+					<th>Person</th>
+					<th>Channel</th>
+					<th>Category</th>
+					<th>Design</th>
+					<th>Text</th>
+					<th>Status</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+		</table>
 		<%
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
@@ -223,18 +234,6 @@
 					String filename = rs.getString("filename");
 		%>
 		<table class="socialmedia">
-			<thead>
-				<tr>
-					<th>Week</th>
-					<th>Person</th>
-					<th>Channel</th>
-					<th>Category</th>
-					<th>Design</th>
-					<th>Text</th>
-					<th>Status</th>
-					<th>Date</th>
-				</tr>
-			</thead>
 			<tr>
 				<td><p>
 						<button onclick="printWeekNumber()">Week Number</button>
