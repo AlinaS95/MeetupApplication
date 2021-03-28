@@ -230,8 +230,7 @@
 
 			<!-- Window content -->
 			<div class="addBlock">
-				<div class="popupHeader">
-					Create a Task <span
+				<div class="popupHeader"><span
 						onclick="document.getElementById('task_add').style.display='none'
 					"
 						class="close" title="Schließen">&times; </span>

@@ -33,6 +33,7 @@ public class FileUploadServlet extends HttpServlet {
         String person = request.getParameter("person");
         String channel = request.getParameter("channel");
         String category = request.getParameter("category");
+        String text = request.getParameter("text");
 
         Part part = request.getPart("file");//
         String fileName = extractFileName(part);//file name
@@ -44,12 +45,13 @@ public class FileUploadServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path) VALUES (?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path, text) VALUES (?,?,?,?,?,?)");
             pst.setString(1, person);
             pst.setString(2, channel);
             pst.setString(3, category);
             pst.setString(4, fileName);
             pst.setString(5, savePath);
+            pst.setString(6, text);
             pst.executeUpdate();
             String message = "New Post";
             request.setAttribute("message", message);

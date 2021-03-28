@@ -142,9 +142,9 @@ table.socialmedia tbody img {
 	margin-bottom: -10px;
 }
 
-.popupBody {
-	margin-top: 10px;
-	margin-bottom: 10px;
+.popupBody_SocialMedia {
+	margin-top: 0px;
+	margin-bottom: 0px;
 	padding: 2px 15px;
 	text-align: left;
 	font-size: 20px;
@@ -152,20 +152,56 @@ table.socialmedia tbody img {
 	/* Style the Image Used to Trigger the Modal */
 }
 
-textarea {
+.popupBody_SocialMedia input, select {
 	background-color: white;
 	border: none;
 	border-radius: 5px;
+	height: 30px;
 }
 
-textarea:focus {
-	border: thin #707070;
+.popupBody_SocialMedia .listBody fieldset {
+	border: none;
 	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
 }
 
-form {
-	margin: 5px -15px;
+.popupBody_SocialMedia fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
 }
+
+.popupBody_SocialMedia input,textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 5px;
+}
+
+.popupBody_SocialMedia button {
+    margin: 2px 60px;
+    cursor: pointer
+}
+
+.popupBody_SocialMedia button:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
+.popupBody_SocialMedia button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 190px;
+} 
 
 select {
   -moz-appearance: none;

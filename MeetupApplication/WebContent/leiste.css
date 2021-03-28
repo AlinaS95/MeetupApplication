@@ -19,7 +19,7 @@ h2 {
 	font-weight: 500;
 	font-size: 28px;
 	letter-spacing: 2px;
-	padding: 5px 3px;
+	padding: 0px 3px;
 }
 
 h3 {
@@ -465,7 +465,7 @@ nav ul li {
 .popupBody {
 	margin-top: 10px;
 	margin-bottom: 10px;
-	padding: 2px 15px;
+	padding: 0px 15px;
 	text-align: left;
 	font-size: 20px;
 	color: #707070;
@@ -474,7 +474,26 @@ nav ul li {
 
 .popupBody button {
     margin: 2px 60px;
+    cursor: pointer
 }
+
+.popupBody button:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
+.popupBody button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+} 
 
 .popupBody img {
 	width: 55px;
@@ -511,6 +530,7 @@ nav ul li {
 .popupBody input,textarea:focus {
 	border: none;
 	border-radius: 5px;
+	margin: 5px 5px;
 }
 
 .popupInfo img {
