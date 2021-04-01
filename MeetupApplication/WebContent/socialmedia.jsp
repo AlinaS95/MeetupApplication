@@ -176,27 +176,33 @@
 								<label>Person</label> <input type="text" name="person" />
 							</div>
 							<div>
-								<label>Channel</label> <input type="text" name="channel" />
-							</div>
-							<div>
-								<label>Category</label> <select name="category">
-									<option value="category">Image Post</option>
-									<option value="category">Story</option>
-									<option value="category">Video</option>
+								<label>Channel</label> <select name="channel">
+									<option selected="">Select the channel</option>
+									<option value="Facebook">Facebook</option>
+									<option value="Instagram">Instagram</option>
+									<option value="Xing">Xing</option>
+									<option value="LinkedIn">LinkedIn</option>
 								</select>
 							</div>
 							<div>
-								<label>Design</label> <input type="file" name="file" />
+								<label>Category</label> <select name="category">
+									<option selected="">Select the category</option>
+									<option value="Image Post">Image Post</option>
+									<option value="Story">Story</option>
+									<option value="Video">Video</option>
+								</select>
 							</div>
 							<div>
-								<label>Text</label> <input type="text" name="text" />
+								<label>Design</label> <input type="file" id="file-upload-button"
+									name="file" />
+							</div>
+							<div>
+								<label>Text</label>
+								<textarea type="text" name="text"></textarea>
 							</div>
 							<button type="submit">Save</button>
 						</form>
 					</div>
-				</div>
-				<div class="popupFooter">
-					<a href="delete.jsp">Delete</a>
 				</div>
 			</div>
 		</div>
@@ -206,24 +212,26 @@
 		<table class="socialmedia">
 			<thead>
 				<tr>
-					<th>Week</th>
-					<th>Person</th>
-					<th>Channel</th>
-					<th>Category</th>
-					<th>Design</th>
-					<th>Text</th>
-					<th>Status</th>
-					<th>Date</th>
+					<th style="width: 150px">Week</th>
+					<th style="width: 200px">Person</th>
+					<th style="width: 150px">Channel</th>
+					<th style="width: 150px">Category</th>
+					<th style="width: 200px">Design</th>
+					<th style="width: 250px">Text</th>
+					<th style="width: 150px">Status</th>
+					<th style="width: 185px">Date</th>
+					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
 		</table>
 		<%
 			try {
-				Class.forName("com.mysql.jdbc.Driver");
+				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
 				String sql = "SELECT * FROM socialmedia";
 				ResultSet rs = st.executeQuery(sql);
+				int i=0;
 				while (rs.next()) {
 					String person = rs.getString("person");
 					String channel = rs.getString("channel");
@@ -233,17 +241,22 @@
 		%>
 		<table class="socialmedia">
 			<tr>
-				<td><p>
+				<td style="width: 150px;"><p>
 						<button onclick="printWeekNumber()">Week Number</button>
 					</p> <a id="result"></a></td>
-				<td><%=person%></td>
-				<td><%=channel%></td>
-				<td><%=category%></td>
-				<td><image src="pictures/<%=filename%>" /></td>
-				<td><%=text%></td>
-				<td>Published</td>
-				<td><p align="center">
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=person%></td>
+				<td style="width: 150px;"><%=channel%></td>
+				<td style="width: 150px;"><%=category%></td>
+				<td style="width: 200px;"><image src="pictures/<%=filename%>" /></td>
+				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=text%></td>
+				<td style="width: 150px;">Published</td>
+				<td style="width: 185px;"><p align="center"> 
 						<input type="date" id="dateInput"></td>
+				<td style="width: 150px;"><a href=""><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 35px; height: 35px; position: absolute;margin: -17px -45px;"></a> <a href="deletePost.jsp?id=<%=rs.getString("id") %>"><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute;margin: -17px 5px;" /> </a></td>
 			</tr>
 			</tbody>
 		</table>

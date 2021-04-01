@@ -513,6 +513,14 @@ nav ul li {
 	height: 30px;
 }
 
+.popupBody select {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px 0px;
+}
+
 .popupBody .listBody fieldset {
 	border: none;
 	border-radius: 5px;
