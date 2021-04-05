@@ -170,7 +170,7 @@
 				</div>
 				<div class="popupBody_SocialMedia">
 					<div class="popupInfo">
-						<form action="FileUploadServlet" method="post"
+						<form action="UploadPost" method="post"
 							enctype="multipart/form-data">
 							<div>
 								<label>Person</label> <input type="text" name="person" />
