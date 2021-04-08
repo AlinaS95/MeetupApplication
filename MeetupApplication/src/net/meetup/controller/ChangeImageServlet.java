@@ -19,12 +19,12 @@ import javax.servlet.http.Part;
 
 import net.meetup.utils.JDBCUtils;
 
-@WebServlet("/UploadPost")
+@WebServlet("/ChangeImage")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
         maxFileSize = 1024 * 1024 * 10, // 10MB
         maxRequestSize = 1024 * 1024 * 50)
 
-public class UploadPostServlet extends HttpServlet {
+public class ChangeImageServlet extends HttpServlet {
 
 	//private static final String SAVE_DIR=*pictures*; //this is our folder name
 
@@ -34,12 +34,12 @@ public class UploadPostServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
 
-        String person = request.getParameter("person");
-        String channel = request.getParameter("channel");
-        String category = request.getParameter("category");
-        String text = request.getParameter("text");
-        String status = request.getParameter("status");
-        LocalDate postDate = LocalDate.parse(request.getParameter("postDate"));
+        String driverName = "com.mysql.jdbc.Driver";
+        String url = "jdbc:mysql://localhost:3306/meetup";
+        String user = "root";
+        String psw = "";
+        
+        String id = request.getParameter("id");
 
         Part part = request.getPart("file");
         String fileName = extractFileName(part);//file name
@@ -48,25 +48,26 @@ public class UploadPostServlet extends HttpServlet {
         
         part.write(savePath + File.separator);
         
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path, text, status, postDate) VALUES (?,?,?,?,?,?,?,?)");
-            pst.setString(1, person);
-            pst.setString(2, channel);
-            pst.setString(3, category);
-            pst.setString(4, fileName);
-            pst.setString(5, savePath);
-            pst.setString(6, text);
-            pst.setString(7, status);
-			pst.setDate(8, JDBCUtils.getSQLDate(postDate));
-            pst.executeUpdate();
-            String message = "New Post";
-            request.setAttribute("message", message);
-            request.getRequestDispatcher("socialmedia.jsp").forward(request, response);
-        } catch (Exception e) {
-            out.println(e);
-        }
+        if (id != null) {
+    		Connection con = null;
+    		PreparedStatement ps = null;
+    		int socialID = Integer.parseInt(id);
+    		try {
+    			Class.forName(driverName);
+    			con = DriverManager.getConnection(url, user, psw);
+    			String sql = "Update socialmedia set id=?,filename=?, path=? where id=" + id;
+    			ps = con.prepareStatement(sql);
+    			ps.setString(1, id);
+    			ps.setString(2, fileName);
+                ps.setString(3, savePath);
+
+    			ps.executeUpdate();
+    			response.sendRedirect("socialmedia.jsp");
+    			
+    		} catch (Exception e) {
+                out.println(e);
+    		}
+    	}
 
     }
     // file name of the upload file is included in content-disposition header like this:

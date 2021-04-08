@@ -11,6 +11,30 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
+<script>
+	Date.prototype.getWeekNumber = function() {
+
+		var oneJan = new Date(this.getFullYear(), 0, 1);
+
+		// calculating number of days  
+		//in given year before given date 
+
+		var numberOfDays = Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
+
+		// adding 1 since this.getDay() 
+		//returns value starting from 0 
+
+		return Math.ceil((this.getDay() + 1 + numberOfDays) / 7);
+
+	}
+
+	function printWeekNumber() {
+		var dateInput = document.getElementById("dateInput").value;
+		var date = new Date(dateInput);
+		var result = date.getWeekNumber();
+		document.getElementById("result").innerHTML = +result;
+	}
+</script>
 </head>
 <body>
 <div class="background1">
@@ -112,6 +136,9 @@
 			<th>S</th>
 			<th>S</th>
 		</tr>
+		<td style="width: 150px;"><p>
+						<button onclick="printWeekNumber()">Week Number</button>
+					</p> <a id="result"></a></td>
 		<tr>
 			<td></td>
 			<td></td>

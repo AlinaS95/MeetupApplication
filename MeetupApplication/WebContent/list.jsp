@@ -1,6 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Random"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,95 +124,64 @@
 	</div>
 
 	<div class="background2">
-		<br>
-
-		<!-- List Navigation -->
-
+		<br> <b class="editHeader">Tasks</b>
 		<div class="list_navigation">
 			<nav>
 				<ul>
-					<li><a class="sortTask"
-						onclick="document.getElementById('task_sort').style.display='block'"
+					<li><a class="sortPosts"
+						onclick="document.getElementById('posts_sort').style.display='block'"
 						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
-					<li><a class="filterTask"
-						onclick="document.getElementById('task_filter').style.display='block'"
+					<li><a class="filterDate"
+						onclick="document.getElementById('date_filter').style.display='block'"
 						style="width: auto;"><img src="pictures/filter.png"
 							alt="Settings">Filter</a></li>
-					<li><a class="addTask"
-						onclick="document.getElementById('task_add').style.display='block'"
+					<li><a class="socialmediaPopup"
+						onclick="document.getElementById('add_post').style.display='block'"
 						style="width: auto;"><img src="pictures/add.png" alt="Add">New
 							Task</a></li>
 				</ul>
 			</nav>
 		</div>
 
-		<!-- Pop-Up-Window Workspace Add Tasks -->
-		<div id="task_add" class="navigation_addBlock">
+		<!-- Pop-Up-Window New Post -->
+		<div id="add_post" class="list_addBlock">
 
 			<!-- Window content -->
 			<div class="addBlock">
-				<span
-					onclick="document.getElementById('task_add').style.display='none'
+				<div class="popupHeader">
+					Add new Task <span
+						onclick="document.getElementById('add_post').style.display='none'
 					"
-					class="close" title="Schließen">&times; </span>
-				<div class="listBody">
-					<div>
-						<div>
-							<c:if test="${task != null}">
-								<form action="update" method="post">
-							</c:if>
-							<c:if test="${task == null}">
-								<form action="insert" method="post">
-							</c:if>
-
-							<caption>
-								<h2>
-									<c:if test="${task != null}">Edit Task</c:if>
-									<c:if test="${task == null}">Add New Task</c:if>
-								</h2>
-							</caption>
-						</div>
-						<div class="popupBody">
-							<c:if test="${task != null}">
-								<input type="hidden" name="taskID"
-									value="<c:out value='${task.taskID}' />" />
-							</c:if>
-							<fieldset>
-								<label>Task Name</label> <input type="text"
-									value="<c:out value='${task.title}' />" class="form-control"
-									name="title" required="required" minlength="5">
-							</fieldset>
-
-							<fieldset>
-								<label>Description</label> <input type="text"
-									value="<c:out value='${task.description}' />"
-									class="form-control" name="description" minlength="5">
-							</fieldset>
-
-							<fieldset>
-								<label>Due Date</label> <input type="date"
-									value="<c:out value='${task.targetDate}' />"
-									class="form-control" name="targetDate" required="required">
-							</fieldset>
-
-							<fieldset>
-								<label>Task Status</label> <select class="form-control"
-									name="isDone">
-									<option value="false">In Progress</option>
-									<option value="true">Complete</option>
-								</select>
-							</fieldset>
-
-							<fieldset>
-								<label>Assignee</label> <input type="text"
-									value="<c:out value='${task.assignee}' />" class="form-control"
-									name="assignee" required="required">
-							</fieldset>
-							<div class="popupFooter">
-								<button type="submit">Save</button>
-
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<div class="popupBody_list">
+					<div class="popupInfo">
+						<form action="UploadTask" method="post">
+							<div>
+								<label>Title</label> <input type="text" name="taskName"
+									required="required" />
 							</div>
-						</div>
+							<div>
+								<label style="position: absolute">Description</label>
+								<textarea style="margin-left: 99px" name="description"></textarea>
+							</div>
+							<div>
+								<label>Due Date</label> <input type="date" name="dueDate"
+									style="margin-left: 20px;" required="required">
+							</div>
+							<div>
+								<label>Status</label> <select name="taskStatus"
+									style="margin-left: 46px">
+									<option value="In Progress">In Progress</option>
+									<option value="Done">Done</option>
+								</select>
+							</div>
+							<div>
+								<label>Assignee</label> <input type="text" name="assignee"
+									style="margin-left: 20px;" required="required">
+							</div>
+							<button type="submit">Save</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -211,53 +189,113 @@
 
 		<hr>
 		<br>
-		<ul>
-			<li style="list-style: none;"><a
-				href="<%=request.getContextPath()%>/list" class="nav-link">Tasks</a></li>
-		</ul>
 
-		<!-- List Tabelle -->
-		<table class="list-table">
+		<p style="font-weight: bold">${message}</p>
+		<table class="list">
 			<thead>
 				<tr>
-					<th>Task Name</th>
-					<th>Description</th>
-					<th>Due Date</th>
-					<th>Task Status</th>
-					<th>Assignee</th>
-					<th>Action</th>
+					<th style="width: 200px">Title</th>
+					<th style="width: 250px">Description</th>
+					<th style="width: 150px">Due Date</th>
+					<th style="width: 150px">Status</th>
+					<th style="width: 200px">Assignee</th>
+					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
-			<tbody>
-				<!--   for (Task task: tasks) {  -->
-				<c:forEach var="task" items="${listTasks}">
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-
-					</tr>
-					<tr>
-						<td><c:out value="${task.title}" /></td>
-						<td><c:out value="${task.description}" /></td>
-						<td><c:out value="${task.targetDate}" /></td>
-						<td><c:out value="${task.status}" /></td>
-						<td><c:out value="${task.assignee}" /></td>
-						<td><a href="edit?taskID=<c:out value='${task.taskID}' />">Edit</a>
-							&nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="delete?taskID=<c:out value='${task.taskID}' />">Delete</a></td>
-						<!--  <td><button (click)="updateTask(task.taskID)" class="btn btn-success">Update</button>
-                 <button (click)="deleteTask(task.taskID)" class="btn btn-warning">Delete</button></td> -->
-					</tr>
-				</c:forEach>
-				<!-- } -->
-
-			</tbody>
-
 		</table>
-		<div></div>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM tasks";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String taskID = rs.getString("taskID");
+					String taskName = rs.getString("taskName");
+					String description = rs.getString("description");
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+					String taskStatus = rs.getString("taskStatus");
+					String assignee = rs.getString("assignee");
+		%>
+		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
+		<table class="list">
+			<tr>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=description%></td>
+				<td style="width: 150px;"><%=dueDate%></td>
+				<td style="width: 150px;"><%=taskStatus%></td>
+				<td style="width: 200px;"><%=assignee%></td>
+				<td style="width: 150px;"><a
+					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+					<a
+					onclick="document.getElementById('delete_info').style.display='block'"
+					<%=rs.getString("taskID")%> style="width: auto;"><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
+				</a></td>
+			</tr>
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
+		<br>
+		<hr>
+		<br>
+
+		<!-- Pop-Up-Window Delete Info -->
+		<div id="delete_info" class="list_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					<img src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+					Post <span
+						onclick="document.getElementById('delete_info').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<%
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM tasks";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String taskID = rs.getString("taskID");
+							String taskName = rs.getString("taskName");
+							String description = rs.getString("description");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+							String taskStatus = rs.getString("taskStatus");
+							String assignee = rs.getString("assignee");
+				%>
+				<div class="popupBody_list">
+
+					<div class="popupInfo">
+						<input type="text" name="taskID"
+							value='<%=rs.getString("taskID")%>' /> <a class="aButtons"
+							href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
+						<br>
+					</div>
+				</div>
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+			</div>
+		</div>
 	</div>
 
 

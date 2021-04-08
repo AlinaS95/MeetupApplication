@@ -212,7 +212,7 @@ table.socialmedia tbody img {
 	outline: none;
 	background: #E3E0E0;
 	color: #707070;
-	border-color: #E3E0E0;
+	border-color: #707070;
 }
 
 .popupBody_SocialMedia button {
@@ -227,7 +227,7 @@ table.socialmedia tbody img {
 	margin-left: 190px;
 }
 
-.deleteButtons {
+.aButtons {
 	font-size: 20px;
 	background: #fff;
 	border-style: solid;
@@ -241,9 +241,9 @@ table.socialmedia tbody img {
 	margin: 4px;
 }
 
-.deleteButtons a:hover{
+.aButtons:hover{
 	outline: none;
 	background: #E3E0E0;
 	color: #707070;
-	border-color: #E3E0E0;
+	border-color: #707070;
 }

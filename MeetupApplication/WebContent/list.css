@@ -1,48 +1,36 @@
-/* list table*/
-
-.list-table {
-	border-collapse: collapse;
-	margin: 25px 0;
-	font-size: 0.9en;
-	min-width: 300px;
-	border-radius: 5px 5px 0 0;
-	overflow: hidden;
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-}
-
-.list-table thead tr {
-	background-color: #E3E0E0;
-	color: #707070;
-	text-align: center;
-	font-weight: bold;
-}
-
-.list-table th, .list-table td {
-	padding: 20px 48px;
-}
-
-.list-table tbody tr {
-	border: 1px solid #dddddd;
-}
-
-.list-table tbody tr:nth-of-type(even) {
-	background-color: #f3f3f3;
-}
-
-.list-table tbody tr:last-of-type {
-	border-bottom: 2px solid #707070;
-}
-
-.list-table tbody tr.active-row {
-	font-weight: bold;
+/*all items */
+* {
+	font-family: "Times New Roman";
+	font-size: 20px;
 	color: #707070;
 }
 
-/* list navigation*/
+.category_list {
+	background-color: #F0F0F0;
+	text-align: left;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 190px;
+	height: 30px;
+	font-size: 20px;
+	font-weight: 500;
+	padding-top: 6px;
+	padding-left: 6px;
+}
+
+.category_list img {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	margin: 5px 8px;
+}
+
+/* navigation*/
 .list_navigation nav {
 	width: 100%;
 	height: 30px;
-	margin-top: -63px;
+	margin-top: -45px;
 }
 
 .list_navigation nav ul li {
@@ -52,7 +40,7 @@
 	float: right;
 }
 
-.list_navigation nav ul li a {
+.list_navigation nav ul li a { 
 	text-decoration: none;
 	display: flex;
 	font-family: "Times New Roman";
@@ -64,15 +52,59 @@
 }
 
 /* add and settings */
-.list_navigation img {
+.list_navigation img{
 	margin-top: -3px;
 	width: 25px;
 	height: 25px;
 	margin: 0px 5px;
 }
 
-/* Pop-Up-Window Content New Task */
-.popupBlock {
+table.list {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 110px;
+}
+
+table.list thead th { 
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.list tbody {
+	background: #F0F0F0;
+}
+
+table.list tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.list tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+/* Background Pop-Up-Window*/
+.list_addBlock {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.addBlock {
 	position: relative;
 	background-color: #F0F0F0;
 	margin: auto;
@@ -88,6 +120,15 @@
 	animation-duration: 0.4s
 }
 
+/* Schlieﬂ-Button */
+.close {
+	color: #707070;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
 .popupHeader {
 	text-align: center;
 	padding: 5px 15px;
@@ -96,9 +137,15 @@
 	letter-spacing: 2px;
 }
 
-.listBody .popupBody {
-	margin-top: 10px;
-	margin-bottom: 10px;
+.popupHeader img {
+	width: 35px;
+	height: 35px;
+	margin-bottom: -10px;
+}
+
+.popupBody_list {
+	margin-top: 0px;
+	margin-bottom: 0px;
 	padding: 2px 15px;
 	text-align: left;
 	font-size: 20px;
@@ -106,39 +153,97 @@
 	/* Style the Image Used to Trigger the Modal */
 }
 
-.addBlock .popupFooter button {
-    margin-right: 30px;
-    border-width: 5px;
-    margin-left: 172px;
-}
-
-.addBlock button {
-	font-size: 20px;
-	background: #fff;
-	border-style: solid;
-	border-color: #fff;
-	border-width: 0px;
+.popupBody_list input {
+	background-color: white;
+	border: none;
 	border-radius: 5px;
-	padding: 1px 5px;
-	cursor: pointer;
-
-} 
-
-.popupBody .listBody input, select {
-	margin: 5px;
+	height: 30px;
 }
 
-.popupBody .listBody {
-	margin-top: 0px;
+.popupBody_list select {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px 5px;
 }
 
-.listBody h2 {
-	padding: 0px 130px;
+.popupBody_list .listBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
 }
 
-.addBlock button:hover{
+.popupBody_list fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody_list input {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 55px;
+}
+
+.popupBody_list textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 2px 15px;
+	margin-left: 2px;
+}
+
+.popupBody_list textarea {
+	margin-left: 2px;
+}
+
+.popupBody_list input#file-upload-button {
+	font-size: 19px;
+}
+
+.popupBody_list button {
+    margin: 2px 60px;
+    cursor: pointer
+}
+
+.popupBody_list button:hover{
 	outline: none;
 	background: #E3E0E0;
 	color: #707070;
+	border-color: #707070;
+}
+
+.popupBody_list button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
 	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 190px;
+}
+
+.aButtons {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 190px;
+	text-decoration: none;
+	margin: 4px;
+}
+
+.aButtons:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #707070;
 }

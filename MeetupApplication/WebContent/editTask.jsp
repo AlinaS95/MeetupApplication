@@ -12,12 +12,11 @@
 <meta charset="ISO-8859-1">
 <title>Social Media</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="socialmedia.css">
+<link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="editPost.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
-<script type="text/javascript" src="socialmedia.js"></script>
 </head>
 <body>
 	<div class="background1">
@@ -104,7 +103,7 @@
 		<br>
 		<div class="editBody">
 			<%
-				String id = request.getParameter("id");
+				String taskID = request.getParameter("taskID");
 				String driver = "com.mysql.jdbc.Driver";
 				String connectionUrl = "jdbc:mysql://localhost:3306/";
 				String database = "meetup";
@@ -123,52 +122,40 @@
 				try {
 					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
 					statement = connection.createStatement();
-					String sql = "select * from socialmedia where id=" + id;
+					String sql = "select * from tasks where taskID=" + taskID;
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="UpdatePost" method="post">
-				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
+			<form action="UpdateTask" method="post">
+				<input type="hidden" name="taskID" value="<%=rs.getString("taskID")%>">
 				<div>
-					<label>Person</label><input type="text" name="person"
-						value='<%=rs.getString("person")%>' />
-				</div>
-				<div class="selected">
-					<label>Channel</label><select name="channel"><%=rs.getString("channel")%>
-						<option selected=""><%=rs.getString("channel")%></option>
-						<option value="Facebook">Facebook</option>
-						<option value="Instagram">Instagram</option>
-						<option value="Xing">Xing</option>
-						<option value="LinkedIn">LinkedIn</option>
-					</select>
-				</div>
-				<div class="selected">
-					<label>Category</label> <select name="category"><%=rs.getString("category")%>
-						<option selected=""><%=rs.getString("category")%></option>
-						<option value="Image Post">Image Post</option>
-						<option value="Story">Story</option>
-						<option value="Video">Video</option>
-					</select>
+					<label>Title</label><input type="text" name="taskName"
+						value='<%=rs.getString("taskName")%>' />
 				</div>
 				<div>
-					<label style="margin-left:-133px">Status</label> <select name="status"><%=rs.getString("status")%>
-						<option style="font-weight:bold"selected=""><%=rs.getString("status")%></option>
+					<label style=" margin: 2px -40px;">Description</label>
+					<textarea name="description"
+						style=" margin: 2px 43px;"><%=rs.getString("description")%></textarea>
+				</div>
+				<div>
+					<label style="margin-left:-105px">Due Date</label><input type="date"
+						name="dueDate"
+						value='<%=rs.getDate("dueDate").toLocalDate()%>' />
+				</div>
+				<div class="selected">
+					<label>Status</label> <select name="taskStatus"><%=rs.getString("taskStatus")%>
+						<option selected=""><%=rs.getString("taskStatus")%></option>
 						<option value="In Progress">In Progress</option>
-						<option value="Published">Published</option>
+						<option value="Done">Done</option>
 					</select>
 				</div>
 				<div>
-					<label style="margin-left: -50px;">Date</label><input type="date"
-						name="postDate" style="margin-left: 5px"
-						value='<%=rs.getDate("postDate").toLocalDate()%>' />
+					<label style="margin-left:-40px">Assignee</label><input type="text" name="assignee"
+						value='<%=rs.getString("assignee")%>' />
 				</div>
-				<div>
-					<label style="position: absolute; margin: 2px -140px;">Text</label>
-					<textarea name="text"
-						style="position: absolute; margin: 2px -95px;"><%=rs.getString("text")%></textarea>
-				</div>
-				<br> <br> <br> <a class="aButtons"
-					href="socialmedia.jsp">Back</a>
+				
+				<a class="aButtons"
+					href="list.jsp">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

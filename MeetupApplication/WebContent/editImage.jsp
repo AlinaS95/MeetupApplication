@@ -127,45 +127,13 @@
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="UpdatePost" method="post">
+			<form action="ChangeImage" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
 				<div>
-					<label>Person</label><input type="text" name="person"
-						value='<%=rs.getString("person")%>' />
-				</div>
-				<div class="selected">
-					<label>Channel</label><select name="channel"><%=rs.getString("channel")%>
-						<option selected=""><%=rs.getString("channel")%></option>
-						<option value="Facebook">Facebook</option>
-						<option value="Instagram">Instagram</option>
-						<option value="Xing">Xing</option>
-						<option value="LinkedIn">LinkedIn</option>
-					</select>
-				</div>
-				<div class="selected">
-					<label>Category</label> <select name="category"><%=rs.getString("category")%>
-						<option selected=""><%=rs.getString("category")%></option>
-						<option value="Image Post">Image Post</option>
-						<option value="Story">Story</option>
-						<option value="Video">Video</option>
-					</select>
-				</div>
-				<div>
-					<label style="margin-left:-133px">Status</label> <select name="status"><%=rs.getString("status")%>
-						<option style="font-weight:bold"selected=""><%=rs.getString("status")%></option>
-						<option value="In Progress">In Progress</option>
-						<option value="Published">Published</option>
-					</select>
-				</div>
-				<div>
-					<label style="margin-left: -50px;">Date</label><input type="date"
-						name="postDate" style="margin-left: 5px"
-						value='<%=rs.getDate("postDate").toLocalDate()%>' />
-				</div>
-				<div>
-					<label style="position: absolute; margin: 2px -140px;">Text</label>
-					<textarea name="text"
-						style="position: absolute; margin: 2px -95px;"><%=rs.getString("text")%></textarea>
+					<label style="margin-left: -205px">Design</label>
+					<image style="width:50px; height:50px;" src="pictures/<%=rs.getString("filename")%>" />
+					<br> <input type="file" id="file-upload-button" name="file"
+						style="margin-left: 140px" value="<%=rs.getString("filename")%>" />
 				</div>
 				<br> <br> <br> <a class="aButtons"
 					href="socialmedia.jsp">Back</a>

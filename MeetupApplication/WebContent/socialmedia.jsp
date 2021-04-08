@@ -22,30 +22,7 @@
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="socialmedia.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script>
-	Date.prototype.getWeekNumber = function() {
 
-		var oneJan = new Date(this.getFullYear(), 0, 1);
-
-		// calculating number of days  
-		//in given year before given date 
-
-		var numberOfDays = Math.floor((this - oneJan) / (24 * 60 * 60 * 1000));
-
-		// adding 1 since this.getDay() 
-		//returns value starting from 0 
-
-		return Math.ceil((this.getDay() + 1 + numberOfDays) / 7);
-
-	}
-
-	function printWeekNumber() {
-		var dateInput = document.getElementById("dateInput").value;
-		var date = new Date(dateInput);
-		var result = date.getWeekNumber();
-		document.getElementById("result").innerHTML = +result;
-	}
-</script>
 </head>
 <body>
 	<div class="background1">
@@ -139,8 +116,7 @@
 	</div>
 
 	<div class="background2">
-		<br>
-		<div class="category_socialmedia">Social Media Schedule</div>
+		<br> <b class="editHeader">Social Media Schedule</b>
 		<div class="socialmedia_navigation">
 			<nav>
 				<ul>
@@ -201,8 +177,15 @@
 									name="file" required="required" />
 							</div>
 							<div>
+								<label>Status</label> <select name="status"
+									style="margin-left: 22px">
+									<option value="In Progress">In Progress</option>
+									<option value="Published">Published</option>
+								</select>
+							</div>
+							<div>
 								<label>Date</label> <input type="date" name="postDate"
-									style="margin-left:33px;" required="required">
+									style="margin-left: 33px;" required="required">
 							</div>
 							<div>
 								<label style="position: absolute">Text</label>
@@ -217,11 +200,11 @@
 
 		<hr>
 		<br>
-		<p>${message}</p>
+		
+		<p style="font-weight:bold">${message}</p>
 		<table class="socialmedia">
 			<thead>
 				<tr>
-					<th style="width: 150px">Week</th>
 					<th style="width: 200px">Person</th>
 					<th style="width: 150px">Channel</th>
 					<th style="width: 150px">Category</th>
@@ -247,24 +230,25 @@
 					String channel = rs.getString("channel");
 					String category = rs.getString("category");
 					String filename = rs.getString("filename");
+					String status = rs.getString("status");
 					LocalDate postDate = rs.getDate("postDate").toLocalDate();
 					String text = rs.getString("text");
 		%>
 		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
 		<table class="socialmedia">
 			<tr>
-				<td style="width: 150px;"><p>
-						<button onclick="printWeekNumber()">Week Number</button>
-					</p> <a id="result"></a></td>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=person%></td>
 				<td style="width: 150px;"><%=channel%></td>
 				<td style="width: 150px;"><%=category%></td>
-				<td style="width: 200px;"><image src="pictures/<%=filename%>" /></td>
+				<td style="width: 200px;"><image src="pictures/<%=filename%>" /><a
+					href="editImage.jsp?id=<%=rs.getString("id")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 25px; height: 25px;"></a></td>
 				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=text%></td>
-				<td style="width: 150px;">Published</td>
+				<td style="width: 150px;"><%=status%></td>
 				<td style="width: 185px;"><p align="center"><%=postDate%></td>
 				<td style="width: 150px;"><a
-					href='editPost.jsp?u=<%=rs.getString("id")%>'><img
+					href="editPost.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
 					<a
@@ -313,6 +297,7 @@
 							String channel = rs.getString("channel");
 							String category = rs.getString("category");
 							String filename = rs.getString("filename");
+							String status = rs.getString("status");
 							LocalDate postDate = rs.getDate("postDate").toLocalDate();
 							String text = rs.getString("text");
 				%>
@@ -320,8 +305,8 @@
 
 					<div class="popupInfo">
 						<input type="text" name="id" value='<%=rs.getString("id")%>' /> <a
-							class="deleteButtons"
-							href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a> <br>
+							class="aButtons" href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a>
+						<br>
 					</div>
 				</div>
 				<%
