@@ -182,10 +182,17 @@ table.socialmedia tbody img {
 	margin: 5px 0px;
 }
 
-.popupBody_SocialMedia input,textarea:focus {
+.popupBody_SocialMedia input {
 	border: none;
 	border-radius: 5px;
 	margin: 5px 17px;
+}
+
+.popupBody_SocialMedia textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 17px;
+	margin-left: 77px;
 }
 
 .popupBody_SocialMedia textarea {

@@ -7,6 +7,8 @@ import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +16,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import net.meetup.utils.JDBCUtils;
 
 @WebServlet("/UploadPost")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -34,6 +38,7 @@ public class UploadPostServlet extends HttpServlet {
         String channel = request.getParameter("channel");
         String category = request.getParameter("category");
         String text = request.getParameter("text");
+        LocalDate postDate = LocalDate.parse(request.getParameter("postDate"));
 
         Part part = request.getPart("file");//
         String fileName = extractFileName(part);//file name
@@ -45,13 +50,14 @@ public class UploadPostServlet extends HttpServlet {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path, text) VALUES (?,?,?,?,?,?)");
+            PreparedStatement pst = con.prepareStatement("INSERT INTO socialmedia (person, channel, category, filename, path, text, postDate) VALUES (?,?,?,?,?,?,?)");
             pst.setString(1, person);
             pst.setString(2, channel);
             pst.setString(3, category);
             pst.setString(4, fileName);
             pst.setString(5, savePath);
             pst.setString(6, text);
+			pst.setDate(7, JDBCUtils.getSQLDate(postDate));
             pst.executeUpdate();
             String message = "New Post";
             request.setAttribute("message", message);

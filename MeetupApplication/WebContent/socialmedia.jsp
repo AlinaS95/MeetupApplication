@@ -9,6 +9,7 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -174,7 +175,8 @@
 						<form action="UploadPost" method="post"
 							enctype="multipart/form-data">
 							<div>
-								<label>Person</label> <input type="text" name="person" />
+								<label>Person</label> <input type="text" name="person"
+									required="required" />
 							</div>
 							<div>
 								<label>Channel</label> <select name="channel">
@@ -186,7 +188,8 @@
 								</select>
 							</div>
 							<div>
-								<label>Category</label> <select name="category" style="margin-left:-2px">
+								<label>Category</label> <select name="category"
+									style="margin-left: -2px">
 									<option selected="">Select the category</option>
 									<option value="Image Post">Image Post</option>
 									<option value="Story">Story</option>
@@ -195,10 +198,14 @@
 							</div>
 							<div>
 								<label>Design</label> <input type="file" id="file-upload-button"
-									name="file" />
+									name="file" required="required" />
 							</div>
 							<div>
-								<label style="position:absolute">Text</label>
+								<label>Date</label> <input type="date" name="postDate"
+									style="margin-left:33px;" required="required">
+							</div>
+							<div>
+								<label style="position: absolute">Text</label>
 								<textarea name="text"></textarea>
 							</div>
 							<button type="submit">Save</button>
@@ -240,6 +247,7 @@
 					String channel = rs.getString("channel");
 					String category = rs.getString("category");
 					String filename = rs.getString("filename");
+					LocalDate postDate = rs.getDate("postDate").toLocalDate();
 					String text = rs.getString("text");
 		%>
 		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
@@ -254,16 +262,15 @@
 				<td style="width: 200px;"><image src="pictures/<%=filename%>" /></td>
 				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=text%></td>
 				<td style="width: 150px;">Published</td>
-				<td style="width: 185px;"><p align="center">
-						<input type="date" id="dateInput"></td>
+				<td style="width: 185px;"><p align="center"><%=postDate%></td>
 				<td style="width: 150px;"><a
 					href='editPost.jsp?u=<%=rs.getString("id")%>'><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
 					<a
-					onclick="document.getElementById('delete_info').style.display='block'" <%=rs.getString("id")%>
-					style="width: auto;"><img src="pictures/delete2.png"
-						alt="Delete post"
+					onclick="document.getElementById('delete_info').style.display='block'"
+					<%=rs.getString("id")%> style="width: auto;"><img
+						src="pictures/delete2.png" alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
 				</a></td>
 			</tr>
@@ -286,42 +293,43 @@
 			<div class="addBlock">
 				<div class="popupHeader">
 					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" />
-					Delete Post <span
+						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+					Post <span
 						onclick="document.getElementById('delete_info').style.display='none'
 					"
 						class="close" title="Schließen">&times;</span>
 				</div>
 				<%
-							try {
-								Class.forName("com.mysql.cj.jdbc.Driver");
-								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-								Statement st = con.createStatement();
-								String sql = "SELECT * FROM socialmedia";
-								ResultSet rs = st.executeQuery(sql);
-								int i = 0;
-								while (rs.next()) {
-									String id = rs.getString("id");
-									String person = rs.getString("person");
-									String channel = rs.getString("channel");
-									String category = rs.getString("category");
-									String filename = rs.getString("filename");
-									String text = rs.getString("text");
-						%>
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM socialmedia";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String id = rs.getString("id");
+							String person = rs.getString("person");
+							String channel = rs.getString("channel");
+							String category = rs.getString("category");
+							String filename = rs.getString("filename");
+							LocalDate postDate = rs.getDate("postDate").toLocalDate();
+							String text = rs.getString("text");
+				%>
 				<div class="popupBody_SocialMedia">
-				
+
 					<div class="popupInfo">
-						<input type="text" name="id" value='<%=rs.getString("id")%>' />
-						<a class="deleteButtons" href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a>
-						<br>
+						<input type="text" name="id" value='<%=rs.getString("id")%>' /> <a
+							class="deleteButtons"
+							href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a> <br>
 					</div>
 				</div>
 				<%
-							}
-							} catch (Exception e) {
-								out.println(e);
-							}
-						%>
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
 			</div>
 		</div>
 	</div>

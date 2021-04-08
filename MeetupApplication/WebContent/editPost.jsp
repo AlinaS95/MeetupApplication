@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*,java.util.*"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="net.meetup.utils.JDBCUtils"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.PrintWriter"%>
+<%@page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -153,6 +158,10 @@
 					</select>
 				</div>
 				<div>
+					<label style="margin-left:-50px;">Date</label><input type="date" name="postDate"
+						style="margin-left:5px" value='<%=rs.getDate("postDate")%>' />
+				</div>
+				<div>
 					<label style="position: absolute; margin: 2px -140px;">Text</label>
 					<textarea name="text"
 						style="position: absolute; margin: 2px -95px;"><%=rs.getString("text")%></textarea>
@@ -175,13 +184,14 @@
 	String category = request.getParameter("category");
 	String text = request.getParameter("text");
 
-	if (id != null && person != null && channel != null && category != null && text != null) {
+	if (id != null && person != null && channel != null && category != null && text != null ) {
 		String query = "update socialmedia set person=?, channel=?, category=?, text=? where id='" + id + "'";
 		stmt = conn.prepareStatement(query);
 		stmt.setString(1, person);
 		stmt.setString(2, channel);
 		stmt.setString(3, category);
 		stmt.setString(4, text);
+
 		stmt.executeUpdate();
 		response.sendRedirect("socialmedia.jsp");
 	}
