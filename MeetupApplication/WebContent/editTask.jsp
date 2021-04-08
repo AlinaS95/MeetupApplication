@@ -127,19 +127,19 @@
 					while (rs.next()) {
 			%>
 			<form action="UpdateTask" method="post">
-				<input type="hidden" name="taskID" value="<%=rs.getString("taskID")%>">
+				<input type="hidden" name="taskID"
+					value="<%=rs.getString("taskID")%>">
 				<div>
 					<label>Title</label><input type="text" name="taskName"
 						value='<%=rs.getString("taskName")%>' />
 				</div>
 				<div>
-					<label style=" margin: 2px -40px;">Description</label>
-					<textarea name="description"
-						style=" margin: 2px 43px;"><%=rs.getString("description")%></textarea>
+					<label style="margin: 2px -40px;">Description</label>
+					<textarea name="description" style="margin: 2px 43px;"><%=rs.getString("description")%></textarea>
 				</div>
 				<div>
-					<label style="margin-left:-105px">Due Date</label><input type="date"
-						name="dueDate"
+					<label style="margin-left: -105px">Due Date</label><input
+						type="date" name="dueDate"
 						value='<%=rs.getDate("dueDate").toLocalDate()%>' />
 				</div>
 				<div class="selected">
@@ -150,12 +150,11 @@
 					</select>
 				</div>
 				<div>
-					<label style="margin-left:-40px">Assignee</label><input type="text" name="assignee"
-						value='<%=rs.getString("assignee")%>' />
+					<label style="margin-left: -40px">Assignee</label><input
+						type="text" name="assignee" value='<%=rs.getString("assignee")%>' />
 				</div>
-				
-				<a class="aButtons"
-					href="list.jsp">Back</a>
+
+				<a class="aButtons" href="list.jsp">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

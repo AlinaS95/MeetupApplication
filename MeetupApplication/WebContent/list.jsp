@@ -237,7 +237,7 @@
 						src="pictures/delete2.png" alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
 				</a></td>
-			</tr>
+			</tr> 
 			</tbody>
 		</table>
 		<%
