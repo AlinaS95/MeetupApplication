@@ -3,71 +3,186 @@
 <%@page import="java.sql.*,java.util.*"%>
 <!DOCTYPE html>
 <html>
-<%
-	String url = "jdbc:mysql://localhost:3306/meetup";
-	Statement stat = null;
-	ResultSet result = null;
+<head>
+<meta charset="ISO-8859-1">
+<title>Social Media</title>
+<link name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="socialmedia.css">
+<link rel="stylesheet" type="text/css" href="editPost.css">
+<link rel="stylesheet" type="text/css" href="leiste.css">
+<link rel="icon" type="image/png" href="pictures/meetup_logo.png">
+<script type="text/javascript" src="methods.js"></script>
+<script type="text/javascript" src="socialmedia.js"></script>
+</head>
+<body>
+	<div class="background1">
+		<div class="headliner_block">
+			<div class="logo">
+				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+					alt="Home"></a>
+			</div>
+			<div class="firstBox">
+				<h3>
+					Workspace: <a class="workspace">${login.workspace}</a>
+				</h3>
+				<a class="information"
+					onclick="document.getElementById('p_info').style.display='block'"
+					style="width: auto;"><img src="pictures/infoicon.png"
+					alt="Information"></a> <a class="status"
+					href="javascript:progress()"><img
+					src="pictures/greenCircle.png" alt="Status"></a>
+			</div>
+			<br>
+			<div class="secondblock">
+				<div class="searchbox">
+					<span class="searchicon"><img src="pictures/search.png"></span>
+					<input type="search" id="search" placeholder="Search..." />
+				</div>
+				<div class="user">
+					<a href="javascript:profile()"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
+				</div>
+			</div>
+			<br>
+		</div>
+		<div class="mainmenu">
+			<nav>
+				<ul>
+					<li><a href="javascript:menue()"><img
+							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a href="home.jsp"><dfn class="tooltip">
+								Home <span role="tooltip" style="font-weight: normal">You
+									can find the home area here </span>
+							</dfn></a></li>
+					<li><a href="javascript:list()"><dfn class="tooltip">
+								List <span role="tooltip" style="font-weight: normal">Here
+									you can find your tasks and create them</span>
+							</dfn> </a></li>
+					<li><a href="javascript:board()"> <dfn class="tooltip">
+								Board <span role="tooltip" style="font-weight: normal">Here
+									you can find your tasks and their processing status </span>
+							</dfn>
+					</a></li>
+					<li><a href="calendar.jsp"><dfn class="tooltip">
+								Calendar <span role="tooltip" style="font-weight: normal">You
+									can find your calendar here </span>
+							</dfn></a></li>
+					<li><a href="javascript:progress()"><dfn class="tooltip">
+								Progress <span role="tooltip" style="font-weight: normal">Here
+									you can find your project and team status</span>
+							</dfn></a></li>
+					<li><a href="socialmedia.jsp" style="font-weight: bold"><dfn
+								class="tooltip">
+								Social Media <span role="tooltip" style="font-weight: normal">Here
+									you can find everything about your social media tasks</span>
+							</dfn></a></li>
+				</ul>
+				<div class="secondNavigation">
+					<ul>
+						<li><a class="add"
+							onclick="document.getElementById('add').style.display='block'"
+							style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>
+						<li><a class="profile_settings"
+							onclick="document.getElementById('p_settings').style.display='block'"
+							style="width: auto;"><img src="pictures/settings.png"
+								alt="Settings"></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!-- Pop-Up-Window -->
+	<div id="l_add" class="navigation_addBlock">
 
-	PreparedStatement stmt = null;
+		<!-- Window content -->
+		<div class="addBlock">
+			<div class="popupHeader">
+				Add<span
+					onclick="document.getElementById('l_add').style.display='none'"
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody"></div>
+		</div>
+	</div>
 
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection(url, "root", "");
-%>
-<form action="" method="post" enctype="multipart/form-data">
-	<%
-	stat = conn.createStatement();
-	String u = request.getParameter("u");
-	int num = Integer.parseInt(u);
-	String data = "select * from socialmedia where id='"+num+"'";
-	result = stat.executeQuery(data);
-	while(result.next()){
-	%>
-	<input type="hidden" name="id" value='<%=result.getString("id") %>'/>
-	<div>
-		<label>Person</label> <input type="text" name="person" value='<%=result.getString("person") %>'/>
+	<div class="background2">
+		<br>
+		<div class="editHeader">Edit Post</div>
+		<br>
+		<div class="editBody">
+			<%
+				String url = "jdbc:mysql://localhost:3306/meetup";
+				Connection conn = null;
+				Statement stat = null;
+				ResultSet rs = null;
+
+				PreparedStatement stmt = null;
+
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				conn = DriverManager.getConnection(url, "root", "");
+			%>
+			<form action="" method="post">
+				<%
+					stat = conn.createStatement();
+					String u = request.getParameter("u");
+					int num = Integer.parseInt(u);
+					String data = "select * from socialmedia where id='" + num + "'";
+					rs = stat.executeQuery(data);
+					while (rs.next()) {
+				%>
+				<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
+				<div>
+					<label>Person</label><input type="text" name="person"
+						value='<%=rs.getString("person")%>' />
+				</div>
+				<div class="selected">
+					<label>Channel</label><select name="channel"><%=rs.getString("channel")%>
+						<option selected=""><%=rs.getString("channel")%></option>
+						<option value="Facebook">Facebook</option>
+						<option value="Instagram">Instagram</option>
+						<option value="Xing">Xing</option>
+						<option value="LinkedIn">LinkedIn</option>
+					</select>
+				</div>
+				<div class="selected">
+					<label>Category</label> <select name="category"><%=rs.getString("category")%>
+						<option selected=""><%=rs.getString("category")%></option>
+						<option value="Image Post">Image Post</option>
+						<option value="Story">Story</option>
+						<option value="Video">Video</option>
+					</select>
+				</div>
+				<div>
+					<label style="position: absolute; margin: 2px -140px;">Text</label>
+					<textarea name="text"
+						style="position: absolute; margin: 2px -95px;"><%=rs.getString("text")%></textarea>
+				</div>
+				<%
+					}
+				%>
+				<br> <br> <br> 
+				<button onclick="socialmedia.jsp">Back</button>
+				<button type="submit">Update</button>
+			</form>
+		</div>
 	</div>
-	<div>
-		<label>Channel</label><input type="text" name="channel" value='<%=result.getString("channel") %>'/>
-	</div>
-	<div>
-		<label>Category</label> <input type="text" name="category" value='<%=result.getString("category") %>'/>
-	</div>
-	<div>
-		<label>Design</label> <input type="file" id="file-upload-button"
-			name="file" value='<%=result.getString("file") %>'/>
-	</div>
-	<div>
-		<label>Text</label>
-		<textarea type="text" name="text" <input type="text" name="text" value='<%=result.getString("text") %>'/>></textarea>
-	</div>
-	<%
-	}
-	%>
-	<button type="submit">Update</button>
-	<a href="socialmedia.jsp">Back</a>
-</form>
+</body>
 </html>
 <%
-String a = request.getParameter("id");
-String person = request.getParameter("person");
-String channel = request.getParameter("channel");
-String category = request.getParameter("category");
+	String id = request.getParameter("id");
+	String person = request.getParameter("person");
+	String channel = request.getParameter("channel");
+	String category = request.getParameter("category");
+	String text = request.getParameter("text");
 
-Part part = request.getPart("file");//
-String fileName = extractFileName(part);//file name
-String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\" + File.separator + fileName;
-File fileSaveDir = new File(savePath);
-
-part.write(savePath + File.separator);
-
-private String extractFileName(Part part){//This method will print the file name.
-    String contentDisp = part.getHeader("content-disposition");
-    String[] items = contentDisp.split(";");
-    for (String s : items) {
-        if (s.trim().startsWith("filename")) {
-            return s.substring(s.indexOf("=") + 2, s.length() - 1);
-        }
-    }
-    return "";
-}
+	if (id != null && person != null && channel != null && category != null && text != null) {
+		String query = "update socialmedia set person=?, channel=?, category=?, text=? where id='" + id + "'";
+		stmt = conn.prepareStatement(query);
+		stmt.setString(1, person);
+		stmt.setString(2, channel);
+		stmt.setString(3, category);
+		stmt.setString(4, text);
+		stmt.executeUpdate();
+		response.sendRedirect("socialmedia.jsp");
+	}
 %>

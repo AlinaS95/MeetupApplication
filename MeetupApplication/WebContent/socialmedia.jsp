@@ -157,6 +157,7 @@
 				</ul>
 			</nav>
 		</div>
+
 		<!-- Pop-Up-Window New Post -->
 		<div id="add_post" class="socialmedia_addBlock">
 
@@ -185,7 +186,7 @@
 								</select>
 							</div>
 							<div>
-								<label>Category</label> <select name="category">
+								<label>Category</label> <select name="category" style="margin-left:-2px">
 									<option selected="">Select the category</option>
 									<option value="Image Post">Image Post</option>
 									<option value="Story">Story</option>
@@ -197,8 +198,8 @@
 									name="file" />
 							</div>
 							<div>
-								<label>Text</label>
-								<textarea type="text" name="text"></textarea>
+								<label style="position:absolute">Text</label>
+								<textarea name="text"></textarea>
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -206,6 +207,7 @@
 				</div>
 			</div>
 		</div>
+
 		<hr>
 		<br>
 		<p>${message}</p>
@@ -231,14 +233,16 @@
 				Statement st = con.createStatement();
 				String sql = "SELECT * FROM socialmedia";
 				ResultSet rs = st.executeQuery(sql);
-				int i=0;
+				int i = 0;
 				while (rs.next()) {
+					String id = rs.getString("id");
 					String person = rs.getString("person");
 					String channel = rs.getString("channel");
 					String category = rs.getString("category");
 					String filename = rs.getString("filename");
 					String text = rs.getString("text");
 		%>
+		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
 		<table class="socialmedia">
 			<tr>
 				<td style="width: 150px;"><p>
@@ -250,13 +254,18 @@
 				<td style="width: 200px;"><image src="pictures/<%=filename%>" /></td>
 				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=text%></td>
 				<td style="width: 150px;">Published</td>
-				<td style="width: 185px;"><p align="center"> 
+				<td style="width: 185px;"><p align="center">
 						<input type="date" id="dateInput"></td>
-				<td style="width: 150px;"><a href=""><img
+				<td style="width: 150px;"><a
+					href='editPost.jsp?u=<%=rs.getString("id")%>'><img
 						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute;margin: -17px -45px;"></a> <a href="deletePost.jsp?id=<%=rs.getString("id") %>"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute;margin: -17px 5px;" /> </a></td>
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+					<a
+					onclick="document.getElementById('delete_info').style.display='block'" <%=rs.getString("id")%>
+					style="width: auto;"><img src="pictures/delete2.png"
+						alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
+				</a></td>
 			</tr>
 			</tbody>
 		</table>
@@ -269,6 +278,52 @@
 		<br>
 		<hr>
 		<br>
+
+		<!-- Pop-Up-Window Delete Info -->
+		<div id="delete_info" class="socialmedia_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					<img src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; margin: -4px -2px;" />
+					Delete Post <span
+						onclick="document.getElementById('delete_info').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<%
+							try {
+								Class.forName("com.mysql.cj.jdbc.Driver");
+								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+								Statement st = con.createStatement();
+								String sql = "SELECT * FROM socialmedia";
+								ResultSet rs = st.executeQuery(sql);
+								int i = 0;
+								while (rs.next()) {
+									String id = rs.getString("id");
+									String person = rs.getString("person");
+									String channel = rs.getString("channel");
+									String category = rs.getString("category");
+									String filename = rs.getString("filename");
+									String text = rs.getString("text");
+						%>
+				<div class="popupBody_SocialMedia">
+				
+					<div class="popupInfo">
+						<input type="text" name="id" value='<%=rs.getString("id")%>' />
+						<a class="deleteButtons" href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a>
+						<br>
+					</div>
+				</div>
+				<%
+							}
+							} catch (Exception e) {
+								out.println(e);
+							}
+						%>
+			</div>
+		</div>
 	</div>
 </body>
 </html>

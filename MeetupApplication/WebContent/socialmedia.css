@@ -165,7 +165,7 @@ table.socialmedia tbody img {
 	border: none;
 	border-radius: 5px;
 	height: 30px;
-	margin: 5px 0px;
+	margin: 5px 5px;
 }
 
 .popupBody_SocialMedia .listBody fieldset {
@@ -185,7 +185,11 @@ table.socialmedia tbody img {
 .popupBody_SocialMedia input,textarea:focus {
 	border: none;
 	border-radius: 5px;
-	margin: 5px 5px;
+	margin: 5px 17px;
+}
+
+.popupBody_SocialMedia textarea {
+	margin-left: 77px;
 }
 
 .popupBody_SocialMedia input#file-upload-button {
@@ -214,4 +218,25 @@ table.socialmedia tbody img {
 	padding: 1px 5px;
 	cursor: pointer;
 	margin-left: 190px;
+}
+
+.deleteButtons {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 190px;
+	text-decoration: none;
+	margin: 4px;
+}
+
+.deleteButtons a:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
 }

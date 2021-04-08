@@ -1,0 +1,80 @@
+.editHeader {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+.editBody {
+	padding: 2px 15px;
+	text-align: center;
+}
+
+.editBody input {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+}
+
+.editBody select {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px 0px;
+	width: auto;
+}
+
+.editBody .listBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.editBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.editBody label {
+	padding: 0px 2px;
+}
+
+.editBody .selected {
+	margin-left: -160px;
+}
+
+.editBody input,textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 5px;
+}
+
+.editBody input#file-upload-button {
+	font-size: 19px;
+}
+
+
+.editBody button:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
+.editBody button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin: 0px 5px;
+}
