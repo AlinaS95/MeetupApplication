@@ -4,6 +4,19 @@
   <session-config>
     <session-timeout>30</session-timeout>
   </session-config>
+  <welcome-file-list>
+  <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+  <description></description>
+  <display-name>LoginController</display-name>
+  <servlet-name>LoginController</servlet-name>
+  <servlet-class>net.meetup.controller.LoginController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  <servlet-name>LoginController</servlet-name>
+  <url-pattern>/LoginController</url-pattern>
+  </servlet-mapping>
   <servlet-mapping>
     <servlet-name>default</servlet-name>
     <url-pattern>*.png</url-pattern>

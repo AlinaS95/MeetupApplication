@@ -20,7 +20,7 @@ function calendar() {
 }
 
 function progress() {
-	window.setTimeout('window.location="progress.html", 2000');
+	window.setTimeout('window.location="progress.jsp", 2000');
 }
 
 function socialmedia() {

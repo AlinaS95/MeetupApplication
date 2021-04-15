@@ -17,9 +17,13 @@ html {
 }
 
 .box3 {
-     margin-right: -3px;
+    margin-right: -3px;
 }
 
+.box1 a, .box2 a, .box3 a{
+   font-weight: bold;
+   margin-left: 70px;
+}
 
 h5 {
 	 float: left;

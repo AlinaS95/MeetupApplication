@@ -66,8 +66,6 @@ h1{
 	font-size: 18px;
 	border-radius: 20px;
 	font-family: Times New Roman;
-	
-	
 }
 
 .loginbox input[type="submit"]:hover
@@ -75,7 +73,6 @@ h1{
 	cursor: pointer;
 	background: #E3E0E0;
 	color: black;
-	
 }
 
 
@@ -85,13 +82,30 @@ h1{
 	font-size: 12px;
 	line-height: 20px;
 	color: black;
-	
 }
 
 .loginbox a:hover {
 	color: darkgrey;
-	
-	
+
+}
+
+.loginbox .buttonL 
+{
+	border: none;
+	height: 40px;
+	background: #fff;
+	color: black;
+	font-size: 18px;
+	border-radius: 20px;
+	font-family: Times New Roman;
+	padding: 10px 74px;
+}
+
+.loginbox .buttonL:hover
+{
+	cursor: pointer;
+	background: #E3E0E0;
+	color: black;
 }
 
 .logo img{

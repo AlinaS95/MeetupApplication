@@ -15,12 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
 public class LoginController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public LoginController() {
-		super();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,28 +27,48 @@ public class LoginController extends HttpServlet {
 		String password = request.getParameter("password");
 		String workspace = request.getParameter("workspace");
 
+		User user = new User();
+
+		user.setEmail(email);
+		user.setPassword(password);
+		user.setWorkspace(workspace);
+
 		LoginDAO loginDAO = new LoginDAO(); // this class contain main logic to perform function calling and database
 											// operation
-
 		try {
-			User user = loginDAO.checkLogin(email, password, workspace); // this class contain setting up all received values from login.jsp
-			String destPage = "login.jsp";
-
-			if (user != null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("login", user);
-				destPage = "profile.jsp";
-			} else {
-				String message = "Invalid email/password";
-				request.setAttribute("message", message);
+			String userValidate = loginDAO.checkLogin(user);
+			
+			if(userValidate.equals("Admin_Role"))
+			{
+				System.out.println("Admin");
+				
+				HttpSession session = request.getSession(); //create a session
+				session.setAttribute("Admin", email); //setting session attribute
+				request.setAttribute("email", email);
+				
+				request.getRequestDispatcher("admin.jsp").forward(request, response);
 			}
-
-			RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
-			dispatcher.forward(request, response);
-
-		} catch (SQLException | ClassNotFoundException ex) {
-			throw new ServletException(ex);
+			else if (userValidate.equals("User_Role"))
+			{
+				System.out.println("User's Page");
+				HttpSession session = request.getSession(); //create a session
+				session.setAttribute("User", email); //setting session attribute
+				request.setAttribute("email", email);
+				
+				request.getRequestDispatcher("profile.jsp").forward(request, response);
+			}
+			else
+			{
+				System.out.println("Error = "+userValidate);
+				request.setAttribute("errMessage", userValidate);
+				System.out.println("Error message = " +userValidate);
+				
+				request.getRequestDispatcher("login.jsp").forward(request, response);
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		} catch (Exception e2) {
+			e2.printStackTrace();
 		}
 	}
-
 }
