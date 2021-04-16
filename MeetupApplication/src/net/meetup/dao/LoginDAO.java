@@ -12,57 +12,36 @@ import java.sql.Statement;
 
 public class LoginDAO {
 
-	public String checkLogin(User user) throws SQLException, ClassNotFoundException
+	public User checkLogin(String email, String password, String workspace) throws SQLException, ClassNotFoundException
 	{
-		/*String jdbcURL = "jdbc:mysql://localhost:3306/meetup";
+		String jdbcURL = "jdbc:mysql://localhost:3306/meetup";
         String jdbcName = "root";
         String jdbcPassword = "";
- 
+
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(jdbcURL, jdbcName, jdbcPassword);
-        
         String sqlLogin = "SELECT * FROM user WHERE email = ? and password = ? and workspace = ?";
-        
-        PreparedStatement statement = connection.prepareStatement(sqlLogin);*/
-        
-        String email = user.getEmail();
-        String password = user.getPassword();
-        String workspace = user.getWorkspace();
-        String firstName = user.getFirstName();
-        String lastName = user.getLastName();
-        String company = user.getCompany();
-        String position = user.getPosition();
-        
-        Connection con = null;
-        Statement statement = null;
-        ResultSet resultSet = null;
-        
-        String emailDB = "";
-        String passwordDB = "";
-        String workspaceDB = "";
-        String positionDB = "";
-        
-       try {
-           con = JDBCUtils.getConnection();
-           statement = con.createStatement();
-           resultSet = statement.executeQuery("select * from user");
-           
-           while(resultSet.next()){
-        	   emailDB = resultSet.getString("email");
-        	   passwordDB = resultSet.getString("password");
-        	   workspaceDB = resultSet.getString("workspace");
-        	   positionDB = resultSet.getString("position");
-        	   
-        	   if(email.equals(emailDB) && password.equals(passwordDB) && workspace.equals(workspaceDB) && position.equals("Admin"))
-        		   return "Admin_Role";
-        	   else if(email.equals(emailDB) && password.equals(passwordDB) && workspace.equals(workspaceDB) && position.equals("User"))
-        		   return "User_Role";
-           }
-       }
-       catch(SQLException e)
-       {
-    	   e.printStackTrace();
-       }
-       return "Invalid user credentials";
-	}
+        PreparedStatement statement = connection.prepareStatement(sqlLogin);
+        statement.setString(1, email);
+        statement.setString(2, password);
+        statement.setString(3, workspace);
+
+        ResultSet result = statement.executeQuery();
+
+        User user = null;
+ 
+        if (result.next()) {
+            user = new User();
+            user.setUserID(result.getInt("userID"));
+            user.setFirstName(result.getString("firstName"));
+            user.setLastName(result.getString("lastName"));
+            user.setEmail(email);
+            user.setCompany(result.getString("company"));
+            user.setWorkspace(result.getString("workspace"));
+        }
+
+        connection.close();
+ 
+        return user;
+    }
 }

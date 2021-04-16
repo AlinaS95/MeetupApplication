@@ -23,19 +23,14 @@
 	<div class="loginbox">
 		<h1>Already a Member?</h1>
 		<h1>Login here</h1>
-		<form name="form" action="<%=request.getContextPath()%>/LoginController" method="post" id="loginForm">
+		<form name="form" action="login" method="post" id=loginForm>
 			<p>E-Mail</p>
 			<input type="text" name="email" placeholder="Enter E-Mail" />
 			<p>Password</p>
 			<input type="password" name="password" placeholder="Enter Password" /><br>${message}
 			<p>Workspace</p>
 			<input type="text" name="workspace" placeholder="Enter Workspace" />
-			<p>Position</p>
-			<label>Position</label> <select name="position">
-				<option value="" selected="selected">Select your position</option>
-				<option value="admin">Admin</option>
-				<option value="employee">Employee</option>
-			</select>
+			
 			<input type="submit" name="btn_login" value="Login">
 			<input type="submit" value="Not a member?" onClick="register()"><br>
 		</form>

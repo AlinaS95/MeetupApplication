@@ -23,9 +23,6 @@ body{
 	font-family: Times New Roman;
 }
 
-
-
-
 h1{
 	margin: 0;
 	padding: 0 0 20px;
@@ -57,7 +54,7 @@ h1{
 	font-family: Times New Roman;
 }
 
-.loginbox input[type="submit"]
+.loginbox input[type="submit"],[type="reset"]
 {
 	border: none;
 	height: 40px;
@@ -68,7 +65,7 @@ h1{
 	font-family: Times New Roman;
 }
 
-.loginbox input[type="submit"]:hover
+.loginbox input[type="submit"]:hover,[type="reset"]:hover
 {
 	cursor: pointer;
 	background: #E3E0E0;
