@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -237,7 +240,48 @@
 		</script> <main> <br>
 
 		<div class="box1">Last edited projects:</div>
-		<div class="box2">Most recently edited tasks:</div>
+
+		<div class="box2">
+			Most recently edited tasks: <br>
+			<br>
+			<table class="list">
+				<thead>
+					<tr>
+						<th style="width: 200px">Title</th>
+						<th style="width: 150px">Due Date</th>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = rs.getString("taskName");
+						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+			%>
+			<input type="hidden" name="taskID"
+				value='<%=rs.getString("taskID")%>' />
+			<table class="homeTask">
+				<tr class="tableTask">
+					<td id="taskName" onclick="list()"><%=taskName%></td>
+					<td style="width: 150px;"><%=dueDate%></td>
+				</tr>
+				</tbody>
+			</table>
+			<%
+				}
+				} catch (Exception e) {
+					out.println(e);
+				}
+			%>
+		</div>
 		<div class="box3">Notes:</div>
 
 		<h1 class="separator">Favorites</h1>
@@ -310,24 +354,25 @@
 				dialog.close();
 			}
 		</script> <!-- Watch --> <script>
-	'use strict';
-	(function() {
-		function uhrzeit() {
-			var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
-					.getMinutes(), s = jetzt.getSeconds();
-			m = fuehrendeNull(m);
-			s = fuehrendeNull(s);
-			document.getElementById('uhr').innerHTML = h + ':' + m + ':' + s;
-			setTimeout(uhrzeit, 500);
-		}
+			'use strict';
+			(function() {
+				function uhrzeit() {
+					var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+							.getMinutes(), s = jetzt.getSeconds();
+					m = fuehrendeNull(m);
+					s = fuehrendeNull(s);
+					document.getElementById('uhr').innerHTML = h + ':' + m
+							+ ':' + s;
+					setTimeout(uhrzeit, 500);
+				}
 
-		function fuehrendeNull(zahl) {
-			zahl = (zahl < 10 ? '0' : '') + zahl;
-			return zahl;
-		}
-		document.addEventListener('DOMContentLoaded', uhrzeit);
-	}());
-</script>
+				function fuehrendeNull(zahl) {
+					zahl = (zahl < 10 ? '0' : '') + zahl;
+					return zahl;
+				}
+				document.addEventListener('DOMContentLoaded', uhrzeit);
+			}());
+		</script>
 	</div>
 </body>
 </html>

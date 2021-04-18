@@ -797,6 +797,36 @@ img.middle {
   animation: fadeIn 1s;
 }
 
+table.homeTask thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.homeTask td#taskName {
+	hyphens: auto; 
+	word-break: break-word; 
+	width: 200px; 
+	cursor: pointer;
+}
+
+table.homeTask tr.tableTask:hover td{
+	font-weight: bold;
+}
+
+table.homeTask tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.homeTask tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
   from {opacity: 0;} 

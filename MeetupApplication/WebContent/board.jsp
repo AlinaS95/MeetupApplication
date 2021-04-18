@@ -1,0 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Dashboard</title>
+<link name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="board.css">
+<link rel="stylesheet" type="text/css" href="leiste.css">
+<link rel="icon" type="image/png" href="pictures/meetup_logo.png">
+<script type="text/javascript" src="methods.js"></script>
+</head>
+<body>
+	<div class="background1">
+		<div class="headliner_block">
+			<div class="logo">
+				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+					alt="Home"></a>
+			</div>
+			<div class="project">
+				<h3>Project</h3>
+				<hr>
+				<nav>
+					<ul>
+						<li><img src="pictures/splitButton.png">
+							<ul>
+								<li><a href="javascript:anotherproject()">Website</a>
+							</ul></li>
+					</ul>
+					<ul>
+						<li><a class="information"
+							onclick="document.getElementById('p_info').style.display='block'"
+							style="width: auto;"><img src="pictures/infoicon.png"
+								alt="Information"></a></li>
+						<li><a class="favorites"
+							onclick="document.getElementById('pr_favorites').style.display='block'"
+							style="width: auto;"><img src="pictures/favorite.png"
+								alt="Favorites"></a></li>
+						<li><a class="status" href="javascript:progress()"><img
+								src="pictures/greenCircle.png" alt="Status"></a></li>
+					</ul>
+				</nav>
+			</div>
+			<br>
+			<div class="secondblock">
+				<div class="searchbox">
+					<span class="searchicon"><img src="pictures/search.png"></span>
+					<input type="search" id="search" placeholder="Search..." />
+				</div>
+				<div class="user">
+					<a href="javascript:profile()"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
+				</div>
+			</div>
+			<br>
+		</div>
+		<div class="mainmenu">
+			<nav>
+				<ul>
+					<li><a href="javascript:menue()"><img
+							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a href="javascript:home()">Home</a></li>
+					<li><a href="javascript:list()">List</a></li>
+					<li><a href="javascript:board()" style="font-weight: bold">Board</a></li>
+					<li><a href="javascript:calendar()">Calendar</a></li>
+					<li><a href="javascript:progress()">Progress</a></li>
+					<li><a href="javascript:socialmedia()">Social Media</a></li>
+				</ul>
+				<div class="secondNavigation">
+					<ul>
+						<li><a class="add"
+							onclick="document.getElementById('l_add').style.display='block'"
+							style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>
+						<li><a class="profile_settings"
+							onclick="document.getElementById('p_settings').style.display='block'"
+							style="width: auto;"><img src="pictures/settings.png"
+								alt="Settings"></a></li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+
+
+	<div class="background2">
+		<br>
+		<div class="category_socialmedia">
+			Archive <img src="pictures/splitButton.png">
+		</div>
+		<div class="socialmedia_navigation">
+			<nav>
+				<ul>
+					<li><a class="sortPosts"
+						onclick="document.getElementById('posts_sort').style.display='block'"
+						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
+					<li><a class="filterDate"
+						onclick="document.getElementById('date_filter').style.display='block'"
+						style="width: auto;"><img src="pictures/filter.png"
+							alt="Settings">Filter</a></li>
+					<li><a class="socialmediaPopup"
+						onclick="document.getElementById('add_post').style.display='block'"
+						style="width: auto;"><img src="pictures/add.png" alt="Add">New
+							Post</a></li>
+
+				</ul>
+			</nav>
+			<hr>
+		</div>
+	</div>
+
+	<div class="box1">
+		<dfn class="tooltip">
+			To Do <span role="tooltip">In this column you will find all
+				the tasks to be done</span>
+		</dfn>
+	</div>
+
+	<div class="box2">
+		<dfn class="tooltip">
+			In Progress <span role="tooltip">In this column you will find
+				all the tasks that are in development</span>
+		</dfn>
+	</div>
+
+	<div class="box3">
+		<dfn class="tooltip">
+			Review <span role="tooltip">All tasks can be commented on,
+				assessed and revised here</span>
+		</dfn>
+	</div>
+	<div class="box4">
+		<dfn class="tooltip">
+			Done <span role="tooltip">In this column you will find all the
+				tasks that have been completed and reflected on</span>
+		</dfn>
+	</div>
+
+
+	<a class="addnewtask"
+		onclick="document.getElementById('l_add').style.display='block'"
+		style="width: auto;"><img src="pictures/add.png" alt="Add"></a>
+	<a class="addnewtask1"
+		onclick="document.getElementById('l_add').style.display='block'"
+		style="width: auto;"><img src="pictures/add.png" alt="Add"></a>
+	<a class="addnewtask2"
+		onclick="document.getElementById('l_add').style.display='block'"
+		style="width: auto;"><img src="pictures/add.png" alt="Add"></a>
+	<a class="addnewtask3"
+		onclick="document.getElementById('l_add').style.display='block'"
+		style="width: auto;"><img src="pictures/add.png" alt="Add"></a>
+
+	<div class="boardtask1">
+		<a class="addnewtask"
+			onclick="document.getElementById('l_add').style.display='block'"
+			style="width: auto;"><img src="pictures/add.png" alt="Add"></a>
+	</div>
+	<div class="profiletask">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask1">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask2">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask3">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask4">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask5">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask6">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask7">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask8">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask9">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask10">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+	<div class="profiletask11">
+		<img src="pictures/usericon.png" width="40" height="40" />
+	</div>
+
+	<div class="task1">
+		<section>
+			<div class="rechteck1"></div>
+			<form>
+				<label for="gebdat"></label> <input type="date" id="gebdat"
+					name="gebdat">
+			</form>
+			<label><textarea class="text" name="html_elemente" cols="20"
+					rows="10" maxlength="10000" wrap="soft"></textarea> </label>
+		</section>
+		<section>
+			<div class="rechteck2"></div>
+		</section>
+	</div>
+	<div class="task2">
+		<section>
+			<div class="rechteck3"></div>
+		</section>
+		<section>
+			<div class="rechteck4"></div>
+		</section>
+	</div>
+	<div class="task3">
+		<section>
+			<div class="rechteck5"></div>
+		</section>
+		<section>
+			<div class="rechteck8"></div>
+		</section>
+	</div>
+	<div class="task4">
+		<section>
+			<div class="rechteck6"></div>
+		</section>
+		<section>
+			<div class="rechteck7"></div>
+		</section>
+	</div>
+
+
+</body>
+</html>

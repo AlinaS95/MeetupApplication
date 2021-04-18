@@ -12,7 +12,7 @@ function list() {
 }
 
 function board() {
-	window.setTimeout('window.location="board.html", 2000');
+	window.setTimeout('window.location="board.jsp", 2000');
 }
 
 function calendar() {
