@@ -1,6 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ page import="java.sql.*"%>
+<%@ page import="java.util.*,java.sql.*"%>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
+<%
+	Gson gsonObj = new Gson(); //Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
+	Map<Object, Object> map = null;
+	List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
+	String dataPoints = null;
+
+	try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root","");
+		Statement statement = connection.createStatement();
+		String xVal, yVal;
+
+		ResultSet resultSet = statement.executeQuery("select * from datapoints");
+
+		while (resultSet.next()) {
+			xVal = resultSet.getString("x");
+			yVal = resultSet.getString("y");
+			map = new HashMap<Object, Object>();
+			map.put("x", Double.parseDouble(xVal));
+			map.put("y", Double.parseDouble(yVal));
+			list.add(map);
+			dataPoints = gsonObj.toJson(list);
+		}
+		connection.close();
+	} catch (SQLException e) {
+		out.println(
+				"<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Could not connect to the database. Please check if you have mySQL Connector installed on the machine - if not, try installing the same.</div>");
+		dataPoints = null;
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +43,25 @@
 <link rel="stylesheet" type="text/css" href="progress.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+<%if (dataPoints != null) {%>
+	var chart = new CanvasJS.Chart("chartContainer", {
+			animationEnabled : true,
+			exportEnabled : true,
+			title : {
+				text : "Status"
+			},
+			data : [ {
+				type : "column", //change type to bar, line, area, pie, etc
+				dataPoints :
+<%out.print(dataPoints);%>
+	} ]
+		});
+		chart.render();
+<%}%>
+	}
+</script>
 </head>
 <body>
 	<div class="background1">
@@ -177,6 +228,10 @@
 	</div>
 
 	<h6>Team Status</h6>
-	<div class="teamstatus"></div>
+	<div class="teamstatus">
+	
+	<div id="chartContainer" style="height: 370px; width: 100%;"></div></div>
+	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	
 </body>
 </html>

@@ -269,8 +269,8 @@
 			<input type="hidden" name="taskID"
 				value='<%=rs.getString("taskID")%>' />
 			<table class="homeTask">
-				<tr class="tableTask">
-					<td id="taskName" onclick="list()"><%=taskName%></td>
+				<tr class="tableTask" onclick="list()">
+					<td id="taskName"><%=taskName%></td>
 					<td style="width: 150px;"><%=dueDate%></td>
 				</tr>
 				</tbody>
