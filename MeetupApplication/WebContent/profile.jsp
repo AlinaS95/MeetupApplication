@@ -396,7 +396,7 @@
 		</div>
 		<br> <br>
 		<div class="logout">
-			<a href="logout"><img src="pictures/logout.png" alt="Logout" />Logout</a>
+			<a href="logout.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
 </body>

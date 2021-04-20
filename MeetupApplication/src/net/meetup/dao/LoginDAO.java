@@ -20,7 +20,7 @@ public class LoginDAO {
 
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection connection = DriverManager.getConnection(jdbcURL, jdbcName, jdbcPassword);
-        String sqlLogin = "SELECT * FROM user WHERE email = ? and password = ? and workspace = ?";
+        String sqlLogin = "SELECT * FROM user WHERE email = ? and password = PASSWORD(?) and workspace = ?";
         PreparedStatement statement = connection.prepareStatement(sqlLogin);
         statement.setString(1, email);
         statement.setString(2, password);
