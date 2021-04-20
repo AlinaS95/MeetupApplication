@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Social Media</title>
+<title>User</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="socialmedia.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
@@ -28,7 +28,7 @@
 			</div>
 			<div class="firstBox">
 				<h3>
-					Workspace: <a class="workspace">${login.workspace}</a>
+					Admin: <a class="workspace">${admin.firstName}</a>
 				</h3>
 				<a class="information"
 					onclick="document.getElementById('p_info').style.display='block'"
@@ -76,7 +76,7 @@
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-					<li><a href="socialmedia.jsp" style="font-weight: bold"><dfn
+					<li><a href="socialmedia.jsp" style="font-weight: normal"><dfn
 								class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
@@ -99,13 +99,13 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Post</div>
+		<div class="editHeader">Edit User</div>
 		<hr>
 		<br>
 		<div class="editBody">
 			<%
-				String id = request.getParameter("id");
-				String driver = "com.mysql.jdbc.Driver";
+				String userID = request.getParameter("userID");
+				String driver = "com.mysql.cj.jdbc.Driver";
 				String connectionUrl = "jdbc:mysql://localhost:3306/";
 				String database = "meetup";
 				String userid = "root";
@@ -123,52 +123,34 @@
 				try {
 					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
 					statement = connection.createStatement();
-					String sql = "select * from socialmedia where id=" + id;
+					String sql = "select * from user where userID=" + userID;
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="UpdatePost" method="post">
-				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
+			<form action="UpdateUser" method="post">
+				<input type="hidden" name="userID" value="<%=rs.getString("userID")%>"/>
 				<div>
-					<label>Person</label><input type="text" name="person"
-						value='<%=rs.getString("person")%>' />
-				</div>
-				<div class="selected">
-					<label>Channel</label><select name="channel"><%=rs.getString("channel")%>
-						<option selected=""><%=rs.getString("channel")%></option>
-						<option value="Facebook">Facebook</option>
-						<option value="Instagram">Instagram</option>
-						<option value="Xing">Xing</option>
-						<option value="LinkedIn">LinkedIn</option>
-					</select>
-				</div>
-				<div class="selected">
-					<label>Category</label> <select name="category"><%=rs.getString("category")%>
-						<option selected=""><%=rs.getString("category")%></option>
-						<option value="Image Post">Image Post</option>
-						<option value="Story">Story</option>
-						<option value="Video">Video</option>
-					</select>
+					<label>First Name</label><input type="text" name="firstName"
+						value='<%=rs.getString("firstName")%>' />
 				</div>
 				<div>
-					<label style="margin-left:-133px">Status</label> <select name="status"><%=rs.getString("status")%>
-						<option style="font-weight:bold"selected=""><%=rs.getString("status")%></option>
-						<option value="In Progress">In Progress</option>
-						<option value="Published">Published</option>
-					</select>
+					<label>Last Name</label><input type="text" name="lastName"
+						value='<%=rs.getString("lastName")%>' />
 				</div>
 				<div>
-					<label style="margin-left: -50px;">Date</label><input type="date"
-						name="postDate" style="margin-left: 5px"
-						value='<%=rs.getDate("postDate").toLocalDate()%>' />
+					<label>Email</label><input type="text" name="email"
+						value='<%=rs.getString("email")%>' />
 				</div>
 				<div>
-					<label style="position: absolute; margin: 2px -140px;">Text</label>
-					<textarea name="text"
-						style="position: absolute; margin: 2px -95px;"><%=rs.getString("text")%></textarea>
+					<label>Company</label><input type="text" name="company"
+						value='<%=rs.getString("company")%>' />
+				</div>
+				<div>
+					<label>Workspace</label><input type="text" name="workspace"
+						value='<%=rs.getString("workspace")%>' />
 				</div>
 				<br> <br> <br> <a class="aButtons"
-					href="socialmedia.jsp">Back</a>
+					href="admin.jsp">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

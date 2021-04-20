@@ -9,50 +9,46 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import net.meetup.bean.User;
-import net.meetup.dao.RegisterDAO;
+import net.meetup.bean.Admin;
+import net.meetup.dao.AdminRegisterDAO;
 
-@WebServlet("/register")
-public class RegisterController extends HttpServlet {
+@WebServlet("/adminRegister")
+public class AdminRegisterController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private RegisterDAO registerDAO;
+	private AdminRegisterDAO adminRegisterDAO;
 	
 	public void init() {
-		registerDAO = new RegisterDAO();
+		adminRegisterDAO = new AdminRegisterDAO();
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		register(request, response);
+		adminRegister(request, response);
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("registration.jsp");
+		response.sendRedirect("adminRegistration.jsp");
 	}
-	private void register(HttpServletRequest request, HttpServletResponse response)
+	private void adminRegister(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			String firstName = request.getParameter("firstName");
 			String lastName = request.getParameter("lastName");
 			String email = request.getParameter("email");
-			String company = request.getParameter("company");
-			String workspace = request.getParameter("workspace");
 			String password = request.getParameter("password");
 			
-			User user = new User();
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(email);
-			user.setCompany(company);
-			user.setWorkspace(workspace);
-			user.setPassword(password);
+			Admin admin = new Admin();
+			admin.setFirstName(firstName);
+			admin.setLastName(lastName);
+			admin.setEmail(email);
+			admin.setPassword(password);
 			
 			try {
-				int result = registerDAO.registerUser(user);
-				String destPage = "registration.jsp";
+				int result = adminRegisterDAO.registerAdmin(admin);
+				String destPage = "adminRegistration.jsp";
 				if (result == 1) {
 					HttpSession session = request.getSession();
-					session.setAttribute("login", user);
-					destPage = "profile.jsp";
+					session.setAttribute("admin", admin);
+					destPage = "admin.jsp";
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 				dispatcher.forward(request, response);

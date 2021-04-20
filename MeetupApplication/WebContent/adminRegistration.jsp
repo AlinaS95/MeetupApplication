@@ -21,8 +21,8 @@
 	</div>
 
 	<div class="loginbox">
-		<h1>Create a Account</h1>
-		<form action="register" method="post" onsubmit="return validate();"
+		<h1>Create a Admin-Account</h1>
+		<form action="adminRegister" method="post" onsubmit="return validate();"
 			id="registerForm">
 			<p>*First Name</p>
 			<input type="text" id="firstName" name="firstName"
@@ -35,14 +35,6 @@
 			<p>*Email</p>
 			<input type="text" id="email" name="email" placeholder="Enter Email" />
 
-			<p>*Company</p>
-			<input type="text" id="company" name="company"
-				placeholder="Enter Company" />
-
-			<p>*Workspace</p>
-			<input type="text" id="workspace" name="workspace"
-				placeholder="Enter Workspace" />
-
 			<p>*Password</p>
 			<input type="password" id="password" name="password"
 				placeholder="Enter Password" />
@@ -52,7 +44,7 @@
 
 			<input type="submit" name="btn_register" value="Register">
 		</form>
-		<a class="buttonL" href="login.jsp">Already a member?</a>
+		<a class="buttonL" href="adminLogin.jsp" style="padding:10px 55px;">Already a member?</a>
 	</div>
 </body>
 </html>

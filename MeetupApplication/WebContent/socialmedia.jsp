@@ -2,13 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
-<%@page import="java.util.Set"%>
-<%@page import="java.util.HashSet"%>
-<%@page import="java.util.Random"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
 <%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>

@@ -13,7 +13,7 @@
 <title>Social Media</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="list.css">
-<link rel="stylesheet" type="text/css" href="editPost.css">
+<link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>

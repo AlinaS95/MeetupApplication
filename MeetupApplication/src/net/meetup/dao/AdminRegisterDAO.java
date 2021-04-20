@@ -1,6 +1,6 @@
 package net.meetup.dao;
 
-import net.meetup.bean.User;
+import net.meetup.bean.Admin;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,15 +8,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class RegisterDAO {
+public class AdminRegisterDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/meetup";
 	private String jdbcName = "root";
 	private String jdbcPassword = "";
 	
-	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, workspace, password) VALUES (?,?,?,?,?,PASSWORD(?))";
-	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, workspace, password from user where userID=?";
+	private static final String REGISTER_ADMIN_SQL = "INSERT INTO admin (firstName, lastName, email, password) VALUES (?,?,?,PASSWORD(?))";
+	private static final String SELECT_ADMIN_BY_ID = "select id, firstName, lastName, email, password from user where id=?";
 	
-	public RegisterDAO() {}
+	public AdminRegisterDAO() {}
 	
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -31,20 +31,18 @@ public class RegisterDAO {
 		return connection;
 	}
 		
-	public int registerUser(User user) throws SQLException {
-		System.out.println("REGISTER_USER_SQL");
+	public int registerAdmin(Admin admin) throws SQLException {
+		System.out.println("REGISTER_ADMIN_SQL");
 		
 		int result = 0;
 		
 		// try-with-resource statement will auto close the connection
 		try (Connection connection = getConnection();
-			PreparedStatement statement = connection.prepareStatement(REGISTER_USER_SQL)) {
-			statement.setString(1, user.getFirstName());
-			statement.setString(2, user.getLastName());
-			statement.setString(3, user.getEmail());
-			statement.setString(4, user.getCompany());
-			statement.setString(5, user.getWorkspace());
-			statement.setString(6, user.getPassword());
+			PreparedStatement statement = connection.prepareStatement(REGISTER_ADMIN_SQL)) {
+			statement.setString(1, admin.getFirstName());
+			statement.setString(2, admin.getLastName());
+			statement.setString(3, admin.getEmail());
+			statement.setString(4, admin.getPassword());
 			
 			System.out.println(statement);
 			
@@ -56,13 +54,13 @@ public class RegisterDAO {
 		return result;
 	}
 	
-	public User selectUser(int userID) {
-        User user = null;
+	public Admin selectAdmin(int id) {
+        Admin admin = null;
         // Step 1: Establishing a Connection
         try (Connection connection = getConnection();
             // Step 2:Create a statement using connection object
-            PreparedStatement statement = connection.prepareStatement(SELECT_USER_BY_ID);) {
-            statement.setInt(1, userID);
+            PreparedStatement statement = connection.prepareStatement(SELECT_ADMIN_BY_ID);) {
+            statement.setInt(1, id);
             System.out.println(statement);
             // Step 3: Execute the query or update query
             ResultSet result = statement.executeQuery();
@@ -72,15 +70,13 @@ public class RegisterDAO {
                 String firstName = result.getString("firstName");
                 String lastName = result.getString("lastName");
                 String email = result.getString("email");
-                String company = result.getString("company");
-                String workspace = result.getString("workspace");
                 String password = result.getString("password");
-                user = new User(userID, firstName, lastName, email, company, workspace, password);
+                admin = new Admin(id, firstName, lastName, email, password);
             }
         } catch (SQLException e) {
             printSQLException(e);
         }
-        return user;
+        return admin;
     }
 	
 	private void printSQLException(SQLException ex) {
