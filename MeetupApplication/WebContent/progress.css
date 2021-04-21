@@ -79,3 +79,9 @@ h6 {
   line-height: 80px; /* To center it vertically */
   color: white;
 }
+
+.canvasjs-chart-canvas{
+	right: 967px;
+	position: relative;
+	width: 1200px;
+}
