@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Profile</title>
+<title>Admin</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="<%=common.url%>profile.css">
 <link rel="stylesheet" type="text/css" href="<%=common.url%>admin.css">
@@ -63,14 +63,10 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="javascript:menue()"><img
-							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp">Home</a></li>
-					<li><a href="javascript:list()">List</a></li>
-					<li><a href="javascript:board()">Board</a></li>
-					<li><a href="calendar.jsp">Calendar</a></li>
-					<li><a href="javascript:progress()">Progress</a></li>
-					<li><a href="socialmedia.jsp">Social Media</a></li>
+					<li><a href="admin.jsp" style="font-weight:bold">Admin Center</a></li>
+					<li><a href="adminUser.jsp" style="margin-left:165px">User</a></li>
+					<li><a href="">Workspaces</a></li>
+					<li><a href="">Settings</a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
@@ -89,7 +85,7 @@
 
 	<div class="background2">
 		<br>
-		<div class="profile_title">Admin View</div>
+		<div class="profile_title">Admin Center</div>
 		<br>
 		<div class="profile_overview" style="height:250px">
 			<div class="profile_icon">
@@ -99,119 +95,6 @@
 				src="pictures/infoicon.png" alt="information" />Admin:<a>${admin.firstName}
 			</a></a><br> <br> <a>${admin.email}</a>
 		</div>
-		<br>
-		<hr>
-		<br>
-		
-		<!-- User -->
-		<div class="user_title">User List</div>
-		<table class="user">
-			<thead>
-				<tr>
-					<th style="width: 250px">First Name</th>
-					<th style="width: 250px">Last Name</th>
-					<th style="width: 250px">Email</th>
-					<th style="width: 250px">Company</th>
-					<th style="width: 250px">Workspace</th>
-					<th style="width: 150px">Settings</th>
-				</tr>
-			</thead>
-		</table>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM user";
-				ResultSet rs = st.executeQuery(sql);
-				int i = 0;
-				while (rs.next()) {
-					String userID = rs.getString("userID");
-					String firstName = rs.getString("firstName");
-					String lastName = rs.getString("lastName");
-					String email = rs.getString("email");
-					String company = rs.getString("company");
-					String workspace = rs.getString("workspace");
-		%>
-		<input type="hidden" name="userID" value='<%=rs.getString("userID")%>' />
-		<table class="user">
-			<tr>
-				<td style="width: 250px;"><%=firstName%></td>
-				<td style="width: 250px;"><%=lastName%></td>
-				<td style="width: 250px;"><%=email%></td>
-				<td style="width: 250px;"><%=company%></td>
-				<td style="width: 250px;"><%=workspace%></td>
-				<td style="width: 150px;"><a
-					href="editUser.jsp?userID<%=rs.getString("userID")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 30px; height: 30px; position: absolute; margin: -20px -48px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("userID")%> style="width: auto;"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 24px; height: 24px; position: absolute; margin: -18px 0px;" />
-				</a></td>
-			</tr>
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		<br>
-		<hr>
-		<br>
-
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="user_popupBlock">
-
-			<!-- Window content -->
-			<div class="popupBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					User <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM user";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String userID = rs.getString("userID");
-							String firstName = rs.getString("firstName");
-							String lastName = rs.getString("lastName");
-							String email = rs.getString("email");
-							String company = rs.getString("company");
-							String workspace = rs.getString("workspace");
-				%>
-				<div class="popupBody_user">
-
-					<div class="popupInfo">
-						<input type="text" name="userID"
-							value='<%=rs.getString("userID")%>' /> <a class="aButtons"
-							href="deleteUser.jsp?userID=<%=rs.getString("userID")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
-
-
 		<br> <br>
 		<div class="logout">
 			<a href="adminLogin.jsp"><img src="pictures/logout.png"

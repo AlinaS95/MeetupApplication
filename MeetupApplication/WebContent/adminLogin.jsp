@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Login</title>
+<title>Admin Login</title>
 <link rel="stylesheet" type="text/css" href="<%=common.url%>/login.css">
 <link rel="icon" type="image/png"
 	href="<%=common.url%>pictures/meetup_logo.png">

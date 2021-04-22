@@ -38,3 +38,7 @@ function login() {
 function register() {
 	window.setTimeout('window.location="registration.jsp", 2000');
 }
+
+function inbox() {
+	window.setTimeout('window.location="inbox.jsp", 2000');
+}

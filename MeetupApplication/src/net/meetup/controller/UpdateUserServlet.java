@@ -56,7 +56,7 @@ public class UpdateUserServlet extends HttpServlet {
 				ps.setString(6, workspace);
 
 				ps.executeUpdate();
-				response.sendRedirect("admin.jsp");
+				response.sendRedirect("adminUser.jsp");
 
 			} catch (Exception e) {
 				out.println(e);
