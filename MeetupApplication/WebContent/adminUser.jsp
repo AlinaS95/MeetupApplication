@@ -138,7 +138,7 @@
 				<td style="width: 250px;"><%=company%></td>
 				<td style="width: 250px;"><%=workspace%></td>
 				<td style="width: 150px;"><a
-					href="editUser.jsp?userID<%=rs.getString("userID")%>"><img
+					href="editUser.jsp?userID=<%=rs.getString("userID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 30px; height: 30px; position: absolute; margin: -20px -48px;"></a>
 					<a
@@ -205,13 +205,6 @@
 					}
 				%>
 			</div>
-		</div>
-
-
-		<br> <br>
-		<div class="logout">
-			<a href="adminLogin.jsp"><img src="pictures/logout.png"
-				alt="Logout" />Logout</a>
 		</div>
 	</div>
 </body>

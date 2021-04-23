@@ -29,6 +29,11 @@ h3 {
 	letter-spacing: 2px;
 }
 
+h4 {
+	text-align: left;
+	font-size: 20px;
+}
+
 /* background 1*/
 .background1 {
 	background-color: #F0F0F0; /* primary background */

@@ -195,6 +195,25 @@
 	color: #707070;
 }
 
+.popupBody .aButtons2{
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.popupBody .aButtons2:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
 .workspace_title {
 	background-color: #F0F0F0;
 	text-align: center;
@@ -288,14 +307,59 @@
 .workingtime_Buttons input {
 	width: 130px;
 	height: 20px;
-	margin: 5px 5px;
 	position: absolute;
 }
 
-.clock {
-	margin: 20px 200px;
-	position: absolute;
+.workingtime_Buttons input#starttime,#pausetime,#stoptime {
+	margin: -40px 45px;
 }
+
+.workingtime_Buttons input.start_button{
+	background-image:url(pictures/playButton.png);
+	background-size: 35px;
+	width: 35px;
+	height: 35px;
+	border-style: none;
+	cursor: pointer;
+}
+
+.workingtime_Buttons input.startPause_button{
+	background-image:url(pictures/pauseButton.png);
+	background-size: 35px;
+	width: 35px;
+	height: 35px;
+	border-style: none;
+	cursor: pointer;
+}
+
+.workingtime_Buttons input.stop_button{
+	background-image:url(pictures/stopButton.png);
+	background-size: 35px;
+	width: 35px;
+	height: 35px;
+	border-style: none;
+	cursor: pointer;
+}
+
+.aButtons2{
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.aButtons2:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
+}
+
 
 .logout img {
 	width: 50px;
@@ -357,9 +421,4 @@ table {
 td {
 	font-size: 15px; 
 	font-weight: 100;
-}
-
-h4 {
-	margin: -46px 68px;
-	position: absolute;
 }

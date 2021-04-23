@@ -2,30 +2,37 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Profile</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="<%=common.url%>profile.css">
-<link rel="stylesheet" type="text/css" href="<%=common.url%>leiste.css">
+<link rel="stylesheet" type="text/css" href="profile.css">
+<link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
-	function myFunction() {
-		var x = document.getElementById("settingsText");
-		if (x.style.display === "none") {
-			x.style.display = "block";
-		} else {
-			x.style.display = "none";
-		}
-	}
-</script>
 </head>
 <body>
+	<%
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+			Statement st = con.createStatement();
+			String sql = "SELECT * FROM user";
+			ResultSet rs = st.executeQuery(sql);
+			int i = 0;
+			while (rs.next()) {
+				String userID = rs.getString("userID");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				String email = rs.getString("email");
+				String company = rs.getString("company");
+				String workspace = rs.getString("workspace");
+	%>
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
@@ -34,7 +41,7 @@
 			</div>
 			<div class="firstBox">
 				<h3>
-					Welcome <a class="firstname">${login.firstName}</a>
+					Welcome <a class="firstname"><%=firstName%></a>
 				</h3>
 				<a class="favorites"
 					onclick="document.getElementById('p_favorites').style.display='block'"
@@ -92,21 +99,21 @@
 				<img src="pictures/usericon.png" alt="user" />
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
-				src="pictures/infoicon.png" alt="information" /><a>${login.firstName}
-			</a><a style="margin-right: 50px">${login.lastName}</a></a><br> <br>
-			<a>${login.email}</a><br> <br> <a class="profile_settings"
+				src="pictures/infoicon.png" alt="information" /><a><%=firstName%>
+			</a><a style="margin-right: 50px"><%=lastName%></a></a><br> <br> <a><%=email%></a><br>
+			<br> <a class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
 				alt="Settings">Settings</a>
 		</div>
 
-		<!-- Pop-Up-Window Profile -->
+		<!-- Pop-Up-Window Profile Settings-->
 		<div id="p_settings" class="profile_popup">
 
 			<!-- Window content -->
 			<div class="popupBlock">
 				<div class="popupHeader">
-					<img src="pictures/settings.png">Settings <span
+					Settings <span
 						onclick="document.getElementById('p_settings').style.display='none'
 					"
 						class="close" title="Schließen">&times;</span>
@@ -116,29 +123,26 @@
 					<button onClick="changePicture()">Upload new photo</button>
 					<button onClick="deletePicture()">Remove photo</button>
 					<br>
+					<hr>
 					<div class="popupInfo">
-						<a>First name: </a><a>${login.firstName}</a><br> <a>Last
-							name: </a><a>${login.lastName}</a><br> <a>Email: </a><a>${login.email}</a><br>
-						<a>Company: </a><a>${login.company}</a><br> <a>Workspace:
-						</a><a>${login.workspace}</a><br> <a>Add File</a>
-						<form name="form1" method="post" action="imageProcess.jsp" enctype="multipart/form-data">
-							<div>
-								<label>Name</label> <input type="text" name="fname"
-									size="50" />
-							</div>
-							<div>
-								<label>Profile Photo: </label> <input type="file" name="photo"
-									size="50" />
-							</div>
-							<input type="submit" value="Save">
-						</form>
+						<input type="hidden" name="userID" value="${login.userID}" /> <a
+							style="font-weight: bold">First Name: </a><a><%=firstName%></a><br>
+						<a style="font-weight: bold">Last Name: </a><a><%=lastName%></a><br>
+						<a style="font-weight: bold">Email: </a><a><%=email%></a><br>
+						<a style="font-weight: bold">Company: </a><a><%=company%></a><br>
+						<a style="font-weight: bold">Workspace: </a><a><%=workspace%></a><br>
 					</div>
-				</div>
-				<div class="popupFooter">
-					<a href="delete.jsp">Delete</a>
+					<div style="margin: 10px 25px">
+						<a class="aButtons2"
+							href="editProfile.jsp?userID=<%=rs.getString("userID")%>"><img
+							src="pictures/settings.png" alt="Settings"
+							style="width: 30px; height: 30px; margin: -4px -35px;">Edit
+							User</a>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<!-- Workspace -->
 		<div class="workspace_title">Workspace</div>
 		<br>
@@ -230,7 +234,8 @@
 
 			<!-- Window content -->
 			<div class="addBlock">
-				<div class="popupHeader"><span
+				<div class="popupHeader">
+					<span
 						onclick="document.getElementById('task_add').style.display='none'
 					"
 						class="close" title="Schließen">&times; </span>
@@ -349,55 +354,71 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="organization_title">Organization</div>
 		<br>
 		<div class="organization">
 			<div class="workingtime">Working Time</div>
 			<br>
-			<div class="clock">
-				<canvas id="profileClock">
-			</canvas>
-				<script src="profile.js"></script>
-			</div>
 			<div class="workingtime_Buttons" style="margin: -15px 2px;">
-				<img src="pictures/playButton.png" alt="set Time"> <input
-					type="text" placeholder='input entry time' id='entry'> <br>
-				<img src="pictures/pauseButton.png" alt="start Pause"> <input
-					type="text" placeholder='input pause time' id='pause'> <br>
-				<img src="pictures/stopButton.png" alt="set Time"> <input
-					type="text" placeholder="input exit time" id='exit'><br>
-				<input type="button" value='calculate' onclick='calculateTime()'
-					style="width: 100px; height: 30px; position: relative"><br>
-				<p>You worked today:</p>
-				<input type="text" placeholder="Working hours" id='total'>
+				<form action="" method="post">
+					<!--  button - Start Timer -->
+					<timer> <input class="start_button" name="starttime_button"
+						type="button" value=""
+						onclick="document.getElementById('starttime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
+					<br>
+					<br>
+					<input type="time" id="starttime" name="starttime" /> </timer>
+					<!--  button - Pause Start Timer -->
+					<timer> <input class="startPause_button"
+						name="pausetime_button" type="button" value=""
+						onclick="document.getElementById('pausetime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
+					<br>
+					<br>
+					<input type="time" id="pausetime" name="pausetime" /> </timer> 
+					<!--  button - Stop Timer -->
+					<timer> <input class="stop_button" name="stoptime_button"
+						type="button" value=""
+						onclick="document.getElementById('stoptime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
+					<br>
+					<br>
+					<input type="time" id="stoptime" name="stoptime" /> </timer>
+					<p>You worked today:</p>
+					<input name="workingSum" type="button" value="Calcuate"
+						onclick="workingSum()"/>
+					<a id="sumAnswer"></a>
+					
+					<script>
+					function workingSum() {
+						var time1=document.getElementById("starttime").value;
+						var time2=document.getElementById("stoptime").value;
+						
+						var result=parseFloat(stoptime)-parseFloat(starttime);
+						
+						if(!isNan(result)) {
+							document.getElementById("sumAnswer")+result;
+						}
+					}
+					</script>
+					<br><br>
+					<div>
+						<button class="aButtons2" type="submit">Save</button>
+						<a class="aButtons2" href="workingTime.jsp"
+							style="margin-left: 10px">Work Schedule</a>
+					</div>
+				</form>
 			</div>
-			<script>
-				function calculateTime() {
-					var entry = document.getElementById('entry');
-					var exit = document.getElementById('exit');
-					var pause = document.getElementById('pause');
-
-					var entryTime = entry.value.split(':');
-					var entryTimeInMins = entryTime[0] + entryTime[1];
-
-					var pauseTime = pause.value.split(':');
-					var pauseTimeInMins = pauseTime[0] + pauseTime[1];
-
-					var exitTime = exit.value.split(':');
-					var exitTimeInMins = exitTime[0] + exitTime[1];
-
-					var totalTime = exitTimeInMins - entryTimeInMins;
-					var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
-
-					document.getElementById('total').value = totalTimeHour;
-
-				}
-			</script>
 		</div>
 		<br> <br>
 		<div class="logout">
 			<a href="logout.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
+	<%
+		}
+		} catch (Exception e) {
+			out.println(e);
+		}
+	%>
 </body>
 </html>

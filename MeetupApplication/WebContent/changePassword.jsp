@@ -75,75 +75,28 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit User</div>
+		<div class="editHeader">Change Password</div>
 		<hr>
 		<br>
 		<div class="editBody">
-			<%
-				String userID = request.getParameter("userID");
-				String driver = "com.mysql.cj.jdbc.Driver";
-				String connectionUrl = "jdbc:mysql://localhost:3306/";
-				String database = "meetup";
-				String userid = "root";
-				String password = "";
-				try {
-					Class.forName(driver);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				Connection connection = null;
-				Statement statement = null;
-				ResultSet rs = null;
-			%>
-			<%
-				try {
-					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
-					statement = connection.createStatement();
-					String sql = "select * from user where userID=" + userID;
-					rs = statement.executeQuery(sql);
-					while (rs.next()) {
-			%>
-			<form action="UpdateUser" method="post">
-				<input type="hidden" name="userID"
-					value="<%=rs.getString("userID")%>" />
+			<form action="changePasswordAction.jsp" method="post">
 				<div>
-					<label>First Name</label><input type="text" name="firstName"
-						value='<%=rs.getString("firstName")%>' />
+					<label style="margin-left:-30px">Email</label><input type="text" name="email" 
+					required="">
 				</div>
 				<div>
-					<label>Last Name</label><input type="text" name="lastName"
-						value='<%=rs.getString("lastName")%>' />
+					<label style="margin-left:-100px">New Password</label><input type="password" name="password"
+					required="">
 				</div>
 				<div>
-					<label style="margin-left:40px">Email</label><input type="text" name="email"
-						value='<%=rs.getString("email")%>' />
+					<label style="margin-left:-110px">Reply Password</label><input type="password" name="password"
+					required="">
 				</div>
-				<div>
-					<label style="margin-left:10px">Company</label><input type="text" name="company"
-						value='<%=rs.getString("company")%>' />
-				</div>
-				<div>
-					<label>Workspace</label><input type="text" name="workspace"
-						value='<%=rs.getString("workspace")%>' />
-				</div>
-				<div style="margin:5px 0px">
-					<label style="margin-left:-80px">Password</label><a class="aButtons" style="font-weight:bold"
-					href="changePassword.jsp">Change Password</a>
-				</div>
-				<br> <a class="aButtons"
-					href="adminUser.jsp" style="margin-left:10px">Back</a>
-				<button type="submit">Update</button>
+				<br>  <a class="aButtons"
+					href="adminUser.jsp" style="margin-left:30px">Back</a><button
+					class="aButtons" type="submit">Change Password</button>
 			</form>
-
-			<%
-				}
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			%>
 		</div>
-		<br>
 		<hr>
 	</div>
 </body>

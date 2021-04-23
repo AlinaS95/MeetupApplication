@@ -1,22 +1,33 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
-<%@page import="java.sql.*,java.util.*"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
 <%@page import="java.time.LocalDate"%>
-<%@page import="net.meetup.utils.JDBCUtils"%>
-<%@page import="java.io.IOException"%>
-<%@page import="java.io.PrintWriter"%>
-<%@page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User</title>
+<title>Profile</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="socialmedia.css">
-<link rel="stylesheet" type="text/css" href="editor.css">
+<link rel="stylesheet" type="text/css" href="profile.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
+<link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+	function myFunction() {
+		var x = document.getElementById("settingsText");
+		if (x.style.display === "none") {
+			x.style.display = "block";
+		} else {
+			x.style.display = "none";
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="background1">
@@ -27,12 +38,12 @@
 			</div>
 			<div class="firstBox">
 				<h3>
-					Admin: <a class="workspace">${admin.firstName}</a>
+					Welcome <a class="firstname">${login.firstName}</a>
 				</h3>
-				<a class="information"
-					onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png"
-					alt="Information"></a> <a class="status"
+				<a class="favorites"
+					onclick="document.getElementById('p_favorites').style.display='block'"
+					style="width: auto;"><img src="pictures/favorite.png"
+					alt="Favorites"></a> <a class="status"
 					href="javascript:progress()"><img
 					src="pictures/greenCircle.png" alt="Status"></a>
 			</div>
@@ -43,7 +54,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
+					<a href="profile.jsp"><img src="pictures/usericon.png"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -52,11 +63,14 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="admin.jsp">Admin Center</a></li>
-					<li><a href="adminUser.jsp"
-						style="margin-left: 165px; font-weight: bold">User</a></li>
-					<li><a href="">Workspaces</a></li>
-					<li><a href="">Settings</a></li>
+					<li><a href="javascript:menue()"><img
+							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a href="home.jsp">Home</a></li>
+					<li><a href="javascript:list()">List</a></li>
+					<li><a href="javascript:board()">Board</a></li>
+					<li><a href="calendar.jsp">Calendar</a></li>
+					<li><a href="javascript:progress()">Progress</a></li>
+					<li><a href="socialmedia.jsp">Social Media</a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
@@ -115,23 +129,24 @@
 						value='<%=rs.getString("lastName")%>' />
 				</div>
 				<div>
-					<label style="margin-left:40px">Email</label><input type="text" name="email"
-						value='<%=rs.getString("email")%>' />
+					<label style="margin-left: 40px">Email</label><input type="text"
+						name="email" value='<%=rs.getString("email")%>' />
 				</div>
 				<div>
-					<label style="margin-left:10px">Company</label><input type="text" name="company"
-						value='<%=rs.getString("company")%>' />
+					<label style="margin-left: 10px">Company</label><input type="text"
+						name="company" value='<%=rs.getString("company")%>' />
 				</div>
 				<div>
 					<label>Workspace</label><input type="text" name="workspace"
 						value='<%=rs.getString("workspace")%>' />
 				</div>
-				<div style="margin:5px 0px">
-					<label style="margin-left:-80px">Password</label><a class="aButtons" style="font-weight:bold"
-					href="changePassword.jsp">Change Password</a>
+				<div style="margin: 5px 0px">
+					<label style="margin-left: -80px">Password</label><a
+						class="aButtons" style="font-weight: bold"
+						href="changePassword.jsp">Change Password</a>
 				</div>
-				<br> <a class="aButtons"
-					href="adminUser.jsp" style="margin-left:10px">Back</a>
+				<br> <a class="aButtons" href="profile.jsp"
+					style="margin-left: 10px">Back</a>
 				<button type="submit">Update</button>
 			</form>
 
