@@ -403,8 +403,8 @@
 					<br><br>
 					<div>
 						<button class="aButtons2" type="submit">Save</button>
-						<a class="aButtons2" href="workingTime.jsp"
-							style="margin-left: 10px">Work Schedule</a>
+						<a class="aButtons2" href="timeTracker.jsp"
+							style="margin-left: 10px">Time Tracker</a>
 					</div>
 				</form>
 			</div>
