@@ -141,6 +141,9 @@
 		<hr>
 		<br>
 
+		<div class="newTime">
+		<input>
+		</div>
 		<p style="font-weight: bold">${message}</p>
 		<table class="list">
 			<thead>

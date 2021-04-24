@@ -9,10 +9,12 @@ public class User {
 	protected String position;
 	protected String workspace;
 	protected String password;
+	protected String fileName;
+	protected String savePath;
 	
 	public User() {}
 	
-	public User (String firstName, String lastName, String email, String company, String position, String workspace, String password) {
+	public User (String firstName, String lastName, String email, String company, String position, String workspace, String password, String fileName, String savePath) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -21,9 +23,11 @@ public class User {
 		this.position = position;
 		this.workspace = workspace;
 		this.password = password;
+		this.fileName = fileName;
+		this.savePath = savePath;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String password) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String password,String fileName, String savePath) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -33,9 +37,11 @@ public class User {
 		this.position = position;
 		this.workspace = workspace;
 		this.password = password;
+		this.fileName = fileName;
+		this.savePath = savePath;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String fileName) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -44,6 +50,7 @@ public class User {
 		this.company = company;
 		this.position = position;
 		this.workspace = workspace;
+		this.fileName = fileName;
 	}
 	
 	public int getUserID() {
@@ -93,5 +100,17 @@ public class User {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	public String getSavePath() {
+		return savePath;
+	}
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
 	}
 }

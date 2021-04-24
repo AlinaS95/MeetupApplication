@@ -17,22 +17,6 @@
 <script type="text/javascript" src="methods.js"></script>
 </head>
 <body>
-	<%
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-			Statement st = con.createStatement();
-			String sql = "SELECT * FROM user";
-			ResultSet rs = st.executeQuery(sql);
-			int i = 0;
-			while (rs.next()) {
-				String userID = rs.getString("userID");
-				String firstName = rs.getString("firstName");
-				String lastName = rs.getString("lastName");
-				String email = rs.getString("email");
-				String company = rs.getString("company");
-				String workspace = rs.getString("workspace");
-	%>
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
@@ -41,7 +25,7 @@
 			</div>
 			<div class="firstBox">
 				<h3>
-					Welcome <a class="firstname"><%=firstName%></a>
+					Welcome <a class="firstname">${login.firstName}</a>
 				</h3>
 				<a class="favorites"
 					onclick="document.getElementById('p_favorites').style.display='block'"
@@ -57,8 +41,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp"><img src="pictures/usericon.png"
-						alt="Profil Icon" /></a>
+					<a href="profile.jsp"><img src="pictures/${login.fileName}"
+						alt="Profile Picture" /></a>
 				</div>
 			</div>
 			<br>
@@ -96,12 +80,12 @@
 		<br>
 		<div class="profile_overview">
 			<div class="profile_icon">
-				<img src="pictures/usericon.png" alt="user" />
+				<img src="pictures/${login.fileName}" alt="Profile Picture" />
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
-				src="pictures/infoicon.png" alt="information" /><a><%=firstName%>
-			</a><a style="margin-right: 50px"><%=lastName%></a></a><br> <br> <a><%=email%></a><br>
-			<br> <a class="profile_settings"
+				src="pictures/infoicon.png" alt="information" /><a>${login.firstName}
+			</a><a style="margin-right: 50px">${login.lastName}</a></a><br> <br>
+			<a>${login.email}</a><br> <br> <a class="profile_settings"
 				onclick="document.getElementById('p_settings').style.display='block'"
 				style="width: auto;"><img src="pictures/settings.png"
 				alt="Settings">Settings</a>
@@ -119,22 +103,25 @@
 						class="close" title="Schließen">&times;</span>
 				</div>
 				<div class="popupBody">
-					<img src="pictures/usericon.png" alt="Members">
+					<input type="hidden" name="userID" value="${login.userID}" /> <img
+						src="pictures/${login.fileName}" /> <a
+						href="editProfilePicture.jsp?userID=${login.userID}"
+						style="margin: 60px"><img src="pictures/settings.png"
+						alt="Settings" style="width: 25px; height: 25px;"></a><br>
 					<button onClick="changePicture()">Upload new photo</button>
 					<button onClick="deletePicture()">Remove photo</button>
 					<br>
 					<hr>
 					<div class="popupInfo">
-						<input type="hidden" name="userID" value="${login.userID}" /> <a
-							style="font-weight: bold">First Name: </a><a><%=firstName%></a><br>
-						<a style="font-weight: bold">Last Name: </a><a><%=lastName%></a><br>
-						<a style="font-weight: bold">Email: </a><a><%=email%></a><br>
-						<a style="font-weight: bold">Company: </a><a><%=company%></a><br>
-						<a style="font-weight: bold">Workspace: </a><a><%=workspace%></a><br>
+						<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
+						<a style="font-weight: bold">Last Name: </a><a>${login.lastName}</a><br>
+						<a style="font-weight: bold">Email: </a><a>${login.email}</a><br>
+						<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
+						<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
 					</div>
 					<div style="margin: 10px 25px">
 						<a class="aButtons2"
-							href="editProfile.jsp?userID=<%=rs.getString("userID")%>"><img
+							href="editProfile.jsp?userID=${login.userID}"><img
 							src="pictures/settings.png" alt="Settings"
 							style="width: 30px; height: 30px; margin: -4px -35px;">Edit
 							User</a>
@@ -375,7 +362,7 @@
 						onclick="document.getElementById('pausetime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
 					<br>
 					<br>
-					<input type="time" id="pausetime" name="pausetime" /> </timer> 
+					<input type="time" id="pausetime" name="pausetime" /> </timer>
 					<!--  button - Stop Timer -->
 					<timer> <input class="stop_button" name="stoptime_button"
 						type="button" value=""
@@ -385,22 +372,22 @@
 					<input type="time" id="stoptime" name="stoptime" /> </timer>
 					<p>You worked today:</p>
 					<input name="workingSum" type="button" value="Calcuate"
-						onclick="workingSum()"/>
-					<a id="sumAnswer"></a>
-					
+						onclick="workingSum()" /> <a id="sumAnswer"></a>
+
 					<script>
-					function workingSum() {
-						var time1=document.getElementById("starttime").value;
-						var time2=document.getElementById("stoptime").value;
-						
-						var result=parseFloat(stoptime)-parseFloat(starttime);
-						
-						if(!isNan(result)) {
-							document.getElementById("sumAnswer")+result;
+						function workingSum() {
+							var time1 = document.getElementById("starttime").value;
+							var time2 = document.getElementById("stoptime").value;
+
+							var result = parseFloat(stoptime)
+									- parseFloat(starttime);
+
+							if (!isNan(result)) {
+								document.getElementById("sumAnswer") + result;
+							}
 						}
-					}
 					</script>
-					<br><br>
+					<br> <br>
 					<div>
 						<button class="aButtons2" type="submit">Save</button>
 						<a class="aButtons2" href="timeTracker.jsp"
@@ -414,11 +401,5 @@
 			<a href="logout.jsp"><img src="pictures/logout.png" alt="Logout" />Logout</a>
 		</div>
 	</div>
-	<%
-		}
-		} catch (Exception e) {
-			out.println(e);
-		}
-	%>
 </body>
 </html>

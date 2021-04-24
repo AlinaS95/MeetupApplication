@@ -27,9 +27,9 @@
 			<p>E-Mail</p>
 			<input type="text" name="email" placeholder="Enter E-Mail" />
 			<p>Password</p>
-			<input type="password" name="password" placeholder="Enter Password" /><br>${message}
+			<input type="password" name="password" placeholder="Enter Password" />
 			<p>Workspace</p>
-			<input type="text" name="workspace" placeholder="Enter Workspace" />
+			<input type="text" name="workspace" placeholder="Enter Workspace" />${message}
 			
 			<input type="submit" name="btn_login" value="Login">
 			<input type="submit" value="Not a member?" onClick="register()"><br>
@@ -45,6 +45,7 @@
 					},
 
 					password : "required",
+					workspace : "required",
 				},
 
 				messages : {

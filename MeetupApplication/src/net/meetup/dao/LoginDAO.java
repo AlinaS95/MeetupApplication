@@ -38,6 +38,7 @@ public class LoginDAO {
             user.setEmail(email);
             user.setCompany(result.getString("company"));
             user.setWorkspace(result.getString("workspace"));
+            user.setFileName(result.getString("fileName"));
         }
 
         connection.close();

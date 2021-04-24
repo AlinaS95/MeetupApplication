@@ -23,7 +23,7 @@
 	<div class="loginbox">
 		<h1>Create a Account</h1>
 		<form action="register" method="post" onsubmit="return validate();"
-			id="registerForm">
+			id="registerForm" enctype="multipart/form-data">
 			<p>*First Name</p>
 			<input type="text" id="firstName" name="firstName"
 				placeholder="Enter First Name" />
@@ -50,6 +50,9 @@
 			<p>*Password reply</p>
 			<input type="password" name="" placeholder="Reply Password">
 
+			<p>Profile Picture</p>
+			<input type="file" id="file-upload-button" name="file" required="required" />
+			
 			<input type="submit" name="btn_register" value="Register">
 		</form>
 		<a class="buttonL" href="login.jsp">Already a member?</a>

@@ -235,7 +235,7 @@
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=person%></td>
 				<td style="width: 150px;"><%=channel%></td>
 				<td style="width: 150px;"><%=category%></td>
-				<td style="width: 200px;"><image src="pictures/<%=filename%>" /><a
+				<td style="width: 200px;"><img src="pictures/<%=filename%>" /><a
 					href="editImage.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 25px; height: 25px;"></a></td>
