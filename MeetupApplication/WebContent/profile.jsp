@@ -80,7 +80,7 @@
 		<br>
 		<div class="profile_overview">
 			<div class="profile_icon">
-				<img src="pictures/${login.fileName}" alt="Profile Picture" />
+				<img src="pictures/${login.fileName}" alt="Profile Picture" /><br>
 			</div>
 			<br style="margin-bottom: 15px"> <a class="profile_info"><img
 				src="pictures/infoicon.png" alt="information" /><a>${login.firstName}
@@ -104,13 +104,10 @@
 				</div>
 				<div class="popupBody">
 					<input type="hidden" name="userID" value="${login.userID}" /> <img
-						src="pictures/${login.fileName}" /> <a
+						src="pictures/${login.fileName}" style="width: 65px; height: 65px" /><br>
+					<a class="aButtons2"
 						href="editProfilePicture.jsp?userID=${login.userID}"
-						style="margin: 60px"><img src="pictures/settings.png"
-						alt="Settings" style="width: 25px; height: 25px;"></a><br>
-					<button onClick="changePicture()">Upload new photo</button>
-					<button onClick="deletePicture()">Remove photo</button>
-					<br>
+						style="margin-left: 70px">Upload new photo</a> <br> <br>
 					<hr>
 					<div class="popupInfo">
 						<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
@@ -119,12 +116,13 @@
 						<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
 						<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
 					</div>
-					<div style="margin: 10px 25px">
-						<a class="aButtons2"
-							href="editProfile.jsp?userID=${login.userID}"><img
+					<div style="margin: 15px 25px">
+						<a class="aButtons2" href="editProfile.jsp?userID=${login.userID}"><img
 							src="pictures/settings.png" alt="Settings"
 							style="width: 30px; height: 30px; margin: -4px -35px;">Edit
-							User</a>
+							User</a> <a class="aButtons2" href="logout.jsp" style="margin-left:135px"><img
+							src="pictures/logout.png" style="width: 25px; height:25px; margin-left:-30px"
+							alt="Logout" />Save and Logout</a>
 					</div>
 				</div>
 			</div>

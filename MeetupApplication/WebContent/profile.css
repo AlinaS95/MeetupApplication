@@ -115,10 +115,10 @@
 }
 
 .profile_icon img{
-	width: 117px;
-	height: 117px;
+	width: 130px;
+	height: 130px;
 	position: relative;
-	padding-bottom: 20px;
+	border-radius: 100%;
 }
 
 .profile_info img{

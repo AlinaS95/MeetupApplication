@@ -88,7 +88,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
+					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>

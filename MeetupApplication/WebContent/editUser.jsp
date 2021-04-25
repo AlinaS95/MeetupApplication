@@ -12,7 +12,6 @@
 <meta charset="ISO-8859-1">
 <title>User</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="socialmedia.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">

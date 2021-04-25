@@ -44,7 +44,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
+					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -111,7 +111,7 @@
 	</div>
 
 	<div class="background2">
-		<br> <b class="editHeader">Social Media Schedule</b>
+		<br> <div class="header2">Social Media Schedule</div>
 		<div class="socialmedia_navigation">
 			<nav>
 				<ul>

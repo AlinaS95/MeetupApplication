@@ -12,7 +12,7 @@
 <meta charset="ISO-8859-1">
 <title>Profile</title>
 <link name="viewport" content="width=device-width">
-<link rel="stylesheet" type="text/css" href="socialmedia.css">
+<link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="editPost.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
@@ -135,7 +135,7 @@
 					<br> <input type="file" id="file-upload-button" name="file"
 						style="margin-left: 140px" value="<%=rs.getString("filename")%>" />
 				</div>
-				<br> <br> <br> <a class="aButtons"
+				<br><a class="aButtons"
 					href="profile.jsp">Back</a>
 				<button type="submit">Update</button>
 			</form>

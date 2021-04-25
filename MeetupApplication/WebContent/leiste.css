@@ -316,11 +316,11 @@ nav ul li {
 .user img {
 	width: 40px;
 	height: 40px;
-	margin: 32px 310px;
+	margin: 30px 310px;
 	padding: 5px 8px;
 	cursor: pointer;
 	background-color: #F0F0F0;
-	border-radius: 5px;
+	border-radius: 100%;
 	position: absolute;
 }
 
@@ -581,4 +581,12 @@ nav ul li {
 
 dfn{
 	font-style: normal;
+}
+
+.header2 {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
 }
