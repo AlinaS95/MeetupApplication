@@ -190,7 +190,7 @@
 		<hr>
 		<br>
 
-		<p style="font-weight: bold">${message}</p>
+		<p style="font-weight:bold">${message}</p>
 		<table class="list">
 			<thead>
 				<tr>

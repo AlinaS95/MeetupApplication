@@ -2,14 +2,13 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
-<%@page import="java.util.Set"%>
-<%@page import="java.util.HashSet"%>
-<%@page import="java.util.Random"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="java.io.*,java.util.*"%>
+<%@page import="javax.servlet.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +47,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
-						alt="Profil Icon" /></a>
+					<a href="javascript:profile()"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -140,11 +139,36 @@
 		</div>
 		<hr>
 		<br>
-
+		<%
+         Date dNow = new Date();
+         SimpleDateFormat ft = new SimpleDateFormat ("EEEE',' dd.MM.yyyy");
+         out.print( "<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
+      %>
 		<div class="newTime">
-		<input>
+			<form action="addTime" method="post">
+				<div>
+					<label>Date</label> <input type="date" name="date"
+						style="margin-left: 20px;" required="required">
+				</div>
+				<div>
+					<label>Start</label> <input type="time" name="startTime"
+						style="margin-left: 20px;" required="required">
+				</div>
+				<div>
+					<label>Stop</label> <input type="time" name="stopTime"
+						style="margin-left: 20px;" required="required">
+				</div>
+				<div>
+					<label>Pause</label> <input type="number" step=".01"
+						name="pauseTime" style="margin-left: 20px;" required="required">
+				</div>
+				<div>
+					<label>Duration</label> <input type="number" step=".01"
+						name="pauseTime" style="margin-left: 20px;" required="required">
+				</div>
+				<button type="submit">Save</button>
+			</form>
 		</div>
-		<p style="font-weight: bold">${message}</p>
 		<table class="list">
 			<thead>
 				<tr>
@@ -193,8 +217,7 @@
 			</tr> 
 			</tbody>
 		</table>
-		<%
-			}
+}
 			} catch (Exception e) {
 				out.println(e);
 			}
@@ -216,7 +239,7 @@
 					"
 						class="close" title="Schließen">&times;</span>
 				</div>
-				<%
+<%-- 				<% 
 					try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -231,7 +254,7 @@
 							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 							String taskStatus = rs.getString("taskStatus");
 							String assignee = rs.getString("assignee");
-				%>
+				%>--%>
 				<div class="popupBody_list">
 
 					<div class="popupInfo">
