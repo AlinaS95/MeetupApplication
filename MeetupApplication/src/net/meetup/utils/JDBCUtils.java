@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class JDBCUtils {
 
@@ -49,5 +51,13 @@ public class JDBCUtils {
 
     public static LocalDate getUtilDate(Date sqlDate) {
         return sqlDate.toLocalDate();
+    }
+    
+    public static Time getSQLTime(LocalTime time) {
+    	return java.sql.Time.valueOf(time);
+    }
+    
+    public static LocalTime getUtilTime(Time sqlTime) {
+    	return sqlTime.toLocalTime();
     }
 }

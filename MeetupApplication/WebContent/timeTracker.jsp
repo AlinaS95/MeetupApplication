@@ -7,6 +7,8 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.sql.Time"%>
 <%@page import="java.io.*,java.util.*"%>
 <%@page import="javax.servlet.*,java.text.*"%>
 <!DOCTYPE html>
@@ -140,10 +142,10 @@
 		<hr>
 		<br>
 		<%
-         Date dNow = new Date();
-         SimpleDateFormat ft = new SimpleDateFormat ("EEEE',' dd.MM.yyyy");
-         out.print( "<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
-      %>
+			Date dNow = new Date();
+			SimpleDateFormat ft = new SimpleDateFormat("EEEE',' dd.MM.yyyy");
+			out.print("<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
+		%>
 		<div class="newTime">
 			<form action="addTime" method="post">
 				<div>
@@ -159,119 +161,73 @@
 						style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Pause</label> <input type="number" step=".01"
+					<label>Pause</label> <input type="number" step="0.01"
 						name="pauseTime" style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Duration</label> <input type="number" step=".01"
-						name="pauseTime" style="margin-left: 20px;" required="required">
+					<label>Duration</label> <input type="number" step="0.01"
+						name="duration" style="margin-left: 20px;" required="required">
 				</div>
 				<button type="submit">Save</button>
 			</form>
 		</div>
+		<br>
 		<table class="list">
 			<thead>
 				<tr>
 					<th style="width: 200px">Date</th>
-					<th style="width: 300px">Time</th>
+					<th style="width: 200px">Time</th>
 					<th style="width: 200px">Duration</th>
 					<th style="width: 200px">Break</th>
 					<th style="width: 200px">Duration(Total)</th>
+					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
 		</table>
-		<!-- <%
+		<%
 			try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM tasks";
+				String sql = "SELECT * FROM workingtime";
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
-					String taskID = rs.getString("taskID");
-					String taskName = rs.getString("taskName");
-					String description = rs.getString("description");
-					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-					String taskStatus = rs.getString("taskStatus");
-					String assignee = rs.getString("assignee");
+					String id = rs.getString("id");
+					LocalDate date = rs.getDate("date").toLocalDate();
+					LocalTime startTime = rs.getTime("startTime").toLocalTime();
+					LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
+					String pauseTime = rs.getString("pauseTime");
+					String duration = rs.getString("duration");
 		%>
-		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
+		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
 		<table class="list">
 			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=description%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
-				<td style="width: 150px;"><%=taskStatus%></td>
-				<td style="width: 200px;"><%=assignee%></td>
+				<td style="width: 200px;"><%=date%></td>
+				<td style="width: 200px;"><%=startTime%></td>
+				<td style="width: 200px;"><%=stopTime%></td>
+				<td style="width: 200px;"><%=pauseTime%></td>
+				<td style="width: 200px;"><%=duration%></td>
 				<td style="width: 150px;"><a
-					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
+					href="editTask.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("taskID")%> style="width: auto;"><img
+					<a href="deleteTime.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
-				</a></td>
-			</tr> 
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
+				</td>
+			</tr>
 			</tbody>
 		</table>
-}
+		<%
+			}
 			} catch (Exception e) {
 				out.println(e);
 			}
-		%>-->
+		%>
 		<br>
 		<hr>
 		<br>
-
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="list_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Post <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-<%-- 				<% 
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							String description = rs.getString("description");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							String taskStatus = rs.getString("taskStatus");
-							String assignee = rs.getString("assignee");
-				%>--%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="taskID"
-							value='<%=rs.getString("taskID")%>' /> <a class="aButtons"
-							href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
 	</div>
 
 
