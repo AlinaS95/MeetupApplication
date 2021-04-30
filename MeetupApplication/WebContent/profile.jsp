@@ -3,8 +3,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
 <%@page import="java.util.*"%>
+<%@page import="java.util.Date"%>
 <%@page import="java.sql.*"%>
+<%@page import="java.io.*"%>
 <%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalTime"%>
+<%@page import="javax.servlet.*,java.text.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,8 +124,9 @@
 						<a class="aButtons2" href="editProfile.jsp?userID=${login.userID}"><img
 							src="pictures/settings.png" alt="Settings"
 							style="width: 30px; height: 30px; margin: -4px -35px;">Edit
-							User</a> <a class="aButtons2" href="logout.jsp" style="margin-left:135px"><img
-							src="pictures/logout.png" style="width: 25px; height:25px; margin-left:-30px"
+							User</a> <a class="aButtons2" href="logout.jsp"
+							style="margin-left: 135px"><img src="pictures/logout.png"
+							style="width: 25px; height: 25px; margin-left: -30px"
 							alt="Logout" />Save and Logout</a>
 					</div>
 				</div>
@@ -345,54 +350,57 @@
 		<div class="organization">
 			<div class="workingtime">Working Time</div>
 			<br>
-			<div class="workingtime_Buttons" style="margin: -15px 2px;">
-				<form action="" method="post">
-					<!--  button - Start Timer -->
-					<timer> <input class="start_button" name="starttime_button"
-						type="button" value=""
-						onclick="document.getElementById('starttime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
-					<br>
-					<br>
-					<input type="time" id="starttime" name="starttime" /> </timer>
-					<!--  button - Pause Start Timer -->
-					<timer> <input class="startPause_button"
-						name="pausetime_button" type="button" value=""
-						onclick="document.getElementById('pausetime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
-					<br>
-					<br>
-					<input type="time" id="pausetime" name="pausetime" /> </timer>
-					<!--  button - Stop Timer -->
-					<timer> <input class="stop_button" name="stoptime_button"
-						type="button" value=""
-						onclick="document.getElementById('stoptime').value = new Date().toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'})" />
-					<br>
-					<br>
-					<input type="time" id="stoptime" name="stoptime" /> </timer>
-					<p>You worked today:</p>
-					<input name="workingSum" type="button" value="Calcuate"
-						onclick="workingSum()" /> <a id="sumAnswer"></a>
-
-					<script>
-						function workingSum() {
-							var time1 = document.getElementById("starttime").value;
-							var time2 = document.getElementById("stoptime").value;
-
-							var result = parseFloat(stoptime)
-									- parseFloat(starttime);
-
-							if (!isNan(result)) {
-								document.getElementById("sumAnswer") + result;
-							}
-						}
-					</script>
-					<br> <br>
+			<div class="newTime">
+				<form action="addTime" method="post">
 					<div>
-						<button class="aButtons2" type="submit">Save</button>
+						<label>Date</label> <input type="date" name="date" id="date"
+							style="margin-left: 20px;" required="required">
+					</div><br>
+					<div>
+						<label>Start</label> <input type="time" name="startTime"
+							id="starttime" style="margin-left: 20px;" required="required">
+					</div><br>
+					<div>
+						<label>Stop</label> <input type="time" name="stopTime"
+							id="stoptime" style="margin-left: 20px;" required="required">
+					</div><br>
+					<div>
+						<label>Pause</label> <input type="time" name="pauseTime"
+							id="pausetime" style="margin-left: 10px;" required="required">
+					</div><br>
+					<div>
+						<input name="workingSum" type="button" class="aButtons2" value="Calcuate"
+							onclick="calculateTime()" /> <input
+							type="number" step="0.01" name="duration"
+							placeholder="Working hours" id='total'>
+					</div>
+					<button class="aButtons2" type="submit">Save</button>
 						<a class="aButtons2" href="timeTracker.jsp"
 							style="margin-left: 10px">Time Tracker</a>
-					</div>
 				</form>
 			</div>
+			<script>
+				function calculateTime() {
+					var entry = document.getElementById('starttime');
+					var exit = document.getElementById('stoptime');
+					var pause = document.getElementById('pausetime');
+
+					var entryTime = entry.value.split(':');
+					var entryTimeInMins = entryTime[0] + entryTime[1];
+
+					var pauseTime = pause.value.split(':');
+					var pauseTimeInMins = pauseTime[0] + pauseTime[1] / 6 * 10;
+
+					var exitTime = exit.value.split(':');
+					var exitTimeInMins = exitTime[0] + exitTime[1];
+
+					var totalTime = exitTimeInMins - entryTimeInMins;
+					var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
+
+					document.getElementById('total').value = totalTimeHour;
+
+				}
+			</script>
 		</div>
 		<br> <br>
 		<div class="logout">

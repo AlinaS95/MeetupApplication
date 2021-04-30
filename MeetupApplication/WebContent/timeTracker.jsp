@@ -153,24 +153,48 @@
 						style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Start</label> <input type="time" name="startTime"
+					<label>Start</label> <input type="time" name="startTime" id="starttime" 
 						style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Stop</label> <input type="time" name="stopTime"
+					<label>Stop</label> <input type="time" name="stopTime" id="stoptime" 
 						style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Pause</label> <input type="number" step="0.01"
-						name="pauseTime" style="margin-left: 20px;" required="required">
+					<label>Pause</label> <input type="time" 
+						name="pauseTime" id="pausetime"  style="margin-left: 20px;" required="required">
 				</div>
 				<div>
-					<label>Duration</label> <input type="number" step="0.01"
-						name="duration" style="margin-left: 20px;" required="required">
+				<label>Duration</label> 
+				<input name="workingSum" type="button" value="Calcuate"
+						onclick="calculateTime()" />
+						<br><input type="number" name="duration" placeholder="Working hours" id='total'>
 				</div>
 				<button type="submit">Save</button>
 			</form>
 		</div>
+		<script>
+				function calculateTime() {
+					var entry = document.getElementById('starttime');
+					var exit = document.getElementById('stoptime');
+					var pause = document.getElementById('pausetime');
+
+					var entryTime = entry.value.split(':');
+					var entryTimeInMins = entryTime[0] + entryTime[1];
+
+					var pauseTime = pause.value.split(':');
+					var pauseTimeInMins = pauseTime[0] + pauseTime[1]/6*10;
+
+					var exitTime = exit.value.split(':');
+					var exitTimeInMins = exitTime[0] + exitTime[1];
+
+					var totalTime = exitTimeInMins - entryTimeInMins;
+					var totalTimeHour = (totalTime - pauseTimeInMins) /100;
+
+					document.getElementById('total').value = totalTimeHour;
+
+				}
+			</script>
 		<br>
 		<table class="list">
 			<thead>
