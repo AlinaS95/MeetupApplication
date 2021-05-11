@@ -152,13 +152,14 @@
 				<div>
 					<label>Date</label> <input type="date" name="date"
 						required="required"> <label style="margin-left: 20px;">Start</label>
-					<input type="time" name="startTime" id="starttime"
-						required="required"> <label style="margin-left: 20px;">Stop</label> <input
-						type="time" name="stopTime" id="stoptime" required="required">
-					<label style="margin-left: 20px;">Pause</label> <input type="time" name="pauseTime"
-						id="pausetime" required="required"> <a
+					<input type="time" name="startTime" id="starttime"> <label
+						style="margin-left: 20px;">Stop</label> <input type="time"
+						name="stopTime" id="stoptime"> <label
+						style="margin-left: 20px;">Pause</label> <input type="time"
+						name="pauseTime" id="pausetime"> <a
 						style="margin-left: 15px;">Working Hours: <input type="text"
-						name="duration" id="total" readonly="readonly"></a>
+						name="duration" id="total" readonly="readonly">
+					</a>
 					<button type="submit">Save</button>
 				</div>
 			</form>
@@ -206,7 +207,7 @@
 			}
 		</script>
 		<br>
-		<table class="list">
+		<table class="workingtime">
 			<thead>
 				<tr>
 					<th style="width: 200px">Date</th>
@@ -235,7 +236,7 @@
 					String duration = rs.getString("duration");
 		%>
 		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
-		<table class="list">
+		<table class="workingtime">
 			<tr>
 				<td style="width: 200px;"><%=date%></td>
 				<td style="width: 200px;"><%=startTime%></td>
@@ -261,6 +262,88 @@
 		%>
 		<br>
 		<hr>
+		<div class="newTime">
+			<form action="addTime" method="post">
+				<div>
+					<input class="newTask" type="text" name="taskName"
+						placeholder="What are you working on?"></input> <label
+						style="margin-left: 20px;">Start</label> <input type="time"
+						name="startTask" id="startTask"> <label
+						style="margin-left: 20px;">Stop</label> <input type="time"
+						name="stopTask" id="stopTask"> <a
+						style="margin-left: 15px;">Hours: <input type="text"
+						name="totalTask" id="totalTask" readonly="readonly"></a>
+					<button type="submit">Save</button>
+				</div>
+			</form>
+		</div>
+
+		<script>
+			// Zeit-Differenz ermitteln
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("startTask").addEventListener("change",
+						SumHoursTask);
+				document.getElementById("stopTask").addEventListener("change",
+						SumHoursTask);
+			});
+
+			function SumHoursTask() {
+				var startTask = document.getElementById('startTask').value;
+				var stopTask = document.getElementById('stopTask').value;
+				var diff = 0;
+
+				if (startTask && stopTask) {
+					startTask = ConvertToSeconds(startTask);
+					stopTask = ConvertToSeconds(stopTask);
+					diff = Math.abs(stopTask - startTask);
+					document.getElementById('totalTask').value = secondsToHHmmSS(diff);
+				}
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(seconds/60);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return hours + "," + minutes;
+				}
+			}
+		</script>
+		<br>
+		
+		<table class="taskTime">
+			<thead>
+				<tr>
+					<td style="text-align:left">Today</td>
+					<td style="text-align:right">Total Hours<input type="text" name="totalHours"
+						id="totalHours"></input></td>
+				</tr>
+			</thead>
+		</table>
+
+		<table class="workingtime">
+			<tr>
+				<td style="width: 200px;"><input type="text"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 150px;"><a
+					href="editTime.jsp?id="><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+					<a href="deleteTime.jsp?id="><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
 		<br>
 	</div>
 

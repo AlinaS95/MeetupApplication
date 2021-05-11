@@ -1,4 +1,4 @@
-input#total {
+input#total,#totalTask,#totalHours {
 	width:75px;
 	border-style:none;
 	background-color: #E3E0E0;
@@ -10,4 +10,64 @@ input#total {
 	width: 75%;
 	margin-left: 170px;
 	padding: 5px 0px;
+	width: 75%;
+}
+
+table.workingtime {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 110px;
+}
+
+table.workingtime thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.workingtime tbody {
+	background: #F0F0F0;
+}
+
+table.workingtime tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.workingtime tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+/*Table TaskTime */
+table.taskTime {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 110px;
+}
+
+table.taskTime tbody {
+	background: #F0F0F0;
+}
+
+table.taskTime td {
+	font-size: 20px;
+	padding: 10px 5px;
+	width: 84%;
+}
+
+table.taskTime tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+
+input.newTask {
+	width: 30%;
+	border-style: none;
 }
