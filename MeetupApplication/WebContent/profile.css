@@ -96,7 +96,7 @@
 	color: #707070;
 	width: 340px;
 	height: 35px;
-	margin-left: 500px;
+	margin-left: 550px;
 	margin-bottom: 160px;
 	padding-top: 10px;
 }
@@ -108,8 +108,8 @@
 	border-radius: 5px;
 	color: #707070;
 	width: 340px;
-	height: 300px;
-	margin: 0px 485px;
+	height: 280px;
+	margin: 0px 535px;
 	margin-top: -170px;
 	padding: 15px 15px;
 }
@@ -222,7 +222,7 @@
 	color: #707070;
 	width: 340px;
 	height: 35px;
-	margin-left: 65px;
+	margin-left: 85px;
 	margin-top: 50px;
 	padding-top: 10px;
 	margin-bottom: -10px;
@@ -234,8 +234,8 @@
 	box-shadow: 10px 10px 15px silver;
 	border-radius: 5px;
 	color: #707070;
-	width: 340px;
-	height: 260px;
+	width: 380px;
+	height: 250px;
 	margin: 0px 50px;
 	padding: 15px 15px;
 }
@@ -271,7 +271,7 @@
 	color: #707070;
 	width: 340px;
 	height: 35px;
-	margin-left: 915px;
+	margin-left: 995px;
 	margin-top: -340px;
 	padding-top: 10px;
 	margin-bottom: 270px;
@@ -283,9 +283,9 @@
 	box-shadow: 10px 10px 15px silver;
 	border-radius: 5px;
 	color: #707070;
-	width: 340px;
-	height: 260px;
-	margin: 0px 900px;
+	width: 380px;
+	height: 250px;
+	margin: 0px 960px;
 	margin-top: -280px;
 	padding: 15px 15px;
 }
@@ -300,45 +300,11 @@
 	height: 35px;
 }
 
-.workingtime_Buttons p {
-	margin: 0px 11px;
-}
-
-.workingtime_Buttons input {
-	width: 130px;
-	height: 20px;
-	position: absolute;
-}
-
-.workingtime_Buttons input#starttime,#pausetime,#stoptime {
-	margin: -40px 45px;
-}
-
-.workingtime_Buttons input.start_button{
-	background-image:url(pictures/playButton.png);
-	background-size: 35px;
-	width: 35px;
-	height: 35px;
-	border-style: none;
-	cursor: pointer;
-}
-
-.workingtime_Buttons input.startPause_button{
-	background-image:url(pictures/pauseButton.png);
-	background-size: 35px;
-	width: 35px;
-	height: 35px;
-	border-style: none;
-	cursor: pointer;
-}
-
-.workingtime_Buttons input.stop_button{
-	background-image:url(pictures/stopButton.png);
-	background-size: 35px;
-	width: 35px;
-	height: 35px;
-	border-style: none;
-	cursor: pointer;
+input#total {
+	width:75px;
+	border-style:none;
+	background-color: #F0F0F0;
+	font-weight: bold;
 }
 
 .aButtons2{

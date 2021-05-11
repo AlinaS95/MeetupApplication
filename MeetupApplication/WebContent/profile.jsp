@@ -355,52 +355,69 @@
 					<div>
 						<label>Date</label> <input type="date" name="date" id="date"
 							style="margin-left: 20px;" required="required">
-					</div><br>
-					<div>
+					</div>
+					<div style="margin: 10px 0px">
 						<label>Start</label> <input type="time" name="startTime"
 							id="starttime" style="margin-left: 20px;" required="required">
-					</div><br>
-					<div>
+					</div>
+					<div style="margin: 10px 0px">
 						<label>Stop</label> <input type="time" name="stopTime"
 							id="stoptime" style="margin-left: 20px;" required="required">
-					</div><br>
-					<div>
+					</div>
+					<div style="margin: 10px 0px">
 						<label>Pause</label> <input type="time" name="pauseTime"
 							id="pausetime" style="margin-left: 10px;" required="required">
-					</div><br>
-					<div>
-						<input name="workingSum" type="button" class="aButtons2" value="Calcuate"
-							onclick="calculateTime()" /> <input
-							type="number" step="0.01" name="duration"
-							placeholder="Working hours" id='total'>
+						<a style="margin-left: 10px;">Working Hours: <input
+							type="text" name="duration" id="total" readonly="readonly"></a>
 					</div>
-					<button class="aButtons2" type="submit">Save</button>
-						<a class="aButtons2" href="timeTracker.jsp"
-							style="margin-left: 10px">Time Tracker</a>
+					<div style="margin: 15px 0px">
+						<a class="aButtons2" style="margin-right: 5px"
+							href="timeTracker.jsp">Time Tracker</a>
+						<button class="aButtons2" type="submit">Save</button>
+					</div>
 				</form>
 			</div>
 			<script>
-				function calculateTime() {
-					var entry = document.getElementById('starttime');
-					var exit = document.getElementById('stoptime');
-					var pause = document.getElementById('pausetime');
+			// Zeit-Differenz ermitteln
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("starttime").addEventListener("change",
+						SumHours);
+				document.getElementById("stoptime").addEventListener("change",
+						SumHours);
+				document.getElementById("pausetime").addEventListener("change",
+						SumHours);
+			});
 
-					var entryTime = entry.value.split(':');
-					var entryTimeInMins = entryTime[0] + entryTime[1];
+			function SumHours() {
+				var starttime = document.getElementById('starttime').value;
+				var stoptime = document.getElementById('stoptime').value;
+				var pausetime = document.getElementById('pausetime').value;
+				var diff = 0;
 
-					var pauseTime = pause.value.split(':');
-					var pauseTimeInMins = pauseTime[0] + pauseTime[1] / 6 * 10;
-
-					var exitTime = exit.value.split(':');
-					var exitTimeInMins = exitTime[0] + exitTime[1];
-
-					var totalTime = exitTimeInMins - entryTimeInMins;
-					var totalTimeHour = (totalTime - pauseTimeInMins) / 100;
-
-					document.getElementById('total').value = totalTimeHour;
-
+				if (starttime && stoptime && pausetime) {
+					starttime = ConvertToSeconds(starttime);
+					stoptime = ConvertToSeconds(stoptime);
+					pausetime = ConvertToSeconds(pausetime);
+					diff = Math.abs(stoptime - starttime - pausetime);
+					document.getElementById('total').value = secondsToHHmmSS(diff);
 				}
-			</script>
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(Math.trunc(seconds /60)/60 *100);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return hours + "," + minutes;
+				}
+			}
+		</script>
 		</div>
 		<br> <br>
 		<div class="logout">

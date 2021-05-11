@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Tasks</title>
+<title>Time Tracker</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
@@ -59,7 +59,7 @@
 									can find the home area here </span>
 							</dfn></a></li>
 					<li><a href="javascript:list()"><dfn class="tooltip">
-								List <span role="tooltip" style="font-weight: bold">Here
+								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn> </a></li>
 					<li><a href="javascript:board()"> <dfn class="tooltip">
@@ -98,12 +98,12 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Post</div>
+		<div class="editHeader">Edit Working Time</div>
 		<hr>
 		<br>
 		<div class="editBody">
 			<%
-				String taskID = request.getParameter("taskID");
+				String id = request.getParameter("id");
 				String driver = "com.mysql.jdbc.Driver";
 				String connectionUrl = "jdbc:mysql://localhost:3306/";
 				String database = "meetup";
@@ -122,40 +122,38 @@
 				try {
 					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
 					statement = connection.createStatement();
-					String sql = "select * from tasks where taskID=" + taskID;
+					String sql = "select * from workingtime where id=" + id;
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="UpdateTask" method="post">
-				<input type="hidden" name="taskID"
-					value="<%=rs.getString("taskID")%>">
+			<form action="UpdateTime" method="post">
+				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
 				<div>
-					<label>Title</label><input type="text" name="taskName"
-						value='<%=rs.getString("taskName")%>' />
-				</div>
-				<div>
-					<label style="margin: 2px -40px;">Description</label>
-					<textarea name="description" style="margin: 2px 43px;"><%=rs.getString("description")%></textarea>
+					<label>Date</label><input type="date" name="date"
+						value='<%=rs.getDate("date")%>' />
 				</div>
 				<div>
-					<label style="margin-left: -105px">Due Date</label><input
-						type="date" name="dueDate"
-						value='<%=rs.getDate("dueDate").toLocalDate()%>' />
-				</div>
-				<div class="selected">
-					<label>Status</label> <select name="taskStatus"><%=rs.getString("taskStatus")%>
-						<option selected=""><%=rs.getString("taskStatus")%></option>
-						<option value="In Progress">In Progress</option>
-						<option value="Done">Done</option>
-					</select>
+					<label style="margin: 0px -50px;">Start</label> <input
+						type="time" name="startTime" id="starttime" style="margin:0px 50px"
+						value='<%=rs.getTime("startTime").toLocalTime()%>' />
 				</div>
 				<div>
-					<label style="margin-left: -40px">Assignee</label><input
-						type="text" name="assignee" value='<%=rs.getString("assignee")%>' />
+					<label style="margin-left: -95px">Stop</label><input
+						type="time" name="stopTime" id="stoptime"
+						value='<%=rs.getTime("stopTime").toLocalTime()%>' />
 				</div>
-
-				<a class="aButtons" href="list.jsp">Back</a>
-				<button type="submit">Update</button>
+				<div>
+					<label style="margin-left: -105px">Pause</label><input
+						type=time name="pauseTime" id="pausetime"
+						value='<%=rs.getTime("pauseTime").toLocalTime()%>' />
+				</div>
+				<div>
+					<label style="margin-left: -130px">Duration</label><input
+						type="text" name="duration" id="total" value='<%=rs.getString("duration")%>' />
+				</div>
+				<div>
+				<a class="aButtons" href="timeTracker.jsp">Back</a>
+				<button type="submit">Update</button></div>
 			</form>
 
 			<%
@@ -166,6 +164,47 @@
 				}
 			%>
 		</div>
+		<script>
+			// Zeit-Differenz ermitteln
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("starttime").addEventListener("change",
+						SumHours);
+				document.getElementById("stoptime").addEventListener("change",
+						SumHours);
+				document.getElementById("pausetime").addEventListener("change",
+						SumHours);
+			});
+
+			function SumHours() {
+				var starttime = document.getElementById('starttime').value;
+				var stoptime = document.getElementById('stoptime').value;
+				var pausetime = document.getElementById('pausetime').value;
+				var diff = 0;
+
+				if (starttime && stoptime && pausetime) {
+					starttime = ConvertToSeconds(starttime);
+					stoptime = ConvertToSeconds(stoptime);
+					pausetime = ConvertToSeconds(pausetime);
+					diff = Math.abs(stoptime - starttime - pausetime);
+					document.getElementById('total').value = secondsToHHmmSS(diff);
+				}
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return hours + "," + minutes;
+				}
+			}
+		</script>
 		<hr>
 	</div>
 </body>

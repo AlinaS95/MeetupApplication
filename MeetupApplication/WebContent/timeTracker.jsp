@@ -18,6 +18,7 @@
 <title>Time Tracker</title>
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="stylesheet" type="text/css" href="list.css">
+<link rel="stylesheet" type="text/css" href="timeTracker.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="list.js"></script>
@@ -150,60 +151,69 @@
 			<form action="addTime" method="post">
 				<div>
 					<label>Date</label> <input type="date" name="date"
-						style="margin-left: 20px;" required="required">
+						required="required"> <label style="margin-left: 20px;">Start</label>
+					<input type="time" name="startTime" id="starttime"
+						required="required"> <label style="margin-left: 20px;">Stop</label> <input
+						type="time" name="stopTime" id="stoptime" required="required">
+					<label style="margin-left: 20px;">Pause</label> <input type="time" name="pauseTime"
+						id="pausetime" required="required"> <a
+						style="margin-left: 15px;">Working Hours: <input type="text"
+						name="duration" id="total" readonly="readonly"></a>
+					<button type="submit">Save</button>
 				</div>
-				<div>
-					<label>Start</label> <input type="time" name="startTime" id="starttime" 
-						style="margin-left: 20px;" required="required">
-				</div>
-				<div>
-					<label>Stop</label> <input type="time" name="stopTime" id="stoptime" 
-						style="margin-left: 20px;" required="required">
-				</div>
-				<div>
-					<label>Pause</label> <input type="time" 
-						name="pauseTime" id="pausetime"  style="margin-left: 20px;" required="required">
-				</div>
-				<div>
-				<label>Duration</label> 
-				<input name="workingSum" type="button" value="Calcuate"
-						onclick="calculateTime()" />
-						<br><input type="number" name="duration" placeholder="Working hours" id='total'>
-				</div>
-				<button type="submit">Save</button>
 			</form>
 		</div>
+
 		<script>
-				function calculateTime() {
-					var entry = document.getElementById('starttime');
-					var exit = document.getElementById('stoptime');
-					var pause = document.getElementById('pausetime');
+			// Zeit-Differenz ermitteln
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("starttime").addEventListener("change",
+						SumHours);
+				document.getElementById("stoptime").addEventListener("change",
+						SumHours);
+				document.getElementById("pausetime").addEventListener("change",
+						SumHours);
+			});
 
-					var entryTime = entry.value.split(':');
-					var entryTimeInMins = entryTime[0] + entryTime[1];
+			function SumHours() {
+				var starttime = document.getElementById('starttime').value;
+				var stoptime = document.getElementById('stoptime').value;
+				var pausetime = document.getElementById('pausetime').value;
+				var diff = 0;
 
-					var pauseTime = pause.value.split(':');
-					var pauseTimeInMins = pauseTime[0] + pauseTime[1]/6*10;
-
-					var exitTime = exit.value.split(':');
-					var exitTimeInMins = exitTime[0] + exitTime[1];
-
-					var totalTime = exitTimeInMins - entryTimeInMins;
-					var totalTimeHour = (totalTime - pauseTimeInMins) /100;
-
-					document.getElementById('total').value = totalTimeHour;
-
+				if (starttime && stoptime && pausetime) {
+					starttime = ConvertToSeconds(starttime);
+					stoptime = ConvertToSeconds(stoptime);
+					pausetime = ConvertToSeconds(pausetime);
+					diff = Math.abs(stoptime - starttime - pausetime);
+					document.getElementById('total').value = secondsToHHmmSS(diff);
 				}
-			</script>
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return hours + "," + minutes;
+				}
+			}
+		</script>
 		<br>
 		<table class="list">
 			<thead>
 				<tr>
 					<th style="width: 200px">Date</th>
-					<th style="width: 200px">Time</th>
-					<th style="width: 200px">Duration</th>
+					<th style="width: 200px">Start</th>
+					<th style="width: 200px">Stop</th>
 					<th style="width: 200px">Break</th>
-					<th style="width: 200px">Duration(Total)</th>
+					<th style="width: 200px">Duration</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
@@ -221,7 +231,7 @@
 					LocalDate date = rs.getDate("date").toLocalDate();
 					LocalTime startTime = rs.getTime("startTime").toLocalTime();
 					LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
-					String pauseTime = rs.getString("pauseTime");
+					LocalTime pauseTime = rs.getTime("pauseTime").toLocalTime();
 					String duration = rs.getString("duration");
 		%>
 		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
@@ -233,7 +243,7 @@
 				<td style="width: 200px;"><%=pauseTime%></td>
 				<td style="width: 200px;"><%=duration%></td>
 				<td style="width: 150px;"><a
-					href="editTask.jsp?id=<%=rs.getString("id")%>"><img
+					href="editTime.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
 					<a href="deleteTime.jsp?id=<%=rs.getString("id")%>"><img

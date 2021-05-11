@@ -97,3 +97,10 @@
 	color: #707070;
 	border-color: #707070;
 }
+
+input#total {
+	width:75px;
+	border-style:none;
+	background-color: #E3E0E0;
+	font-weight: bold;
+}
