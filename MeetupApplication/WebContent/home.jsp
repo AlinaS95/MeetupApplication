@@ -170,7 +170,7 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Alina Schomacher</h4>
-						<p>Ich möchte Sie nochmals an das Meeting am 26.02.2021
+						<p>Ich möchte Sie nochmals an das Meeting am 25.02.2021
 							erinnern.</p>
 					</div>
 				</div>
