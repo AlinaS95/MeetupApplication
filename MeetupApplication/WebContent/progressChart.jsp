@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*,java.sql.*"%>
-<%@ page import="com.google.gson.Gson"%>
-<%@ page import="com.google.gson.JsonObject"%>
+<%@ page import="comgoogle.gson.Gson"%>
+<%@ page import="comgoogle.gson.JsonObject"%>
 
 <%
-	Gson gsonObj = new Gson(); //Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
+	Gso gsonObj = new Gson(); //Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
 	Map<Object, Object> map = null;
 	List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
 	String dataPoints = null;
