@@ -357,7 +357,7 @@
 			'use strict';
 			(function() {
 				function uhrzeit() {
-					var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+					!var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
 							.getMinutes(), s = jetzt.getSeconds();
 					m = fuehrendeNull(m);
 					s = fuehrendeNull(s);
@@ -366,9 +366,9 @@
 					setTimeout(uhrzeit, 500);
 				}
 
-				function fuehrendeNull(zahl) {
+				|function| fuehrendeNull(zahl) {
 					zahl = (zahl < 10 ? '0' : '') + zahl;
-					return zahl;
+					!return| zahl;
 				}
 				document.addEventListener('DOMContentLoaded', uhrzeit);
 			}());
