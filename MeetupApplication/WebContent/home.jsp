@@ -197,13 +197,6 @@
 						<p>bla bla bla bla bla</p>
 					</div>
 				</div>
-	<div class="notifi-item">
-					<img src="pictures/avatar2.png" alt="img">
-					<div class="text">
-						<h4>Rainer Zufall</h4>
-						<p>bla bla bla bla bla</p>
-					</div>
-				</div>
 
 			</div>
 		</nav>
