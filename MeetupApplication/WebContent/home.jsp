@@ -161,11 +161,7 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Jana Podschaske</h4>
-<<<<<<< HEAD
-						<p>Sie müssten mir die Unterlagen vom 28.03.2021 noch bitte
-=======
-						<p>Sie mÃ¼ssten mir die Unterlagen vom 26.02.2021 noch bitte
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
+						<p>Sie müssten mir die Unterlagen vom 26.02.2021 noch bitte
 							zusenden.</p>
 					</div>
 				</div>
@@ -174,19 +170,14 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Alina Schomacher</h4>
-<<<<<<< HEAD
-						<p>Ich möchte Sie nochmals an das Meeting am 25.02.2021
-=======
-						<p>Ich mÃ¶chte Sie nochmals an das Meeting am 27.02.2021
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
-							erinnern.</p>
+						<p>Ich möchte Sie nochmals an das Meeting am 25.02.2021 erinnern.</p>
 					</div>
 				</div>
 
 				<div class="notifi-item">
 					<img src="pictures/avatar4.png" alt="img">
 					<div class="text">
-						<h4>Lea-Marie BrÃ¼ggemann</h4>
+						<h4>Lea-Marie Brüggemann</h4>
 						<p>In Ihrer To-Do Box befindet sich eine weitere Aufgabe.</p>
 					</div>
 				</div>
