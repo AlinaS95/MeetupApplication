@@ -366,7 +366,7 @@
 					setTimeout(uhrzeit, 500);
 				}
 
-				|function| fuehrendeNull(zahl) {
+				function fuehrendeNull(zahl) {
 					zahl = (zahl < 10 ? '0' : '') + zahl;
 					return zahl;
 				}
