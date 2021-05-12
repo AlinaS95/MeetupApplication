@@ -287,7 +287,7 @@
 
 		<form>
 			<p class="choice">
-				<button id="win">Add Task</button>
+				<button id="win">Add new Task</button>
 				<button id="and">Inbox</button>
 				<button id="mac">Profile</button>
 			</p>
@@ -349,7 +349,7 @@
 				dialog.showModal();
 			}
 
-			function schlie√üeFenster() {
+			function schlieﬂeFenster() {
 				dialog.close();
 			}
 		</script> <!-- Watch --> <script>
@@ -367,7 +367,7 @@
 
 				function fuehrendeNull(zahl) {
 					zahl = (zahl < 10 ? '0' : '') + zahl;
-					!return| zahl;
+					return zahl;
 				}
 				document.addEventListener('DOMContentLoaded', uhrzeit);
 			}());
