@@ -135,7 +135,7 @@
 			<div class="popupHeader">
 				Add<span
 					onclick="document.getElementById('l_add').style.display='none'"
-					class="close" title="Schließen">&times;</span>
+					class="close" title="SchlieÃŸen">&times;</span>
 			</div>
 			<div class="popupBody"></div>
 		</div>
@@ -161,7 +161,11 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Jana Podschaske</h4>
+<<<<<<< HEAD
 						<p>Sie müssten mir die Unterlagen vom 28.03.2021 noch bitte
+=======
+						<p>Sie mÃ¼ssten mir die Unterlagen vom 26.02.2021 noch bitte
+>>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
 							zusenden.</p>
 					</div>
 				</div>
@@ -170,7 +174,11 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Alina Schomacher</h4>
+<<<<<<< HEAD
 						<p>Ich möchte Sie nochmals an das Meeting am 25.02.2021
+=======
+						<p>Ich mÃ¶chte Sie nochmals an das Meeting am 27.02.2021
+>>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
 							erinnern.</p>
 					</div>
 				</div>
@@ -178,7 +186,7 @@
 				<div class="notifi-item">
 					<img src="pictures/avatar4.png" alt="img">
 					<div class="text">
-						<h4>Lea-Marie Brüggemann</h4>
+						<h4>Lea-Marie BrÃ¼ggemann</h4>
 						<p>In Ihrer To-Do Box befindet sich eine weitere Aufgabe.</p>
 					</div>
 				</div>
@@ -211,7 +219,7 @@
 				var wochentage = new Array("Sonntag", "Montag", "Dienstag",
 						"Mittwoch", "Donnerstag", "Freitag", "Samstag");
 
-				var monate = new Array("Januar", "Februar", "März", "April",
+				var monate = new Array("Januar", "Februar", "MÃ¤rz", "April",
 						"Mai", "Juni", "Juli", "August", "September",
 						"Oktober", "November", "Dezember");
 
@@ -309,7 +317,7 @@
 				</div> <br> <br>
 				<div class="chip2">
 					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea Brüggemann
+					Lea BrÃ¼ggemann
 				</div> <br> <br>
 				<h4>Production-Team</h4>
 				<hr> <br>
@@ -319,7 +327,7 @@
 				</div> <br> <br>
 				<div class="chip4">
 					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea Brüggemann
+					Lea BrÃ¼ggemann
 				</div> <br> <br>
 				<h4>University-Team</h4>
 				<hr> <br>
@@ -344,13 +352,13 @@
 					.getElementById('dialog'), Abbruch = document
 					.getElementById("Abbruch");
 			startbutton.addEventListener('click', zeigeFenster);
-			Abbruch.addEventListener('click', schließeFenster);
+			Abbruch.addEventListener('click', schlieÃŸeFenster);
 
 			function zeigeFenster() {
 				dialog.showModal();
 			}
 
-			function schließeFenster() {
+			function schlieÃŸeFenster() {
 				dialog.close();
 			}
 		</script> <!-- Watch --> <script>
@@ -368,7 +376,7 @@
 
 				function fuehrendeNull(zahl) {
 					zahl = (zahl < 10 ? '0' : '') + zahl;
-					return zahl;
+					!return| zahl;
 				}
 				document.addEventListener('DOMContentLoaded', uhrzeit);
 			}());

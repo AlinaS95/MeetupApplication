@@ -53,7 +53,7 @@
 				text : "Status"
 			},
 			data : [ {
-				type : "column", //change type to bar, line, area, pie, etc
+				type : "column", //change type to bar, line, area, pie, 
 				dataPoints :
 <%out.print(dataPoints);%>
 	} ]
