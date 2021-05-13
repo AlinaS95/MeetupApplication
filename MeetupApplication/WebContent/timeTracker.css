@@ -1,4 +1,4 @@
-input#total,#totalTask,#totalHours {
+input#total,#totalTask,#totalHours,#totalWeek {
 	width:75px;
 	border-style:none;
 	background-color: #E3E0E0;
@@ -18,6 +18,7 @@ table.workingtime {
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 	margin: 0px 110px;
+	border-collapse: collapse;
 }
 
 table.workingtime thead th {
@@ -27,6 +28,17 @@ table.workingtime thead th {
 	width: 80px;
 }
 
+table.workingtime tr.week {
+	background: #d9d4d4;
+}
+
+
+input#totalWeek {
+	width:40px;
+	border-style:none;
+	background-color: #d9d4d4;
+	font-weight: bold;
+}
 table.workingtime tbody {
 	background: #F0F0F0;
 }

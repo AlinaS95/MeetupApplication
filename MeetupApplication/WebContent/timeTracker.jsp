@@ -207,8 +207,57 @@
 			}
 		</script>
 		<br>
+
+		<script>
+		Date.prototype.getWeekNumber = function() { 
+			var oneJan = new Date(this.getFullYear(), 0, 1); 
+
+   			// calculating number of days  
+    		//in given year before given date 
+			var numberOfDays = Math.floor((this - oneJan) / (24 * 60 * 60 * 1000)); 
+
+    	// adding 1 since this.getDay() 
+    	//returns value starting from 0 
+    	return Math.ceil((this.getDay() + 1 + numberOfDays) / 7); 
+		} 
+
+		function printWeekNumber() { 
+			var dateInput = document.getElementById("dateInput").value; 
+    		var date = new Date(dateInput); 
+    		var result = date.getWeekNumber(); 
+    		document.getElementById("result").innerHTML = + result; 
+		}
+		</script>
+		
 		<table class="workingtime">
 			<thead>
+				<tr class="week">
+					<td style="text-align: left; padding: 0px 10px">
+						<button onclick="printWeekNumber()">Week Number</button>KW<a
+						id="result"></a></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="text-align: right">
+						<%
+							try {
+								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+								Statement st = con.createStatement();
+								String strQuery = "SELECT SUM(duration) FROM workingtime";
+								ResultSet rs = st.executeQuery(strQuery);
+								String totalDuration = "";
+								while (rs.next()) {
+									totalDuration = rs.getString(1);
+									out.println("Total Hours :" + totalDuration);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						%>
+					</td>
+				</tr>
 				<tr>
 					<th style="width: 200px">Date</th>
 					<th style="width: 200px">Start</th>
@@ -238,7 +287,8 @@
 		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
 		<table class="workingtime">
 			<tr>
-				<td style="width: 200px;"><%=date%></td>
+				<td style="width: 200px;"><input type="date" id="dateInput"
+					name="date" value='<%=rs.getDate("date")%>' /></td>
 				<td style="width: 200px;"><%=startTime%></td>
 				<td style="width: 200px;"><%=stopTime%></td>
 				<td style="width: 200px;"><%=pauseTime%></td>
@@ -316,13 +366,13 @@
 			}
 		</script>
 		<br>
-		
+
 		<table class="taskTime">
 			<thead>
 				<tr>
-					<td style="text-align:left">Today</td>
-					<td style="text-align:right">Total Hours<input type="text" name="totalHours"
-						id="totalHours"></input></td>
+					<td style="text-align: left">Today</td>
+					<td style="text-align: right">Total Hours<input type="text"
+						name="totalHours" id="totalHours"></input></td>
 				</tr>
 			</thead>
 		</table>
@@ -333,12 +383,11 @@
 				<td style="width: 200px;"><input type="time"></td>
 				<td style="width: 200px;"><input type="time"></td>
 				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 150px;"><a
-					href="editTime.jsp?id="><img
+				<td style="width: 150px;"><a href="editTime.jsp?id="><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a href="deleteTime.jsp?id="><img
-						src="pictures/delete2.png" alt="Delete post"
+					<a href="deleteTime.jsp?id="><img src="pictures/delete2.png"
+						alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
 				</td>
 			</tr>
