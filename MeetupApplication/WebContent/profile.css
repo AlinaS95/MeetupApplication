@@ -300,7 +300,7 @@
 	height: 35px;
 }
 
-input#total {
+input#total,#KWInput {
 	width:75px;
 	border-style:none;
 	background-color: #F0F0F0;

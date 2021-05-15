@@ -43,8 +43,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
-						alt="Profil Icon" /></a>
+					<a href="javascript:profile()"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -128,32 +128,36 @@
 			%>
 			<form action="UpdateTime" method="post">
 				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
+				<input type="hidden" name="userID" value="${login.userID}" />
+				<input type="hidden" name="userSID" value="<%=rs.getString("userSID")%>"/>
 				<div>
-					<label>Date</label><input type="date" name="date"
-						value='<%=rs.getDate("date")%>' />
+					<input type="hidden" name="kw" value='<%=rs.getString("kw")%>' /> <label>Date</label><input
+						type="date" name="date" value='<%=rs.getDate("date")%>' />
 				</div>
 				<div>
-					<label style="margin: 0px -50px;">Start</label> <input
-						type="time" name="startTime" id="starttime" style="margin:0px 50px"
+					<label style="margin: 0px -50px;">Start</label> <input type="time"
+						name="startTime" id="starttime" style="margin: 0px 50px"
 						value='<%=rs.getTime("startTime").toLocalTime()%>' />
 				</div>
 				<div>
-					<label style="margin-left: -95px">Stop</label><input
-						type="time" name="stopTime" id="stoptime"
+					<label style="margin-left: -95px">Stop</label><input type="time"
+						name="stopTime" id="stoptime"
 						value='<%=rs.getTime("stopTime").toLocalTime()%>' />
 				</div>
 				<div>
-					<label style="margin-left: -105px">Pause</label><input
-						type=time name="pauseTime" id="pausetime"
+					<label style="margin-left: -105px">Pause</label><input type=time
+						name="pauseTime" id="pausetime"
 						value='<%=rs.getTime("pauseTime").toLocalTime()%>' />
 				</div>
 				<div>
 					<label style="margin-left: -130px">Duration</label><input
-						type="text" name="duration" id="total" value='<%=rs.getString("duration")%>' />
+						type="text" name="duration" id="total"
+						value='<%=rs.getString("duration")%>' />
 				</div>
 				<div>
-				<a class="aButtons" href="timeTracker.jsp">Back</a>
-				<button type="submit">Update</button></div>
+					<a class="aButtons" href="timeTracker.jsp?userID=${login.userID}">Back</a>
+					<button type="submit">Update</button>
+				</div>
 			</form>
 
 			<%

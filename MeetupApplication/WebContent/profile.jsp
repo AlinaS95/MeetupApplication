@@ -19,6 +19,8 @@
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 </head>
 <body>
 	<div class="background1">
@@ -352,8 +354,12 @@
 			<br>
 			<div class="newTime">
 				<form action="addTime" method="post">
-					<div>
-						<label>Date</label> <input type="date" name="date" id="date"
+					<div style="margin: -12px 0px">
+						<a class="aButtons2" onclick="checkWeek(this)">Week Number</a> <input
+							type="text" name="kw" id="KWInput" required="required">
+					</div>
+					<div style="margin: 16px 0px">
+						<label>Date</label> <input type="date" name="date" id="dateInput"
 							style="margin-left: 20px;" required="required">
 					</div>
 					<div style="margin: 10px 0px">
@@ -370,9 +376,10 @@
 						<a style="margin-left: 10px;">Working Hours: <input
 							type="text" name="duration" id="total" readonly="readonly"></a>
 					</div>
-					<div style="margin: 15px 0px">
+					<input type="hidden" name="userSID" value='${login.userID}' />
+					<div style="margin: 10px 0px">
 						<a class="aButtons2" style="margin-right: 5px"
-							href="timeTracker.jsp">Time Tracker</a>
+							href="timeTracker.jsp?userID=${login.userID}">Time Tracker</a>
 						<button class="aButtons2" type="submit">Save</button>
 					</div>
 				</form>
@@ -410,12 +417,27 @@
 				function secondsToHHmmSS(secs) {
 					var hours = parseInt(secs / 3600);
 					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(Math.trunc(seconds /60)/60 *100);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
 					if (minutes < 10) {
 						minutes = '0' + minutes;
 					}
-					return hours + "," + minutes;
+					return hours + "." + minutes;
 				}
+			}
+		</script>
+			<script>
+		Date.prototype.getWeekNumber = function(){
+			  var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
+			  var dayNum = d.getUTCDay() || 7;
+			  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+			  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+			  return "KW " + Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+			};
+
+			function checkWeek() {
+			  var dateInput = document.getElementById('dateInput').value;
+			  var m = moment(dateInput, 'YYYY-MM-DD');
+			  document.getElementById('KWInput').value = m.toDate().getWeekNumber();      
 			}
 		</script>
 		</div>

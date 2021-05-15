@@ -32,12 +32,16 @@ public class UpdateTimeServlet extends HttpServlet {
 		String psw = "";
 
 		String id = request.getParameter("id");
+		String kw = request.getParameter("kw");
 		LocalDate date = LocalDate.parse(request.getParameter("date"));
 		LocalTime startTime = LocalTime.parse(request.getParameter("startTime"));
 		LocalTime stopTime = LocalTime.parse(request.getParameter("stopTime"));
 		LocalTime pauseTime = LocalTime.parse(request.getParameter("pauseTime"));
 		String duration = request.getParameter("duration");
-
+		String userSID = request.getParameter("userSID");
+		
+		String userID = request.getParameter("userID");
+		
 		if (id != null) {
 			Connection con = null;
 			PreparedStatement ps = null;
@@ -45,18 +49,20 @@ public class UpdateTimeServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update workingtime set id=?,date=?,startTime=?,stopTime=?, pauseTime=?, duration=? where id="
+				String sql = "Update workingtime set id=?,kw=?,date=?,startTime=?,stopTime=?, pauseTime=?, duration=?, userSID=? where id="
 						+ id;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, id);
-				ps.setDate(2, JDBCUtils.getSQLDate(date));
-				ps.setTime(3, JDBCUtils.getSQLTime(startTime));
-				ps.setTime(4, JDBCUtils.getSQLTime(stopTime));
-				ps.setTime(5, JDBCUtils.getSQLTime(pauseTime));
-				ps.setString(6, duration);
+				ps.setString(2, kw);
+				ps.setDate(3, JDBCUtils.getSQLDate(date));
+				ps.setTime(4, JDBCUtils.getSQLTime(startTime));
+				ps.setTime(5, JDBCUtils.getSQLTime(stopTime));
+				ps.setTime(6, JDBCUtils.getSQLTime(pauseTime));
+				ps.setString(7, duration);
+				ps.setString(8, userSID);
 
 				ps.executeUpdate();
-				response.sendRedirect("timeTracker.jsp");
+				response.sendRedirect("timeTracker.jsp?userID="+userSID);
 
 			} catch (Exception e) {
 				out.println(e);

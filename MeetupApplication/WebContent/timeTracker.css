@@ -1,4 +1,18 @@
-input#total,#totalTask,#totalHours,#totalWeek {
+input#total {
+	width:50px;
+	border-style:none;
+	background-color: #E3E0E0;
+	font-weight: bold;
+}
+
+input#KWInput {
+	width:60px;
+	border-style:none;
+	background-color: #E3E0E0;
+	font-weight: bold;
+}
+
+input#totalTask,#totalHours,#totalWeek {
 	width:75px;
 	border-style:none;
 	background-color: #E3E0E0;
@@ -7,10 +21,9 @@ input#total,#totalTask,#totalHours,#totalWeek {
 
 .newTime {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-	width: 75%;
-	margin-left: 170px;
+	margin-left: 115px;
 	padding: 5px 0px;
-	width: 75%;
+	width: 84%;
 }
 
 table.workingtime {
