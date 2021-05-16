@@ -438,7 +438,7 @@ form {
 	width: 5em;
 }
 
-input {
+.tasksHome input {
 	padding: .5em;
 	background-color: #fffbf0;
 	border: 1px solid #d7d7d7;

@@ -224,6 +224,7 @@
 			<img src="pictures/usericon.png" width="40" height="40" />
 		</div>
 
+		<div class="tasksHome">
 		<div class="task1">
 			<section>
 				<div class="rechteck1"></div>
@@ -261,6 +262,7 @@
 			<section>
 				<div class="rechteck7"></div>
 			</section>
+		</div>
 		</div>
 	</div>
 
