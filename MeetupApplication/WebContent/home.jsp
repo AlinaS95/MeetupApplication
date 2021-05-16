@@ -41,7 +41,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
+					<a href="javascript:profile()"><img src="pictures/usericon.png"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 			</p>
 			<p>
 				<img src="pictures/inbox.png" height="40" width="40" hspace="1"
-					vspace="1" alt="inbox"><a href="javascript:inbox()">Inbox</a>
+					vspace="1" alt="inbox" onclick="inbox()">Inbox
 			</p>
 			<p>
 				<img src="pictures/person.png" height="40" width="40" hspace="1"
@@ -135,7 +135,7 @@
 			<div class="popupHeader">
 				Add<span
 					onclick="document.getElementById('l_add').style.display='none'"
-					class="close" title="SchlieÃŸen">&times;</span>
+					class="close" title="Schließen">&times;</span>
 			</div>
 			<div class="popupBody"></div>
 		</div>
@@ -161,7 +161,7 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Jana Podschaske</h4>
-						<p>Sie müssten mir die Unterlagen vom 26.02.2021 noch bitte
+						<p>Sie müssten mir die Unterlagen vom 28.02.2021 noch bitte
 							zusenden.</p>
 					</div>
 				</div>
@@ -170,7 +170,8 @@
 					<img src="pictures/avatar5.png" alt="img">
 					<div class="text">
 						<h4>Alina Schomacher</h4>
-						<p>Ich möchte Sie nochmals an das Meeting am 25.02.2021 erinnern.</p>
+						<p>Ich möchte Sie nochmals an das Meeting am 27.02.2021
+							erinnern.</p>
 					</div>
 				</div>
 
@@ -210,7 +211,7 @@
 				var wochentage = new Array("Sonntag", "Montag", "Dienstag",
 						"Mittwoch", "Donnerstag", "Freitag", "Samstag");
 
-				var monate = new Array("Januar", "Februar", "MÃ¤rz", "April",
+				var monate = new Array("Januar", "Februar", "März", "April",
 						"Mai", "Juni", "Juli", "August", "September",
 						"Oktober", "November", "Dezember");
 
@@ -239,57 +240,177 @@
 		</script> <main> <br>
 
 		<div class="box1">Last edited projects:</div>
-
-		<div class="box2">
-			Most recently edited tasks: <br>
-			<br>
-			<table class="list">
-				<thead>
-					<tr>
-						<th style="width: 200px">Title</th>
-						<th style="width: 150px">Due Date</th>
-					</tr>
-				</thead>
-			</table>
-			<hr>
-			<%
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks";
-					ResultSet rs = st.executeQuery(sql);
-					int i = 0;
-					while (rs.next()) {
-						String taskID = rs.getString("taskID");
-						String taskName = rs.getString("taskName");
-						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-			%>
-			<input type="hidden" name="taskID"
-				value='<%=rs.getString("taskID")%>' />
-			<table class="homeTask">
-				<tr class="tableTask" onclick="list()">
-					<td id="taskName"><%=taskName%></td>
-					<td style="width: 150px;"><%=dueDate%></td>
+		<div class="box2">Most recently edited tasks:
+		<br><br>
+		<table class="list">
+			<thead>
+				<tr>
+					<th style="width: 200px">Title</th>
+					<th style="width: 150px">Due Date</th>
 				</tr>
-				</tbody>
-			</table>
-			<%
-				}
-				} catch (Exception e) {
-					out.println(e);
-				}
-			%>
+			</thead>
+		</table>
+		<hr>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM tasks";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String taskID = rs.getString("taskID");
+					String taskName = rs.getString("taskName");
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+		%>
+		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
+		<table class="homeTask">
+			<tr class="tableTask" onclick="list()">
+				<td id="taskName"><%=taskName%></td>
+				<td style="width: 150px;"><%=dueDate%></td>
+			</tr> 
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
 		</div>
-		<div class="box3">Notes:</div>
+		<div class="box3">
+		<a onclick="document.getElementById('add_note').style.display='block'" style="width: auto;"><img src="pictures/add.png" alt="Add">Notes</a>
+		<br>
+		<br>
+		<table class="list">
+			<thead>
+				<tr>
+					<th style="width: 350px">Note</th>
+					<th style="width: 400px">Date</th>
+				</tr>
+			</thead>
+		</table>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM notes";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String id = rs.getString("id");
+					String noteTitle = rs.getString("noteTitle");
+					LocalDate date = rs.getDate("date").toLocalDate();
+		%>
+		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
+		<table class="list">
+			<tr>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=noteTitle%></td>
+				<td style="width: 200px;"><%=date%></td>
+				<td style="width: 10px;"><a
+					href="editNote.jsp?id=<%=rs.getString("id")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
+					<a
+					onclick="document.getElementById('delete_info').style.display='block'"
+					<%=rs.getString("id")%> style="width: auto;"><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
+				</a></td>
+			</tr> 
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
+		</div>
+		
+		
+		<!-- Pop-Up-Window New Note -->
+		<div id="add_note" class="note_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Add new Note <span
+						onclick="document.getElementById('add_note').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<div class="popupBody_note">
+					<div class="popupInfo">
+						<form class="noteForm" action="AddNote" method="post">
+							<div>
+								<label>Note</label> <input type="text" name="noteTitle"
+									required="required" />
+							</div>
+							<div>
+								<label>Date</label> <input type="date" name="date"
+									style="margin-left: 20px;" required="required">
+							</div>
+							<button type="submit">Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Pop-Up-Window Delete Note -->
+		<div id="delete_info" class="note_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					<img src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+					Note <span
+						onclick="document.getElementById('delete_info').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<%
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM notes";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String id = rs.getString("id");
+							String noteTitle = rs.getString("noteTitle");
+							LocalDate date = rs.getDate("date").toLocalDate();
+				%>
+				<div class="popupBody_list">
+
+					<div class="popupInfo">
+						<input type="text" name="id"
+							value='<%=rs.getString("id")%>' /> <a class="aButtons"
+							href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a>
+						<br>
+					</div>
+				</div>
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+			</div>
+		</div>
 
 		<h1 class="separator">Favorites</h1>
 
 		<form>
 			<p class="choice">
-				<button id="win">Add new Task</button>
-				<button id="and">Inbox</button>
-				<button id="mac">Profile</button>
+				<button id="win">Add Task</button>
+				<button id="and" onclick="inbox()">Inbox</button>
+				<button id="mac" onclick="profile()">Profile</button>
 			</p>
 		</form>
 
@@ -308,7 +429,7 @@
 				</div> <br> <br>
 				<div class="chip2">
 					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea BrÃ¼ggemann
+					Lea Brüggemann
 				</div> <br> <br>
 				<h4>Production-Team</h4>
 				<hr> <br>
@@ -318,7 +439,7 @@
 				</div> <br> <br>
 				<div class="chip4">
 					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea BrÃ¼ggemann
+					Lea Brüggemann
 				</div> <br> <br>
 				<h4>University-Team</h4>
 				<hr> <br>
@@ -343,7 +464,7 @@
 					.getElementById('dialog'), Abbruch = document
 					.getElementById("Abbruch");
 			startbutton.addEventListener('click', zeigeFenster);
-			Abbruch.addEventListener('click', schlieÃŸeFenster);
+			Abbruch.addEventListener('click', schließeFenster);
 
 			function zeigeFenster() {
 				dialog.showModal();
@@ -353,25 +474,24 @@
 				dialog.close();
 			}
 		</script> <!-- Watch --> <script>
-			'use strict';
-			(function() {
-				function uhrzeit() {
-					var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
-							.getMinutes(), s = jetzt.getSeconds();
-					m = fuehrendeNull(m);
-					s = fuehrendeNull(s);
-					document.getElementById('uhr').innerHTML = h + ':' + m
-							+ ':' + s;
-					setTimeout(uhrzeit, 500);
-				}
+	'use strict';
+	(function() {
+		function uhrzeit() {
+			var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+					.getMinutes(), s = jetzt.getSeconds();
+			m = fuehrendeNull(m);
+			s = fuehrendeNull(s);
+			document.getElementById('uhr').innerHTML = h + ':' + m + ':' + s;
+			setTimeout(uhrzeit, 500);
+		}
 
-				function fuehrendeNull(zahl) {
-					zahl = (zahl < 10 ? '0' : '') + zahl;
-					return zahl;
-				}
-				document.addEventListener('DOMContentLoaded', uhrzeit);
-			}());
-		</script>
+		function fuehrendeNull(zahl) {
+			zahl = (zahl < 10 ? '0' : '') + zahl;
+			return zahl;
+		}
+		document.addEventListener('DOMContentLoaded', uhrzeit);
+	}());
+</script>
 	</div>
 </body>
 </html>
