@@ -136,7 +136,7 @@
 			window.onload = datum
 		</script>  <main> <br>
 
-		<div class="box1">Short Messages:</div>
+		<div class="box1">Short Messages:
 		<br><br>
 		<table class="list1">
 			<thead>
@@ -174,6 +174,7 @@
 				out.println(e);
 			}
 		%>
+		</div>
 		<div class="box2">Most recently edited tasks:
 		<br><br>
 		<table class="list">
