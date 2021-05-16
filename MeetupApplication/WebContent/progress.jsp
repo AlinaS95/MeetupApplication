@@ -4,14 +4,14 @@
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
 <%
-	Gson gsonObj = new Gson(); //Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
+	Gson gsonObj = new Gson();//Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
 	Map<Object, Object> map = null;
 	List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
 	String dataPoints = null;
 
 	try {
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root","");
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 		Statement statement = connection.createStatement();
 		String xVal, yVal;
 
@@ -45,21 +45,44 @@
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-<%if (dataPoints != null) {%>
-	var chart = new CanvasJS.Chart("chartContainer", {
-			animationEnabled : true,
-			exportEnabled : true,
+
+		var chart = new CanvasJS.Chart("chartContainer", {
+			width : "1400",
+			theme : "light2",
 			title : {
-				text : "Status"
+				text : "Task Progress"
+			},
+			subtitles : [ {
+				text : "December 2017"
+			} ],
+			axisY : {
+				title : "Task Status",
+				labelFormatter : addSymbols
 			},
 			data : [ {
-				type : "column", //change type to bar, line, area, pie, 
+				type : "bar",
+				indexLabel : "{y}",
+				indexLabelFontColor : "#444",
+				indexLabelPlacement : "inside",
 				dataPoints :
 <%out.print(dataPoints);%>
 	} ]
 		});
 		chart.render();
-<%}%>
+
+		function addSymbols(e) {
+			var suffixes = [ "", "K", "M", "B" ];
+
+			var order = Math.max(
+					Math.floor(Math.log(e.value) / Math.log(1000)), 0);
+			if (order > suffixes.length - 1)
+				order = suffixes.length - 1;
+
+			var suffix = suffixes[order];
+			return CanvasJS.formatNumber(e.value / Math.pow(1000, order))
+					+ suffix;
+		}
+
 	}
 </script>
 </head>
@@ -88,8 +111,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
-						alt="Profil Icon" /></a>
+					<a href="javascript:profile()"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -116,12 +139,12 @@
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
-					<li><a href="javascript:progress()" style="font-weight: bold"><dfn class="tooltip">
+					<li><a href="javascript:progress()" style="font-weight: bold"><dfn
+								class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-					<li><a href="socialmedia.jsp"><dfn
-								class="tooltip">
+					<li><a href="socialmedia.jsp"><dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
@@ -156,13 +179,12 @@
 
 
 
-	<h4>
-		This Project is </h4><a style="position:absolute;margin:-48px 135px" class="workspace">${login.workspace}</a>
+	<h4>This Project is</h4>
+	<a style="position: absolute; margin: -48px 135px" class="workspace">${login.workspace}</a>
 
 
 	<div class="box1">
-		Overdue Task<br>
-		<a> <%
+		Overdue Task<br> <a> <%
  	try {
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -181,8 +203,7 @@
 	</div>
 
 	<div class="box2">
-		Incompleted Task<br>
-		<a> <%
+		Incompleted Task<br> <a> <%
  	try {
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -201,8 +222,7 @@
 	</div>
 
 	<div class="box3">
-		Completed Task<br>
-		<a> <%
+		Completed Task<br> <a> <%
  	try {
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -229,9 +249,10 @@
 
 	<h6>Team Status</h6>
 	<div class="teamstatus">
-	
-	<div id="chartContainer" style="height: 370px; width: 100%;"></div></div>
-	<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-	
+
+		<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+		<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+	</div>
+
 </body>
 </html>
