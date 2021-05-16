@@ -16,7 +16,6 @@
 <script type="text/javascript" src="methods.js"></script>
 </head>
 <body>
-
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
@@ -47,76 +46,42 @@
 			</div>
 			<br>
 		</div>
-		<main> <dialog id="dialog">
-		<div class="button" id="menuebutton"></div>
-		<div>
-			<img class="middle" src="pictures/meetup_logo.png" alt="link"
-				width="80" height="70" />
-		</div>
-		<br>
-		<hr>
-
-		<ul>
-			<p>
-				<img src="pictures/home.png" height="40" width="40" hspace="1"
-					vspace="1" alt="home">Home
-			</p>
-			<p>
-				<img src="pictures/task.png" height="40" width="40" hspace="1"
-					vspace="1" alt="task">My Task
-			</p>
-			<p>
-				<img src="pictures/inbox.png" height="40" width="40" hspace="1"
-					vspace="1" alt="inbox" onclick="inbox()">Inbox
-			</p>
-			<p>
-				<img src="pictures/person.png" height="40" width="40" hspace="1"
-					vspace="1" alt="person">Profile
-			</p>
-
-			<hr>
-			<p>Reports:</p>
-			<li>Tasks I created</li>
-			<li>Tasks I assigned to others</li>
-			<li>Recently completed Tasks</li>
-			<li>Custom Field Order</li>
-			<br>
-			<hr>
-			<p>Teams:</p>
-			<td><div class="select-wrapper">
-					<select>
-						<option value="imagePost">Marketing</option>
-						<option value="story">Production</option>
-						<option value="linkPost">University</option>
-					</select>
-				</div></td>
-
-		</ul>
-		<div id="Abbruch">
-			<img src="pictures/baseline_close_black_18dp.png">
-		</div>
-		<br>
-		<div id="punkte"></div>
-		</dialog> </main>
 		<div class="mainmenu">
 			<nav>
-
 				<ul>
-					<li><button id="start">
-							<img src="pictures/navigation.png" height="50" width="50"
-								align="left" alt="navigation">
-						</button> </a></li>
-					<li><a href="javascript:home()" style="font-weight: bold">Home</a></li>
-					<li><a href="javascript:list()">List</a></li>
-					<li><a href="javascript:board()">Board</a></li>
-					<li><a href="javascript:calendar()">Calendar</a></li>
-					<li><a href="javascript:progress()">Progress</a></li>
-					<li><a href="javascript:socialmedia()">Social Media</a></li>
+					<li><a href="javascript:menue()"><img
+							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a href="home.jsp"><dfn class="tooltip">
+								Home <span role="tooltip" style="font-weight: normal">You
+									can find the home area here </span>
+							</dfn></a></li>
+					<li><a href="javascript:list()"><dfn class="tooltip">
+								List <span role="tooltip" style="font-weight: normal">Here
+									you can find your tasks and create them</span>
+							</dfn> </a></li>
+					<li><a href="javascript:board()"> <dfn class="tooltip">
+								Board <span role="tooltip" style="font-weight: normal">Here
+									you can find your tasks and their processing status </span>
+							</dfn>
+					</a></li>
+					<li><a href="calendar.jsp"><dfn class="tooltip">
+								Calendar <span role="tooltip" style="font-weight: normal">You
+									can find your calendar here </span>
+							</dfn></a></li>
+					<li><a href="javascript:progress()"><dfn class="tooltip">
+								Progress <span role="tooltip" style="font-weight: normal">Here
+									you can find your project and team status</span>
+							</dfn></a></li>
+					<li><a href="socialmedia.jsp" style="font-weight: bold"><dfn
+								class="tooltip">
+								Social Media <span role="tooltip" style="font-weight: normal">Here
+									you can find everything about your social media tasks</span>
+							</dfn></a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
-							onclick="document.getElementById('l_add').style.display='block'"
+							onclick="document.getElementById('add').style.display='block'"
 							style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>
 						<li><a class="profile_settings"
 							onclick="document.getElementById('p_settings').style.display='block'"
@@ -140,6 +105,7 @@
 			<div class="popupBody"></div>
 		</div>
 	</div>
+	</div>
 
 	<div class="background2">
 		<br>
@@ -147,60 +113,6 @@
 
 		<p id="uhr"></p>
 		<div id="datum"></div>
-
-
-		<nav>
-			<div class="icon" onclick="toggleNotifi()">
-				<img src="pictures/notificationring.png" alt="">
-			</div>
-			<div class="notifi-box" id="box">
-				<h2>
-					Notifications <span>17</span>
-				</h2>
-				<div class="notifi-item">
-					<img src="pictures/avatar5.png" alt="img">
-					<div class="text">
-						<h4>Jana Podschaske</h4>
-						<p>Sie müssten mir die Unterlagen vom 28.02.2021 noch bitte
-							zusenden.</p>
-					</div>
-				</div>
-
-				<div class="notifi-item">
-					<img src="pictures/avatar5.png" alt="img">
-					<div class="text">
-						<h4>Alina Schomacher</h4>
-						<p>Ich möchte Sie nochmals an das Meeting am 27.02.2021
-							erinnern.</p>
-					</div>
-				</div>
-
-				<div class="notifi-item">
-					<img src="pictures/avatar4.png" alt="img">
-					<div class="text">
-						<h4>Lea-Marie Brüggemann</h4>
-						<p>In Ihrer To-Do Box befindet sich eine weitere Aufgabe.</p>
-					</div>
-				</div>
-
-				<div class="notifi-item">
-					<img src="pictures/avatar1.png" alt="img">
-					<div class="text">
-						<h4>Max Mustermann</h4>
-						<p>bla bla bla bla</p>
-					</div>
-				</div>
-
-				<div class="notifi-item">
-					<img src="pictures/avatar2.png" alt="img">
-					<div class="text">
-						<h4>Rainer Zufall</h4>
-						<p>bla bla bla bla bla</p>
-					</div>
-				</div>
-
-			</div>
-		</nav>
 
 		<!-- Date --> <script language="javascript" type="text/javascript">
 			window.setInterval("datum()", 60000);
@@ -222,24 +134,46 @@
 			}
 
 			window.onload = datum
-		</script> <!-- Inbox --> <script>
-			var box = document.getElementById('box');
-			var down = false;
+		</script>  <main> <br>
 
-			function toggleNotifi() {
-				if (down) {
-					box.style.height = '0px';
-					box.style.opacity = 0;
-					down = false;
-				} else {
-					box.style.height = '530px';
-					box.style.opacity = 1;
-					down = true;
-				}
+		<div class="box1">Short Messages:</div>
+		<br><br>
+		<table class="list1">
+			<thead>
+				<tr>
+					<th style="width: 200px">Message</th>
+					<th style="width: 150px">Due Date</th>
+				</tr>
+			</thead>
+		</table>
+		<hr>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM inbox";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String inboxID = rs.getString("inboxID");
+					String fullName = rs.getString("fullName");
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+		%>
+		<input type="hidden" name="inboxID" value='<%=rs.getString("inboxID")%>' />
+		<table class="homeTask">
+			<tr class="tableTask" onclick="list()">
+				<td id="fullName"><%=fullName%></td>
+				<td style="width: 150px;"><%=dueDate%></td>
+			</tr> 
+			</tbody>
+		</table>
+		<%
 			}
-		</script> <main> <br>
-
-		<div class="box1">Last edited projects:</div>
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
 		<div class="box2">Most recently edited tasks:
 		<br><br>
 		<table class="list">
@@ -492,6 +426,7 @@
 		document.addEventListener('DOMContentLoaded', uhrzeit);
 	}());
 </script>
+	</div>
 	</div>
 </body>
 </html>

@@ -1269,4 +1269,33 @@ dialog[open] {
 	border-radius: 0 1em 1em;
 	box-shadow: 10px 10px 15px silver;
 }
+table.list1 {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 110px;
+}
+
+table.list1 thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.list1 tbody {
+	background: #F0F0F0;
+}
+
+table.list1 tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.list1 tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
 
