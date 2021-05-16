@@ -118,7 +118,7 @@
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM user";
+				String sql = "SELECT * FROM user WHERE workspace='Website'";
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {

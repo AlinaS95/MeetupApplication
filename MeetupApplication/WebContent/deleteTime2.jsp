@@ -98,11 +98,7 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Working Time</div>
-		<hr>
-		<br>
-		<div class="editBody">
-			<%
+		<%
 				String id = request.getParameter("id");
 				String driver = "com.mysql.jdbc.Driver";
 				String connectionUrl = "jdbc:mysql://localhost:3306/";
@@ -126,6 +122,10 @@
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
+		<div class="editHeader">Successfully deleted<%=rs.getString("id")%></div>
+		<hr>
+		<br>
+		<div class="editBody">
 			<form action="UpdateTime" method="post">
 				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
 				<input type="hidden" name="userID" value="${login.userID}" />
@@ -169,47 +169,6 @@
 				}
 			%>
 		</div>
-		<script>
-			// Zeit-Differenz ermitteln
-			window.addEventListener("DOMContentLoaded", function() {
-				document.getElementById("starttime").addEventListener("change",
-						SumHours);
-				document.getElementById("stoptime").addEventListener("change",
-						SumHours);
-				document.getElementById("pausetime").addEventListener("change",
-						SumHours);
-			});
-
-			function SumHours() {
-				var starttime = document.getElementById('starttime').value;
-				var stoptime = document.getElementById('stoptime').value;
-				var pausetime = document.getElementById('pausetime').value;
-				var diff = 0;
-
-				if (starttime && stoptime && pausetime) {
-					starttime = ConvertToSeconds(starttime);
-					stoptime = ConvertToSeconds(stoptime);
-					pausetime = ConvertToSeconds(pausetime);
-					diff = Math.abs(stoptime - starttime - pausetime);
-					document.getElementById('total').value = secondsToHHmmSS(diff);
-				}
-
-				function ConvertToSeconds(time) {
-					var splitTime = time.split(":");
-					return splitTime[0] * 3600 + splitTime[1] * 60;
-				}
-
-				function secondsToHHmmSS(secs) {
-					var hours = parseInt(secs / 3600);
-					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
-					if (minutes < 10) {
-						minutes = '0' + minutes;
-					}
-					return hours + "," + minutes;
-				}
-			}
-		</script>
 		<hr>
 	</div>
 </body>

@@ -244,10 +244,11 @@
 					<td style="text-align: right; padding:0px 10px">
 						<%
 							try {
+								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 19'";
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 19' AND userSID=" + userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -330,10 +331,11 @@
 					<td style="text-align: right; padding:0px 10px">
 						<%
 							try {
+								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 19'";
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 20' AND userSID=" + userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -416,10 +418,11 @@
 					<td style="text-align: right; padding:0px 10px">
 						<%
 							try {
+								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 19'";
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 21'AND userSID=" + userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
