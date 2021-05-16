@@ -221,75 +221,41 @@
 			</div>
 		</div>
 
-		<!-- Pop-Up-Window Workspace Add Tasks -->
-		<div id="task_add" class="navigation_addBlock">
 
+<!-- Pop-Up-Window Add Workspace-->
+		<div id="workspace_add" class="navigation_addBlock">
 			<!-- Window content -->
 			<div class="addBlock">
 				<div class="popupHeader">
-					<span
-						onclick="document.getElementById('task_add').style.display='none'
+					Manage your Workspace <span
+						onclick="document.getElementById('workspace_add').style.display='none'
 					"
 						class="close" title="Schließen">&times; </span>
 				</div>
 				<div class="popupBody">
-					<div class="container col-md-5">
-						<div class="card">
-							<div class="card-body">
-								<c:if test="${todo != null}">
-									<form action="update" method="post">
-								</c:if>
-								<c:if test="${todo == null}">
-									<form action="insert" method="post">
-								</c:if>
-
-								<caption>
-									<h2>
-										<c:if test="${task != null}">
-               Edit Task
-              </c:if>
-										<c:if test="${task == null}">
-               Add New Task
-              </c:if>
-									</h2>
-								</caption>
-
-								<c:if test="${task != null}">
-									<input type="hidden" name="taskID"
-										value="<c:out value='${task.taskID}' />" />
-								</c:if>
-								<form>
-									<fieldset class="form-group">
-										<label>Task Title</label> <input type="text"
-											value="<c:out value='${task.title}' />" class="form-control"
-											name="title" required="required" minlength="5">
-									</fieldset>
-
-									<fieldset class="form-group">
-										<label>Task Description</label> <input type="text"
-											value="<c:out value='${task.description}' />"
-											class="form-control" name="description" minlength="5">
-									</fieldset>
-
-									<fieldset class="form-group">
-										<label>Task Status</label> <select class="form-control"
-											name="isDone">
-											<option value="false">In Progress</option>
-											<option value="true">Complete</option>
-										</select>
-									</fieldset>
-
-									<fieldset class="form-group">
-										<label>Task Target Date</label> <input type="date"
-											value="<c:out value='${task.targetDate}' />"
-											class="form-control" name="targetDate" required="required">
-									</fieldset>
-
-									<button type="submit" class="btn btn-success">Save</button>
-								</form>
-							</div>
-						</div>
+					<a>Add new member</a>
+					<form action="addWorkspace" method="post">
+					<input type="hidden"
+					name="userSID" value='${login.userID}' />
+						<p>Full Name</p>
+						<input type="text" id="fullName" name="fullName"
+							placeholder="Enter full name" />
+						<p>Email</p>
+						<input type="text" id="email" name="email"
+							placeholder="Enter email" />
+						<p>Workspace</p>
+						<input type="text" id="workspace" name="workspace"
+							placeholder="Enter workspace" />
+						<input type="submit"
+							name="btn_addMember" value="Add Member"> 
+					</form>
+					<hr>
+					<div class="membersList">
+					
 					</div>
+				</div>
+				<div class="popupFooter">
+					<button onClick="save()">Save</button>
 				</div>
 			</div>
 		</div>

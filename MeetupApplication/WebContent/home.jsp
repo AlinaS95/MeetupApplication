@@ -40,8 +40,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
-						alt="Profil Icon" /></a>
+					<a href="javascript:profile()"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -111,205 +111,130 @@
 		<br>
 		<main>
 
-		<p id="uhr"></p>
-		<div id="datum"></div>
+			<p id="uhr"></p>
+			<div id="datum"></div>
 
-		<!-- Date --> <script language="javascript" type="text/javascript">
-			window.setInterval("datum()", 60000);
+			<!-- Date -->
+			<script language="javascript" type="text/javascript">
+				window.setInterval("datum()", 60000);
 
-			function datum() {
-				var d = new Date();
+				function datum() {
+					var d = new Date();
 
-				var wochentage = new Array("Sonntag", "Montag", "Dienstag",
-						"Mittwoch", "Donnerstag", "Freitag", "Samstag");
+					var wochentage = new Array("Sonntag", "Montag", "Dienstag",
+							"Mittwoch", "Donnerstag", "Freitag", "Samstag");
 
-				var monate = new Array("Januar", "Februar", "M‰rz", "April",
-						"Mai", "Juni", "Juli", "August", "September",
-						"Oktober", "November", "Dezember");
+					var monate = new Array("Januar", "Februar", "M‰rz",
+							"April", "Mai", "Juni", "Juli", "August",
+							"September", "Oktober", "November", "Dezember");
 
-				document.getElementById("datum").innerHTML = ' '
-						+ wochentage[d.getDay()] + ', der ' + d.getDate()
-						+ '. ' + monate[d.getMonth()] + ' ' + d.getFullYear();
+					document.getElementById("datum").innerHTML = ' '
+							+ wochentage[d.getDay()] + ', der ' + d.getDate()
+							+ '. ' + monate[d.getMonth()] + ' '
+							+ d.getFullYear();
 
-			}
+				}
 
-			window.onload = datum
-		</script>  <main> <br>
+				window.onload = datum
+			</script>
+			<main>
+				<br>
 
-		<div class="box1">Short Messages:
-		<br><br>
-		<table class="list1">
-			<thead>
-				<tr>
-					<th style="width: 200px">Message</th>
-					<th style="width: 150px">Due Date</th>
-				</tr>
-			</thead>
-		</table>
-		<hr>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM inbox";
-				ResultSet rs = st.executeQuery(sql);
-				int i = 0;
-				while (rs.next()) {
-					String inboxID = rs.getString("inboxID");
-					String fullName = rs.getString("fullName");
-					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-		%>
-		<input type="hidden" name="inboxID" value='<%=rs.getString("inboxID")%>' />
-		<table class="homeTask">
-			<tr class="tableTask" onclick="list()">
-				<td id="fullName"><%=fullName%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
-			</tr> 
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		</div>
-		<div class="box2">Most recently edited tasks:
-		<br><br>
-		<table class="list">
-			<thead>
-				<tr>
-					<th style="width: 200px">Title</th>
-					<th style="width: 150px">Due Date</th>
-				</tr>
-			</thead>
-		</table>
-		<hr>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM tasks";
-				ResultSet rs = st.executeQuery(sql);
-				int i = 0;
-				while (rs.next()) {
-					String taskID = rs.getString("taskID");
-					String taskName = rs.getString("taskName");
-					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-		%>
-		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
-		<table class="homeTask">
-			<tr class="tableTask" onclick="list()">
-				<td id="taskName"><%=taskName%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
-			</tr> 
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		</div>
-		<div class="box3">
-		<a onclick="document.getElementById('add_note').style.display='block'" style="width: auto;"><img src="pictures/add.png" alt="Add">Notes</a>
-		<br>
-		<br>
-		<table class="list">
-			<thead>
-				<tr>
-					<th style="width: 350px">Note</th>
-					<th style="width: 400px">Date</th>
-				</tr>
-			</thead>
-		</table>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM notes";
-				ResultSet rs = st.executeQuery(sql);
-				int i = 0;
-				while (rs.next()) {
-					String id = rs.getString("id");
-					String noteTitle = rs.getString("noteTitle");
-					LocalDate date = rs.getDate("date").toLocalDate();
-		%>
-		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
-		<table class="list">
-			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=noteTitle%></td>
-				<td style="width: 200px;"><%=date%></td>
-				<td style="width: 10px;"><a
-					href="editNote.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
+				<div class="box1">
+					Short Messages: <br> <br>
+					<table class="list">
+						<thead>
+							<tr>
+								<th style="width: 200px">Message</th>
+								<th style="width: 150px">Due Date</th>
+							</tr>
+						</thead>
+					</table>
+					<hr>
+					<%
+						try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM inbox";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String inboxID = rs.getString("inboxID");
+							String fullName = rs.getString("fullName");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+					%>
+					<input type="hidden" name="inboxID"
+						value='<%=rs.getString("inboxID")%>' />
+					<table class="homeTask">
+						<tr class="tableTask" onclick="list()">
+							<td id="fullName"><%=fullName%></td>
+							<td style="width: 150px;"><%=dueDate%></td>
+						</tr>
+						</tbody>
+					</table>
+					<%
+						}
+					} catch (Exception e) {
+					out.println(e);
+					}
+					%>
+				</div>
+				<div class="box2">
+					Most recently edited tasks: <br> <br>
+					<table class="list">
+						<thead>
+							<tr>
+								<th style="width: 200px">Title</th>
+								<th style="width: 150px">Due Date</th>
+							</tr>
+						</thead>
+					</table>
+					<hr>
+					<%
+						try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM tasks";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String taskID = rs.getString("taskID");
+							String taskName = rs.getString("taskName");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+					%>
+					<input type="hidden" name="taskID"
+						value='<%=rs.getString("taskID")%>' />
+					<table class="homeTask">
+						<tr class="tableTask" onclick="list()">
+							<td id="taskName"><%=taskName%></td>
+							<td style="width: 150px;"><%=dueDate%></td>
+						</tr>
+						</tbody>
+					</table>
+					<%
+						}
+					} catch (Exception e) {
+					out.println(e);
+					}
+					%>
+				</div>
+				<div class="box3">
 					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("id")%> style="width: auto;"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
-				</a></td>
-			</tr> 
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		</div>
-		
-		
-		<!-- Pop-Up-Window New Note -->
-		<div id="add_note" class="note_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Add new Note <span
-						onclick="document.getElementById('add_note').style.display='none'
-					"
-						class="close" title="Schlieﬂen">&times;</span>
-				</div>
-				<div class="popupBody_note">
-					<div class="popupInfo">
-						<form class="noteForm" action="AddNote" method="post">
-							<div>
-								<label>Note</label> <input type="text" name="noteTitle"
-									required="required" />
-							</div>
-							<div>
-								<label>Date</label> <input type="date" name="date"
-									style="margin-left: 20px;" required="required">
-							</div>
-							<button type="submit">Save</button>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<!-- Pop-Up-Window Delete Note -->
-		<div id="delete_info" class="note_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Note <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schlieﬂen">&times;</span>
-				</div>
-				<%
-					try {
+						onclick="document.getElementById('add_note').style.display='block'"
+						style="width: auto;"><img src="pictures/add.png" alt="Add">Notes</a>
+					<br> <br>
+					<table class="list">
+						<thead>
+							<tr>
+								<th style="width: 350px">Note</th>
+								<th style="width: 400px">Date</th>
+							</tr>
+						</thead>
+					</table>
+					<%
+						try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 						Statement st = con.createStatement();
@@ -320,203 +245,284 @@
 							String id = rs.getString("id");
 							String noteTitle = rs.getString("noteTitle");
 							LocalDate date = rs.getDate("date").toLocalDate();
-				%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="id"
-							value='<%=rs.getString("id")%>' /> <a class="aButtons"
-							href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
+					%>
+					<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
+					<table class="list">
+						<tr>
+							<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=noteTitle%></td>
+							<td style="width: 200px;"><%=date%></td>
+							<td style="width: 10px;"><a
+								href="editNote.jsp?id=<%=rs.getString("id")%>"><img
+									src="pictures/settings.png" alt="Settings"
+									style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
+								<a
+								onclick="document.getElementById('delete_info').style.display='block'"
+								<%=rs.getString("id")%> style="width: auto;"><img
+									src="pictures/delete2.png" alt="Delete post"
+									style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
+							</a></td>
+						</tr>
+						</tbody>
+					</table>
+					<%
+						}
 					} catch (Exception e) {
-						out.println(e);
+					out.println(e);
 					}
-				%>
-			</div>
-		</div>
-
-		<h1 class="separator">Favorites</h1>
-
-		<form>
-			<p class="choice">
-				<button id="win">Add Task</button>
-				<button id="and" onclick="inbox()">Inbox</button>
-				<button id="mac" onclick="profile()">Profile</button>
-			</p>
-		</form>
-
-
-		<div class="popup" onclick="myFunction()">
-			<img src="pictures/mannschaft.png" alt=""> <span
-				class="popuptext" id="myPopup"><h4>Marketing-Team</h4>
-				
-				<a onclick="document.getElementById('add_note').style.display='block'" style="width: auto;"><img src="pictures/add.png" alt="Add">Teams</a>
-		<br>
-		<br>
-		<table class="list">
-			<thead>
-				<tr>
-					<th style="width: 350px">Name</th>
-					<th style="width: 400px">Workspace</th>
-				</tr>
-			</thead>
-		</table>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-				String sql = "SELECT * FROM teams";
-				ResultSet rs = st.executeQuery(sql);
-				int i = 0;
-				while (rs.next()) {
-					String teamsid = rs.getString("teamsid");
-					String fullName = rs.getString("fullName");
-					String workspace = rs.getString("workspace");
-		%>
-		<input type="hidden" name="teamsid" value='<%=rs.getString("teamsid")%>' />
-		<table class="list">
-			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=fullName%></td>
-				<td style="width: 200px;"><%=workspace%></td>
-				<td style="width: 10px;"><a
-					href="editNote.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("id")%> style="width: auto;"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
-				</a></td>
-			</tr> 
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		</div>
-		
-		
-		<!-- Pop-Up-Window New Note -->
-		<div id="add_note" class="note_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Add new Teammember <span
-						onclick="document.getElementById('add_note').style.display='none'
-					"
-						class="close" title="Schlieﬂen">&times;</span>
+					%>
 				</div>
-				<div class="popupBody_note">
-					<div class="popupInfo">
-						<form class="noteForm" action="AddNote" method="post">
-							<div>
-								<label>Teammember</label> <input type="text" name="noteTitle"
-									required="required" />
+
+
+				<!-- Pop-Up-Window New Note -->
+				<div id="add_note" class="note_addBlock">
+
+					<!-- Window content -->
+					<div class="addBlock">
+						<div class="popupHeader">
+							Add new Note <span
+								onclick="document.getElementById('add_note').style.display='none'
+					"
+								class="close" title="Schlieﬂen">&times;</span>
+						</div>
+						<div class="popupBody_note">
+							<div class="popupInfo">
+								<form class="noteForm" action="AddNote" method="post">
+									<div>
+										<label>Note</label> <input type="text" name="noteTitle"
+											required="required" />
+									</div>
+									<div>
+										<label>Date</label> <input type="date" name="date"
+											style="margin-left: 20px;" required="required">
+									</div>
+									<button type="submit">Save</button>
+								</form>
 							</div>
-							<div>
-								<label>Workspace</label> <input type="date" name="date"
-									style="margin-left: 20px;" required="required">
-							</div>
-							<button type="submit">Save</button>
-						</form>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		
-		<!-- Pop-Up-Window Delete Note -->
-		<div id="delete_info" class="note_addBlock">
 
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Teammember <span
-						onclick="document.getElementById('delete_info').style.display='none'
+				<!-- Pop-Up-Window Delete Note -->
+				<div id="delete_info" class="note_addBlock">
+
+					<!-- Window content -->
+					<div class="addBlock">
+						<div class="popupHeader">
+							<img src="pictures/delete2.png" alt="Delete post"
+								style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+							Note <span
+								onclick="document.getElementById('delete_info').style.display='none'
 					"
-						class="close" title="Schlieﬂen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM teams";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String id = rs.getString("id");
-							String fullName = rs.getString("fullName");
-							String workspace = rs.getString("workspace");
-				%>
-				<div class="popupBody_list">
+								class="close" title="Schlieﬂen">&times;</span>
+						</div>
+						<%
+							try {
+							Class.forName("com.mysql.cj.jdbc.Driver");
+							Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+							Statement st = con.createStatement();
+							String sql = "SELECT * FROM notes";
+							ResultSet rs = st.executeQuery(sql);
+							int i = 0;
+							while (rs.next()) {
+								String id = rs.getString("id");
+								String noteTitle = rs.getString("noteTitle");
+								LocalDate date = rs.getDate("date").toLocalDate();
+						%>
+						<div class="popupBody_list">
 
-					<div class="popupInfo">
-						<input type="text" name="id"
-							value='<%=rs.getString("id")%>' /> <a class="aButtons"
-							href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a>
-						<br>
+							<div class="popupInfo">
+								<input type="text" name="id" value='<%=rs.getString("id")%>' />
+								<a class="aButtons"
+									href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a> <br>
+							</div>
+						</div>
+						<%
+							}
+						} catch (Exception e) {
+						out.println(e);
+						}
+						%>
 					</div>
 				</div>
-				<%
-					}
-					} catch (Exception e) {
+
+				<h1 class="separator">Favorites</h1>
+
+				<form>
+					<p class="choice">
+						<button id="win">Add Task</button>
+						<button id="and" onclick="inbox()">Inbox</button>
+						<button id="mac" onclick="profile()">Profile</button>
+					</p>
+				</form>
+
+
+				<div class="popup" onclick="myFunction()">
+					<img src="pictures/mannschaft.png" alt=""> <span
+						class="popuptext" id="myPopup"><h4>${login.workspace}-Team</h4>
+
+						<a
+						onclick="document.getElementById('add_note').style.display='block'"
+						style="width: auto;"><img src="pictures/add.png" alt="Add">Teams</a>
+						<br> <br>
+						<table class="list">
+							<thead>
+								<tr>
+									<th style="width: 350px">Name</th>
+									<th style="width: 400px">Workspace</th>
+								</tr>
+							</thead>
+						</table> <%
+ 	try {
+ 	String workspace2 = request.getParameter("workspace");
+ 	Class.forName("com.mysql.cj.jdbc.Driver");
+ 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+ 	Statement st = con.createStatement();
+ 	String sql = "SELECT * FROM user WHERE workspace="+ workspace2;
+ 	ResultSet rs = st.executeQuery(sql);
+ 	int i = 0;
+ 	while (rs.next()) {
+ 		String workspaceID = rs.getString("workspaceID");
+ 		String firstName = rs.getString("firstName");
+ 		String lastName = rs.getString("lastName");
+ 		String workspace = rs.getString("workspace");
+ 		String userSID = rs.getString("userSID");
+ %> <input type="hidden" name="workspaceID"
+						value='<%=rs.getString("workspaceID")%>' />
+						<table class="list">
+							<tr>
+								<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=firstName%>
+									<%=lastName%><input type="hidden" name="userSID"
+									value='<%=rs.getString("userSID")%>' /></td>
+								<td style="width: 200px;"><%=workspace%></td>
+
+							</tr>
+							</tbody>
+						</table> <%
+ 	}
+ } catch (Exception e) {
+ out.println(e);
+ }
+ %>
+				</div>
+
+
+				<!-- Pop-Up-Window New Note -->
+				<div id="add_note" class="note_addBlock">
+
+					<!-- Window content -->
+					<div class="addBlock">
+						<div class="popupHeader">
+							Add new Teammember <span
+								onclick="document.getElementById('add_note').style.display='none'
+					"
+								class="close" title="Schlieﬂen">&times;</span>
+						</div>
+						<div class="popupBody_note">
+							<div class="popupInfo">
+								<form class="noteForm" action="AddNote" method="post">
+									<div>
+										<label>Teammember</label> <input type="text" name="noteTitle"
+											required="required" />
+									</div>
+									<div>
+										<label>Workspace</label> <input type="date" name="date"
+											style="margin-left: 20px;" required="required">
+									</div>
+									<button type="submit">Save</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Pop-Up-Window Delete Note -->
+				<div id="delete_info" class="note_addBlock">
+
+					<!-- Window content -->
+					<div class="addBlock">
+						<div class="popupHeader">
+							<img src="pictures/delete2.png" alt="Delete post"
+								style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+							Teammember <span
+								onclick="document.getElementById('delete_info').style.display='none'
+					"
+								class="close" title="Schlieﬂen">&times;</span>
+						</div>
+						<%
+							try {
+							Class.forName("com.mysql.cj.jdbc.Driver");
+							Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+							Statement st = con.createStatement();
+							String sql = "SELECT * FROM teams";
+							ResultSet rs = st.executeQuery(sql);
+							int i = 0;
+							while (rs.next()) {
+								String id = rs.getString("id");
+								String fullName = rs.getString("fullName");
+								String workspace = rs.getString("workspace");
+						%>
+						<div class="popupBody_list">
+
+							<div class="popupInfo">
+								<input type="text" name="id" value='<%=rs.getString("id")%>' />
+								<a class="aButtons"
+									href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a> <br>
+							</div>
+						</div>
+						<%
+							}
+						} catch (Exception e) {
 						out.println(e);
+						}
+						%>
+					</div>
+				</div>
+
+			</main>
+			<!-- Teams Pop Up -->
+			<script>
+				// When the user clicks on div, open the popup
+				function myFunction() {
+					var popup = document.getElementById("myPopup");
+					popup.classList.toggle("show");
+				}
+			</script>
+			<script>
+				var startbutton = document.getElementById("start"), dialog = document
+						.getElementById('dialog'), Abbruch = document
+						.getElementById("Abbruch");
+				startbutton.addEventListener('click', zeigeFenster);
+				Abbruch.addEventListener('click', schlieﬂeFenster);
+
+				function zeigeFenster() {
+					dialog.showModal();
+				}
+
+				function schlieﬂeFenster() {
+					dialog.close();
+				}
+			</script>
+			<!-- Watch -->
+			<script>
+				'use strict';
+				(function() {
+					function uhrzeit() {
+						var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+								.getMinutes(), s = jetzt.getSeconds();
+						m = fuehrendeNull(m);
+						s = fuehrendeNull(s);
+						document.getElementById('uhr').innerHTML = h + ':' + m
+								+ ':' + s;
+						setTimeout(uhrzeit, 500);
 					}
-				%>
-			</div>
-		</div>
 
-		</main> <!-- Teams Pop Up --> <script>
-			// When the user clicks on div, open the popup
-			function myFunction() {
-				var popup = document.getElementById("myPopup");
-				popup.classList.toggle("show");
-			}
-		</script> <script>
-			var startbutton = document.getElementById("start"), dialog = document
-					.getElementById('dialog'), Abbruch = document
-					.getElementById("Abbruch");
-			startbutton.addEventListener('click', zeigeFenster);
-			Abbruch.addEventListener('click', schlieﬂeFenster);
-
-			function zeigeFenster() {
-				dialog.showModal();
-			}
-
-			function schlieﬂeFenster() {
-				dialog.close();
-			}
-		</script> <!-- Watch --> <script>
-	'use strict';
-	(function() {
-		function uhrzeit() {
-			var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
-					.getMinutes(), s = jetzt.getSeconds();
-			m = fuehrendeNull(m);
-			s = fuehrendeNull(s);
-			document.getElementById('uhr').innerHTML = h + ':' + m + ':' + s;
-			setTimeout(uhrzeit, 500);
-		}
-
-		function fuehrendeNull(zahl) {
-			zahl = (zahl < 10 ? '0' : '') + zahl;
-			return zahl;
-		}
-		document.addEventListener('DOMContentLoaded', uhrzeit);
-	}());
-</script>
+					function fuehrendeNull(zahl) {
+						zahl = (zahl < 10 ? '0' : '') + zahl;
+						return zahl;
+					}
+					document.addEventListener('DOMContentLoaded', uhrzeit);
+				}());
+			</script>
 	</div>
 	</div>
 	</div>
