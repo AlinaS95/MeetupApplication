@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+<%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +11,7 @@
 <title>Inbox</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="inbox.css">
+<link rel="stylesheet" type="text/css" href="list.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
 </head>
@@ -117,6 +122,182 @@
 			<div class="signtonavigate">
 				<img src="pictures/pfeil-nach-unten-skizze.png" alt="img">
 			</div>
+
+<!-- Messages -->
+	<br> <b class="editHeader">Messages</b>
+		<div class="list_navigation">
+			<nav>
+				<ul>
+					<li><a class="socialmediaPopup"
+						onclick="document.getElementById('add_post').style.display='block'"
+						style="width: auto;"><img src="pictures/add.png" alt="Add">New
+							Message</a></li>
+				</ul>
+			</nav>
+		</div>
+
+		<!-- Pop-Up-Window New Post -->
+		<div id="add_post" class="list_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Add new Message <span
+						onclick="document.getElementById('add_post').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<div class="popupBody_list">
+					<div class="popupInfo">
+						<form action="UploadInbox" method="post">
+							<div>
+								<label>Title</label> <input type="text" name="fullName"
+									required="required" />
+							</div>
+							<div>
+								<label>E-Mail</label> <input type="text" name="email"
+									required="required" />
+							</div>
+							<div>
+								<label>Workspace</label> <input type="text" name="workspace"
+									required="required" />
+							</div>
+							<div>
+								<label>Position</label> <input type="text" name="position"
+									required="required" />
+							</div>
+								<div>
+								<label>Due Date</label> <input type="date" name="dueDate"
+									style="margin-left: 20px;" required="required">
+							</div>
+							<div>
+								<label style="position: absolute">Description</label>
+								<textarea style="margin-left: 99px" name="description"></textarea>
+							</div>
+							<button type="submit">Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<hr>
+		<br>
+
+		<p style="font-weight: bold">${message}</p>
+		<table class="list">
+			<thead>
+				<tr>
+					<th style="width: 200px">Title</th>
+					<th style="width: 250px">Description</th>
+					<th style="width: 150px">Due Date</th>
+					<th style="width: 150px">Workspace</th>
+					<th style="width: 200px">position</th>
+					<th style="width: 150px">Settings</th>
+				</tr>
+			</thead>
+		</table>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM inbox";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String inboxID = rs.getString("inboxID");
+					String fullName = rs.getString("fullName");
+					String description = rs.getString("description");
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+					String workspace = rs.getString("workspace");
+					String email = rs.getString("email");
+					String position = rs.getString("position");
+		%>
+		<input type="hidden" name="inboxID" value='<%=rs.getString("inboxID")%>' />
+		<table class="list">
+			<tr>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=fullName%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=description%></td>
+				<td style="width: 150px;"><%=dueDate%></td>
+				<td style="width: 150px;"><%=workspace%></td>
+				<td style="width: 200px;"><%=email%></td>
+				<td style="width: 200px;"><%=position%></td>
+				<td style="width: 150px;"><a
+					href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+					<a
+					onclick="document.getElementById('delete_info').style.display='block'"
+					<%=rs.getString("inboxID")%> style="width: auto;"><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
+				</a></td>
+			</tr> 
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
+		<br>
+		<hr>
+		<br>
+
+		<!-- Pop-Up-Window Delete Info -->
+		<div id="delete_info" class="list_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					<img src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+					Post <span
+						onclick="document.getElementById('delete_info').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<%
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM inbox";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String inboxID = rs.getString("inboxID");
+							String fullName = rs.getString("fullName");
+							String email = rs.getString("email");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+							String workspace = rs.getString("workspace");
+							String description = rs.getString("description");
+							String position = rs.getString("position");
+				%>
+				<div class="popupBody_list">
+
+					<div class="popupInfo">
+						<input type="text" name="inboxID"
+							value='<%=rs.getString("inboxID")%>' /> <a class="aButtons"
+							href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>">Delete</a>
+						<br>
+					</div>
+				</div>
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+			</div>
+		</div>
+	</div>
+
+
+
+
 
 			<div class="inboxbox">
 				<p class="bl2">18.03.2021/12:08
