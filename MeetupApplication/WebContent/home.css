@@ -610,6 +610,17 @@ form {
      margin-right: 0;
 }
 
+.box3 img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-right: -95%;
+    margin-top: -4px;
+    margin-bottom: 0em;
+    margin-left: 32px;
+}
+
+
 p.choice {
 	margin-top: -3em;
 }
@@ -797,23 +808,23 @@ img.middle {
   animation: fadeIn 1s;
 }
 
+
 table.homeTask thead th {
 	background: #E3E0E0;
 	border-bottom: 1px solid #dddddd;
 	padding: 5px 5px;
 	width: 80px;
 }
-
-table.homeTask td#taskName {
+table.homeTask td#taskName{
 	hyphens: auto; 
 	word-break: break-word; 
 	width: 200px; 
-	cursor: pointer;
+	cursor:pointer;
 }
-
 table.homeTask tr.tableTask:hover td{
 	font-weight: bold;
 }
+
 
 table.homeTask tbody td {
 	font-size: 20px;
@@ -826,6 +837,7 @@ table.homeTask tbody img {
 	height: 100px;
 	cursor: pointer;
 }
+
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
@@ -1078,6 +1090,7 @@ dialog[open] {
 	position: absolute;
 	top: 2%;
 	right: 5%;
+	cursor: pointer;
 }
 #punkte ul {
 	margin-top:10px;
@@ -1107,3 +1120,153 @@ dialog[open] {
   color: #fff;
   pointer-events: none;
 }
+
+/* Background Pop-Up-Window*/
+.note_addBlock {
+	display: none;
+	position: fixed;
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.addBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Schlieﬂ-Button */
+.close {
+	color: #707070;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.popupHeader {
+	text-align: center;
+	padding: 5px 15px;
+	color: #707070;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+.popupHeader img {
+	width: 35px;
+	height: 35px;
+	margin-bottom: -10px;
+}
+
+.popupBody_note {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 2px 15px;
+	text-align: left;
+	font-size: 20px;
+	color: #707070;
+/* Style the Image Used to Trigger the Modal */
+}
+
+.popupBody_note input {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+}
+
+.popupBody_note select {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px 5px;
+}
+
+.popupBody_note .listBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody_note fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody_note input {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 55px;
+	height: 30px;
+}
+
+.popupBody_note textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 2px 15px;
+	margin-left: 2px;
+}
+
+.popupBody_note textarea {
+	margin-left: 2px;
+}
+
+.popupBody_note input#file-upload-button {
+	font-size: 19px;
+}
+
+
+.popupBody_note button:hover {
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #707070;
+}
+
+.popupBody_note button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 123px;
+	margin-top:  30px;
+}
+
+.popupInfo form.noteForm {
+	max-width: 800px;
+	height: auto;
+	box-sizing: border-box;
+	font-family: sans-serif;
+	color: white;
+	background: #F0F0F0;
+	margin: 1em auto -1em;
+	padding: 3em;
+	border-radius: 0 1em 1em;
+	box-shadow: 10px 10px 15px silver;
+}
+
