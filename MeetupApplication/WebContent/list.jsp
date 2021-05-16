@@ -162,23 +162,32 @@
 									required="required" />
 							</div>
 							<div>
-								<label style="position: absolute">Description</label>
-								<textarea style="margin-left: 99px" name="description"></textarea>
+								<label>Description</label> <textarea name="description"></textarea>
 							</div>
 							<div>
 								<label>Due Date</label> <input type="date" name="dueDate"
-									style="margin-left: 20px;" required="required">
+									style="margin-left: 33px;" required="required">
 							</div>
 							<div>
-								<label>Status</label> <select name="taskStatus"
-									style="margin-left: 46px">
-									<option value="In Progress">In Progress</option>
-									<option value="Done">Done</option>
-								</select>
+								<label>Status</label> <input type="text" name="taskStatus"
+									required="required" />
 							</div>
 							<div>
 								<label>Assignee</label> <input type="text" name="assignee"
-									style="margin-left: 20px;" required="required">
+									required="required" />
+							</div>
+							<div>
+								<label>Internal Inquiries</label> <input type="text" name="internalInquiries"
+									required="required" />
+							</div>
+							<div>
+								<label>Comment</label> <input type="text" name="comment"
+									required="required" />
+							</div>
+							
+							<div>
+								<label>Attachment</label> <input type="file" id="file-upload-button"
+									name="file" required="required" />
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -195,10 +204,13 @@
 			<thead>
 				<tr>
 					<th style="width: 200px">Title</th>
-					<th style="width: 250px">Description</th>
+					<th style="width: 150px">Description</th>
 					<th style="width: 150px">Due Date</th>
-					<th style="width: 150px">Status</th>
-					<th style="width: 200px">Assignee</th>
+					<th style="width: 200px">Status</th>
+					<th style="width: 250px">Assignee</th>
+					<th style="width: 185px">Internal Inquiries</th>
+					<th style="width: 185px">Comment</th>
+					<th style="width: 185px">Attachment</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
@@ -213,20 +225,29 @@
 				int i = 0;
 				while (rs.next()) {
 					String taskID = rs.getString("taskID");
-					String taskName = rs.getString("taskName");
-					String description = rs.getString("description");
-					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-					String taskStatus = rs.getString("taskStatus");
-					String assignee = rs.getString("assignee");
+					String taskName = request.getParameter("taskName");
+					String description = request.getParameter("description");
+					LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
+					String taskStatus = request.getParameter("taskStatus");
+					String assignee = request.getParameter("assignee");
+					String internalInquiries = request.getParameter("internalInquiries");
+					String comment = request.getParameter("comment");
+					String filename = rs.getString("filename");
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
 		<table class="list">
 			<tr>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=description%></td>
+				<td style="width: 150px;"><%=description%></td>
 				<td style="width: 150px;"><%=dueDate%></td>
-				<td style="width: 150px;"><%=taskStatus%></td>
-				<td style="width: 200px;"><%=assignee%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=taskStatus%></td>
+				<td style="width: 150px;"><%=assignee%></td>
+				<td style="width: 185px;"><p align="center"><%=internalInquiries%></td>
+				<td style="width: 185px;"><p align="center"><%=comment%></td>
+				<td style="width: 200px;"><img src="pictures/<%=filename%>" /><a
+					href="editImageTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 25px; height: 25px;"></a></td>
 				<td style="width: 150px;"><a
 					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
@@ -264,27 +285,29 @@
 						class="close" title="Schließen">&times;</span>
 				</div>
 				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							String description = rs.getString("description");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							String taskStatus = rs.getString("taskStatus");
-							String assignee = rs.getString("assignee");
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = request.getParameter("taskName");
+						String description = request.getParameter("description");
+						LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
+						String taskStatus = request.getParameter("taskStatus");
+						String assignee = request.getParameter("assignee");
+						String internalInquiries = request.getParameter("internalInquiries");
+						String comment = request.getParameter("comment");
+						String filename = rs.getString("filename");
 				%>
 				<div class="popupBody_list">
 
 					<div class="popupInfo">
-						<input type="text" name="taskID"
-							value='<%=rs.getString("taskID")%>' /> <a class="aButtons"
-							href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
+						<input type="text" name="taskID" value='<%=rs.getString("taskID")%>' /> 
+						<a class="aButtons" href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
 						<br>
 					</div>
 				</div>

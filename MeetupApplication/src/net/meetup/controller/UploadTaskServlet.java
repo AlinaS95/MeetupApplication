@@ -19,7 +19,12 @@ import javax.servlet.http.Part;
 
 import net.meetup.utils.JDBCUtils;
 
+
 @WebServlet("/UploadTask")
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+		maxFileSize = 1024 * 1024 * 10, // 10MB
+		maxRequestSize = 1024 * 1024 * 50)
+
 
 public class UploadTaskServlet extends HttpServlet {
 
@@ -34,17 +39,32 @@ public class UploadTaskServlet extends HttpServlet {
 		LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
 		String taskStatus = request.getParameter("taskStatus");
 		String assignee = request.getParameter("assignee");
+		String internalInquiries = request.getParameter("internalInquiries");
+		String comment = request.getParameter("comment");
+		
+		Part part = request.getPart("file");
+		String fileName = extractFileName(part);// file name
+		String savePath = "C:\\Users\\lmb19\\Desktop\\eclipse-javascript-2018-09-win32-x86_64\\eclipse\\MeetupApplication2\\WebContent\\pictures"
+				+ File.separator + fileName;
+		File fileSaveDir = new File(savePath);
+
+		part.write(savePath + File.separator);
+
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee) VALUES (?,?,?,?,?)");
+					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, comment, filename, path) VALUES (?,?,?,?,?,?,?,?,?)");
 			pst.setString(1, taskName);
 			pst.setString(2, description);
 			pst.setDate(3, JDBCUtils.getSQLDate(dueDate));
 			pst.setString(4, taskStatus);
 			pst.setString(5, assignee);
+			pst.setString(6, internalInquiries);
+			pst.setString(7, comment);
+			pst.setString(8, fileName);
+			pst.setString(9, savePath);
 			pst.executeUpdate();
 			String message = "New Task";
 			request.setAttribute("message", message);
@@ -54,5 +74,18 @@ public class UploadTaskServlet extends HttpServlet {
 		}
 
 	}
+	// file name of the upload file is included in content-disposition header like
+		// this:
+		// form-data; name="dataFile"; filename="PHOTO.JPG"
 
-}
+		private String extractFileName(Part part) {// This method will print the file name.
+			String contentDisp = part.getHeader("content-disposition");
+			String[] items = contentDisp.split(";");
+			for (String s : items) {
+				if (s.trim().startsWith("filename")) {
+					return s.substring(s.indexOf("=") + 2, s.length() - 1);
+				}
+			}
+			return "";
+		}
+	}
