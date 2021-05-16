@@ -352,39 +352,129 @@
 		<div class="popup" onclick="myFunction()">
 			<img src="pictures/mannschaft.png" alt=""> <span
 				class="popuptext" id="myPopup"><h4>Marketing-Team</h4>
-				<hr> <br>
-				<div class="chip">
-					<img src="pictures/avatar5.png" alt="Person" width="96" height="96">
-					Alina Schomacher
-				</div> <br> <br>
-				<div class="chip1">
-					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Jana Podschaske
-				</div> <br> <br>
-				<div class="chip2">
-					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea Brüggemann
-				</div> <br> <br>
-				<h4>Production-Team</h4>
-				<hr> <br>
-				<div class="chip3">
-					<img src="pictures/avatar5.png" alt="Person" width="96" height="96">
-					Jana Podschaske
-				</div> <br> <br>
-				<div class="chip4">
-					<img src="pictures/avatar4.png" alt="Person" width="96" height="96">
-					Lea Brüggemann
-				</div> <br> <br>
-				<h4>University-Team</h4>
-				<hr> <br>
-				<div class="chip5">
-					<img src="pictures/avatar2.png" alt="Person" width="96" height="96">
-					Max Mustermann
-				</div> <br> <br>
-				<div class="chip6">
-					<img src="pictures/avatar1.png" alt="Person" width="96" height="96">
-					Max Mustermann
-				</div> </span>
+				
+				<a onclick="document.getElementById('add_note').style.display='block'" style="width: auto;"><img src="pictures/add.png" alt="Add">Teams</a>
+		<br>
+		<br>
+		<table class="list">
+			<thead>
+				<tr>
+					<th style="width: 350px">Name</th>
+					<th style="width: 400px">Workspace</th>
+				</tr>
+			</thead>
+		</table>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT * FROM teams";
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String teamsid = rs.getString("teamsid");
+					String fullName = rs.getString("fullName");
+					String workspace = rs.getString("workspace");
+		%>
+		<input type="hidden" name="teamsid" value='<%=rs.getString("teamsid")%>' />
+		<table class="list">
+			<tr>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=fullName%></td>
+				<td style="width: 200px;"><%=workspace%></td>
+				<td style="width: 10px;"><a
+					href="editNote.jsp?id=<%=rs.getString("id")%>"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
+					<a
+					onclick="document.getElementById('delete_info').style.display='block'"
+					<%=rs.getString("id")%> style="width: auto;"><img
+						src="pictures/delete2.png" alt="Delete post"
+						style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
+				</a></td>
+			</tr> 
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>
+		</div>
+		
+		
+		<!-- Pop-Up-Window New Note -->
+		<div id="add_note" class="note_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					Add new Teammember <span
+						onclick="document.getElementById('add_note').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<div class="popupBody_note">
+					<div class="popupInfo">
+						<form class="noteForm" action="AddNote" method="post">
+							<div>
+								<label>Teammember</label> <input type="text" name="noteTitle"
+									required="required" />
+							</div>
+							<div>
+								<label>Workspace</label> <input type="date" name="date"
+									style="margin-left: 20px;" required="required">
+							</div>
+							<button type="submit">Save</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Pop-Up-Window Delete Note -->
+		<div id="delete_info" class="note_addBlock">
+
+			<!-- Window content -->
+			<div class="addBlock">
+				<div class="popupHeader">
+					<img src="pictures/delete2.png" alt="Delete post"
+						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+					Teammember <span
+						onclick="document.getElementById('delete_info').style.display='none'
+					"
+						class="close" title="Schließen">&times;</span>
+				</div>
+				<%
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM teams";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String id = rs.getString("id");
+							String fullName = rs.getString("fullName");
+							String workspace = rs.getString("workspace");
+				%>
+				<div class="popupBody_list">
+
+					<div class="popupInfo">
+						<input type="text" name="id"
+							value='<%=rs.getString("id")%>' /> <a class="aButtons"
+							href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a>
+						<br>
+					</div>
+				</div>
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+			</div>
 		</div>
 
 		</main> <!-- Teams Pop Up --> <script>
@@ -426,6 +516,7 @@
 		document.addEventListener('DOMContentLoaded', uhrzeit);
 	}());
 </script>
+	</div>
 	</div>
 	</div>
 </body>
