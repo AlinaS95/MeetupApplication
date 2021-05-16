@@ -189,6 +189,12 @@
 								<label>Attachment</label> <input type="file" id="file-upload-button"
 									name="file" required="required" />
 							</div>
+							
+							<div>
+								<label>Completion in %</label> <input type="text" name="completion"
+									required="required" />
+							</div>
+							
 							<button type="submit">Save</button>
 						</form>
 					</div>
@@ -211,6 +217,7 @@
 					<th style="width: 185px">Internal Inquiries</th>
 					<th style="width: 185px">Comment</th>
 					<th style="width: 185px">Attachment</th>
+					<th style="width: 185px">Completion in %</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
@@ -233,6 +240,8 @@
 					String internalInquiries = request.getParameter("internalInquiries");
 					String comment = request.getParameter("comment");
 					String filename = rs.getString("filename");
+					String completion = rs.getString("completion");
+
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
 		<table class="list">
@@ -248,6 +257,7 @@
 					href="editImageTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 25px; height: 25px;"></a></td>
+				<td style="width: 185px;"><p align="center"><%=completion%></td>
 				<td style="width: 150px;"><a
 					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
@@ -302,6 +312,7 @@
 						String internalInquiries = request.getParameter("internalInquiries");
 						String comment = request.getParameter("comment");
 						String filename = rs.getString("filename");
+						String completion = rs.getString("completion");
 				%>
 				<div class="popupBody_list">
 

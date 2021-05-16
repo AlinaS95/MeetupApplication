@@ -41,6 +41,8 @@ public class UploadTaskServlet extends HttpServlet {
 		String assignee = request.getParameter("assignee");
 		String internalInquiries = request.getParameter("internalInquiries");
 		String comment = request.getParameter("comment");
+		String completion = request.getParameter("completion");
+
 		
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
@@ -55,7 +57,7 @@ public class UploadTaskServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, comment, filename, path) VALUES (?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, comment, filename, path, completion) VALUES (?,?,?,?,?,?,?,?,?,?)");
 			pst.setString(1, taskName);
 			pst.setString(2, description);
 			pst.setDate(3, JDBCUtils.getSQLDate(dueDate));
@@ -65,6 +67,7 @@ public class UploadTaskServlet extends HttpServlet {
 			pst.setString(7, comment);
 			pst.setString(8, fileName);
 			pst.setString(9, savePath);
+			pst.setString(10, completion);
 			pst.executeUpdate();
 			String message = "New Task";
 			request.setAttribute("message", message);

@@ -37,6 +37,7 @@ public class UpdateTaskServlet extends HttpServlet {
 		LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
 		String taskStatus = request.getParameter("taskStatus");
 		String assignee = request.getParameter("assignee");
+		String completion = request.getParameter("completion");
 
 		if (taskID != null) {
 			Connection con = null;
@@ -45,7 +46,7 @@ public class UpdateTaskServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=? where taskID="
+				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=? completion=? where taskID="
 						+ taskID;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, taskID);
@@ -54,6 +55,8 @@ public class UpdateTaskServlet extends HttpServlet {
 				ps.setDate(4, JDBCUtils.getSQLDate(dueDate));
 				ps.setString(5, taskStatus);
 				ps.setString(6, assignee);
+				ps.setString(7, completion);
+
 
 				ps.executeUpdate();
 				response.sendRedirect("list.jsp");
