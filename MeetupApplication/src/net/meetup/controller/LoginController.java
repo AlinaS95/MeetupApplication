@@ -37,7 +37,7 @@ public class LoginController extends HttpServlet {
 			if (user != null) {
 				HttpSession session = request.getSession();
 				session.setAttribute("login", user);
-				destPage = "profile.jsp";
+				destPage = "profile.jsp?wID="+ user.getWID();
 			} else {
 				String message = "Invalid email/password";
 				request.setAttribute("message", message);

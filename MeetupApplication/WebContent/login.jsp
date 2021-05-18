@@ -29,7 +29,12 @@
 			<p>Password</p>
 			<input type="password" name="password" placeholder="Enter Password" />
 			<p>Workspace</p>
-			<input type="text" name="workspace" placeholder="Enter Workspace" />${message}
+			<select name="workspace">
+				<option selected="">Select your workspace</option>
+				<option value="Marketing">Marketing</option>
+				<option value="Website">Website</option>
+				<option value="IT">IT</option>
+			</select>${message}<br><br>
 			
 			<input type="submit" name="btn_login" value="Login">
 			<input type="submit" value="Not a member?" onClick="register()"><br>

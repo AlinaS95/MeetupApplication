@@ -40,7 +40,7 @@
 <div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
 			<div class="firstBox">
@@ -72,7 +72,7 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp">Home</a></li>
+					<li><a href="home.jsp?wID=${login.WID}">Home</a></li>
 					<li><a href="javascript:list()">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
 					<li><a href="calendar.jsp"style="font-weight: bold">Calendar</a></li>

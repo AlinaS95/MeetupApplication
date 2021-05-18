@@ -26,8 +26,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -47,7 +47,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp"><img src="pictures/${login.fileName}"
+					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
 						alt="Profile Picture" /></a>
 				</div>
 			</div>
@@ -58,7 +58,7 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp">Home</a></li>
+					<li><a href="home.jsp?wID=${login.WID}">Home</a></li>
 					<li><a href="javascript:list()">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
 					<li><a href="calendar.jsp">Calendar</a></li>
@@ -109,7 +109,8 @@
 						class="close" title="Schließen">&times;</span>
 				</div>
 				<div class="popupBody">
-					<input type="hidden" name="userID" value="${login.userID}" /> <img
+					<input type="hidden" name="userID" value="${login.userID}" /> <input
+						type="hidden" name="wID" value="${login.WID}" /> <img
 						src="pictures/${login.fileName}" style="width: 65px; height: 65px" /><br>
 					<a class="aButtons2"
 						href="editProfilePicture.jsp?userID=${login.userID}"
@@ -141,22 +142,36 @@
 		<div class="workspace">
 			<div class="project_name">${login.workspace}</div>
 			<!-- Workspace Members -->
-			<br> <br>Members<br> <a class="workspace_members"
-				onclick="document.getElementById('w_members').style.display='block'
-				"
-				style="width: auto;"><img src="pictures/usericon.png"
-				alt="Members"></a> <a class="workspace_members"
-				onclick="document.getElementById('w_members').style.display='block'
-				"
-				style="width: auto;"><img src="pictures/usericon.png"
-				alt="Members"></a> <a class="workspace_addmembers"
-				onclick="document.getElementById('members_add').style.display='block'
-				"
-				style="width: auto;"><img src="pictures/add.png"
-				alt="Add Members"></a> <br>
+			<br> <br>Members<br>
+			<%
+				try {
+					String wID = request.getParameter("wID");
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM user WHERE wID=" + wID;
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String firstName = rs.getString("firstName");
+						String lastName = rs.getString("lastName");
+						String workspace = rs.getString("workspace");
+						String fileName = rs.getString("filename");
+			%>
+			<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+			<img class="membersImg" style="border-radius: 100%; width: 50px; height: 50px"
+				src="pictures/<%=fileName%>" title="<%=firstName%> <%=lastName%>" /><input
+				type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
 
+			<%
+				}
+				} catch (Exception e) {
+					out.println(e);
+				}
+			%>
+ 
 			<!-- Workspace Tasks -->
-			<br> Tasks<br> <a class="workspace_tasks"
+			<br><br>Tasks<br> <a class="workspace_tasks"
 				onclick="document.getElementById('task_info').style.display='block'"
 				style="width: auto;"><img src="pictures/workspaceTasks.png"
 				alt="Tasks"></a><a class="workspace_addmembers"
@@ -194,26 +209,6 @@
 							type="image" src="pictures/add.png" alt="Add">
 					</form>
 					<hr>
-					<div class="membersList">
-						<a href="<%=request.getContextPath()%>/workspaceManagement"
-							class="nav-link">Members</a><br>
-						<table>
-							<c:forEach var="workspace" items="${listWorkspace}">
-								<tr>
-									<td><input type="image" src="pictures/usericon.png"
-										alt="Member"></td>
-									<td><c:out value="${workspace.workspaceID}" /></td>
-									<td><c:out value="${workspace.teamName}" /></td>
-									<td><c:out value="${workspace.fullName}" /></td>
-									<td><c:out value="${workspace.email}" /></td>
-									<td><input
-										src="delete?workspaceID=<c:out value='${workspace.workspaceID}' />"
-										type="image" src="pictures/delete.png" alt="delete member"
-										style="width: 20px; height: 20px; margin-top: -10px; position: absolute"></td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
 				</div>
 				<div class="popupFooter">
 					<button onClick="save()">Save</button>
@@ -222,7 +217,7 @@
 		</div>
 
 
-<!-- Pop-Up-Window Add Workspace-->
+		<!-- Pop-Up-Window Add Workspace-->
 		<div id="workspace_add" class="navigation_addBlock">
 			<!-- Window content -->
 			<div class="addBlock">
@@ -235,8 +230,7 @@
 				<div class="popupBody">
 					<a>Add new member</a>
 					<form action="addWorkspace" method="post">
-					<input type="hidden"
-					name="userSID" value='${login.userID}' />
+						<input type="hidden" name="userSID" value='${login.userID}' />
 						<p>Full Name</p>
 						<input type="text" id="fullName" name="fullName"
 							placeholder="Enter full name" />
@@ -245,14 +239,11 @@
 							placeholder="Enter email" />
 						<p>Workspace</p>
 						<input type="text" id="workspace" name="workspace"
-							placeholder="Enter workspace" />
-						<input type="submit"
-							name="btn_addMember" value="Add Member"> 
+							placeholder="Enter workspace" /> <input type="submit"
+							name="btn_addMember" value="Add Member">
 					</form>
 					<hr>
-					<div class="membersList">
-					
-					</div>
+					<div class="membersList"></div>
 				</div>
 				<div class="popupFooter">
 					<button onClick="save()">Save</button>
@@ -272,11 +263,9 @@
 				</div>
 				<div class="popupBody">
 					<ul class="navbar-nav">
-						<li><a href="<%=request.getContextPath()%>/list"
-							class="nav-link">Tasks</a></li>
+						<li><a>Tasks</a></li>
 					</ul>
 					<div class="row">
-						<!-- <div class="alert alert-success" *ngIf='message'>{{message}}</div> -->
 						<table>
 							<thead>
 								<tr>
@@ -287,26 +276,6 @@
 								</tr>
 							</thead>
 							<tbody>
-								<!--   for (Task task: tasks) {  -->
-								<c:forEach var="task" items="${listTasks}">
-
-									<tr>
-										<td><c:out value="${task.title}" /></td>
-										<td><c:out value="${task.targetDate}" /></td>
-										<td><c:out value="${task.status}" /></td>
-
-										<td><a
-											href="edit?taskID=<c:out value='${task.taskID}' />">Edit</a>
-											&nbsp;&nbsp;&nbsp;&nbsp; <a
-											href="delete?taskID=<c:out value='${task.taskID}' />">Delete</a></td>
-
-										<!--  <td><button (click)="updateTask(task.taskID)" class="btn btn-success">Update</button>
-                 <button (click)="deleteTask(task.taskID)" class="btn btn-warning">Delete</button></td> -->
-									</tr>
-								</c:forEach>
-								<!-- } -->
-							</tbody>
-
 						</table>
 					</div>
 				</div>

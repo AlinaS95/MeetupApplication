@@ -11,10 +11,11 @@ public class User {
 	protected String password;
 	protected String fileName;
 	protected String savePath;
+	protected int wID;
 	
 	public User() {}
 	
-	public User (String firstName, String lastName, String email, String company, String position, String workspace, String password, String fileName, String savePath) {
+	public User (String firstName, String lastName, String email, String company, String position, String workspace, String password, String fileName, String savePath, int wID) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -25,9 +26,10 @@ public class User {
 		this.password = password;
 		this.fileName = fileName;
 		this.savePath = savePath;
+		this.wID = wID;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String password,String fileName, String savePath) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String password,String fileName, String savePath, int wID) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -39,9 +41,10 @@ public class User {
 		this.password = password;
 		this.fileName = fileName;
 		this.savePath = savePath;
+		this.wID = wID;
 	}
 	
-	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String fileName) {
+	public User(int userID, String firstName, String lastName, String email, String company, String position, String workspace, String fileName, int wID) {
 		super();
 		this.userID = userID;
 		this.firstName = firstName;
@@ -51,6 +54,7 @@ public class User {
 		this.position = position;
 		this.workspace = workspace;
 		this.fileName = fileName;
+		this.wID = wID;
 	}
 	
 	public int getUserID() {
@@ -112,5 +116,11 @@ public class User {
 	}
 	public void setSavePath(String savePath) {
 		this.savePath = savePath;
+	}
+	public int getWID() {
+		return wID;
+	}
+	public void setWID(int wID) {
+		this.wID = wID;
 	}
 }

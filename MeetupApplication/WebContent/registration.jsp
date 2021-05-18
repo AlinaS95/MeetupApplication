@@ -40,8 +40,12 @@
 				placeholder="Enter Company" />
 
 			<p>*Workspace</p>
-			<input type="text" id="workspace" name="workspace"
-				placeholder="Enter Workspace" />
+			<select name="wID" id="wID" onchange="singleSelectChangeText()">
+				<option selected="">Select your workspace</option>
+				<option value="1">Marketing</option>
+				<option value="2">Website</option>
+				<option value="3">IT</option>
+			</select> <input id="myWorkspace" type="text" name="workspace">
 
 			<p>*Password</p>
 			<input type="password" id="password" name="password"
@@ -51,11 +55,22 @@
 			<input type="password" name="" placeholder="Reply Password">
 
 			<p>Profile Picture</p>
-			<input type="file" id="file-upload-button" name="file" required="required" />
-			
-			<input type="submit" name="btn_register" value="Register">
+			<input type="file" id="file-upload-button" name="file"
+				required="required" /> <input type="submit" name="btn_register"
+				value="Register">
 		</form>
 		<a class="buttonL" href="login.jsp">Already a member?</a>
 	</div>
+	<script>
+		function singleSelectChangeText() {
+			//Getting Value
+
+			var selObj = document.getElementById("wID");
+			var selValue = selObj.options[selObj.selectedIndex].text;
+
+			//Setting Value
+			document.getElementById("myWorkspace").value = selValue;
+		}
+	</script>
 </body>
 </html>

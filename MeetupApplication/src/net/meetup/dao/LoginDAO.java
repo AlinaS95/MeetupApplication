@@ -39,6 +39,7 @@ public class LoginDAO {
             user.setCompany(result.getString("company"));
             user.setWorkspace(result.getString("workspace"));
             user.setFileName(result.getString("fileName"));
+            user.setWID(result.getInt("wID"));
         }
 
         connection.close();

@@ -23,7 +23,7 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
 			<div class="firstBox">
@@ -44,7 +44,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
+					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -55,7 +55,7 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp"><dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"><dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>

@@ -782,7 +782,7 @@ img.middle {
     color: #707070;
     text-align: center;
     border-radius: 6px;
-    padding: 12px 0;
+    padding: 12px 5;
     position: absolute;
     z-index: 1;
     margin-top: -104px;
@@ -836,6 +836,13 @@ table.homeTask tbody img {
 	width: 100px;
 	height: 100px;
 	cursor: pointer;
+}
+
+.list .membersImg{
+	width: 45px;
+	height: 45px;
+	border-radius: 100%;
+	margin: -30px -15px;
 }
 
 

@@ -13,8 +13,8 @@ public class RegisterDAO {
 	private String jdbcName = "root";
 	private String jdbcPassword = "";
 	
-	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, workspace, password, filename, path) VALUES (?,?,?,?,?,PASSWORD(?),?,?)";
-	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, workspace, password, filename from user where userID=?";
+	private static final String REGISTER_USER_SQL = "INSERT INTO user (firstName, lastName, email, company, workspace, password, filename, path, wID) VALUES (?,?,?,?,?,PASSWORD(?),?,?,?)";
+	private static final String SELECT_USER_BY_ID = "select userID, firstName, lastName, email, company, workspace, password, filename, wID from user where userID=?";
 	
 	public RegisterDAO() {}
 	
@@ -47,6 +47,7 @@ public class RegisterDAO {
 			statement.setString(6, user.getPassword());
 			statement.setString(7, user.getFileName());
 			statement.setString(8, user.getSavePath());
+			statement.setInt(9, user.getWID());
 			
 			System.out.println(statement);
 			
@@ -78,7 +79,8 @@ public class RegisterDAO {
                 String workspace = result.getString("workspace");
                 String password = result.getString("password");
                 String fileName = result.getString("filename");
-                user = new User(userID, firstName, lastName, email, company, workspace, password,fileName);
+                Integer wID = result.getInt("wID");
+                user = new User(userID, firstName, lastName, email, company, workspace, password,fileName, wID);
             }
         } catch (SQLException e) {
             printSQLException(e);

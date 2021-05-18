@@ -52,7 +52,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img
+					<a href="profile.jsp?wID=${login.WID}"><img
 						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 						<input type="hidden"
 					name="userID" value='${login.userID}' />

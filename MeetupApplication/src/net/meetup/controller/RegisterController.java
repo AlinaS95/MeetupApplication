@@ -33,7 +33,7 @@ public class RegisterController extends HttpServlet {
 	}
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.sendRedirect("registration.jsp");
+		response.sendRedirect("registration.jsp?wID=\"+ user.getWID()");
 	}
 	private void register(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,6 +43,7 @@ public class RegisterController extends HttpServlet {
 			String company = request.getParameter("company");
 			String workspace = request.getParameter("workspace");
 			String password = request.getParameter("password");
+			Integer wID = Integer.parseInt(request.getParameter("wID"));
 			
 			Part part = request.getPart("file");
 			String fileName = extractFileName(part);// file name
@@ -61,6 +62,7 @@ public class RegisterController extends HttpServlet {
 			user.setPassword(password);
 			user.setFileName(fileName);
 			user.setSavePath(savePath);
+			user.setWID(wID);
 			
 			try {
 				int result = registerDAO.registerUser(user);
