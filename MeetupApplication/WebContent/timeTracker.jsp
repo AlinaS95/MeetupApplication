@@ -31,7 +31,7 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
 			<div class="firstBox">
@@ -65,37 +65,37 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="javascript:home()"> <dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"> <dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="javascript:list()" style="font-weight: normal">
+					<li><a href="list.jsp?wID=${login.WID}" style="font-weight: normal">
 							<dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn>
 					</a></li>
 
-					<li><a href="javascript:board()" style="font-weight: normal">
+					<li><a href="board.jsp?wID=${login.WID}" style="font-weight: normal">
 							<dfn class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
 					</a></li>
 
-					<li><a href="javascript:calendar()"
+					<li><a href="calendar.jsp?wID=${login.WID}"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
 
-					<li><a href="javascript:progress()"
+					<li><a href="progress.jsp?wID=${login.WID}"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
 
-					<li><a href="javascript:socialmedia()"
+					<li><a href="socialmedia.jsp?wID=${login.WID}"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>

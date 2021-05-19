@@ -60,10 +60,10 @@
 							src="pictures/navigation.png" alt="Menu"></a></li>
 					<li><a href="home.jsp?wID=${login.WID}">Home</a></li>
 					<li><a href="list.jsp?wID=${login.WID}">List</a></li>
-					<li><a href="javascript:board()">Board</a></li>
-					<li><a href="calendar.jsp">Calendar</a></li>
-					<li><a href="javascript:progress()">Progress</a></li>
-					<li><a href="socialmedia.jsp">Social Media</a></li>
+					<li><a href="board.jsp?wID=${login.WID}">Board</a></li>
+					<li><a href="calendar.jsp?wID=${login.WID}">Calendar</a></li>
+					<li><a href="progress.jsp?wID=${login.WID}">Progress</a></li>
+					<li><a href="socialmedia.jsp?wID=${login.WID}">Social Media</a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
