@@ -46,7 +46,7 @@ public class UploadTaskServlet extends HttpServlet {
 		
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
-		String savePath = "C:\\Users\\lmb19\\Desktop\\eclipse-javascript-2018-09-win32-x86_64\\eclipse\\MeetupApplication2\\WebContent\\pictures"
+		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\"
 				+ File.separator + fileName;
 		File fileSaveDir = new File(savePath);
 

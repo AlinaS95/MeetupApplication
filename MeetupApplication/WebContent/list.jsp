@@ -156,7 +156,7 @@
 				</div>
 				<div class="popupBody_list">
 					<div class="popupInfo">
-						<form action="UploadTask" method="post">
+						<form action="UploadTask" method="post" enctype="multipart/form-data">
 							<div>
 								<label>Title</label> <input type="text" name="taskName"
 									required="required" />
@@ -232,13 +232,13 @@
 				int i = 0;
 				while (rs.next()) {
 					String taskID = rs.getString("taskID");
-					String taskName = request.getParameter("taskName");
-					String description = request.getParameter("description");
+					String taskName =  rs.getString("taskName");
+					String description = rs.getString("description");
 					LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
-					String taskStatus = request.getParameter("taskStatus");
-					String assignee = request.getParameter("assignee");
-					String internalInquiries = request.getParameter("internalInquiries");
-					String comment = request.getParameter("comment");
+					String taskStatus = rs.getString("taskStatus");
+					String assignee =  rs.getString("assignee");
+					String internalInquiries =  rs.getString("internalInquiries");
+					String comment =  rs.getString("comment");
 					String filename = rs.getString("filename");
 					String completion = rs.getString("completion");
 
@@ -304,13 +304,13 @@
 					int i = 0;
 					while (rs.next()) {
 						String taskID = rs.getString("taskID");
-						String taskName = request.getParameter("taskName");
-						String description = request.getParameter("description");
+						String taskName = rs.getString("taskName");
+						String description =  rs.getString("description");
 						LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
-						String taskStatus = request.getParameter("taskStatus");
-						String assignee = request.getParameter("assignee");
-						String internalInquiries = request.getParameter("internalInquiries");
-						String comment = request.getParameter("comment");
+						String taskStatus = rs.getString("taskStatus");
+						String assignee = rs.getString("assignee");
+						String internalInquiries = rs.getString("internalInquiries");
+						String comment = rs.getString("comment");
 						String filename = rs.getString("filename");
 						String completion = rs.getString("completion");
 				%>

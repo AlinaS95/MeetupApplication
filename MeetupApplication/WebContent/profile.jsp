@@ -59,7 +59,7 @@
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
 					<li><a href="home.jsp?wID=${login.WID}">Home</a></li>
-					<li><a href="javascript:list()">List</a></li>
+					<li><a href="list.jsp?wID=${login.WID}">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
 					<li><a href="calendar.jsp">Calendar</a></li>
 					<li><a href="javascript:progress()">Progress</a></li>

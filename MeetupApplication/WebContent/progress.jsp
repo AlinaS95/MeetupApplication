@@ -184,12 +184,12 @@
 
 
 	<div class="box1">
-		Overdue Task<br> <a> <%
+		New Task<br> <a> <%
  	try {
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='To Do'";
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
@@ -208,7 +208,7 @@
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='In Progress'";
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
@@ -227,7 +227,7 @@
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='Done'";
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
