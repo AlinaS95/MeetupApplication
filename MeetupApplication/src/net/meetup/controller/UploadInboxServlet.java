@@ -29,24 +29,23 @@ public class UploadInboxServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String fullName = request.getParameter("fullName");
-		String email = request.getParameter("email");
+		String assignee = request.getParameter("assignee");
+		String title = request.getParameter("title");
+		String description = request.getParameter("description");
 		String workspace = request.getParameter("workspace");
 		LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
-		String description = request.getParameter("description");
-		String position = request.getParameter("position");
+		
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO inbox (fullName, email, dueDate, workspace, description, position) VALUES (?,?,?,?,?,?)");
-			pst.setString(1, fullName);
-			pst.setString(2, email);
-			pst.setDate(3, JDBCUtils.getSQLDate(dueDate));
+					"INSERT INTO inbox (assignee, title, description, workspace, dueDate) VALUES (?,?,?,?,?)");
+			pst.setString(1, assignee);
+			pst.setString(2, title);
+			pst.setString(3, description);
 			pst.setString(4, workspace);
-			pst.setString(5, description);
-			pst.setString(6, position);
+			pst.setDate(5, JDBCUtils.getSQLDate(dueDate));
 			pst.executeUpdate();
 			String message = "New Inbox";
 			request.setAttribute("message", message);

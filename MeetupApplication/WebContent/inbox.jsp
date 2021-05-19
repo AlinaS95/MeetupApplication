@@ -150,29 +150,25 @@
 				<div class="popupBody_list">
 					<div class="popupInfo">
 						<form action="UploadInbox" method="post">
-							<div>
-								<label>Title</label> <input type="text" name="fullName"
+						<div>
+								<label>Assignee</label> <input type="text" name="assignee"
 									required="required" />
 							</div>
 							<div>
-								<label>E-Mail</label> <input type="text" name="email"
+								<label>Title</label> <input type="text" name="title"
+									required="required" />
+							</div>
+							<div>
+								<label>Description</label> <input type="text" name="description"
 									required="required" />
 							</div>
 							<div>
 								<label>Workspace</label> <input type="text" name="workspace"
 									required="required" />
 							</div>
-							<div>
-								<label>Position</label> <input type="text" name="position"
-									required="required" />
-							</div>
 								<div>
 								<label>Due Date</label> <input type="date" name="dueDate"
 									style="margin-left: 20px;" required="required">
-							</div>
-							<div>
-								<label style="position: absolute">Description</label>
-								<textarea style="margin-left: 99px" name="description"></textarea>
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -188,11 +184,11 @@
 		<table class="list">
 			<thead>
 				<tr>
+					<th style="width: 200px">Assignee</th>
 					<th style="width: 200px">Title</th>
 					<th style="width: 250px">Description</th>
-					<th style="width: 150px">Due Date</th>
 					<th style="width: 150px">Workspace</th>
-					<th style="width: 200px">position</th>
+					<th style="width: 150px">DueDate</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
@@ -207,22 +203,20 @@
 				int i = 0;
 				while (rs.next()) {
 					String inboxID = rs.getString("inboxID");
-					String fullName = rs.getString("fullName");
+					String assignee = rs.getString("assignee");
+					String title = rs.getString("title");
 					String description = rs.getString("description");
-					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 					String workspace = rs.getString("workspace");
-					String email = rs.getString("email");
-					String position = rs.getString("position");
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 		%>
 		<input type="hidden" name="inboxID" value='<%=rs.getString("inboxID")%>' />
 		<table class="list">
 			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=fullName%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=description%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=assignee%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=title%></td>
+				<td style="width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><%=workspace%></td>
-				<td style="width: 200px;"><%=email%></td>
-				<td style="width: 200px;"><%=position%></td>
+				<td style="width: 150px;"><%=dueDate%></td>
 				<td style="width: 150px;"><a
 					href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 						src="pictures/settings.png" alt="Settings"
@@ -269,12 +263,12 @@
 						int i = 0;
 						while (rs.next()) {
 							String inboxID = rs.getString("inboxID");
-							String fullName = rs.getString("fullName");
-							String email = rs.getString("email");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							String workspace = rs.getString("workspace");
+							String assignee = rs.getString("assignee");
+							String title = rs.getString("title");
 							String description = rs.getString("description");
-							String position = rs.getString("position");
+							String workspace = rs.getString("workspace");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+							
 				%>
 				<div class="popupBody_list">
 
