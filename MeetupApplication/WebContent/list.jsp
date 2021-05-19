@@ -169,8 +169,13 @@
 									style="margin-left: 33px;" required="required">
 							</div>
 							<div>
-								<label>Status</label> <input type="text" name="taskStatus"
-									required="required" />
+								<label>Status</label> <select name="taskStatus"
+									style="margin-left: -2px">
+									<option selected="">Select the category</option>
+									<option value="To do">To do</option>
+									<option value="In Progress">In Progress</option>
+									<option value="Done">Done</option>
+								</select>
 							</div>
 							<div>
 								<label>Assignee</label> <input type="text" name="assignee"
