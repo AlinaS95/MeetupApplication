@@ -137,46 +137,47 @@
 			window.onload = datum
 		</script> <main> <br>
 
-		<div class="box1">
-			Short Messages: <br> <br>
-			<table class="list">
-				<thead>
-					<tr>
-						<th style="width: 200px">Message</th>
-						<th style="width: 150px">Due Date</th>
-					</tr>
-				</thead>
-			</table>
-			<hr>
-			<%
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-					Statement st = con.createStatement();
-					String sql = "SELECT * FROM inbox";
-					ResultSet rs = st.executeQuery(sql);
-					int i = 0;
-					while (rs.next()) {
-						String inboxID = rs.getString("inboxID");
-						String fullName = rs.getString("fullName");
-						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-			%>
-			<input type="hidden" name="inboxID"
-				value='<%=rs.getString("inboxID")%>' />
-			<table class="homeTask">
-				<tr class="tableTask" onclick="list()">
-					<td id="fullName"><%=fullName%></td>
-					<td style="width: 150px;"><%=dueDate%></td>
-				</tr>
-				</tbody>
-			</table>
-			<%
-				}
-				} catch (Exception e) {
+			<div class="box1">
+					Short Messages: <br> <br>
+					<table class="list">
+						<thead>
+							<tr>
+								<th style="width: 200px">Message</th>
+								<th style="width: 150px">Due Date</th>
+							</tr>
+						</thead>
+					</table>
+					<hr>
+					<%
+						try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM inbox";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String inboxID = rs.getString("inboxID");
+							String title = rs.getString("title");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+					%>
+					<input type="hidden" name="inboxID"
+						value='<%=rs.getString("inboxID")%>' />
+					<table class="homeTask">
+						<tr class="tableTask" onclick="inbox()">
+							<td id="title"><%=title%></td>
+							<td style="width: 150px;"><%=dueDate%></td>
+						</tr>
+						</tbody>
+					</table>
+					<%
+						}
+					} catch (Exception e) {
 					out.println(e);
-				}
-			%>
-		</div>
+					}
+					%>
+				</div>
+		
 		<div class="box2">
 			Most recently edited tasks: <br> <br>
 			<table class="list">
