@@ -54,7 +54,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp"><img src="pictures/usericon.png"
+					<a href="profile.jsp"><img src="pictures/${login.fileName}"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -120,6 +120,7 @@
 			<form action="UpdateUser" method="post">
 				<input type="hidden" name="userID"
 					value="<%=rs.getString("userID")%>" />
+				<input type="hidden" name="wID" value="<%=rs.getString("wID") %>"/>
 				<div>
 					<label>First Name</label><input type="text" name="firstName"
 						value='<%=rs.getString("firstName")%>' />
@@ -145,7 +146,7 @@
 						class="aButtons" style="font-weight: bold"
 						href="changePassword.jsp">Change Password</a>
 				</div>
-				<br> <a class="aButtons" href="profile.jsp"
+				<br> <a class="aButtons" href="profile.jsp?wID=${login.WID}"
 					style="margin-left: 10px">Back</a>
 				<button type="submit">Update</button>
 			</form>

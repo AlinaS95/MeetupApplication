@@ -2,13 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@page import="net.meetup.usermanagement.model.common"%>
-<%@page import="java.util.Set"%>
-<%@page import="java.util.HashSet"%>
-<%@page import="java.util.Random"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.DriverManager"%>
-<%@page import="java.sql.Statement"%>
-<%@page import="java.sql.Connection"%>
+<%@page import="java.util.*"%>
+<%@page import="java.sql.*"%>
 <%@page import="java.time.LocalDate"%>
 <!DOCTYPE html>
 <html>
@@ -196,7 +191,7 @@
 							</div>
 							
 							<div>
-								<label>Completion in %</label> <input type="text" name="completion"
+								<label>Completion in %</label> <input type="number" name="completion"
 									required="required" />
 							</div>
 							
@@ -215,14 +210,14 @@
 			<thead>
 				<tr>
 					<th style="width: 200px">Title</th>
-					<th style="width: 150px">Description</th>
+					<th style="width: 200px">Description</th>
 					<th style="width: 150px">Due Date</th>
-					<th style="width: 200px">Status</th>
-					<th style="width: 250px">Assignee</th>
-					<th style="width: 185px">Internal Inquiries</th>
-					<th style="width: 185px">Comment</th>
-					<th style="width: 185px">Attachment</th>
-					<th style="width: 185px">Completion in %</th>
+					<th style="width: 150px">Status</th>
+					<th style="width: 150px">Assignee</th>
+					<th style="width: 200px">Internal Inquiries</th>
+					<th style="width: 200px">Comment</th>
+					<th style="width: 150px">Attachment</th>
+					<th style="width: 150px">Completion in %</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
@@ -237,32 +232,31 @@
 				int i = 0;
 				while (rs.next()) {
 					String taskID = rs.getString("taskID");
-					String taskName =  rs.getString("taskName");
+					String taskName = rs.getString("taskName");
 					String description = rs.getString("description");
-					LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
+					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 					String taskStatus = rs.getString("taskStatus");
-					String assignee =  rs.getString("assignee");
-					String internalInquiries =  rs.getString("internalInquiries");
-					String comment =  rs.getString("comment");
+					String assignee = rs.getString("assignee");
+					String internalInquiries = rs.getString("internalInquiries");
+					String comment = rs.getString("comment");
 					String filename = rs.getString("filename");
 					String completion = rs.getString("completion");
-
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
 		<table class="list">
 			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
-				<td style="width: 150px;"><%=description%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=taskStatus%></td>
+				<td style="width: 200px;"><%=taskName%></td>
+				<td style="width: 200px;"><%=description%></td>
+				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
+				<td style="width: 150px;"><%=taskStatus%></td>
 				<td style="width: 150px;"><%=assignee%></td>
-				<td style="width: 185px;"><p align="center"><%=internalInquiries%></td>
-				<td style="width: 185px;"><p align="center"><%=comment%></td>
-				<td style="width: 200px;"><img src="pictures/<%=filename%>" /><a
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=internalInquiries%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=comment%></td>
+				<td style="width: 150px;"><img src="pictures/<%=filename%>" /><a
 					href="editImageTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 25px; height: 25px;"></a></td>
-				<td style="width: 185px;"><p align="center"><%=completion%></td>
+				<td style="width: 150px;"><%=completion%></td>
 				<td style="width: 150px;"><a
 					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
@@ -273,7 +267,7 @@
 						src="pictures/delete2.png" alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
 				</a></td>
-			</tr> 
+			</tr>
 			</tbody>
 		</table>
 		<%

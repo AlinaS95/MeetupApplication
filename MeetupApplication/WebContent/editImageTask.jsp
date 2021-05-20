@@ -99,7 +99,7 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Post</div>
+		<div class="editHeader">Edit Task</div>
 		<hr>
 		<br>
 		<div class="editBody">
@@ -127,7 +127,7 @@
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="ChangeImage" method="post" enctype="multipart/form-data">
+			<form action="ChangeImageTask" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="taskID" value="<%=rs.getString("taskID")%>">
 				<div>
 					<label style="margin-left: -205px">Design</label>

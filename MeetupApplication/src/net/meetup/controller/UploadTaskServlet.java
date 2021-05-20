@@ -69,8 +69,6 @@ public class UploadTaskServlet extends HttpServlet {
 			pst.setString(9, savePath);
 			pst.setString(10, completion);
 			pst.executeUpdate();
-			String message = "New Task";
-			request.setAttribute("message", message);
 			request.getRequestDispatcher("list.jsp").forward(request, response);
 		} catch (Exception e) {
 			out.println(e);

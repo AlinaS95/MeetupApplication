@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.meetup.bean.User;
+
 import net.meetup.utils.JDBCUtils;
 
 @WebServlet("/UpdateUser")
@@ -37,6 +39,7 @@ public class UpdateUserServlet extends HttpServlet {
 		String email = request.getParameter("email");
 		String company = request.getParameter("company");
 		String workspace = request.getParameter("workspace");
+		Integer wID = Integer.parseInt(request.getParameter("wID"));
 
 		if (userID != null) {
 			Connection con = null;
@@ -45,7 +48,7 @@ public class UpdateUserServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update user set userID=?,firstName=?,lastName=?,email=?, company=?, workspace=? where userID="
+				String sql = "Update user set userID=?,firstName=?,lastName=?,email=?, company=?, workspace=?, wID=? where userID="
 						+ userID;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, userID);
@@ -54,9 +57,10 @@ public class UpdateUserServlet extends HttpServlet {
 				ps.setString(4, email);
 				ps.setString(5, company);
 				ps.setString(6, workspace);
+				ps.setInt(7, wID);
 
 				ps.executeUpdate();
-				response.sendRedirect("profile.jsp");
+				response.sendRedirect("profile.jsp?wID="+ wID);
 
 			} catch (Exception e) {
 				out.println(e);
