@@ -40,6 +40,7 @@ public class UpdateTaskServlet extends HttpServlet {
 		String internalInquiries = request.getParameter("internalInquiries");
 		String comment = request.getParameter("comment");
 		String completion = request.getParameter("completion");
+		String wID = request.getParameter("wID");
 
 		if (taskID != null) {
 			Connection con = null;
@@ -61,7 +62,7 @@ public class UpdateTaskServlet extends HttpServlet {
 				ps.setString(8, completion);
 
 				ps.executeUpdate();
-				response.sendRedirect("list.jsp");
+				response.sendRedirect("list.jsp?wID=\"+wID");
 
 			} catch (Exception e) {
 				out.println(e);

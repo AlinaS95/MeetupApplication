@@ -191,10 +191,11 @@
 			<hr>
 			<%
 				try {
+					String wID = request.getParameter("wID");
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks";
+					String sql = "SELECT * FROM tasks WHERE wId="+wID;
 					ResultSet rs = st.executeQuery(sql);
 					int i = 0;
 					while (rs.next()) {

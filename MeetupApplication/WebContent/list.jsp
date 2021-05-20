@@ -22,7 +22,7 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
 			<div class="firstBox">
@@ -43,7 +43,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/${login.fileName}"
+					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
 						alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -54,18 +54,18 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="javascript:home()"> <dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"> <dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="javascript:list()" style="font-weight: bold">
+					<li><a href="list.jsp?wID=${login.WID}" style="font-weight: bold">
 							<dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn>
 					</a></li>
 
-					<li><a href="javascript:board()" style="font-weight: normal">
+					<li><a href="board.jsp?wID=${login.WID}" style="font-weight: normal">
 							<dfn class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
@@ -78,7 +78,7 @@
 									can find your calendar here </span>
 							</dfn></a></li>
 
-					<li><a href="javascript:progress()"
+					<li><a href="progress.jsp?wID=${login.WID}"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
@@ -155,6 +155,7 @@
 							<div>
 								<label>Title</label> <input type="text" name="taskName"
 									required="required" />
+								<input type="hidden" name="wID" value="${login.WID}"/>
 							</div>
 							<div>
 								<label>Description</label> <textarea name="description"></textarea>
@@ -224,10 +225,11 @@
 		</table>
 		<%
 			try {
+				String wID = request.getParameter("wID");
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM tasks";
+				String sql = "SELECT * FROM tasks WHERE wID="+wID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
@@ -243,6 +245,8 @@
 					String completion = rs.getString("completion");
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
+		<input type="hidden"
+					name="wID" value='<%=rs.getString("wID")%>' />
 		<table class="list">
 			<tr>
 				<td style="width: 200px;"><%=taskName%></td>

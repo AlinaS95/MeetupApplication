@@ -90,7 +90,7 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
+				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
 					alt="Home"></a>
 			</div>
 			<div class="firstBox">
@@ -111,7 +111,7 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img
+					<a href="profile.jsp?wID=${login.WID}"><img
 						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
@@ -122,15 +122,15 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp"><dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"><dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="javascript:list()"><dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"><dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn> </a></li>
-					<li><a href="javascript:board()"> <dfn class="tooltip">
+					<li><a href="board.jsp?wID=${login.WID}"> <dfn class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
@@ -139,7 +139,7 @@
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
-					<li><a href="javascript:progress()" style="font-weight: bold"><dfn
+					<li><a href="progress.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
 								class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
@@ -186,10 +186,11 @@
 	<div class="box1">
 		New Task<br> <a> <%
  	try {
+ 		String wID = request.getParameter("wID");
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='To Do'";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='To Do' AND wID=" + wID;
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
@@ -205,10 +206,11 @@
 	<div class="box2">
 		Incompleted Task<br> <a> <%
  	try {
+ 		String wID = request.getParameter("wID");
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='In Progress'";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='In Progress' AND wID=" + wID;
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
@@ -224,10 +226,11 @@
 	<div class="box3">
 		Completed Task<br> <a> <%
  	try {
+ 		String wID = request.getParameter("wID");
  		Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
  		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
  		Statement st = con.createStatement();
- 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='Done'";
+ 		String strQuery = "SELECT COUNT(*) FROM tasks WHERE taskStatus='Done' AND wID=" + wID;
  		ResultSet rs = st.executeQuery(strQuery);
  		String Countrow = "";
  		while (rs.next()) {
