@@ -19,8 +19,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -56,25 +56,29 @@
 								Home <span role="tooltip" style="font-weight: bold">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}"><dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn> </a></li>
-					<li><a href="board.jsp?wID=${login.WID}"> <dfn class="tooltip">
+					<li><a href="board.jsp?wID=${login.WID}"> <dfn
+								class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
 					</a></li>
-					<li><a href="calendar.jsp?wID=${login.WID}"><dfn class="tooltip">
+					<li><a href="calendar.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
-					<li><a href="progress.jsp?wID=${login.WID}"><dfn class="tooltip">
+					<li><a href="progress.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-					<li><a href="socialmedia.jsp?wID=${login.WID}" style="font-weight: normal"><dfn
-								class="tooltip">
+					<li><a href="socialmedia.jsp?wID=${login.WID}"
+						style="font-weight: normal"><dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
@@ -137,47 +141,47 @@
 			window.onload = datum
 		</script> <main> <br>
 
-			<div class="box1">
-					Short Messages: <br> <br>
-					<table class="list">
-						<thead>
-							<tr>
-								<th style="width: 200px">Message</th>
-								<th style="width: 150px">Due Date</th>
-							</tr>
-						</thead>
-					</table>
-					<hr>
-					<%
-						try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM inbox";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String inboxID = rs.getString("inboxID");
-							String title = rs.getString("title");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-					%>
-					<input type="hidden" name="inboxID"
-						value='<%=rs.getString("inboxID")%>' />
-					<table class="homeTask">
-						<tr class="tableTask" onclick="inbox()">
-							<td id="title"><%=title%></td>
-							<td style="width: 150px;"><%=dueDate%></td>
-						</tr>
-						</tbody>
-					</table>
-					<%
-						}
-					} catch (Exception e) {
+		<div class="box1">
+			Short Messages: <br> <br>
+			<table class="list">
+				<thead>
+					<tr>
+						<th style="width: 200px">Message</th>
+						<th style="width: 150px">Due Date</th>
+					</tr>
+				</thead>
+			</table>
+			<hr>
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM inbox";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String inboxID = rs.getString("inboxID");
+						String title = rs.getString("title");
+						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+			%>
+			<input type="hidden" name="inboxID"
+				value='<%=rs.getString("inboxID")%>' />
+			<table class="homeTask">
+				<tr class="tableTask" onclick="inbox()">
+					<td id="title"><%=title%></td>
+					<td style="width: 150px;"><%=dueDate%></td>
+				</tr>
+				</tbody>
+			</table>
+			<%
+				}
+				} catch (Exception e) {
 					out.println(e);
-					}
-					%>
-				</div>
-		
+				}
+			%>
+		</div>
+
 		<div class="box2">
 			Most recently edited tasks: <br> <br>
 			<table class="list">
@@ -195,18 +199,20 @@
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks WHERE wId="+wID;
+					String sql = "SELECT * FROM tasks,user WHERE user.firstName = tasks.assignee AND tasks.wID=" + wID;
 					ResultSet rs = st.executeQuery(sql);
 					int i = 0;
 					while (rs.next()) {
 						String taskID = rs.getString("taskID");
 						String taskName = rs.getString("taskName");
 						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+						String filename = rs.getString("filename");
 			%>
 			<input type="hidden" name="taskID"
 				value='<%=rs.getString("taskID")%>' />
 			<table class="homeTask">
 				<tr class="tableTask" onclick="list()">
+					<td id="filename"><img src="pictures/<%=filename%>" /></td>
 					<td id="taskName"><%=taskName%></td>
 					<td style="width: 150px;"><%=dueDate%></td>
 				</tr>
@@ -377,7 +383,8 @@
 					<tr style="height: 55px">
 						<td style="width: 65px;"><img class="membersImg"
 							src="pictures/<%=fileName%>" /></td>
-						<td style="hyphens: auto; word-break: break-word; width: 150px; text-align:left"><%=firstName%>
+						<td
+							style="hyphens: auto; word-break: break-word; width: 150px; text-align: left"><%=firstName%>
 							<%=lastName%><input type="hidden" name="wID"
 							value='<%=rs.getString("wID")%>' /></td>
 

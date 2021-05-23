@@ -40,7 +40,6 @@ public class UploadTaskServlet extends HttpServlet {
 		String taskStatus = request.getParameter("taskStatus");
 		String assignee = request.getParameter("assignee");
 		String internalInquiries = request.getParameter("internalInquiries");
-		String comment = request.getParameter("comment");
 		String completion = request.getParameter("completion");
 		Integer wID = Integer.parseInt(request.getParameter("wID"));
 
@@ -58,18 +57,17 @@ public class UploadTaskServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, comment, filename, path, completion, wID) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, filenameTask, path, completion, wID) VALUES (?,?,?,?,?,?,?,?,?,?)");
 			ps.setString(1, taskName);
 			ps.setString(2, description);
 			ps.setDate(3, JDBCUtils.getSQLDate(dueDate));
 			ps.setString(4, taskStatus);
 			ps.setString(5, assignee);
 			ps.setString(6, internalInquiries);
-			ps.setString(7, comment);
-			ps.setString(8, fileName);
-			ps.setString(9, savePath);
-			ps.setString(10, completion);
-			ps.setInt(11, wID);
+			ps.setString(7, fileName);
+			ps.setString(8, savePath);
+			ps.setString(9, completion);
+			ps.setInt(10, wID);
 			ps.executeUpdate();
 			request.getRequestDispatcher("list.jsp?wID="+wID).forward(request, response);
 		} catch (Exception e) {
@@ -85,7 +83,7 @@ public class UploadTaskServlet extends HttpServlet {
 			String contentDisp = part.getHeader("content-disposition");
 			String[] items = contentDisp.split(";");
 			for (String s : items) {
-				if (s.trim().startsWith("filename")) {
+				if (s.trim().startsWith("filenameTask")) {
 					return s.substring(s.indexOf("=") + 2, s.length() - 1);
 				}
 			}

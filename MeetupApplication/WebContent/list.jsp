@@ -22,8 +22,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -43,8 +43,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
-						alt="Profil Icon" /></a>
+					<a href="profile.jsp?wID=${login.WID}"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -54,19 +54,20 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"> <dfn class="tooltip">
-								Home <span role="tooltip" style="font-weight: normal">You
+					<li><a href="home.jsp?wID=${login.WID}"> <dfn
+								class="tooltip">
+								Home <span role="tooltip" style="font-weight: bold">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}" style="font-weight: bold">
-							<dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"
+						style="font-weight: bold"> <dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn>
 					</a></li>
 
-					<li><a href="board.jsp?wID=${login.WID}" style="font-weight: normal">
-							<dfn class="tooltip">
+					<li><a href="board.jsp?wID=${login.WID}"
+						style="font-weight: normal"> <dfn class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
@@ -119,7 +120,8 @@
 	</div>
 
 	<div class="background2">
-		<br> <div class="header2">Tasks</div>
+		<br>
+		<div class="header2">Tasks</div>
 		<div class="list_navigation">
 			<nav>
 				<ul>
@@ -151,14 +153,16 @@
 				</div>
 				<div class="popupBody_list">
 					<div class="popupInfo">
-						<form action="UploadTask" method="post" enctype="multipart/form-data">
+						<form action="UploadTask" method="post"
+							enctype="multipart/form-data">
 							<div>
 								<label>Title</label> <input type="text" name="taskName"
-									required="required" />
-								<input type="hidden" name="wID" value="${login.WID}"/>
+									required="required" /> <input type="hidden" name="wID"
+									value="${login.WID}" />
 							</div>
 							<div>
-								<label>Description</label> <textarea name="description"></textarea>
+								<label>Description</label>
+								<textarea name="description"></textarea>
 							</div>
 							<div>
 								<label>Due Date</label> <input type="date" name="dueDate"
@@ -178,24 +182,20 @@
 									required="required" />
 							</div>
 							<div>
-								<label>Internal Inquiries</label> <input type="text" name="internalInquiries"
-									required="required" />
+								<label>Internal Inquiries</label> <input type="text"
+									name="internalInquiries" required="required" />
 							</div>
+
 							<div>
-								<label>Comment</label> <input type="text" name="comment"
-									required="required" />
+								<label>Attachment</label> <input type="file"
+									id="file-upload-button" name="file" required="required" />
 							</div>
-							
+
 							<div>
-								<label>Attachment</label> <input type="file" id="file-upload-button"
-									name="file" required="required" />
+								<label>Completion in %</label> <input type="number"
+									name="completion" required="required" />
 							</div>
-							
-							<div>
-								<label>Completion in %</label> <input type="number" name="completion"
-									required="required" />
-							</div>
-							
+
 							<button type="submit">Save</button>
 						</form>
 					</div>
@@ -206,7 +206,7 @@
 		<hr>
 		<br>
 
-		<p style="font-weight:bold">${message}</p>
+		<p style="font-weight: bold">${message}</p>
 		<table class="list">
 			<thead>
 				<tr>
@@ -216,20 +216,20 @@
 					<th style="width: 150px">Status</th>
 					<th style="width: 150px">Assignee</th>
 					<th style="width: 200px">Internal Inquiries</th>
-					<th style="width: 200px">Comment</th>
 					<th style="width: 150px">Attachment</th>
 					<th style="width: 150px">Completion in %</th>
 					<th style="width: 150px">Settings</th>
 				</tr>
 			</thead>
 		</table>
+		<br>
 		<%
 			try {
 				String wID = request.getParameter("wID");
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM tasks WHERE wID="+wID;
+				String sql = "SELECT * FROM tasks,user WHERE user.firstName = tasks.assignee AND tasks.wID=" + wID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
@@ -239,24 +239,22 @@
 					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 					String taskStatus = rs.getString("taskStatus");
 					String assignee = rs.getString("assignee");
-					String internalInquiries = rs.getString("internalInquiries");
-					String comment = rs.getString("comment");
 					String filename = rs.getString("filename");
+					String internalInquiries = rs.getString("internalInquiries");
+					String filenameTask = rs.getString("filenameTask");
 					String completion = rs.getString("completion");
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
-		<input type="hidden"
-					name="wID" value='<%=rs.getString("wID")%>' />
+		<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
 		<table class="list">
 			<tr>
 				<td style="width: 200px;"><%=taskName%></td>
 				<td style="width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
 				<td style="width: 150px;"><%=taskStatus%></td>
-				<td style="width: 150px;"><%=assignee%></td>
+				<td style="width: 150px;"><%=assignee%><img src="pictures/<%=filename%>" /></td>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=internalInquiries%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=comment%></td>
-				<td style="width: 150px;"><img src="pictures/<%=filename%>" /><a
+				<td style="width: 150px;"><img src="pictures/<%=filenameTask%>" /><a
 					href="editImageTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 25px; height: 25px;"></a></td>
@@ -280,7 +278,6 @@
 				out.println(e);
 			}
 		%>
-		<br>
 		<hr>
 		<br>
 
@@ -298,30 +295,30 @@
 						class="close" title="Schließen">&times;</span>
 				</div>
 				<%
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks";
-					ResultSet rs = st.executeQuery(sql);
-					int i = 0;
-					while (rs.next()) {
-						String taskID = rs.getString("taskID");
-						String taskName = rs.getString("taskName");
-						String description =  rs.getString("description");
-						LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
-						String taskStatus = rs.getString("taskStatus");
-						String assignee = rs.getString("assignee");
-						String internalInquiries = rs.getString("internalInquiries");
-						String comment = rs.getString("comment");
-						String filename = rs.getString("filename");
-						String completion = rs.getString("completion");
+					try {
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM tasks";
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String taskID = rs.getString("taskID");
+							String taskName = rs.getString("taskName");
+							String description = rs.getString("description");
+							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+							String taskStatus = rs.getString("taskStatus");
+							String assignee = rs.getString("assignee");
+							String internalInquiries = rs.getString("internalInquiries");
+							String filenameTask = rs.getString("filenameTask");
+							String completion = rs.getString("completion");
 				%>
 				<div class="popupBody_list">
 
 					<div class="popupInfo">
-						<input type="text" name="taskID" value='<%=rs.getString("taskID")%>' /> 
-						<a class="aButtons" href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
+						<input type="text" name="taskID"
+							value='<%=rs.getString("taskID")%>' /> <a class="aButtons"
+							href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
 						<br>
 					</div>
 				</div>

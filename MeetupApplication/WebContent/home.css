@@ -818,7 +818,7 @@ table.homeTask thead th {
 table.homeTask td#taskName{
 	hyphens: auto; 
 	word-break: break-word; 
-	width: 200px; 
+	width: 130px; 
 	cursor:pointer;
 }
 table.homeTask tr.tableTask:hover td{
@@ -833,8 +833,9 @@ table.homeTask tbody td {
 }
 
 table.homeTask tbody img {
-	width: 100px;
-	height: 100px;
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
 	cursor: pointer;
 }
 

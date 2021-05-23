@@ -10,7 +10,7 @@ Statement st=conn.createStatement();
 int i=st.executeUpdate("DELETE FROM tasks WHERE taskID="+taskID);
 String message = "Task is deleted";
 request.setAttribute("message", message);
-request.getRequestDispatcher("list.jsp").forward(request, response);
+request.getRequestDispatcher("list.jsp?wID=\"+wID").forward(request, response);
 }
 catch(Exception e)
 {
