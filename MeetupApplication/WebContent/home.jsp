@@ -348,7 +348,7 @@
 
 		<form>
 			<p class="choice">
-				<button id="win">Add Task</button>
+				<button id="win" onclick="list()">Add Task</button>
 				<button id="and" onclick="inbox()">Inbox</button>
 				<button id="mac" onclick="profile()">Profile</button>
 			</p>
