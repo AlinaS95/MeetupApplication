@@ -54,8 +54,7 @@
 					<li><button id="start">
 							<img src="pictures/navigation.png" height="50" width="50"
 								align="left" alt="navigation">
-						</button>
-						</a></li>
+						</button> </a></li>
 					<li><a href="javascript:home()" style="font-weight: bold">Home</a></li>
 					<li><a href="javascript:list()">List</a></li>
 					<li><a href="javascript:board()">Board</a></li>
@@ -98,103 +97,136 @@
 			<img src="pictures/notificationring.png" alt="">
 		</div>
 		<ul id="navigation">
-			<li><a href="start.html">All</a></li>
+			<li><a onclick="myFunction()">All</a></li>
+			<p id="demo"></p>
 			<li><a href="news.html">Assigned by me</a></li>
 			<li><a href="infos.html">Assigned to me</a></li>
-			<li><a href="galerie.html">Settings</a></li>
 		</ul>
-		<br>
-		<br>
-		<button id="open-dialog">Create new notification</button>
-		<dialog role="dialog">
-		<button id="close-dialog">Close</button>
-		<h2>Create new notification</h2>
-		<p>Dies ist eine zugängliche Dialog-Box, die Sie auch mit der
-			Tastatur benutzen können.</p>
-		</dialog>
+		<br> <br>
 
-		<div class="select-wrapper">
-			<select>
-				<option value="imagePost">Today</option>
-				<option value="story">Last 7 days</option>
-				<option value="linkPost">Last month</option>
-			</select>
-			<div class="signtonavigate">
-				<img src="pictures/pfeil-nach-unten-skizze.png" alt="img">
-			</div>
 
-<!-- Messages -->
-	<br> <b class="editHeader">Messages</b>
-		<div class="list_navigation">
-			<nav>
-				<ul>
-					<li><a class="socialmediaPopup"
-						onclick="document.getElementById('add_post').style.display='block'"
-						style="width: auto;"><img src="pictures/add.png" alt="Add">New
-							Message</a></li>
-				</ul>
-			</nav>
-		</div>
+	<!-- Messages -->
+	<br>
+	<b class="editHeader">Messages</b>
+	<div class="list_navigation">
+		<nav>
+			<ul>
+				<li><a class="socialmediaPopup"
+					onclick="document.getElementById('add_post').style.display='block'"
+					style="width: auto;"><img src="pictures/add.png" alt="Add">New
+						Message</a></li>
+			</ul>
+		</nav>
+	</div>
 
-		<!-- Pop-Up-Window New Post -->
-		<div id="add_post" class="list_addBlock">
+	<!-- Pop-Up-Window New Post -->
+	<div id="add_post" class="list_addBlock">
 
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Add new Message <span
-						onclick="document.getElementById('add_post').style.display='none'
+		<!-- Window content -->
+		<div class="addBlock">
+			<div class="popupHeader">
+				Add new Message <span
+					onclick="document.getElementById('add_post').style.display='none'
 					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<div class="popupBody_list">
-					<div class="popupInfo">
-						<form action="UploadInbox" method="post">
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody_list">
+				<div class="popupInfo">
+					<form action="UploadInbox" method="post">
 						<div>
-								<label>Assignee</label> <input type="text" name="assignee"
-									required="required" />
-							</div>
-							<div>
-								<label>Title</label> <input type="text" name="title"
-									required="required" />
-							</div>
-							<div>
-								<label>Description</label> <input type="text" name="description"
-									required="required" />
-							</div>
-							<div>
-								<label>Workspace</label> <input type="text" name="workspace"
-									required="required" />
-							</div>
-								<div>
-								<label>Due Date</label> <input type="date" name="dueDate"
-									style="margin-left: 20px;" required="required">
-							</div>
-							<button type="submit">Save</button>
-						</form>
-					</div>
+							<label>Assignee</label> <input type="text" name="assignee"
+								required="required" />
+						</div>
+						<div>
+							<label>Title</label> <input type="text" name="title"
+								required="required" />
+						</div>
+						<div>
+							<label>Description</label> <input type="text" name="description"
+								required="required" />
+						</div>
+						<div>
+							<label>Workspace</label> <input type="text" name="workspace"
+								required="required" />
+						</div>
+						<div>
+							<label>Due Date</label> <input type="date" name="dueDate"
+								style="margin-left: 20px;" required="required">
+						</div>
+						<button type="submit">Save</button>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<hr>
-		<br>
+	<hr>
+	<br>
 
-		<p style="font-weight: bold">${message}</p>
-		<table class="list">
-			<thead>
-				<tr>
-					<th style="width: 200px">Assignee</th>
-					<th style="width: 200px">Title</th>
-					<th style="width: 250px">Description</th>
-					<th style="width: 150px">Workspace</th>
-					<th style="width: 150px">DueDate</th>
-					<th style="width: 150px">Settings</th>
-				</tr>
-			</thead>
-		</table>
-		<%
-			try {
+	<p style="font-weight: bold">${message}</p>
+	
+	<%
+		try {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+		Statement st = con.createStatement();
+		String sql = "SELECT * FROM inbox";
+		ResultSet rs = st.executeQuery(sql);
+		int i = 0;
+		while (rs.next()) {
+			String inboxID = rs.getString("inboxID");
+			String assignee = rs.getString("assignee");
+			String title = rs.getString("title");
+			String description = rs.getString("description");
+			String workspace = rs.getString("workspace");
+			LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+	%>
+	<input type="hidden" name="inboxID"
+		value='<%=rs.getString("inboxID")%>' />
+	
+	<div class="inboxbox" name="new message">
+	<p>New Message</p><hr>
+	
+			<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 5px -35px;">To: <%=assignee%></a>
+			<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 40px -200px">Title: <%=title%></a>
+			<a style="width: 200px; position: absolute; margin: 70px -230px"">Description: <%=description%></a>
+			<a style="width: 200px; position: absolute; margin: 100px -223px"">Workspace: <%=workspace%></a>
+			<a style="width: 115px; height: 35px; position: absolute; margin: -54px -215px;"><%=dueDate%></a>
+			<a href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
+					src="pictures/settings.png" alt="Settings"
+					style="width: 25px; height: 25px; position: absolute; margin: -55px 200px;"></a>
+				<a
+				onclick="document.getElementById('delete_info').style.display='block'"
+				<%=rs.getString("inboxID")%> style="width: auto;"><img
+					src="pictures/delete2.png" alt="Delete post"
+					style="width: 15px; height: 15px; position: absolute; margin: -50px 170px;" />
+			</a>
+	</div>
+	<%
+		}
+	} catch (Exception e) {
+	out.println(e);
+	}
+	%>
+	<br>
+	<hr>
+	<br>
+
+	<!-- Pop-Up-Window Delete Info -->
+	<div id="delete_info" class="list_addBlock">
+
+		<!-- Window content -->
+		<div class="addBlock">
+			<div class="popupHeader">
+				<img src="pictures/delete2.png" alt="Delete post"
+					style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
+				Post <span
+					onclick="document.getElementById('delete_info').style.display='none'
+					"
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<%
+				try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
@@ -208,216 +240,85 @@
 					String description = rs.getString("description");
 					String workspace = rs.getString("workspace");
 					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-		%>
-		<input type="hidden" name="inboxID" value='<%=rs.getString("inboxID")%>' />
-		<table class="list">
-			<tr>
-				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=assignee%></td>
-				<td style="hyphens: auto; word-break: break-word; width: 250px;"><%=title%></td>
-				<td style="width: 200px;"><%=description%></td>
-				<td style="width: 150px;"><%=workspace%></td>
-				<td style="width: 150px;"><%=dueDate%></td>
-				<td style="width: 150px;"><a
-					href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("inboxID")%> style="width: auto;"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
-				</a></td>
-			</tr> 
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println(e);
-			}
-		%>
-		<br>
-		<hr>
-		<br>
+			%>
+			<div class="popupBody_list">
 
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="list_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Post <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
+				<div class="popupInfo">
+					<input type="text" name="inboxID"
+						value='<%=rs.getString("inboxID")%>' /> <a class="aButtons"
+						href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>">Delete</a>
+					<br>
 				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM inbox";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String inboxID = rs.getString("inboxID");
-							String assignee = rs.getString("assignee");
-							String title = rs.getString("title");
-							String description = rs.getString("description");
-							String workspace = rs.getString("workspace");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							
-				%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="inboxID"
-							value='<%=rs.getString("inboxID")%>' /> <a class="aButtons"
-							href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
 			</div>
+			<%
+				}
+			} catch (Exception e) {
+			out.println(e);
+			}
+			%>
 		</div>
 	</div>
 
+		<div class="inboxbox1">
+		<br>
+		<h3>Friday Meeting: Project x at 10am</h3>
+		<p>
+			Hello Mr. Mustermann, <br>I would like to remind you that there
+			will be a meeting tomorrow at 10:00 am for project x. It would be
+			very nice if you bring all the necessary documents with you. <br>Until
+			then and best regards <br>Jana Podschaske
+		</p>
+	</div>
 
-
-
-
-			<div class="inboxbox">
-				<p class="bl2">18.03.2021/12:08
-				<p>
-				<p class="bl">Tuesday Marketing Meeting: Project 65
-				<p>
-				<div id="kreis1"></div>
-				<div id="message">
-					<img src="pictures/approved.png" alt="img">
-				</div>
-				<div id="settings">
-					<img src="pictures/mehr.png" alt="img">
-				</div>
-				<div id="reply">
-					<img src="pictures/email.png" alt="img">
-				</div>
-			</div>
-			<div class="inboxbox1">
-				<p class="bl3">16.03.2021/09:08
-				<p>
-				<p class="bl">Friday delivery: Project 12
-				<p>
-				<div id="kreis2"></div>
-				<div id="message">
-					<img src="pictures/approved.png" alt="img">
-				</div>
-				<div id="settings">
-					<img src="pictures/mehr.png" alt="img">
-				</div>
-				<div id="reply">
-					<img src="pictures/email.png" alt="img">
-				</div>
-			</div>
-			<div class="inboxbox2">
-				<p class="bl4">14.03.2021/15:46
-				<p>
-				<p class="bl">Monday Meeting with Jana Podschaske: 2pm
-				<p>
-				<div id="kreis3"></div>
-				<div id="message">
-					<img src="pictures/approved.png" alt="img">
-				</div>
-				<div id="settings">
-					<img src="pictures/mehr.png" alt="img">
-				</div>
-				<div id="reply">
-					<img src="pictures/email.png" alt="img">
-				</div>
-			</div>
-			<div class="inboxbox3">
-				<p class="bl5">14.03.2021/15:46
-				<p>
-				<div id="settings">
-					<img src="pictures/mehr.png" alt="img">
-				</div>
-				<div id="reply">
-					<img src="pictures/email.png" alt="img">
-				</div>
-				<div id="delete">
-					<img src="pictures/garbage.png" alt="img">
-				</div>
-				<div id="avatar">
-					<img src="pictures/avatar1.png" alt="img">
-					<p class="bl1">From: Jana Podschaske
-					<p>
-				</div>
-				<div id="rechteck7"></div>
-				<br>
-				<h3>Friday Meeting: Project x at 10am</h3>
-				<p>
-					Hello Mr. Mustermann, <br>I would like to remind you that
-					there will be a meeting tomorrow at 10:00 am for project x. It
-					would be very nice if you bring all the necessary documents with
-					you. <br>Until then and best regards <br>Jana Podschaske
-				</p>
-			</div>
-
-
-
-
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br> <br> <br> <br> <br> <br> <br>
-			<br>
-			<br> <br>
-			<br> <br>
 		</div>
-		<script>
-			'use strict';
-			document.addEventListener("DOMContentLoaded", function() {
-				//Polyfill für dialog-Element
-				var lastFocus;
-				var dialog = document.querySelector('dialog');
-				var closeButton = document.getElementById('close-dialog');
-				closeButton.addEventListener('click', toggleDialog);
-				document.querySelector('#open-dialog').addEventListener(
-						'click', toggleDialog);
 
-				function toggleDialog(event) {
-					if (!dialog.hasAttribute('open')) {
-						// show the dialog 
-						dialog.setAttribute('open', 'open');
-						// after displaying the dialog, focus the closeButton inside it
-						closeButton.focus();
-						// only hide the background *after* you've moved focus out of the content that will be "hidden" 
-						var div = document.createElement('div');
-						div.id = 'mybackdrop';
-						document.body.appendChild(div);
-						if (event)
-							lastFocus = event.target;
-					} else {
-						dialog.removeAttribute('open');
-						var div = document.querySelector('#mybackdrop');
-						div.parentNode.removeChild(div);
-						lastFocus.focus();
-					}
-				}
-				// EventListener für ESC-Taste
-				document.addEventListener('keydown', keydown, true);
+	<script>
+		'use strict';
+		document.addEventListener("DOMContentLoaded", function() {
+			//Polyfill für dialog-Element
+			var lastFocus;
+			var dialog = document.querySelector('dialog');
+			var closeButton = document.getElementById('close-dialog');
+			closeButton.addEventListener('click', toggleDialog);
+			document.querySelector('#open-dialog').addEventListener('click',
+					toggleDialog);
 
-				function keydown(event) {
-					if (event.keyCode == 27) {
-						toggleDialog();
-					}
+			function toggleDialog(event) {
+				if (!dialog.hasAttribute('open')) {
+					// show the dialog 
+					dialog.setAttribute('open', 'open');
+					// after displaying the dialog, focus the closeButton inside it
+					closeButton.focus();
+					// only hide the background *after* you've moved focus out of the content that will be "hidden" 
+					var div = document.createElement('div');
+					div.id = 'mybackdrop';
+					document.body.appendChild(div);
+					if (event)
+						lastFocus = event.target;
+				} else {
+					dialog.removeAttribute('open');
+					var div = document.querySelector('#mybackdrop');
+					div.parentNode.removeChild(div);
+					lastFocus.focus();
 				}
-			});
-		</script>
+			}
+			// EventListener für ESC-Taste
+			document.addEventListener('keydown', keydown, true);
+
+			function keydown(event) {
+				if (event.keyCode == 27) {
+					toggleDialog();
+				}
+			}
+		});
+	</script>
+
+<script>
+function myFunction() {
+  var x = document.getElementsByName("new message").length;
+  document.getElementById("demo").innerHTML = x;
+}
+</script>
+	
 </body>
 </html>

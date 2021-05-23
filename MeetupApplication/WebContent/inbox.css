@@ -343,7 +343,42 @@ select:focus::-ms-value {
     margin-left: 79%;
 }
 /* Boxen*/
+
 .inboxbox {
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: 20px 110px;
+    width: 477px;
+    height: 210px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 450;
+    padding: 10px 5px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
+}
+.inboxbox1 {
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: 20px 110px;
+    width: 540px;
+    height: 405px;
+    position: absolute;
+    margin-left: 51%;
+    margin-top: -36%;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 450;
+    padding: 10px 5px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
+    box-shadow: 10px 10px 15px silver;
+}
+
+
+table.inboxbox tbody tr {
     width: 31%;
     background-color: white;
     padding: 74px;
@@ -354,40 +389,7 @@ select:focus::-ms-value {
     margin-top: 3%;
     box-shadow: 10px 10px 15px silver;
 }
-.inboxbox1 {
-    width: 31%;
-    background-color: white;
-    padding: 74px;
-    border: 2px solid #aca9a9;
-    margin: 8px;
-    position: absolute;
-    margin-left: 4%;
-    margin-top: 16%;
-    box-shadow: 10px 10px 15px silver;
-}
-.inboxbox2 {
-    width: 31%;
-    background-color: white;
-    padding: 74px;
-    border: 2px solid #aca9a9;
-    margin: 8px;
-    position: absolute;
-    margin-left: 4%;
-    margin-top: 29%;
-    box-shadow: 10px 10px 15px silver;
-}
-.inboxbox3 {
-    width: 31%;
-    height: 46%;
-    background-color: white;
-    padding: 74px;
-    border: 2px solid #aca9a9;
-    margin: 8px;
-    position: absolute;
-    margin-left: 54%;
-    margin-top: 5%;
-    box-shadow: 10px 10px 15px silver;
-}
+
 .notifi-item img {
     display: block;
     width: 112px;
@@ -886,4 +888,10 @@ nav ul li {
 	width:20px;
 	height: 20px;
 	margin-top: -15px;
+}
+table.notifi-item1 {
+    width: -15px;
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 7%;
 }
