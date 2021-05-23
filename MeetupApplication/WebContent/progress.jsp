@@ -11,18 +11,19 @@
 
 	try {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");	
+		
 		Statement statement = connection.createStatement();
 		String xVal, yVal;
 
-		ResultSet resultSet = statement.executeQuery("select * from datapoints");
+		ResultSet rs = statement.executeQuery("select * from datapoints");
 
-		while (resultSet.next()) {
-			xVal = resultSet.getString("x");
-			yVal = resultSet.getString("y");
+		while (rs.next()) {
+			xVal = rs.getString("x");
+			yVal = rs.getString("y");
 			map = new HashMap<Object, Object>();
 			map.put("x", Double.parseDouble(xVal));
-			map.put("y", Double.parseDouble(yVal));
+			map.put("label",yVal);
 			list.add(map);
 			dataPoints = gsonObj.toJson(list);
 		}
@@ -52,9 +53,6 @@
 			title : {
 				text : "Task Progress"
 			},
-			subtitles : [ {
-				text : "December 2017"
-			} ],
 			axisY : {
 				title : "Task Status",
 				labelFormatter : addSymbols
@@ -90,8 +88,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -122,15 +120,18 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"><dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}"><dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn> </a></li>
-					<li><a href="board.jsp?wID=${login.WID}"> <dfn class="tooltip">
+					<li><a href="board.jsp?wID=${login.WID}"> <dfn
+								class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
@@ -139,8 +140,8 @@
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
-					<li><a href="progress.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
-								class="tooltip">
+					<li><a href="progress.jsp?wID=${login.WID}"
+						style="font-weight: bold"><dfn class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>

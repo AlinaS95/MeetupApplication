@@ -16,14 +16,14 @@
 		Statement statement = connection.createStatement();
 		String xVal, yVal;
 
-		ResultSet resultSet = statement.executeQuery("select * from datapoints");
+		ResultSet resultSet = statement.executeQuery("select * from tasks");
 
 		while (resultSet.next()) {
-			xVal = resultSet.getString("x");
-			yVal = resultSet.getString("y");
+			xVal = resultSet.getString("completion");
+			yVal = resultSet.getString("taskName");
 			map = new HashMap<Object, Object>();
-			map.put("x", Double.parseDouble(xVal));
-			map.put("y", Double.parseDouble(yVal));
+			map.put("completion", Double.parseDouble(xVal));
+			map.put("taskName", yVal);
 			list.add(map);
 			dataPoints = gsonObj.toJson(list);
 		}
