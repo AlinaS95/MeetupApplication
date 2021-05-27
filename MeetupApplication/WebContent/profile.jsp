@@ -314,7 +314,7 @@
 					<input type="hidden" name="userSID" value='${login.userID}' />
 					<div style="margin: 10px 0px">
 						<a class="aButtons2" style="margin-right: 5px"
-							href="timeTracker.jsp?userID=${login.userID}">Time Tracker</a>
+							href="time.jsp?userID=${login.userID}">Time Tracker</a>
 						<button class="aButtons2" type="submit">Save</button>
 					</div>
 				</form>
