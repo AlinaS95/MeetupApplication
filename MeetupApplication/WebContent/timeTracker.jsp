@@ -31,8 +31,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -53,9 +53,8 @@
 				</div>
 				<div class="user">
 					<a href="profile.jsp?wID=${login.WID}"><img
-						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
-						<input type="hidden"
-					name="userID" value='${login.userID}' />
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a> <input
+						type="hidden" name="userID" value='${login.userID}' />
 				</div>
 			</div>
 			<br>
@@ -65,19 +64,20 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"> <dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"> <dfn
+								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}" style="font-weight: normal">
-							<dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"
+						style="font-weight: normal"> <dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn>
 					</a></li>
 
-					<li><a href="board.jsp?wID=${login.WID}" style="font-weight: normal">
-							<dfn class="tooltip">
+					<li><a href="board.jsp?wID=${login.WID}"
+						style="font-weight: normal"> <dfn class="tooltip">
 								Board <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and their processing status </span>
 							</dfn>
@@ -155,8 +155,8 @@
 			<form action="addTime" method="post">
 				<div>
 					<a class="aButtons" onclick="checkWeek(this)">Week Number</a> <input
-						type="text" name="kw" id="KWInput" required="required">
-					<label style="margin-left: 5px">Date</label> <input type="date"
+						type="text" name="kw" id="KWInput" required="required"> <label
+						style="margin-left: 5px">Date</label> <input type="date"
 						name="date" id="dateInput" required="required"> <label
 						style="margin-left: 15px">Start</label> <input type="time"
 						name="startTime" id="starttime" required="required"> <label
@@ -166,9 +166,7 @@
 						name="pauseTime" id="pausetime"> <a
 						style="margin-left: 5px" required="required">Working Hours: <input
 						type="text" name="duration" id="total" readonly="readonly">
-					</a>
-					<input type="hidden"
-					name="userSID" value='${login.userID}' />
+					</a> <input type="hidden" name="userSID" value='${login.userID}' />
 					<button type="submit" style="margin-right: 5px">Save</button>
 				</div>
 			</form>
@@ -223,7 +221,7 @@
 			  var dayNum = d.getUTCDay() || 7;
 			  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
 			  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-			  return "KW " + Math.ceil((((d - yearStart) / 86400000) + 1)/7)
+			  return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
 			};
 
 			function checkWeek() {
@@ -236,19 +234,24 @@
 		<table class="workingtime" id="19">
 			<thead>
 				<tr class="week">
-					<td style="text-align: left; padding: 0px 10px">KW 19</td>
+					<td><FORM ACTION="selectWeek.jsp" METHOD="POST">
+							Week: <BR>
+							<INPUT TYPE="TEXT" NAME="kw"><INPUT
+								TYPE="SUBMIT" value="Submit">
+						</FORM></td>
 					<td></td>
 					<td></td>
 					<td></td>
 					<td></td>
-					<td style="text-align: right; padding:0px 10px">
+					<td style="text-align: right; padding: 0px 10px">
 						<%
 							try {
 								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 19' AND userSID=" + userID;
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='19' AND userSID="
+										+ userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -271,18 +274,19 @@
 				</tr>
 			</thead>
 		</table>
+
 		<%
 			try {
 				String userID = request.getParameter("userID");
+				String kw = request.getParameter("kw");
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM workingtime WHERE kw='KW 19' AND userSID=" + userID;
+				String sql = "SELECT * FROM workingtime WHERE kw= '19' AND userSID=" + userID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
 					String id = rs.getString("id");
-					String kw = rs.getString("kw");
 					LocalDate date = rs.getDate("date").toLocalDate();
 					LocalTime startTime = rs.getTime("startTime").toLocalTime();
 					LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
@@ -328,14 +332,15 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td style="text-align: right; padding:0px 10px">
+					<td style="text-align: right; padding: 0px 10px">
 						<%
 							try {
 								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 20' AND userSID=" + userID;
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='20' AND userSID="
+										+ userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -364,7 +369,7 @@
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM workingtime WHERE kw='KW 20' AND userSID=" + userID;
+				String sql = "SELECT * FROM workingtime WHERE kw='20' AND userSID=" + userID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
@@ -415,14 +420,15 @@
 					<td></td>
 					<td></td>
 					<td></td>
-					<td style="text-align: right; padding:0px 10px">
+					<td style="text-align: right; padding: 0px 10px">
 						<%
 							try {
 								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='KW 21'AND userSID=" + userID;
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='21'AND userSID="
+										+ userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -451,7 +457,7 @@
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM workingtime WHERE kw='KW 21' AND userSID=" + userID;
+				String sql = "SELECT * FROM workingtime WHERE kw='21' AND userSID=" + userID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
@@ -493,7 +499,7 @@
 			}
 		%>
 		<br>
-		
+
 		<hr>
 		<div class="newTime">
 			<form action="addTime" method="post">
@@ -578,6 +584,17 @@
 		</table>
 		<br>
 	</div>
+	<script>
+		function singleSelectChangeText() {
+			//Getting Value
+
+			var selObj = document.getElementById("week");
+			var selValue = selObj.options[selObj.selectedIndex].text;
+
+			//Setting Value
+			document.getElementById("myWeek").value = selValue;
+		}
+	</script>
 
 
 </body>
