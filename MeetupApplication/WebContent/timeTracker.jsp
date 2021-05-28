@@ -130,7 +130,13 @@
 	</div>
 
 	<div class="background2">
-		<br> <b class="editHeader">Time Tracker</b>
+
+		<br>
+		<div class="backIcon">
+			<a href="startTimeTracker.jsp?userID=${login.userID}"><img
+				src="pictures/back.png" alt="Back"></a>
+		</div>
+		<b class="editHeader">Time Tracker</b>
 		<div class="list_navigation">
 			<nav>
 				<ul>
@@ -249,206 +255,17 @@
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='" + kw
-										+ "' AND userSID=" + userID;
-								ResultSet rs = st.executeQuery(strQuery);
-								String totalDuration = "";
-								while (rs.next()) {
-									totalDuration = rs.getString(1);
-									out.println("Total Hours: " + totalDuration + "h");
-								}
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						%>
-					</td>
-				</tr>
-				<tr>
-					<th style="font-style: italic; width: 30px">Week</th>
-					<th style="width: 150px">Date</th>
-					<th style="width: 200px">Start</th>
-					<th style="width: 200px">Stop</th>
-					<th style="width: 200px">Break</th>
-					<th style="width: 200px">Duration</th>
-					<th style="width: 175px">Settings</th>
-				</tr>
-			</thead>
-		</table>
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-
-				String kw = request.getParameter("kw");
-				String userID = request.getParameter("userID");
-				String sql = "select * from workingtime where kw > '" + kw + "'AND userSID='" + userID
-						+ "'ORDER BY date";
-				ResultSet rs = st.executeQuery(sql);
-
-				while (rs.next()) {
-					String id = rs.getString("id");
-					LocalDate date = rs.getDate("date").toLocalDate();
-					LocalTime startTime = rs.getTime("startTime").toLocalTime();
-					LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
-					LocalTime pauseTime = rs.getTime("pauseTime").toLocalTime();
-					String duration = rs.getString("duration");
-					String userSID = rs.getString("userSID");
-		%>
-		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
-		<table class="workingtime">
-			<tr>
-				<td><input type="hidden" id="kwInput" name="kw"
-					value='<%=rs.getString("kw")%>' /><input type="hidden"
-					name="userSID" value='<%=rs.getString("userSID")%>' /></td>
-				<td style="font-style: italic;"><%=rs.getString("kw")%></td>
-				<td style="width: 160px;"><%=date%></td>
-				<td style="width: 200px;"><%=startTime%></td>
-				<td style="width: 200px;"><%=stopTime%></td>
-				<td style="width: 200px;"><%=pauseTime%></td>
-				<td style="width: 200px;"><%=duration%>h</td>
-				<td style="width: 175px;"><a
-					href="editTime.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a href="deleteTime.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-				</td>
-			</tr>
-			</tbody>
-		</table>
-		<%
-			}
-			} catch (Exception e) {
-				out.println("Sorry, could not find that kw. ");
-			}
-		%>
-
-		<br>
-
-		<!-- Current Week -->
-		<div>
-			<table class="workingtime">
-				<thead>
-					<tr class="week">
-						<td style="text-align: left; padding: 0px 10px; font-weight: bold">Week
-							<%=request.getParameter("kw")%></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td style="text-align: right; padding: 0px 10px">
-							<%
-								try {
-									String kw = request.getParameter("kw");
-									String userID = request.getParameter("userID");
-									Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-									Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-									Statement st = con.createStatement();
-									String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='" + kw
-											+ "' AND userSID=" + userID;
-									ResultSet rs = st.executeQuery(strQuery);
-									String totalDuration = "";
-									while (rs.next()) {
-										totalDuration = rs.getString(1);
-										out.println("Total Hours: " + totalDuration + "h");
-									}
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							%>
-						</td>
-					</tr>
-					<tr>
-						<th style="width: 200px">Date</th>
-						<th style="width: 200px">Start</th>
-						<th style="width: 200px">Stop</th>
-						<th style="width: 200px">Break</th>
-						<th style="width: 200px">Duration</th>
-						<th style="width: 175px">Settings</th>
-					</tr>
-				</thead>
-			</table>
-			<%
-				try {
-					Class.forName("com.mysql.cj.jdbc.Driver");
-
-					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-					Statement st = con.createStatement();
-
-					String kw = request.getParameter("kw");
-					String userID = request.getParameter("userID");
-					String sql = "select * from workingtime where kw = '" + kw + "'AND userSID='" + userID
-							+ "'ORDER BY date";
-					ResultSet rs = st.executeQuery(sql);
-
-					while (rs.next()) {
-						String id = rs.getString("id");
-						LocalDate date = rs.getDate("date").toLocalDate();
-						LocalTime startTime = rs.getTime("startTime").toLocalTime();
-						LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
-						LocalTime pauseTime = rs.getTime("pauseTime").toLocalTime();
-						String duration = rs.getString("duration");
-						String userSID = rs.getString("userSID");
-			%>
-			<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
-			<table class="workingtime">
-				<tr>
-					<td><input type="hidden" id="kwInput" name="kw"
-						value='<%=rs.getString("kw")%>' /><input type="hidden"
-						name="userSID" value='<%=rs.getString("userSID")%>' /></td>
-					<td style="width: 200px;"><%=date%></td>
-					<td style="width: 200px;"><%=startTime%></td>
-					<td style="width: 200px;"><%=stopTime%></td>
-					<td style="width: 200px;"><%=pauseTime%></td>
-					<td style="width: 200px;"><%=duration%>h</td>
-					<td style="width: 175px;"><a
-						href="editTime.jsp?id=<%=rs.getString("id")%>"><img
-							src="pictures/settings.png" alt="Settings"
-							style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-						<a href="deleteTime.jsp?id=<%=rs.getString("id")%>"><img
-							src="pictures/delete2.png" alt="Delete post"
-							style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-					</td>
-				</tr>
-				</tbody>
-			</table>
-			<%
-				}
-				} catch (Exception e) {
-					out.println("Sorry, could not find that kw. ");
-				}
-			%>
-		</div>
-		<br>
-
-		<!-- after weeks-->
-		<table class="workingtime">
-			<thead>
-				<tr class="week">
-					<td style="text-align: left; padding: 0px 10px">After</td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td style="text-align: right; padding: 0px 5px">
-						<%
-							try {
-								String kw = request.getParameter("kw");
-								String userID = request.getParameter("userID");
-								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-								Statement st = con.createStatement();
 								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw<'" + kw
 										+ "' AND userSID=" + userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
 									totalDuration = rs.getString(1);
-									out.println("Total Hours: " + totalDuration + "h");
+									if (totalDuration != null) {
+										out.println("Total Hours: " + totalDuration + "h");
+									} else {
+										out.println("Total Hours: 0h");
+									}
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
@@ -457,13 +274,13 @@
 					</td>
 				</tr>
 				<tr>
-					<th style="font-style: italic; width: 30px">Week</th>
-					<th style="width: 150px">Date</th>
+					<th style="font-style: italic; width: 100px">Week</th>
+					<th style="width: 200px">Date</th>
 					<th style="width: 200px">Start</th>
 					<th style="width: 200px">Stop</th>
 					<th style="width: 200px">Break</th>
 					<th style="width: 200px">Duration</th>
-					<th style="width: 175px">Settings</th>
+					<th style="width: 200px">Settings</th>
 				</tr>
 			</thead>
 		</table>
@@ -495,20 +312,214 @@
 				<td><input type="hidden" id="kwInput" name="kw"
 					value='<%=rs.getString("kw")%>' /><input type="hidden"
 					name="userSID" value='<%=rs.getString("userSID")%>' /></td>
-				<td style="font-style: italic; width: 30px"><%=rs.getString("kw")%></td>
-				<td style="width: 160px;"><%=date%></td>
-				<td style="width: 200px;"><%=startTime%></td>
-				<td style="width: 200px;"><%=stopTime%></td>
-				<td style="width: 200px;"><%=pauseTime%></td>
-				<td style="width: 200px;"><%=duration%>h</td>
-				<td style="width: 175px;"><a
-					href="editTime.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a href="deleteTime.jsp?id=<%=rs.getString("id")%>"><img
-						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-				</td>
+				<td style="font-style: italic; width:100px"><%=rs.getString("kw")%></td>
+				<td style="width: 200px;"><%=date%></td>
+					<td style="width: 175px;"><%=startTime%></td>
+					<td style="width: 200px;"><%=stopTime%></td>
+					<td style="width: 200px;"><%=pauseTime%></td>
+					<td style="width: 200px;"><%=duration%>h</td>
+					<td style="width: 200px;"><a
+						href="editTime.jsp?id=<%=rs.getString("id")%>"><img
+							src="pictures/settings.png" alt="Settings"
+							style="width: 35px; height: 35px; position: absolute; margin: -17px -20px;"></a>
+					</td>
+			</tr>
+			</tbody>
+		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println("Sorry, could not find that kw. ");
+			}
+		%>
+
+		<br>
+
+		<!-- Current Week -->
+		<div>
+			<table class="workingtime">
+				<thead>
+					<tr class="week">
+						<td style="text-align: left; padding: 0px 10px; font-weight:bold"><%=request.getParameter("kw")%></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td style="text-align: right; padding: 0px 10px">
+							<%
+								try {
+									String kw = request.getParameter("kw");
+									String userID = request.getParameter("userID");
+									Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+									Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+									Statement st = con.createStatement();
+									String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw='" + kw
+											+ "' AND userSID=" + userID;
+									ResultSet rs = st.executeQuery(strQuery);
+									String totalDuration = "";
+									while (rs.next()) {
+										totalDuration = rs.getString(1);
+										if (totalDuration != null) {
+											out.println("Total Hours: " + totalDuration + "h");
+										} else {
+											out.println("Total Hours: 0h");
+										}
+									}
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+							%>
+						</td>
+					</tr>
+					<tr>
+						<th style="width: 100px">Week</th>
+						<th style="width: 200px">Date</th>
+						<th style="width: 200px">Start</th>
+						<th style="width: 200px">Stop</th>
+						<th style="width: 200px">Break</th>
+						<th style="width: 200px">Duration</th>
+						<th style="width: 200px">Settings</th>
+					</tr>
+				</thead>
+			</table>
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+
+					String kw = request.getParameter("kw");
+					String userID = request.getParameter("userID");
+					String sql = "select * from workingtime where kw = '" + kw + "'AND userSID='" + userID
+							+ "'ORDER BY date";
+					ResultSet rs = st.executeQuery(sql);
+
+					while (rs.next()) {
+						String id = rs.getString("id");
+						LocalDate date = rs.getDate("date").toLocalDate();
+						LocalTime startTime = rs.getTime("startTime").toLocalTime();
+						LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
+						LocalTime pauseTime = rs.getTime("pauseTime").toLocalTime();
+						String duration = rs.getString("duration");
+						String userSID = rs.getString("userSID");
+			%>
+			<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
+			<table class="workingtime">
+				<tr>
+					<td><input type="hidden" id="kwInput" name="kw"
+						value='<%=rs.getString("kw")%>' /><input type="hidden"
+						name="userSID" value='<%=rs.getString("userSID")%>' /></td>
+					<td style="width: 100px; font-weight: bold;"><%=rs.getString("kw")%></td>
+					<td style="width: 200px;"><%=date%></td>
+					<td style="width: 175px;"><%=startTime%></td>
+					<td style="width: 200px;"><%=stopTime%></td>
+					<td style="width: 200px;"><%=pauseTime%></td>
+					<td style="width: 200px;"><%=duration%>h</td>
+					<td style="width: 200px;"><a
+						href="editTime.jsp?id=<%=rs.getString("id")%>"><img
+							src="pictures/settings.png" alt="Settings"
+							style="width: 35px; height: 35px; position: absolute; margin: -17px -20px;"></a>
+					</td>
+				</tr>
+				</tbody>
+			</table>
+			<%
+				}
+				} catch (Exception e) {
+					out.println("Sorry, could not find that kw. ");
+				}
+			%>
+		</div>
+		<br>
+
+		<!-- after weeks-->
+		<table class="workingtime">
+			<thead>
+				<tr class="week">
+					<td style="text-align: left; padding: 0px 10px">After</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td style="text-align: right; padding: 0px 5px">
+						<%
+							try {
+								String kw = request.getParameter("kw");
+								String userID = request.getParameter("userID");
+								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+								Statement st = con.createStatement();
+								String strQuery = "SELECT sum(CAST(duration AS DECIMAL(9,2))) FROM workingtime WHERE kw>'" + kw
+										+ "' AND userSID=" + userID;
+								ResultSet rs = st.executeQuery(strQuery);
+								String totalDuration = "";
+								while (rs.next()) {
+									totalDuration = rs.getString(1);
+									if (totalDuration != null) {
+										out.println("Total Hours: " + totalDuration + "h");
+									} else {
+										out.println("Total Hours: 0h");
+									}
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						%>
+					</td>
+				</tr>
+				<tr>
+					<th style="font-style: italic; width: 100px">Week</th>
+					<th style="width: 200px">Date</th>
+					<th style="width: 200px">Start</th>
+					<th style="width: 200px">Stop</th>
+					<th style="width: 200px">Break</th>
+					<th style="width: 200px">Duration</th>
+					<th style="width: 200px">Settings</th>
+				</tr>
+			</thead>
+		</table>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+
+				String kw = request.getParameter("kw");
+				String userID = request.getParameter("userID");
+				String sql = "select * from workingtime where kw > '" + kw + "'AND userSID='" + userID
+						+ "'ORDER BY date";
+				ResultSet rs = st.executeQuery(sql);
+
+				while (rs.next()) {
+					String id = rs.getString("id");
+					LocalDate date = rs.getDate("date").toLocalDate();
+					LocalTime startTime = rs.getTime("startTime").toLocalTime();
+					LocalTime stopTime = rs.getTime("stopTime").toLocalTime();
+					LocalTime pauseTime = rs.getTime("pauseTime").toLocalTime();
+					String duration = rs.getString("duration");
+					String userSID = rs.getString("userSID");
+		%>
+		<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
+		<table class="workingtime">
+			<tr>
+				<td><input type="hidden" id="kwInput" name="kw"
+					value='<%=rs.getString("kw")%>' /><input type="hidden"
+					name="userSID" value='<%=rs.getString("userSID")%>' /></td>
+				<td style="font-style: italic; width: 100px"><%=rs.getString("kw")%></td>
+				<td style="width: 200px;"><%=date%></td>
+					<td style="width: 175px;"><%=startTime%></td>
+					<td style="width: 200px;"><%=stopTime%></td>
+					<td style="width: 200px;"><%=pauseTime%></td>
+					<td style="width: 200px;"><%=duration%>h</td>
+					<td style="width: 200px;"><a
+						href="editTime.jsp?id=<%=rs.getString("id")%>"><img
+							src="pictures/settings.png" alt="Settings"
+							style="width: 35px; height: 35px; position: absolute; margin: -17px -20px;"></a>
+					</td>
 			</tr>
 			</tbody>
 		</table>

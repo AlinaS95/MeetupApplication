@@ -266,6 +266,21 @@
 	cursor: pointer;
 }
 
+a.taskName {
+	text-decoration: none;
+	margin: 10px 5px;
+	position: absolute;
+}
+
+a.taskName:hover{
+	text-decoration: underline;
+}
+img.taskImage {
+	width: 30px; 
+	height: 30px;
+	margin: 3px -5px;
+}
+
 .workspace_tasks {
 	cursor: pointer;
 }

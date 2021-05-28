@@ -140,7 +140,7 @@
 			</nav>
 		</div>
 
-		<!-- Pop-Up-Window New Post -->
+		<!-- Pop-Up-Window New Task -->
 		<div id="add_post" class="list_addBlock">
 
 			<!-- Window content -->

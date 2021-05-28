@@ -1,3 +1,13 @@
+.backIcon {
+	position: absolute;
+	margin: 0px 5px;
+}
+
+.backIcon img {
+	width:25px;
+	height: 25px;
+}
+
 input#total {
 	width:50px;
 	border-style:none;
@@ -17,6 +27,19 @@ input#totalTask,#totalHours,#totalWeek {
 	border-style:none;
 	background-color: #E3E0E0;
 	font-weight: bold;
+}
+
+.newTaskTime {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin-left: 115px;
+	padding: 5px 0px;
+	width: 84%;
+}
+
+img.taskImage {
+	width: 30px; 
+	height: 30px;
+	margin: -8px 6px;
 }
 
 .newTime {

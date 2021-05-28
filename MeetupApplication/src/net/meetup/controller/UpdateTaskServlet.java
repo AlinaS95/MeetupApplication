@@ -38,7 +38,6 @@ public class UpdateTaskServlet extends HttpServlet {
 		String taskStatus = request.getParameter("taskStatus");
 		String assignee = request.getParameter("assignee");
 		String internalInquiries = request.getParameter("internalInquiries");
-		String comment = request.getParameter("comment");
 		String completion = request.getParameter("completion");
 		String wID = request.getParameter("wID");
 
@@ -49,7 +48,7 @@ public class UpdateTaskServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=?, internalInquiries=?, comment=?, completion=? where taskID="
+				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=?, internalInquiries=?, completion=? where taskID="
 						+ taskID;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, taskName);
@@ -58,8 +57,7 @@ public class UpdateTaskServlet extends HttpServlet {
 				ps.setString(4, taskStatus);
 				ps.setString(5, assignee);
 				ps.setString(6, internalInquiries);
-				ps.setString(7, comment);
-				ps.setString(8, completion);
+				ps.setString(7, completion);
 
 				ps.executeUpdate();
 				response.sendRedirect("list.jsp?wID=\"+wID");

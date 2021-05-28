@@ -98,77 +98,11 @@
 
 	<div class="background2">
 		<br>
-		<%
-				String id = request.getParameter("id");
-				String driver = "com.mysql.jdbc.Driver";
-				String connectionUrl = "jdbc:mysql://localhost:3306/";
-				String database = "meetup";
-				String userid = "root";
-				String password = "";
-				try {
-					Class.forName(driver);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				Connection connection = null;
-				Statement statement = null;
-				ResultSet rs = null;
-			%>
-			<%
-				try {
-					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
-					statement = connection.createStatement();
-					String sql = "select * from workingtime where id=" + id;
-					rs = statement.executeQuery(sql);
-					while (rs.next()) {
-			%>
-		<div class="editHeader">Successfully deleted<%=rs.getString("id")%></div>
 		<hr>
 		<br>
-		<div class="editBody">
-			<form action="UpdateTime" method="post">
-				<input type="hidden" name="id" value="<%=rs.getString("id")%>">
-				<input type="hidden" name="userID" value="${login.userID}" />
-				<input type="hidden" name="userSID" value="<%=rs.getString("userSID")%>"/>
-				<div>
-					<input type="hidden" name="kw" value='<%=rs.getString("kw")%>' /> <label>Date</label><input
-						type="date" name="date" value='<%=rs.getDate("date")%>' />
-				</div>
-				<div>
-					<label style="margin: 0px -50px;">Start</label> <input type="time"
-						name="startTime" id="starttime" style="margin: 0px 50px"
-						value='<%=rs.getTime("startTime").toLocalTime()%>' />
-				</div>
-				<div>
-					<label style="margin-left: -95px">Stop</label><input type="time"
-						name="stopTime" id="stoptime"
-						value='<%=rs.getTime("stopTime").toLocalTime()%>' />
-				</div>
-				<div>
-					<label style="margin-left: -105px">Pause</label><input type=time
-						name="pauseTime" id="pausetime"
-						value='<%=rs.getTime("pauseTime").toLocalTime()%>' />
-				</div>
-				<div>
-					<label style="margin-left: -130px">Duration</label><input
-						type="text" name="duration" id="total"
-						value='<%=rs.getString("duration")%>' />
-				</div>
-				<div>
-					<a class="aButtons" href="timeTracker.jsp?userID=${login.userID}">Back</a>
-					<button type="submit">Update</button>
-					<a class="aButtons" href="deleteTime.jsp?id=<%=rs.getString("id")%>">Delete</a>
-				</div>
-			</form>
-
-			<%
-				}
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			%>
-		</div>
+		<div class="editHeader"><%request.getParameter("id");%> Successfully deleted</div>
+		<a class="aButtons" href="startTimeTracker.jsp?userID=${login.userID}">Back</a>
+		<br><br>
 		<hr>
 	</div>
 </body>

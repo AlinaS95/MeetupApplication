@@ -130,7 +130,12 @@
 	</div>
 
 	<div class="background2">
-		<br> <b class="editHeader">Time Tracker</b>
+		<br>
+		<div class="backIcon">
+			<a href="profile.jsp?wID=${login.WID}"><img
+				src="pictures/back.png" alt="Back"></a>
+		</div>
+		<b class="editHeader">Time Tracker</b>
 		<div class="list_navigation">
 			<nav>
 				<ul>
@@ -145,12 +150,92 @@
 			</nav>
 		</div>
 		<hr>
+		
+		<!-- Add Task Time -->
+		<div class="newTaskTime">
+			<form action="" method="post">
+				<div>
+					<img class="taskImage" src="pictures/workspaceTasks.png"
+						alt="Tasks"> <input type="hidden" name="tID" value="1"><input class="newTask" type="text"
+						name="taskName" placeholder="What are you working on?"></input> <label
+						style="margin-left: 20px;">Start</label> <input type="time"
+						name="startTask" id="startTask"> <label
+						style="margin-left: 20px;">Stop</label> <input type="time"
+						name="stopTask" id="stopTask"> <a
+						style="margin-left: 15px;">Hours: <input type="text"
+						name="taskSum" id="taskSum" style="width: 50px"
+						readonly="readonly"></a>
+					<button type="submit">Save</button>
+				</div>
+			</form>
+		</div>
+
+		<script>
+			// Zeit-Differenz ermitteln
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("startTask").addEventListener("change",
+						SumHoursTask);
+				document.getElementById("stopTask").addEventListener("change",
+						SumHoursTask);
+			});
+
+			function SumHoursTask() {
+				var startTask = document.getElementById('startTask').value;
+				var stopTask = document.getElementById('stopTask').value;
+				var diff = 0;
+
+				if (startTask && stopTask) {
+					startTask = ConvertToSeconds(startTask);
+					stopTask = ConvertToSeconds(stopTask);
+					diff = Math.abs(stopTask - startTask);
+					document.getElementById('taskSum').value = secondsToHHmmSS(diff);
+				}
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(seconds/60);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return hours + "," + minutes;
+				}
+			}
+		</script>
 		<br>
-		<%
-			Date dNow = new Date();
-			SimpleDateFormat ft = new SimpleDateFormat("EEEE',' dd.MM.yyyy");
-			out.print("<h2 align=\"center\">" + ft.format(dNow) + "</h2>");
-		%>
+
+		<table class="taskTime">
+			<thead>
+				<tr>
+					<td style="text-align: left">Today</td>
+					<td style="text-align: right">Total Hours<input type="text"
+						name="totalHours" id="totalHours"></input></td>
+				</tr>
+			</thead>
+		</table>
+
+		<table class="workingtime">
+			<tr>
+				<td style="width: 200px;"><input type="text"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 200px;"><input type="time"></td>
+				<td style="width: 150px;"><a href="editTime.jsp?id="><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+					<a href="deleteTime.jsp?id="><img src="pictures/delete2.png"
+						alt="Delete post"
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		<hr>
 		<div class="newTime">
 			<form action="addTime" method="post">
 				<div>
@@ -230,93 +315,13 @@
 			  document.getElementById('KWInput').value = m.toDate().getWeekNumber();      
 			}
 		</script>
-		<FORM ACTION="timeTracker.jsp?userID=${login.userID}" METHOD="POST">
-			Week: <BR> <INPUT TYPE="TEXT" NAME="kw"><INPUT
-				TYPE="SUBMIT" value="Submit">
-		</FORM>
 
-		<hr>
-		<div class="newTime">
-			<form action="addTime" method="post">
-				<div>
-					<input class="newTask" type="text" name="taskName"
-						placeholder="What are you working on?"></input> <label
-						style="margin-left: 20px;">Start</label> <input type="time"
-						name="startTask" id="startTask"> <label
-						style="margin-left: 20px;">Stop</label> <input type="time"
-						name="stopTask" id="stopTask"> <a
-						style="margin-left: 15px;">Hours: <input type="text"
-						name="totalTask" id="totalTask" readonly="readonly"></a>
-					<button type="submit">Save</button>
-				</div>
-			</form>
-		</div>
+		<form action="timeTracker.jsp?userID=${login.userID}" method="post">
+			Show Week: <br> <input type="number" name="kw"
+				style="width: 50px"><input type="submit" value="Submit"
+				style="margin-left: 5px">
+		</form>
 
-		<script>
-			// Zeit-Differenz ermitteln
-			window.addEventListener("DOMContentLoaded", function() {
-				document.getElementById("startTask").addEventListener("change",
-						SumHoursTask);
-				document.getElementById("stopTask").addEventListener("change",
-						SumHoursTask);
-			});
-
-			function SumHoursTask() {
-				var startTask = document.getElementById('startTask').value;
-				var stopTask = document.getElementById('stopTask').value;
-				var diff = 0;
-
-				if (startTask && stopTask) {
-					startTask = ConvertToSeconds(startTask);
-					stopTask = ConvertToSeconds(stopTask);
-					diff = Math.abs(stopTask - startTask);
-					document.getElementById('totalTask').value = secondsToHHmmSS(diff);
-				}
-
-				function ConvertToSeconds(time) {
-					var splitTime = time.split(":");
-					return splitTime[0] * 3600 + splitTime[1] * 60;
-				}
-
-				function secondsToHHmmSS(secs) {
-					var hours = parseInt(secs / 3600);
-					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(seconds/60);
-					if (minutes < 10) {
-						minutes = '0' + minutes;
-					}
-					return hours + "," + minutes;
-				}
-			}
-		</script>
-		<br>
-
-		<table class="taskTime">
-			<thead>
-				<tr>
-					<td style="text-align: left">Today</td>
-					<td style="text-align: right">Total Hours<input type="text"
-						name="totalHours" id="totalHours"></input></td>
-				</tr>
-			</thead>
-		</table>
-
-		<table class="workingtime">
-			<tr>
-				<td style="width: 200px;"><input type="text"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 150px;"><a href="editTime.jsp?id="><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a href="deleteTime.jsp?id="><img src="pictures/delete2.png"
-						alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-				</td>
-			</tr>
-			</tbody>
-		</table>
 		<br>
 	</div>
 	<script>

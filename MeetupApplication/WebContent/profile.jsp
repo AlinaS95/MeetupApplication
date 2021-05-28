@@ -47,8 +47,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
-						alt="Profile Picture" /></a>
+					<a href="profile.jsp?wID=${login.WID}"><img
+						src="pictures/${login.fileName}" alt="Profile Picture" /></a>
 				</div>
 			</div>
 			<br>
@@ -63,7 +63,8 @@
 					<li><a href="board.jsp?wID=${login.WID}">Board</a></li>
 					<li><a href="calendar.jsp?wID=${login.WID}">Calendar</a></li>
 					<li><a href="progress.jsp?wID=${login.WID}">Progress</a></li>
-					<li><a href="socialmedia.jsp?wID=${login.WID}">Social Media</a></li>
+					<li><a href="socialmedia.jsp?wID=${login.WID}">Social
+							Media</a></li>
 				</ul>
 				<div class="secondNavigation">
 					<ul>
@@ -159,7 +160,8 @@
 						String fileName = rs.getString("filename");
 			%>
 			<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
-			<img class="membersImg" style="border-radius: 100%; width: 50px; height: 50px"
+			<img class="membersImg"
+				style="border-radius: 100%; width: 50px; height: 50px"
 				src="pictures/<%=fileName%>" title="<%=firstName%> <%=lastName%>" /><input
 				type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
 
@@ -169,117 +171,36 @@
 					out.println(e);
 				}
 			%>
- 
+
 			<!-- Workspace Tasks -->
-			<br><br>Tasks<br> <a class="workspace_tasks"
+			<br> Tasks<br>
+			<%
+				try {
+					String wID = request.getParameter("wID");
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks,user WHERE user.firstName = tasks.assignee AND tasks.wID=" + wID;
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = rs.getString("taskName");
+						String filename = rs.getString("filename");
+			%>
+			<img class="taskImage" src="pictures/workspaceTasks.png" alt="Tasks"><input
+				type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
+			<a class="taskName" href="list.jsp?wID=${login.WID}"><%=taskName%></a><input
+				type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+			<%
+				}
+				} catch (Exception e) {
+					out.println(e);
+				}
+			%>
+			<a class="workspace_tasks"
 				onclick="document.getElementById('task_info').style.display='block'"
-				style="width: auto;"><img src="pictures/workspaceTasks.png"
-				alt="Tasks"></a><a class="workspace_addmembers"
-				onclick="document.getElementById('task_add').style.display='block'
-				"
-				style="width: auto;"><img src="pictures/add.png" alt="Add Tasks"></a>
-		</div>
-
-		<!-- Pop-Up-Window Add Members-->
-		<div id="members_add" class="navigation_addBlock">
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Manage your Team <span
-						onclick="document.getElementById('members_add').style.display='none'
-					"
-						class="close" title="Schließen">&times; </span>
-				</div>
-				<div class="popupBody">
-					<a>Add new member</a>
-					<form action="addMember" method="post" id="addMemberForm">
-						<p>Full Name</p>
-						<input type="text" id="fullName" name="fullName"
-							placeholder="Enter full name" />
-						<p>Email</p>
-						<input type="text" id="email" name="email"
-							placeholder="Enter email" />
-						<p>Workspace</p>
-						<input type="text" id="workspace" name="workspace"
-							placeholder="Enter workspace" />
-						<p>Position</p>
-						<input type="text" id="position" name="position"
-							placeholder="Enter position" /> <input type="submit"
-							name="btn_addMember" value="Add Member"> <input
-							type="image" src="pictures/add.png" alt="Add">
-					</form>
-					<hr>
-				</div>
-				<div class="popupFooter">
-					<button onClick="save()">Save</button>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- Pop-Up-Window Add Workspace-->
-		<div id="workspace_add" class="navigation_addBlock">
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Manage your Workspace <span
-						onclick="document.getElementById('workspace_add').style.display='none'
-					"
-						class="close" title="Schließen">&times; </span>
-				</div>
-				<div class="popupBody">
-					<a>Add new member</a>
-					<form action="addWorkspace" method="post">
-						<input type="hidden" name="userSID" value='${login.userID}' />
-						<p>Full Name</p>
-						<input type="text" id="fullName" name="fullName"
-							placeholder="Enter full name" />
-						<p>Email</p>
-						<input type="text" id="email" name="email"
-							placeholder="Enter email" />
-						<p>Workspace</p>
-						<input type="text" id="workspace" name="workspace"
-							placeholder="Enter workspace" /> <input type="submit"
-							name="btn_addMember" value="Add Member">
-					</form>
-					<hr>
-					<div class="membersList"></div>
-				</div>
-				<div class="popupFooter">
-					<button onClick="save()">Save</button>
-				</div>
-			</div>
-		</div>
-		<!-- Pop-Up-Window Workspace Info Tasks -->
-		<div id="task_info" class="navigation_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					Create a Task <span
-						onclick="document.getElementById('task_info').style.display='none'
-					"
-						class="close" title="Schließen">&times; </span>
-				</div>
-				<div class="popupBody">
-					<ul class="navbar-nav">
-						<li><a>Tasks</a></li>
-					</ul>
-					<div class="row">
-						<table>
-							<thead>
-								<tr>
-									<th>Title</th>
-									<th>Target Date</th>
-									<th>Task Status</th>
-									<th>Actions</th>
-								</tr>
-							</thead>
-							<tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+				style="width: auto;"></a>
 		</div>
 
 		<div class="organization_title">Organization</div>
@@ -314,7 +235,7 @@
 					<input type="hidden" name="userSID" value='${login.userID}' />
 					<div style="margin: 10px 0px">
 						<a class="aButtons2" style="margin-right: 5px"
-							href="time.jsp?userID=${login.userID}">Time Tracker</a>
+							href="startTimeTracker.jsp?userID=${login.userID}">Time Tracker</a>
 						<button class="aButtons2" type="submit">Save</button>
 					</div>
 				</form>
