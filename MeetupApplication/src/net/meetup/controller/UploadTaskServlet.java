@@ -42,6 +42,7 @@ public class UploadTaskServlet extends HttpServlet {
 		String internalInquiries = request.getParameter("internalInquiries");
 		String completion = request.getParameter("completion");
 		String wID = request.getParameter("wID");
+		String userSID = request.getParameter("userSID");
 		
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
@@ -55,7 +56,7 @@ public class UploadTaskServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement pst = con.prepareStatement(
-					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, filename, path, completion, wID) VALUES (?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, filename, path, completion, wID, userSID) VALUES (?,?,?,?,?,?,?,?,?,?,?)");
 			pst.setString(1, taskName);
 			pst.setString(2, description);
 			pst.setDate(3, JDBCUtils.getSQLDate(dueDate));
@@ -66,6 +67,7 @@ public class UploadTaskServlet extends HttpServlet {
 			pst.setString(8, savePath);
 			pst.setString(9, completion);
 			pst.setString(10, wID);
+			pst.setString(11, userSID);
 			
 			pst.executeUpdate();
 			request.getRequestDispatcher("list.jsp?wID="+wID).forward(request, response);

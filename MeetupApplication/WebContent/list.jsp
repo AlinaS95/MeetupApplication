@@ -170,8 +170,31 @@
 								</select>
 							</div>
 							<div>
-								<label>Assignee</label> <input type="text" name="assignee"
-									required="required" />
+								<label>Assignee</label> <select name="userSID"
+									style="margin-left: -2px" id="assignee" onchange="singleSelectChangeText()" required="required">
+									<option value="" disabled selected>Select the assignee</option>
+									<%
+										try {
+											String wID = request.getParameter("wID");
+											Class.forName("com.mysql.cj.jdbc.Driver");
+											Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+											Statement st = con.createStatement();
+											String sql = "SELECT * FROM user WHERE user.wID=" + wID;
+											ResultSet rs = st.executeQuery(sql);
+											int i = 0;
+											while (rs.next()) {
+												String userID = rs.getString("userID");
+												String firstName = rs.getString("firstName");
+									%>
+									<option value="<%=userID%>"><%=firstName%></option>
+									<%
+										}
+										} catch (Exception e) {
+											out.println(e);
+										}
+									%>
+								</select>
+								<input id="selectAssignee" type="text" name="assignee">
 							</div>
 							<div>
 								<label>Internal Inquiries</label> <input type="text"
@@ -179,8 +202,8 @@
 							</div>
 
 							<div>
-								<label>Attachment</label> <input type="file" id="file-upload-button"
-									name="file" required="required" />
+								<label>Attachment</label> <input type="file"
+									id="file-upload-button" name="file" required="required" />
 							</div>
 
 							<div>
@@ -194,10 +217,21 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		function singleSelectChangeText() {
+			//Getting Value
+
+			var selObj = document.getElementById("assignee");
+			var selValue = selObj.options[selObj.selectedIndex].text;
+
+			//Setting Value
+			document.getElementById("selectAssignee").value = selValue;
+		}
+	</script>
 		<hr>
 		<br>
-	
-<%-- Versuche für Profilbild von assignee einzeln anzuzeigen
+
+		<%-- Versuche für Profilbild von assignee einzeln anzuzeigen
 		<p style="font-weight: bold">${message}</p> 
 		<%
 			try {
@@ -224,7 +258,7 @@
 				out.println(e);
 			}
 		%>--%>
-		
+
 		<table class="list">
 			<thead>
 				<tr>
@@ -282,7 +316,7 @@
 					<a href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/delete2.png" alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-				</a></td>
+					</a></td>
 			</tr>
 			</tbody>
 		</table>

@@ -150,15 +150,40 @@
 			</nav>
 		</div>
 		<hr>
-		
+
 		<!-- Add Task Time -->
 		<div class="newTaskTime">
-			<form action="" method="post">
+			<form action="addTaskTime" method="post">
 				<div>
 					<img class="taskImage" src="pictures/workspaceTasks.png"
-						alt="Tasks"> <input type="hidden" name="tID" value="1"><input class="newTask" type="text"
-						name="taskName" placeholder="What are you working on?"></input> <label
-						style="margin-left: 20px;">Start</label> <input type="time"
+						alt="Tasks"> <input type="hidden" name="tID"
+						value="${login.userID}"> <select name="taskName"
+						style="margin-left: -2px" required="required">
+						<option selected="">What are you working
+							on?</option>
+						<%
+							try {
+								String userID = request.getParameter("userID");
+								Class.forName("com.mysql.cj.jdbc.Driver");
+								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+								Statement st = con.createStatement();
+								String sql = "SELECT * FROM tasks WHERE userSID="+ userID;
+								ResultSet rs = st.executeQuery(sql);
+								int i = 0;
+								while (rs.next()) {
+									String taskID = rs.getString("taskID");
+									String taskName = rs.getString("taskName");
+									String assignee = rs.getString("assignee");
+						%>
+						<option value="<%=taskName%>"><%=taskName%></option>
+						<%
+							}
+							} catch (Exception e) {
+								out.println(e);
+							}
+						%>
+					</select> <label style="margin-left: 20px;">Date</label> <input type="date"
+						name=taskDate><label style="margin-left: 20px;">Start</label> <input type="time"
 						name="startTask" id="startTask"> <label
 						style="margin-left: 20px;">Stop</label> <input type="time"
 						name="stopTask" id="stopTask"> <a
@@ -213,28 +238,81 @@
 			<thead>
 				<tr>
 					<td style="text-align: left">Today</td>
-					<td style="text-align: right">Total Hours<input type="text"
-						name="totalHours" id="totalHours"></input></td>
+					<td></td>
+					<td></td>
+					<td style="text-align: right; padding: 0px 10px">
+						<%
+							try {
+								String userID = request.getParameter("userID");
+								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+								Statement st = con.createStatement();
+								String strQuery = "SELECT sum(CAST(taskSum AS DECIMAL(9,2))) FROM tasktime WHERE tID="
+										+ userID;
+								ResultSet rs = st.executeQuery(strQuery);
+								String totalDuration = "";
+								while (rs.next()) {
+									totalDuration = rs.getString(1);
+									if (totalDuration != null) {
+										out.println("Total Hours: " + totalDuration + "h");
+									} else {
+										out.println("Total Hours: 0h");
+									}
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						%>
+					</td>
 				</tr>
 			</thead>
 		</table>
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
 
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+
+				String userID = request.getParameter("userID");
+				String sql = "select * from tasktime WHERE tID=" + userID;
+				ResultSet rs = st.executeQuery(sql);
+
+				while (rs.next()) {
+					String taskTimeID = rs.getString("taskTimeID");
+					String taskName = rs.getString("taskName");
+					LocalDate taskDate = rs.getDate("taskDate").toLocalDate();
+					LocalTime startTask = rs.getTime("startTask").toLocalTime();
+					LocalTime stopTask = rs.getTime("stopTask").toLocalTime();
+					String taskSum = rs.getString("taskSum");
+					String tID = rs.getString("tID");
+		%>
+		<input type="hidden" name="taskTimeID"
+			value='<%=rs.getString("taskTimeID")%>' />
 		<table class="workingtime">
 			<tr>
-				<td style="width: 200px;"><input type="text"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 200px;"><input type="time"></td>
-				<td style="width: 150px;"><a href="editTime.jsp?id="><img
+				<td><input type="hidden" name=taskTimeID
+					value='<%=taskTimeID%>' /></td>
+				<td style="width: 200px;"><%=taskName%></td>
+				<td style="width: 175px;"><%=taskDate%></td>
+				<td style="width: 200px;"><%=startTask%></td>
+				<td style="width: 200px;"><%=stopTask%></td>
+				<td style="width: 200px;"><%=taskSum%>h</td>
+				<td style="width: 200px;"><a
+					href="editTime.jsp?taskTimeID=<%=rs.getString("taskTimeID")%>"><img
 						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a href="deleteTime.jsp?id="><img src="pictures/delete2.png"
-						alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
+						style="width: 35px; height: 35px; position: absolute; margin: -17px -20px;"></a>
 				</td>
 			</tr>
 			</tbody>
 		</table>
+		<%
+			}
+			} catch (Exception e) {
+				out.println("No tasks today");
+			}
+		%>
+
 		<hr>
 		<div class="newTime">
 			<form action="addTime" method="post">
