@@ -159,15 +159,14 @@
 						alt="Tasks"> <input type="hidden" name="tID"
 						value="${login.userID}"> <select name="taskName"
 						style="margin-left: -2px" required="required">
-						<option selected="">What are you working
-							on?</option>
+						<option selected="">What are you working on?</option>
 						<%
 							try {
 								String userID = request.getParameter("userID");
 								Class.forName("com.mysql.cj.jdbc.Driver");
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String sql = "SELECT * FROM tasks WHERE userSID="+ userID;
+								String sql = "SELECT * FROM tasks WHERE userSID=" + userID;
 								ResultSet rs = st.executeQuery(sql);
 								int i = 0;
 								while (rs.next()) {
@@ -183,8 +182,8 @@
 							}
 						%>
 					</select> <label style="margin-left: 20px;">Date</label> <input type="date"
-						name=taskDate><label style="margin-left: 20px;">Start</label> <input type="time"
-						name="startTask" id="startTask"> <label
+						id="theDate" name=taskDate><label style="margin-left: 20px;">Start</label>
+					<input type="time" name="startTask" id="startTask"> <label
 						style="margin-left: 20px;">Stop</label> <input type="time"
 						name="stopTask" id="stopTask"> <a
 						style="margin-left: 15px;">Hours: <input type="text"
@@ -194,7 +193,21 @@
 				</div>
 			</form>
 		</div>
+		<script>
+		var date = new Date();
 
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+
+		document.getElementById('theDate').value = today;
+		</script>
 		<script>
 			// Zeit-Differenz ermitteln
 			window.addEventListener("DOMContentLoaded", function() {
@@ -237,9 +250,12 @@
 		<table class="taskTime">
 			<thead>
 				<tr>
-					<td style="text-align: left">Today</td>
-					<td></td>
-					<td></td>
+					<td style="text-align: left">Today: <%
+						Date dNow = new Date();
+						SimpleDateFormat ft = new SimpleDateFormat("EEEE',' dd.MM.yyyy");
+						out.print("<a style='font-weight:bold;align:center;'/>" + ft.format(dNow) + "</h2>");
+					%></td>
+
 					<td style="text-align: right; padding: 0px 10px">
 						<%
 							try {
@@ -247,7 +263,7 @@
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String strQuery = "SELECT sum(CAST(taskSum AS DECIMAL(9,2))) FROM tasktime WHERE tID="
+								String strQuery = "SELECT sum(CAST(taskSum AS DECIMAL(9,2))) FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID="
 										+ userID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
@@ -264,6 +280,7 @@
 							}
 						%>
 					</td>
+					<td></td>
 				</tr>
 			</thead>
 		</table>
@@ -275,7 +292,7 @@
 				Statement st = con.createStatement();
 
 				String userID = request.getParameter("userID");
-				String sql = "select * from tasktime WHERE tID=" + userID;
+				String sql = "select * from tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID=" + userID;
 				ResultSet rs = st.executeQuery(sql);
 
 				while (rs.next()) {
@@ -293,13 +310,14 @@
 			<tr>
 				<td><input type="hidden" name=taskTimeID
 					value='<%=taskTimeID%>' /></td>
-				<td style="width: 200px;"><%=taskName%></td>
-				<td style="width: 175px;"><%=taskDate%></td>
+				<td style="width: 335px;"><%=taskName%></td>
+				<td><input type="hidden" name=taskDate
+					value='<%=taskDate%>' /></td>
 				<td style="width: 200px;"><%=startTask%></td>
 				<td style="width: 200px;"><%=stopTask%></td>
 				<td style="width: 200px;"><%=taskSum%>h</td>
 				<td style="width: 200px;"><a
-					href="editTime.jsp?taskTimeID=<%=rs.getString("taskTimeID")%>"><img
+					href="editTaskTime.jsp?taskTimeID=<%=rs.getString("taskTimeID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -20px;"></a>
 				</td>
@@ -314,17 +332,40 @@
 		%>
 
 		<hr>
+		
+		<!--Working Time -->
+		<br><a>Finish? Add your working hours to your Timesheet</a><br>
 		<div class="newTime">
+		<%
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+
+				String userID = request.getParameter("userID");
+				String sql = "SELECT * from tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID=" + userID;
+				ResultSet rs = st.executeQuery(sql);
+
+				while (rs.next()) {
+					String taskTimeID = rs.getString("taskTimeID");
+					String taskName = rs.getString("taskName");
+					LocalDate taskDate = rs.getDate("taskDate").toLocalDate();			
+					LocalTime startTask = rs.getTime("startTask").toLocalTime();
+					LocalTime stopTask = rs.getTime("stopTask").toLocalTime();
+					String taskSum = rs.getString("taskSum");
+					String tID = rs.getString("tID");
+		%>
 			<form action="addTime" method="post">
 				<div>
 					<a class="aButtons" onclick="checkWeek(this)">Week Number</a> <input
 						type="text" name="kw" id="KWInput" required="required"> <label
 						style="margin-left: 5px">Date</label> <input type="date"
-						name="date" id="dateInput" required="required"> <label
+						name="date" id="dateInput" value="<%=taskDate%>" required="required"> <label
 						style="margin-left: 15px">Start</label> <input type="time"
-						name="startTime" id="starttime" required="required"> <label
+						name="startTime" id="starttime" value="<%=startTask%>" required="required"> <label
 						style="margin-left: 15px" required="required">Stop</label> <input
-						type="time" name="stopTime" id="stoptime"> <label
+						type="time" name="stopTime" value="<%=stopTask%>" id="stoptime"> <label
 						style="margin-left: 15px">Pause</label> <input type="time"
 						name="pauseTime" id="pausetime"> <a
 						style="margin-left: 5px" required="required">Working Hours: <input
@@ -333,6 +374,12 @@
 					<button type="submit" style="margin-right: 5px">Save</button>
 				</div>
 			</form>
+			<%
+			}
+			} catch (Exception e) {
+				out.println("No tasks today");
+			}
+		%>
 		</div>
 
 		<script>
