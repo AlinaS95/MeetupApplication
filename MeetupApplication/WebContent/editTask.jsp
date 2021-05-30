@@ -129,6 +129,8 @@
 			<form action="UpdateTask" method="post">
 				<input type="hidden" name="taskID"
 					value="<%=rs.getString("taskID")%>">
+					<input type="hidden" name="wID"
+					value="<%=rs.getString("wID")%>">
 				<div>
 					<label>Title</label><input type="text" name="taskName"
 						value='<%=rs.getString("taskName")%>' />
@@ -145,6 +147,7 @@
 				<div class="selected">
 					<label>Status</label> <select name="taskStatus"><%=rs.getString("taskStatus")%>
 						<option selected=""><%=rs.getString("taskStatus")%></option>
+						<option value="To do">To do</option>
 						<option value="In Progress">In Progress</option>
 						<option value="Done">Done</option>
 					</select>
@@ -153,8 +156,16 @@
 					<label style="margin-left: -40px">Assignee</label><input
 						type="text" name="assignee" value='<%=rs.getString("assignee")%>' />
 				</div>
+				<div>
+					<label style="margin-left: -40px">Internal Inquiries</label><input
+						type="text" name="internalInquiries" value='<%=rs.getString("internalInquiries")%>' />
+				</div>
+				<div>
+					<label style="margin-left: -40px">Completion in %</label><input
+						type="number" name="completion" value='<%=rs.getString("completion")%>' />
+				</div>
 
-				<a class="aButtons" href="list.jsp">Back</a>
+				<a class="aButtons" href="list.jsp?wID=<%=rs.getString("wID")%>">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

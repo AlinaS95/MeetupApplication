@@ -48,19 +48,21 @@ public class UpdateTaskServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=?, internalInquiries=?, completion=? where taskID="
+				String sql = "Update tasks set taskID=?,taskName=?,description=?,dueDate=?, taskStatus=?, assignee=?, internalInquiries=?, completion=?, wID=? where taskID="
 						+ taskID;
 				ps = con.prepareStatement(sql);
-				ps.setString(1, taskName);
-				ps.setString(2, description);
-				ps.setDate(3, JDBCUtils.getSQLDate(dueDate));
-				ps.setString(4, taskStatus);
-				ps.setString(5, assignee);
-				ps.setString(6, internalInquiries);
-				ps.setString(7, completion);
+				ps.setString(1, taskID);
+				ps.setString(2, taskName);
+				ps.setString(3, description);
+				ps.setDate(4, JDBCUtils.getSQLDate(dueDate));
+				ps.setString(5, taskStatus);
+				ps.setString(6, assignee);
+				ps.setString(7, internalInquiries);
+				ps.setString(8, completion);
+				ps.setString(9, wID);
 
 				ps.executeUpdate();
-				response.sendRedirect("list.jsp?wID=\"+wID");
+				response.sendRedirect("list.jsp?wID="+wID);
 
 			} catch (Exception e) {
 				out.println(e);

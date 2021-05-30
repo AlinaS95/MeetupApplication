@@ -15,8 +15,6 @@
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="list.js"></script>
-
-
 </head>
 <body>
 	<div class="background1">
@@ -72,19 +70,16 @@
 									you can find your tasks and their processing status </span>
 							</dfn>
 					</a></li>
-
 					<li><a href="javascript:calendar()"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Calendar <span role="tooltip" style="font-weight: normal">You
 									can find your calendar here </span>
 							</dfn></a></li>
-
 					<li><a href="progress.jsp?wID=${login.WID}"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-
 					<li><a href="javascript:socialmedia()"
 						style="font-weight: normal"> <dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
@@ -107,7 +102,6 @@
 	</div>
 	<!-- Pop-Up-Window -->
 	<div id="l_add" class="navigation_addBlock">
-
 		<!-- Window content -->
 		<div class="addBlock">
 			<div class="popupHeader">
@@ -139,10 +133,8 @@
 				</ul>
 			</nav>
 		</div>
-
-		<!-- Pop-Up-Window New Task -->
+		<!-- Pop-Up-Window New Post -->
 		<div id="add_post" class="list_addBlock">
-
 			<!-- Window content -->
 			<div class="addBlock">
 				<div class="popupHeader">
@@ -187,8 +179,8 @@
 							</div>
 
 							<div>
-								<label>Attachment</label> <input type="file"
-									id="file-upload-button" name="file" required="required" />
+								<label>Attachment</label> <input type="file" id="file-upload-button"
+									name="file" required="required" />
 							</div>
 
 							<div>
@@ -202,11 +194,37 @@
 				</div>
 			</div>
 		</div>
-
 		<hr>
 		<br>
+	
+<%-- Versuche für Profilbild von assignee einzeln anzuzeigen
+		<p style="font-weight: bold">${message}</p> 
+		<%
+			try {
+				String wID = request.getParameter("wID");
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String sql = "SELECT user.firstName, user.filename,tasks.assignee, tasks.wID FROM user,tasks WHERE user.firstName = tasks.assignee AND tasks.wID=" + wID;
+				ResultSet rs = st.executeQuery(sql);
+				int i = 0;
+				while (rs.next()) {
+					String firstName = rs.getString("firstName");
+					String filename = rs.getString("filename");
+					String assignee = rs.getString("assignee");
 
-		<p style="font-weight: bold">${message}</p>
+		%>
+
+			<div style="margin-left:-1260px; height:70px; margin-bottom:-80px"><input type="hidden" value="<%=firstName%>"><img style="width:35px; height: 35px"
+					src="pictures/<%=filename%>" /></div>
+
+		<%
+			}
+			} catch (Exception e) {
+				out.println(e);
+			}
+		%>--%>
+		
 		<table class="list">
 			<thead>
 				<tr>
@@ -222,7 +240,6 @@
 				</tr>
 			</thead>
 		</table>
-		<br>
 		<%
 			try {
 				String wID = request.getParameter("wID");
@@ -239,9 +256,8 @@
 					LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
 					String taskStatus = rs.getString("taskStatus");
 					String assignee = rs.getString("assignee");
-					String filename = rs.getString("filename");
 					String internalInquiries = rs.getString("internalInquiries");
-					String filenameTask = rs.getString("filenameTask");
+					String filenameTask = rs.getString("filename");
 					String completion = rs.getString("completion");
 		%>
 		<input type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
@@ -252,7 +268,7 @@
 				<td style="width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
 				<td style="width: 150px;"><%=taskStatus%></td>
-				<td style="width: 150px;"><%=assignee%><img src="pictures/<%=filename%>" /></td>
+				<td style="width: 150px;"><%=assignee%></td>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=internalInquiries%></td>
 				<td style="width: 150px;"><img src="pictures/<%=filenameTask%>" /><a
 					href="editImageTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
@@ -263,11 +279,9 @@
 					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
-					<%=rs.getString("taskID")%> style="width: auto;"><img
+					<a href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
+						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
 				</a></td>
 			</tr>
 			</tbody>
@@ -280,58 +294,6 @@
 		%>
 		<hr>
 		<br>
-
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="list_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Post <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							String description = rs.getString("description");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							String taskStatus = rs.getString("taskStatus");
-							String assignee = rs.getString("assignee");
-							String internalInquiries = rs.getString("internalInquiries");
-							String filenameTask = rs.getString("filenameTask");
-							String completion = rs.getString("completion");
-				%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="taskID"
-							value='<%=rs.getString("taskID")%>' /> <a class="aButtons"
-							href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
 	</div>
-
-
 </body>
 </html>

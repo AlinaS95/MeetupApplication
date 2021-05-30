@@ -19,14 +19,14 @@ import javax.servlet.http.Part;
 
 import net.meetup.utils.JDBCUtils;
 
-
 @WebServlet("/UploadTask")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50)
 
-
 public class UploadTaskServlet extends HttpServlet {
+
+	// private static final String SAVE_DIR=*pictures*; //this is our folder name
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -41,34 +41,33 @@ public class UploadTaskServlet extends HttpServlet {
 		String assignee = request.getParameter("assignee");
 		String internalInquiries = request.getParameter("internalInquiries");
 		String completion = request.getParameter("completion");
-		Integer wID = Integer.parseInt(request.getParameter("wID"));
-
+		String wID = request.getParameter("wID");
 		
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
-		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\"
+		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\tasks\\"
 				+ File.separator + fileName;
 		File fileSaveDir = new File(savePath);
 
 		part.write(savePath + File.separator);
 
-
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, filenameTask, path, completion, wID) VALUES (?,?,?,?,?,?,?,?,?,?)");
-			ps.setString(1, taskName);
-			ps.setString(2, description);
-			ps.setDate(3, JDBCUtils.getSQLDate(dueDate));
-			ps.setString(4, taskStatus);
-			ps.setString(5, assignee);
-			ps.setString(6, internalInquiries);
-			ps.setString(7, fileName);
-			ps.setString(8, savePath);
-			ps.setString(9, completion);
-			ps.setInt(10, wID);
-			ps.executeUpdate();
+			PreparedStatement pst = con.prepareStatement(
+					"INSERT INTO tasks (taskName, description, dueDate, taskStatus, assignee, internalInquiries, filename, path, completion, wID) VALUES (?,?,?,?,?,?,?,?,?,?)");
+			pst.setString(1, taskName);
+			pst.setString(2, description);
+			pst.setDate(3, JDBCUtils.getSQLDate(dueDate));
+			pst.setString(4, taskStatus);
+			pst.setString(5, assignee);
+			pst.setString(6, internalInquiries);
+			pst.setString(7, fileName);
+			pst.setString(8, savePath);
+			pst.setString(9, completion);
+			pst.setString(10, wID);
+			
+			pst.executeUpdate();
 			request.getRequestDispatcher("list.jsp?wID="+wID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
@@ -76,17 +75,17 @@ public class UploadTaskServlet extends HttpServlet {
 
 	}
 	// file name of the upload file is included in content-disposition header like
-		// this:
-		// form-data; name="dataFile"; filename="PHOTO.JPG"
+	// this:
+	// form-data; name="dataFile"; filename="PHOTO.JPG"
 
-		private String extractFileName(Part part) {// This method will print the file name.
-			String contentDisp = part.getHeader("content-disposition");
-			String[] items = contentDisp.split(";");
-			for (String s : items) {
-				if (s.trim().startsWith("filenameTask")) {
-					return s.substring(s.indexOf("=") + 2, s.length() - 1);
-				}
+	private String extractFileName(Part part) {// This method will print the file name.
+		String contentDisp = part.getHeader("content-disposition");
+		String[] items = contentDisp.split(";");
+		for (String s : items) {
+			if (s.trim().startsWith("filename")) {
+				return s.substring(s.indexOf("=") + 2, s.length() - 1);
 			}
-			return "";
 		}
+		return "";
 	}
+}

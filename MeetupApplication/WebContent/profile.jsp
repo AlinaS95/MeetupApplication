@@ -143,7 +143,7 @@
 		<div class="workspace">
 			<div class="project_name">${login.workspace}</div>
 			<!-- Workspace Members -->
-			<br> <br>Members<br>
+			<br> Members<br>
 			<%
 				try {
 					String wID = request.getParameter("wID");
@@ -191,7 +191,7 @@
 			<img class="taskImage" src="pictures/workspaceTasks.png" alt="Tasks"><input
 				type="hidden" name="taskID" value='<%=rs.getString("taskID")%>' />
 			<a class="taskName" href="list.jsp?wID=${login.WID}"><%=taskName%></a><input
-				type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+				type="hidden" name="wID" value='<%=rs.getString("wID")%>' /><br>
 			<%
 				}
 				} catch (Exception e) {

@@ -55,7 +55,7 @@ public class ChangeImageTaskServlet extends HttpServlet {
     		try {
     			Class.forName(driverName);
     			con = DriverManager.getConnection(url, user, psw);
-    			String sql = "Update tasks set taskID=?,filename=?, path=? where taskID=" + taskID;
+    			String sql = "Update tasks set taskID=?,filenameTask=?, path=? where taskID=" + taskID;
     			ps = con.prepareStatement(sql);
     			ps.setString(1, taskID);
     			ps.setString(2, fileName);
@@ -77,7 +77,7 @@ public class ChangeImageTaskServlet extends HttpServlet {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
         for (String s : items) {
-            if (s.trim().startsWith("filename")) {
+            if (s.trim().startsWith("filenameTask")) {
                 return s.substring(s.indexOf("=") + 2, s.length() - 1);
             }
         }

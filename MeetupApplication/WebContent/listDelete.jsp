@@ -10,14 +10,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>List</title>
+<title>Tasks</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="list.css">
-<link rel="stylesheet" type="text/css" href="editPost.css">
+<link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
-<script type="text/javascript" src="list.js"></script>
 </head>
 <body>
 	<div class="background1">
@@ -44,8 +43,8 @@
 					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
-						alt="Profil Icon" /></a>
+					<a href="javascript:profile()"><img
+						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -60,7 +59,7 @@
 									can find the home area here </span>
 							</dfn></a></li>
 					<li><a href="javascript:list()"><dfn class="tooltip">
-								List <span role="tooltip" style="font-weight: normal">Here
+								List <span role="tooltip" style="font-weight: bold">Here
 									you can find your tasks and create them</span>
 							</dfn> </a></li>
 					<li><a href="javascript:board()"> <dfn class="tooltip">
@@ -76,7 +75,7 @@
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-					<li><a href="socialmedia.jsp" style="font-weight: bold"><dfn
+					<li><a href="socialmedia.jsp" style="font-weight: normal"><dfn
 								class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
@@ -99,55 +98,11 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Task</div>
 		<hr>
 		<br>
-		<div class="editBody">
-			<%
-				String taskID = request.getParameter("taskID");
-				String driver = "com.mysql.jdbc.Driver";
-				String connectionUrl = "jdbc:mysql://localhost:3306/";
-				String database = "meetup";
-				String userid = "root";
-				String password = "";
-				try {
-					Class.forName(driver);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				Connection connection = null;
-				Statement statement = null;
-				ResultSet rs = null;
-			%>
-			<%
-				try {
-					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
-					statement = connection.createStatement();
-					String sql = "select * from tasks where taskID=" + taskID;
-					rs = statement.executeQuery(sql);
-					while (rs.next()) {
-			%>
-			<form action="ChangeImageTask" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="taskID" value="<%=rs.getString("taskID")%>">
-				<div>
-					<label style="margin-left: -205px">Design</label>
-					<img style="width:50px; height:50px;" src="pictures/<%=rs.getString("filenameTask")%>" />
-					<br> <input type="file" id="file-upload-button" name="file"
-						style="margin-left: 140px" value="<%=rs.getString("filenameTask")%>" />
-				</div>
-				<br> <br> <br> <a class="aButtons"
-					href="list.jsp">Back</a>
-				<button type="submit">Update</button>
-			</form>
-
-			<%
-				}
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			%>
-		</div>
+		<div class="editHeader"><%request.getParameter("taskID");%> Successfully deleted</div>
+		<a class="aButtons" href="list.jsp?wID=${login.WID}">Back</a>
+		<br><br>
 		<hr>
 	</div>
 </body>
