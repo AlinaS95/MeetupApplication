@@ -17,6 +17,26 @@
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="socialmedia.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+	var request = new XMLHttpRequest();
+	function searchInfo() {
+		var taskName = document.vinform.taskName.value;
+		var url = "search.jsp?val=" + taskName;
+
+		try {
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					var val = request.responseText;
+					document.getElementById('taskOutput').innerHTML = val;
+				}
+			}//end of function  
+			request.open("GET", url, true);
+			request.send();
+		} catch (e) {
+			alert("Unable to connect to server");
+		}
+	}
+</script>
 
 </head>
 <body>
@@ -41,11 +61,14 @@
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<input type="search" id="search" placeholder="Search..." />
+					<form name="vinform">
+						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+					</form>
+					<span id="taskOutput"></span>
 				</div>
 				<div class="user">
-					<a href="profile.jsp?wID=${login.WID}"><img src="pictures/${login.fileName}"
-						alt="Profil Icon" /></a>
+					<a href="profile.jsp?wID=${login.WID}"><img
+						src="pictures/${login.fileName}" alt="Profile Picture" /></a>
 				</div>
 			</div>
 			<br>

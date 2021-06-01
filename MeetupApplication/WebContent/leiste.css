@@ -60,19 +60,19 @@ h4 {
 }
 
 .firstBox .firstname {
-    padding: 20px;
-    margin: -27px;
-    text-align: center;
-    margin-left: 45px;
-    text-decoration: underline;
+	padding: 20px;
+	margin: -27px;
+	text-align: center;
+	margin-left: 45px;
+	text-decoration: underline;
 }
 
-.firstBox .workspace{
-    padding: 20px;
-    margin: -27px;
-    text-align: center;
-    margin-left: 0px;
-    text-decoration: underline;
+.firstBox .workspace {
+	padding: 20px;
+	margin: -27px;
+	text-align: center;
+	margin-left: 0px;
+	text-decoration: underline;
 }
 
 .firstBox .information img {
@@ -130,11 +130,11 @@ h4 {
 	position: absolute;
 }
 
-.firstBox nav ul li:hover ul { 
+.firstBox nav ul li:hover ul {
 	display: block;
 }
 
-.firstBox nav ul li ul li { 
+.firstBox nav ul li ul li {
 	width: 185px;
 	height: 50px;
 	margin: 15px -185px;
@@ -150,17 +150,18 @@ h4 {
 	background-color: #d1d1d1;
 }
 
-.firstBox img{
+.firstBox img {
 	width: 20px;
 	height: 20px;
 	position: absolute;
 	margin: 0px -5px;
 }
+
 nav ul li {
 	list-style: none;
 }
 
-.headliner_block{
+.headliner_block {
 	text-align: left;
 	background-color: #E3E0E0;
 	padding: 60px;
@@ -169,7 +170,7 @@ nav ul li {
 }
 
 /* logo */
-.logo img{
+.logo img {
 	width: 9%;
 	float: left;
 	border-radius: 90px;
@@ -189,9 +190,9 @@ nav ul li {
 
 .project h3 {
 	padding: 15px;
-    font-size: 22px;
-    letter-spacing: 2px;
-    margin: 0px 25px;
+	font-size: 22px;
+	letter-spacing: 2px;
+	margin: 0px 25px;
 }
 
 .project nav {
@@ -231,11 +232,11 @@ nav ul li {
 	position: absolute;
 }
 
-.project nav ul li:hover ul { 
+.project nav ul li:hover ul {
 	display: block;
 }
 
-.project nav ul li ul li { 
+.project nav ul li ul li {
 	width: 185px;
 	height: 50px;
 	margin: 15px -185px;
@@ -251,39 +252,63 @@ nav ul li {
 	background-color: #d1d1d1;
 }
 
-.project img{
+.project img {
 	width: 20px;
 	height: 20px;
 	position: absolute;
 	margin: 0px -5px;
 }
 
-.secondblock{
+.secondblock {
 	margin: -105px 1055px;
 	width: 0px;
 }
 
 /*search */
-.searchbox{
+.searchbox {
 	width: 300px;
 	vertical-align: middle;
 	white-space: nowrap;
 	position: relative;
 }
 
-.searchbox input#search{
-	width: 300px;
+.searchbox input#search {
+	width: 285px;
 	height: 50px;
 	background: #F0F0F0;
 	border: none;
-	font-size: 15px;
+	font-size: 20px;
 	float: left;
 	color: #707070;
-	padding-left: 45px;
+	padding-left: 10px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px;
 	margin-top:-30px;
+}
+
+.searchTable {
+	background:#F0F0F0;
+	border-radius:5px;
+	position:absolute;
+	margin:85px -1px;
+	border: solid 2px #707070;
+	width: 300px;
+}
+
+.searchTable td {
+	font-weight: bold;
+}
+
+.searchTable td a{
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.defaultSearch {
+	position: absolute;
+	margin: 90px 5px;
+	font-weight: bold;
 }
 
 .searchbox input#search::-webkit-input-placeholder {
@@ -298,11 +323,11 @@ nav ul li {
 	color: #F0F0F0;
 }
 
-.searchbox input#search::-ms-input-placeholder { 
+.searchbox input#search::-ms-input-placeholder {
 	color: #F0F0F0;
 }
 
-.searchbox .searchicon img{
+.searchbox .searchicon img {
 	position: absolute;
 	top: 50%;
 	margin-left: 250px;
@@ -381,31 +406,30 @@ nav ul li {
 	cursor: pointer;
 }
 
-.mainmenu nav .secondNavigation img{
+.mainmenu nav .secondNavigation img {
 	margin: 0px 15px;
 	margin-top: -3px;
 	width: 35px;
 	height: 35px;
 }
 
-.mainmenu nav .secondNavigation .add img{
+.mainmenu nav .secondNavigation .add img {
 	width: 30px;
 	height: 30px;
 	margin-top: 0px;
 }
 
-
 /* Background Pop-Up-Window*/
 .navigation_addBlock {
 	display: none;
-	position: fixed; 
+	position: fixed;
 	z-index: 4;
 	padding-top: 100px;
 	left: 0;
 	top: 0;
-	width: 100%; 
-	height: 100%; 
-	overflow: auto; 
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -444,9 +468,9 @@ nav ul li {
 	border-radius: 5px;
 	padding: 1px 5px;
 	cursor: pointer;
-} 
+}
 
-.popupBlock button:hover{
+.popupBlock button:hover {
 	outline: none;
 	background: #E3E0E0;
 	color: #707070;
@@ -474,15 +498,15 @@ nav ul li {
 	text-align: left;
 	font-size: 20px;
 	color: #707070;
-	/* Style the Image Used to Trigger the Modal */
+/* Style the Image Used to Trigger the Modal */
 }
 
 .popupBody button {
-    margin: 2px 60px;
-    cursor: pointer
+	margin: 2px 60px;
+	cursor: pointer
 }
 
-.popupBody button:hover{
+.popupBody button:hover {
 	outline: none;
 	background: #E3E0E0;
 	color: #707070;
@@ -498,7 +522,7 @@ nav ul li {
 	border-radius: 5px;
 	padding: 1px 5px;
 	cursor: pointer;
-} 
+}
 
 .popupBody img {
 	width: 55px;
@@ -507,8 +531,8 @@ nav ul li {
 }
 
 .popupFooter button {
-    margin: 5px;
-    border-width: 5px;
+	margin: 5px;
+	border-width: 5px;
 }
 
 .popupBody input, select {
@@ -551,8 +575,8 @@ nav ul li {
 	height: 20px;
 	margin-top: -15px;
 }
-/* Infocards */
 
+/* Infocards */
 .tooltip {
 	color: #707070;
 	cursor: fixed;
@@ -579,7 +603,7 @@ nav ul li {
 	border-radius: 0.2em;
 }
 
-dfn{
+dfn {
 	font-style: normal;
 }
 
@@ -590,3 +614,4 @@ dfn{
 	font-size: 28px;
 	letter-spacing: 2px;
 }
+

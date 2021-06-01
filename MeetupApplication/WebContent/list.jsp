@@ -38,11 +38,14 @@
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<input type="search" id="search" placeholder="Search..." />
+					<form name="vinform">
+						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+					</form>
+					<span id="taskOutput"></span>
 				</div>
 				<div class="user">
 					<a href="profile.jsp?wID=${login.WID}"><img
-						src="pictures/${login.fileName}" alt="Profil Icon" /></a>
+						src="pictures/${login.fileName}" alt="Profile Picture" /></a>
 				</div>
 			</div>
 			<br>

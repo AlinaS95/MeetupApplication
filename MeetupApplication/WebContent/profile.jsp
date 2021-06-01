@@ -21,6 +21,26 @@
 <script type="text/javascript" src="methods.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script>
+	var request = new XMLHttpRequest();
+	function searchInfo() {
+		var taskName = document.vinform.taskName.value;
+		var url = "search.jsp?val=" + taskName;
+
+		try {
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					var val = request.responseText;
+					document.getElementById('taskOutput').innerHTML = val;
+				}
+			}//end of function  
+			request.open("GET", url, true);
+			request.send();
+		} catch (e) {
+			alert("Unable to connect to server");
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="background1">
@@ -44,7 +64,10 @@
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<input type="search" id="search" placeholder="Search..." />
+					<form name="vinform">
+						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+					</form>
+					<span id="taskOutput"></span>
 				</div>
 				<div class="user">
 					<a href="profile.jsp?wID=${login.WID}"><img
@@ -235,7 +258,8 @@
 					<input type="hidden" name="userSID" value='${login.userID}' />
 					<div style="margin: 10px 0px">
 						<a class="aButtons2" style="margin-right: 5px"
-							href="startTimeTracker.jsp?userID=${login.userID}">Time Tracker</a>
+							href="startTimeTracker.jsp?userID=${login.userID}">Time
+							Tracker</a>
 						<button class="aButtons2" type="submit">Save</button>
 					</div>
 				</form>

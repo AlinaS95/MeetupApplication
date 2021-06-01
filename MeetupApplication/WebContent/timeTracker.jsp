@@ -24,7 +24,26 @@
 <script type="text/javascript" src="list.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+<script>
+	var request = new XMLHttpRequest();
+	function searchInfo() {
+		var taskName = document.vinform.taskName.value;
+		var url = "search.jsp?val=" + taskName;
 
+		try {
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					var val = request.responseText;
+					document.getElementById('taskOutput').innerHTML = val;
+				}
+			}//end of function  
+			request.open("GET", url, true);
+			request.send();
+		} catch (e) {
+			alert("Unable to connect to server");
+		}
+	}
+</script>
 
 </head>
 <body>
@@ -49,12 +68,14 @@
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<input type="search" id="search" placeholder="Search..." />
+					<form name="vinform">
+						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+					</form>
+					<span id="taskOutput"></span>
 				</div>
 				<div class="user">
 					<a href="profile.jsp?wID=${login.WID}"><img
-						src="pictures/${login.fileName}" alt="Profil Icon" /></a> <input
-						type="hidden" name="userID" value='${login.userID}' />
+						src="pictures/${login.fileName}" alt="Profile Picture" /></a>
 				</div>
 			</div>
 			<br>
