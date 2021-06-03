@@ -65,7 +65,8 @@
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
 					<form name="vinform">
-						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+						<input id="search" type="text" name="taskName"
+							onkeyup="searchInfo()">
 					</form>
 					<span id="taskOutput"></span>
 				</div>
@@ -221,9 +222,7 @@
 					out.println(e);
 				}
 			%>
-			<a class="workspace_tasks"
-				onclick="document.getElementById('task_info').style.display='block'"
-				style="width: auto;"></a>
+			<a href="list.jsp?wID=${login.WID}"><img class="taskImage" src="pictures/add.png" alt="Add"></a>
 		</div>
 
 		<div class="organization_title">Organization</div>
@@ -231,62 +230,107 @@
 		<div class="organization">
 			<div class="workingtime">Working Time</div>
 			<br>
-			<div class="newTime">
-				<form action="addTime" method="post">
-					<div style="margin: -12px 0px">
-						<a class="aButtons2" onclick="checkWeek(this)">Week Number</a> <input
-							type="text" name="kw" id="KWInput" required="required">
-					</div>
-					<div style="margin: 16px 0px">
-						<label>Date</label> <input type="date" name="date" id="dateInput"
-							style="margin-left: 20px;" required="required">
-					</div>
-					<div style="margin: 10px 0px">
-						<label>Start</label> <input type="time" name="startTime"
-							id="starttime" style="margin-left: 20px;" required="required">
-					</div>
-					<div style="margin: 10px 0px">
-						<label>Stop</label> <input type="time" name="stopTime"
-							id="stoptime" style="margin-left: 20px;" required="required">
-					</div>
-					<div style="margin: 10px 0px">
-						<label>Pause</label> <input type="time" name="pauseTime"
-							id="pausetime" style="margin-left: 10px;" required="required">
-						<a style="margin-left: 10px;">Working Hours: <input
-							type="text" name="duration" id="total" readonly="readonly"></a>
-					</div>
-					<input type="hidden" name="userSID" value='${login.userID}' />
-					<div style="margin: 10px 0px">
-						<a class="aButtons2" style="margin-right: 5px"
-							href="startTimeTracker.jsp?userID=${login.userID}">Time
-							Tracker</a>
-						<button class="aButtons2" type="submit">Save</button>
+
+			<!-- Add Task Time -->
+			<div class="newTaskTime">
+				<form action="addTaskTime" method="post">
+					<div style="margin: -5px 0px">
+						<img class="taskImage" style="position: absolute"
+							src="pictures/workspaceTasks.png" alt="Tasks"> <input
+							type="hidden" name="tID" value="${login.userID}"> <select
+							name="taskName" style="margin: 5px 40px" required="required">
+							<option selected="">What are you working on?</option>
+							<%
+								try {
+									String wID = request.getParameter("wID");
+									Class.forName("com.mysql.cj.jdbc.Driver");
+									Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+									Statement st = con.createStatement();
+									String sql = "SELECT * FROM tasks WHERE wID=" + wID;
+									ResultSet rs = st.executeQuery(sql);
+									int i = 0;
+									while (rs.next()) {
+										String taskID = rs.getString("taskID");
+										String taskName = rs.getString("taskName");
+										String assignee = rs.getString("assignee");
+							%>
+							<option value="<%=taskName%>"><%=taskName%></option>
+							<%
+								}
+								} catch (Exception e) {
+									out.println(e);
+								}
+							%>
+						</select> <br>
+						<label style="margin-left: 20px;">Date</label> <input type="date"
+							style="margin: 5px 0px; margin-right: 5px" id="theDate"
+							name=taskDate><label>Week</label> <input type="number"
+							style="width: 35px" name="week" id="theWeek" required="required"><br>
+						<label style="margin-left: 20px;">Start</label> <input type="time"
+							style="margin: 5px 0px" name="startTask" id="startTask"><br>
+						<label style="margin-left: 20px;">Stop</label> <input type="time"
+							style="margin: 5px 0px" name="stopTask" id="stopTask"> <a
+							style="margin-left: 15px;">Hours: <input type="text"
+							name="taskSum" id="taskSum" style="width: 50px"
+							readonly="readonly"></a><br>
+						<div style="margin: 15px 0px">
+							<a class="aButtons2" style="margin: 20px"
+								href="startTimeTracker.jsp?userSID=${login.userID}">Time
+								Tracker</a>
+							<button class="aButtons2" type="submit">Save</button>
+						</div>
 					</div>
 				</form>
 			</div>
+
+			<!-- Show current week -->
+			<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek').value = weekNumber;
+		</script>
+
+			<!-- Show current date -->
+			<script> 
+		var date = new Date();
+
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+
+		document.getElementById('theDate').value = today;
+		</script>
+
+			<!-- Calculate time difference  -->
 			<script>
-			// Zeit-Differenz ermitteln
 			window.addEventListener("DOMContentLoaded", function() {
-				document.getElementById("starttime").addEventListener("change",
-						SumHours);
-				document.getElementById("stoptime").addEventListener("change",
-						SumHours);
-				document.getElementById("pausetime").addEventListener("change",
-						SumHours);
+				document.getElementById("startTask").addEventListener("change",
+						SumHoursTask);
+				document.getElementById("stopTask").addEventListener("change",
+						SumHoursTask);
 			});
 
-			function SumHours() {
-				var starttime = document.getElementById('starttime').value;
-				var stoptime = document.getElementById('stoptime').value;
-				var pausetime = document.getElementById('pausetime').value;
+			function SumHoursTask() {
+				var startTask = document.getElementById('startTask').value;
+				var stopTask = document.getElementById('stopTask').value;
 				var diff = 0;
 
-				if (starttime && stoptime && pausetime) {
-					starttime = ConvertToSeconds(starttime);
-					stoptime = ConvertToSeconds(stoptime);
-					pausetime = ConvertToSeconds(pausetime);
-					diff = Math.abs(stoptime - starttime - pausetime);
-					document.getElementById('total').value = secondsToHHmmSS(diff);
+				if (startTask && stopTask) {
+					startTask = ConvertToSeconds(startTask);
+					stopTask = ConvertToSeconds(stopTask);
+					diff = Math.abs(stopTask - startTask);
+					document.getElementById('taskSum').value = secondsToHHmmSS(diff);
 				}
 
 				function ConvertToSeconds(time) {
@@ -297,29 +341,15 @@
 				function secondsToHHmmSS(secs) {
 					var hours = parseInt(secs / 3600);
 					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
+					var minutes = parseInt(seconds/60);
 					if (minutes < 10) {
 						minutes = '0' + minutes;
 					}
-					return hours + "." + minutes;
+					return hours + "," + minutes;
 				}
 			}
 		</script>
-			<script>
-		Date.prototype.getWeekNumber = function(){
-			  var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
-			  var dayNum = d.getUTCDay() || 7;
-			  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-			  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-			  return "KW " + Math.ceil((((d - yearStart) / 86400000) + 1)/7)
-			};
-
-			function checkWeek() {
-			  var dateInput = document.getElementById('dateInput').value;
-			  var m = moment(dateInput, 'YYYY-MM-DD');
-			  document.getElementById('KWInput').value = m.toDate().getWeekNumber();      
-			}
-		</script>
+		
 		</div>
 		<br> <br>
 		<div class="logout">

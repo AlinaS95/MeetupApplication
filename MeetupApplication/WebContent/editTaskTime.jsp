@@ -127,16 +127,22 @@
 					while (rs.next()) {
 			%>
 			<form action="UpdateTaskTime" method="post">
-				<input type="hidden" name="taskTimeID" value="<%=rs.getString("taskTimeID")%>">
-				<input type="hidden" name="userID" value="${login.userID}" />
-				<input type="hidden" name="tID" value="<%=rs.getString("tID")%>"/>
+				<input type="hidden" name="taskTimeID"
+					value="<%=rs.getString("taskTimeID")%>"> <input
+					type="hidden" name="userID" value="${login.userID}" /> <input
+					type="hidden" name="tID" value="<%=rs.getString("tID")%>" />
 				<div>
-					<label style="margin:0px 37px">Task</label><input
-						type="text" name="taskName" style="margin:5px -30px" value='<%=rs.getString("taskName")%>' />
+					<label style="margin: 0px 37px">Task</label><input type="text"
+						name="taskName" style="margin: 5px -30px"
+						value='<%=rs.getString("taskName")%>' />
 				</div>
 				<div>
-					<label>Date</label><input
-						type="date" name="taskDate" value='<%=rs.getDate("taskDate")%>' />
+					<input type="hidden" name="week" 
+						value='<%=rs.getString("week")%>' />
+				</div>
+				<div>
+					<label>Date</label><input type="date" name="taskDate"
+						value='<%=rs.getDate("taskDate")%>' />
 				</div>
 				<div>
 					<label style="margin: 0px -50px;">Start</label> <input type="time"
@@ -149,14 +155,15 @@
 						value='<%=rs.getTime("stopTask").toLocalTime()%>' />
 				</div>
 				<div>
-					<label style="margin-left: 38px">Duration</label><input
-						type="text" name="taskSum" id="taskSum"
-						value='<%=rs.getString("taskSum")%>' />
+					<label style="margin-left: 38px">Duration</label><input type="text"
+						name="taskSum" id="taskSum" value='<%=rs.getString("taskSum")%>' />
 				</div>
 				<div>
-					<a class="aButtons" href="startTimeTracker.jsp?userID=${login.userID}">Back</a>
+					<a class="aButtons"
+						href="startTimeTracker.jsp?userID=${login.userID}">Back</a>
 					<button type="submit">Update</button>
-					<a class="aButtons" href="deleteTaskTime.jsp?taskTimeID=<%=rs.getString("taskTimeID")%>">Delete</a>
+					<a class="aButtons"
+						href="deleteTaskTime.jsp?taskTimeID=<%=rs.getString("taskTimeID")%>">Delete</a>
 				</div>
 			</form>
 

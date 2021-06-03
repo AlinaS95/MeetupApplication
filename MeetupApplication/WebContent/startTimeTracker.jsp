@@ -69,7 +69,8 @@
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
 					<form name="vinform">
-						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+						<input id="search" type="text" name="taskName"
+							onkeyup="searchInfo()">
 					</form>
 					<span id="taskOutput"></span>
 				</div>
@@ -157,21 +158,13 @@
 				src="pictures/back.png" alt="Back"></a>
 		</div>
 		<b class="editHeader">Time Tracker</b>
-		<div class="list_navigation">
-			<nav>
-				<ul>
-					<li><a class="sortPosts"
-						onclick="document.getElementById('posts_sort').style.display='block'"
-						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
-					<li><a class="filterDate"
-						onclick="document.getElementById('date_filter').style.display='block'"
-						style="width: auto;"><img src="pictures/filter.png"
-							alt="Settings">Filter</a></li>
-				</ul>
-			</nav>
-		</div>
 		<hr>
 
+		<%
+			Date dNow = new Date();
+			SimpleDateFormat ft = new SimpleDateFormat("EEEE',' dd.MM.yyyy");
+			out.print("<h2>" + ft.format(dNow) + "</h2>");
+		%>
 		<!-- Add Task Time -->
 		<div class="newTaskTime">
 			<form action="addTaskTime" method="post">
@@ -180,14 +173,14 @@
 						alt="Tasks"> <input type="hidden" name="tID"
 						value="${login.userID}"> <select name="taskName"
 						style="margin-left: -2px" required="required">
-						<option selected="">What are you working on?</option>
+						<option selected="" disabled>What are you working on?</option>
 						<%
 							try {
-								String userID = request.getParameter("userID");
+								String userSID = request.getParameter("userSID");
 								Class.forName("com.mysql.cj.jdbc.Driver");
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
-								String sql = "SELECT * FROM tasks WHERE userSID=" + userID;
+								String sql = "SELECT * FROM tasks WHERE userSID=" + userSID;
 								ResultSet rs = st.executeQuery(sql);
 								int i = 0;
 								while (rs.next()) {
@@ -202,8 +195,9 @@
 								out.println(e);
 							}
 						%>
-					</select> <label style="margin-left: 20px;">Date</label> <input type="date"
-						id="theDate" name=taskDate><label style="margin-left: 20px;">Start</label>
+					</select> <input type="hidden" id="theDate" name=taskDate> <input
+						type="hidden" style="width: 35px" name="week" id="theWeek"
+						required="required"><label style="margin-left: 20px;">Start</label>
 					<input type="time" name="startTask" id="startTask"> <label
 						style="margin-left: 20px;">Stop</label> <input type="time"
 						name="stopTask" id="stopTask"> <a
@@ -213,7 +207,20 @@
 					<button type="submit">Save</button>
 				</div>
 			</form>
+			<!-- Show current week -->
+			<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek').value = weekNumber;
+		</script>
 		</div>
+
+		<!-- Show current date -->
 		<script>
 		var date = new Date();
 
@@ -229,8 +236,9 @@
 
 		document.getElementById('theDate').value = today;
 		</script>
+
+		<!-- Calculate time difference  -->
 		<script>
-			// Zeit-Differenz ermitteln
 			window.addEventListener("DOMContentLoaded", function() {
 				document.getElementById("startTask").addEventListener("change",
 						SumHoursTask);
@@ -271,21 +279,17 @@
 		<table class="taskTime">
 			<thead>
 				<tr>
-					<td style="text-align: left">Today: <%
-						Date dNow = new Date();
-						SimpleDateFormat ft = new SimpleDateFormat("EEEE',' dd.MM.yyyy");
-						out.print("<a style='font-weight:bold;align:center;'/>" + ft.format(dNow) + "</h2>");
-					%></td>
+					<td style="text-align: left; font-weight: bold">Today:</td>
 
 					<td style="text-align: right; padding: 0px 10px">
 						<%
 							try {
-								String userID = request.getParameter("userID");
+								String userSID = request.getParameter("userSID");
 								Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 								Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 								Statement st = con.createStatement();
 								String strQuery = "SELECT sum(CAST(taskSum AS DECIMAL(9,2))) FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID="
-										+ userID;
+										+ userSID;
 								ResultSet rs = st.executeQuery(strQuery);
 								String totalDuration = "";
 								while (rs.next()) {
@@ -312,13 +316,14 @@
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
 
-				String userID = request.getParameter("userID");
-				String sql = "select * from tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID=" + userID;
+				String userSID = request.getParameter("userSID");
+				String sql = "select * from tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID=" + userSID;
 				ResultSet rs = st.executeQuery(sql);
 
 				while (rs.next()) {
 					String taskTimeID = rs.getString("taskTimeID");
 					String taskName = rs.getString("taskName");
+					String week = rs.getString("week");
 					LocalDate taskDate = rs.getDate("taskDate").toLocalDate();
 					LocalTime startTask = rs.getTime("startTask").toLocalTime();
 					LocalTime stopTask = rs.getTime("stopTask").toLocalTime();
@@ -332,8 +337,8 @@
 				<td><input type="hidden" name=taskTimeID
 					value='<%=taskTimeID%>' /></td>
 				<td style="width: 335px;"><%=taskName%></td>
-				<td><input type="hidden" name=taskDate
-					value='<%=taskDate%>' /></td>
+				<td><input type="hidden" name=week value='<%=week%>' /></td>
+				<td><input type="hidden" name=taskDate value='<%=taskDate%>' /></td>
 				<td style="width: 200px;"><%=startTask%></td>
 				<td style="width: 200px;"><%=stopTask%></td>
 				<td style="width: 200px;"><%=taskSum%>h</td>
@@ -351,81 +356,250 @@
 				out.println("No tasks today");
 			}
 		%>
+		<br>
+
+		<!-- Break -->
+		<div>
+			<form action="addTaskTime" method="post">
+			<label style="font-weight: bold">Break</label><input type="hidden"
+				name="tID" value="${login.userID}"> <input type="hidden"
+				name="taskName" value="Break"> <input type="hidden"
+				id="theDate2" name=taskDate> <input type="hidden"
+				style="width: 35px" name="week" id="theWeek2"> <label
+				style="margin-left: 20px;">Start</label> <input type="time"
+				name="startTask" id="startPause"> <label
+				style="margin-left: 20px;">Stop</label> <input type="time"
+				name="stopTask" id="stopPause"> <a
+				style="margin-left: 15px;">Hours: <input type="text"
+				name="taskSum" id="pauseSum" style="width: 50px" readonly="readonly">
+			</a>
+			<button type="submit">Save</button>
+			</form>
+
+			<!-- Show current week -->
+			<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek2').value = weekNumber;
+		</script>
+
+			<!-- Show current date -->
+			<script>
+		var date = new Date();
+
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+
+		document.getElementById('theDate2').value = today;
+		</script>
+
+			<!-- Calculate time difference  -->
+			<script>
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("startPause").addEventListener("change",
+						SumHoursPause);
+				document.getElementById("stopPause").addEventListener("change",
+						SumHoursPause);
+			});
+
+			function SumHoursPause() {
+				var startPause = document.getElementById('startPause').value;
+				var stopPause = document.getElementById('stopPause').value;
+				var diff = 0;
+
+				if (startPause && stopPause) {
+					startPause = ConvertToSeconds(startPause);
+					stopPause = ConvertToSeconds(stopPause);
+					diff = Math.abs(stopPause - startPause);
+					document.getElementById('pauseSum').value = secondsToHHmmSS(diff);
+				}
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(seconds/60);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return "-"+hours + "," + minutes;
+				}
+			}
+		</script>
+		</div>
 
 		<hr>
-		
+
 		<!--Working Time -->
-		<br><a>Finish? Add your working hours to your Timesheet</a><br>
+		<br> <a>Finish? Add your working hours to your Timesheet</a> <br>
 		<div class="newTime">
-		<%
-			try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-				Statement st = con.createStatement();
-
-				String userID = request.getParameter("userID");
-				String sql = "SELECT * from tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID=" + userID;
-				ResultSet rs = st.executeQuery(sql);
-
-				while (rs.next()) {
-					String taskTimeID = rs.getString("taskTimeID");
-					String taskName = rs.getString("taskName");
-					LocalDate taskDate = rs.getDate("taskDate").toLocalDate();			
-					LocalTime startTask = rs.getTime("startTask").toLocalTime();
-					LocalTime stopTask = rs.getTime("stopTask").toLocalTime();
-					String taskSum = rs.getString("taskSum");
-					String tID = rs.getString("tID");
-		%>
 			<form action="addTime" method="post">
 				<div>
-					<a class="aButtons" onclick="checkWeek(this)">Week Number</a> <input
-						type="text" name="kw" id="KWInput" required="required"> <label
-						style="margin-left: 5px">Date</label> <input type="date"
-						name="date" id="dateInput" value="<%=taskDate%>" required="required"> <label
-						style="margin-left: 15px">Start</label> <input type="time"
-						name="startTime" id="starttime" value="<%=startTask%>" required="required"> <label
+					<input type="hidden" name="kw" id="theWeek3" required="required">
+					<label style="margin-left: 5px">Date</label> <input type="date"
+						name="date" style="width:150px" id="theDate3" required="required"> <label
+						style="margin-left: 15px">Start</label> <input type="text"
+						style="width: 45px" name="startTime"
+						value="<%try {
+				String userSID = request.getParameter("userSID");
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String strQuery = "SELECT MIN(startTask) FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID="
+						+ userSID;
+				ResultSet rs = st.executeQuery(strQuery);
+				String minTime = "";
+				while (rs.next()) {
+					minTime = rs.getString(1);
+					if (minTime != null) {
+						out.println(minTime);
+					} else {
+						out.println("no tasks available");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}%>"
+						id="starttimeTotal" required="required"> <label
 						style="margin-left: 15px" required="required">Stop</label> <input
-						type="time" name="stopTime" value="<%=stopTask%>" id="stoptime"> <label
-						style="margin-left: 15px">Pause</label> <input type="time"
-						name="pauseTime" id="pausetime"> <a
-						style="margin-left: 5px" required="required">Working Hours: <input
-						type="text" name="duration" id="total" readonly="readonly">
+						type="text" style="width: 45px" name="stopTime" id="stoptimeTotal"
+						value="<%try {
+				String userSID = request.getParameter("userSID");
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String strQuery = "SELECT MAX(stopTask) FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID="
+						+ userSID;
+				ResultSet rs = st.executeQuery(strQuery);
+				String minTime = "";
+				while (rs.next()) {
+					minTime = rs.getString(1);
+					if (minTime != null) {
+						out.println(minTime);
+					} else {
+						out.println("no tasks available");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}%>">
+					<label style="margin-left: 15px">Pause</label> <input type="text"
+						name="pauseTime" style="width: 70px" id="pausetimeTotal" value="<%try {
+				String userSID = request.getParameter("userSID");
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String strQuery = "SELECT taskSum FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND taskName='Break' AND tID="
+						+ userSID;
+				ResultSet rs = st.executeQuery(strQuery);
+				String minTime = "";
+				while (rs.next()) {
+					minTime = rs.getString(1);
+					if (minTime != null) {
+						out.println(minTime);
+					} else {
+						out.println("0");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}%>">
+					<a style="margin-left: 5px" required="required">Working Hours:
+						<input type="text" name="duration"
+						value="<%try {
+				String userSID = request.getParameter("userSID");
+				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+				Statement st = con.createStatement();
+				String strQuery = "SELECT sum(CAST(taskSum AS DECIMAL(9,2))) FROM tasktime WHERE DATE(taskDate)=DATE(NOW()) AND tID="
+						+ userSID;
+				ResultSet rs = st.executeQuery(strQuery);
+				String totalDuration = "";
+				while (rs.next()) {
+					totalDuration = rs.getString(1);
+					if (totalDuration != null) {
+						out.println(totalDuration);
+					} else {
+						out.println("0");
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}%>h"
+						id="totalTask" readonly="readonly">
 					</a> <input type="hidden" name="userSID" value='${login.userID}' />
 					<button type="submit" style="margin-right: 5px">Save</button>
 				</div>
 			</form>
-			<%
-			}
-			} catch (Exception e) {
-				out.println("No tasks today");
-			}
-		%>
+
+			<!-- Show current week -->
+			<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek3').value = weekNumber;
+		</script>
+
+			<!-- Show current date -->
+			<script>
+		var date = new Date();
+
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+
+		document.getElementById('theDate3').value = today;
+		</script>
+
 		</div>
 
+		<!-- Calculate time difference -->
 		<script>
-			// Zeit-Differenz ermitteln
 			window.addEventListener("DOMContentLoaded", function() {
-				document.getElementById("starttime").addEventListener("change",
+				document.getElementById("starttimeTotal").addEventListener("change",
 						SumHours);
-				document.getElementById("stoptime").addEventListener("change",
+				document.getElementById("stoptimeTotal").addEventListener("change",
 						SumHours);
-				document.getElementById("pausetime").addEventListener("change",
+				document.getElementById("pausetimeTotal").addEventListener("change",
 						SumHours);
 			});
 
 			function SumHours() {
-				var starttime = document.getElementById('starttime').value;
-				var stoptime = document.getElementById('stoptime').value;
-				var pausetime = document.getElementById('pausetime').value;
+				var starttime = document.getElementById('starttimeTotal').value;
+				var stoptime = document.getElementById('stoptimeTotal').value;
+				var pausetime = document.getElementById('pausetimeTotal').value;
 				var diff = 0;
 
 				if (starttime && stoptime && pausetime) {
-					starttime = ConvertToSeconds(starttime);
-					stoptime = ConvertToSeconds(stoptime);
 					pausetime = ConvertToSeconds(pausetime);
 					diff = Math.abs(stoptime - starttime - pausetime);
-					document.getElementById('total').value = secondsToHHmmSS(diff);
+					document.getElementById('totalTask').value = secondsToHHmmSS(diff);
 				}
 
 				function ConvertToSeconds(time) {
@@ -446,30 +620,27 @@
 		</script>
 		<br>
 
-		<script>
-		Date.prototype.getWeekNumber = function(){
-			  var d = new Date(Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()));
-			  var dayNum = d.getUTCDay() || 7;
-			  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-			  var yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-			  return Math.ceil((((d - yearStart) / 86400000) + 1)/7)
-			};
-
-			function checkWeek() {
-			  var dateInput = document.getElementById('dateInput').value;
-			  var m = moment(dateInput, 'YYYY-MM-DD');
-			  document.getElementById('KWInput').value = m.toDate().getWeekNumber();      
-			}
-		</script>
-
-		<form action="timeTracker.jsp?userID=${login.userID}" method="post">
-			Show Week: <br> <input type="number" name="kw"
+		<form action="timeTracker.jsp?userSID=${login.userID}" method="post">
+			Show Week: <br> <input type="number" id="theWeek4" name="kw"
 				style="width: 50px"><input type="submit" value="Submit"
 				style="margin-left: 5px">
 		</form>
 
 		<br>
 	</div>
+
+	<!-- Show current week -->
+	<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek4').value = weekNumber;
+		</script>
+
 	<script>
 		function singleSelectChangeText() {
 			//Getting Value

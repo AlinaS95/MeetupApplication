@@ -27,28 +27,29 @@ public class AddTaskTimeServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 
 		String taskName = request.getParameter("taskName");
+		String week = request.getParameter("week");
 		LocalDate taskDate = LocalDate.parse(request.getParameter("taskDate"));
 		LocalTime startTask = LocalTime.parse(request.getParameter("startTask"));
 		LocalTime stopTask = LocalTime.parse(request.getParameter("stopTask"));
 		String taskSum = request.getParameter("taskSum");
 		String tID  = request.getParameter("tID");
 		
-		String userID = request.getParameter("userID");
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO tasktime (taskName, taskDate, startTask, stopTask, taskSum, tID) VALUES (?,?,?,?,?,?)");
+					"INSERT INTO tasktime (taskName, week, taskDate, startTask, stopTask, taskSum, tID) VALUES (?,?,?,?,?,?,?)");
 			ps.setString(1, taskName);
-			ps.setDate(2, JDBCUtils.getSQLDate(taskDate));
-			ps.setTime(3, JDBCUtils.getSQLTime(startTask));
-			ps.setTime(4, JDBCUtils.getSQLTime(stopTask));
-			ps.setString(5, taskSum);
-			ps.setString(6, tID);
+			ps.setString(2, week);
+			ps.setDate(3, JDBCUtils.getSQLDate(taskDate));
+			ps.setTime(4, JDBCUtils.getSQLTime(startTask));
+			ps.setTime(5, JDBCUtils.getSQLTime(stopTask));
+			ps.setString(6, taskSum);
+			ps.setString(7, tID);
 			ps.executeUpdate();
 			
-			request.getRequestDispatcher("startTimeTracker.jsp?userID="+userID).forward(request, response);
+			request.getRequestDispatcher("startTimeTracker.jsp?userSID="+tID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
 		}

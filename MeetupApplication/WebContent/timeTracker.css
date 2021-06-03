@@ -31,7 +31,14 @@ input#totalTask,#totalHours,#totalWeek {
 
 .newTaskTime {
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-	margin-left: 115px;
+	margin-left: 275px;
+	padding: 5px 0px;
+	width: 60%;
+}
+
+.newTaskTime2 {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin-left: 114px;
 	padding: 5px 0px;
 	width: 84%;
 }

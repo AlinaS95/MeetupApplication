@@ -145,9 +145,9 @@
 						value='<%=rs.getTime("stopTime").toLocalTime()%>' />
 				</div>
 				<div>
-					<label style="margin-left: -105px">Pause</label><input type=time
-						name="pauseTime" id="pausetime"
-						value='<%=rs.getTime("pauseTime").toLocalTime()%>' />
+					<label style="margin-left: -105px">Pause</label><input type=text
+						name="pauseTime" style="width:80px" id="pausetime"
+						value='<%=rs.getString("pauseTime")%>' />
 				</div>
 				<div>
 					<label style="margin-left: -130px">Duration</label><input
@@ -155,7 +155,7 @@
 						value='<%=rs.getString("duration")%>' />
 				</div>
 				<div>
-					<a class="aButtons" href="timeTracker.jsp?userID=${login.userID}">Back</a>
+					<a class="aButtons" href="timeTracker.jsp?userSID=${login.userID}">Back</a>
 					<button type="submit">Update</button>
 					<a class="aButtons" href="deleteTime.jsp?id=<%=rs.getString("id")%>">Delete</a>
 				</div>

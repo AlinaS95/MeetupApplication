@@ -33,6 +33,7 @@ public class UpdateTaskTimeServlet extends HttpServlet {
 
 		String taskTimeID = request.getParameter("taskTimeID");
 		String taskName = request.getParameter("taskName");
+		String week = request.getParameter("week");
 		LocalDate taskDate = LocalDate.parse(request.getParameter("taskDate"));
 		LocalTime startTask = LocalTime.parse(request.getParameter("startTask"));
 		LocalTime stopTask = LocalTime.parse(request.getParameter("stopTask"));
@@ -48,19 +49,20 @@ public class UpdateTaskTimeServlet extends HttpServlet {
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update tasktime set taskTimeID=?,taskName=?,taskDate=?,startTask=?,stopTask=?, taskSum=?, tID=? where taskTimeID="
+				String sql = "Update tasktime set taskTimeID=?,taskName=?,week=?,taskDate=?,startTask=?,stopTask=?, taskSum=?, tID=? where taskTimeID="
 						+ taskTimeID;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, taskTimeID);
 				ps.setString(2, taskName);
-				ps.setDate(3, JDBCUtils.getSQLDate(taskDate));
-				ps.setTime(4, JDBCUtils.getSQLTime(startTask));
-				ps.setTime(5, JDBCUtils.getSQLTime(stopTask));
-				ps.setString(6, taskSum);
-				ps.setString(7, tID);
+				ps.setString(3, week);
+				ps.setDate(4, JDBCUtils.getSQLDate(taskDate));
+				ps.setTime(5, JDBCUtils.getSQLTime(startTask));
+				ps.setTime(6, JDBCUtils.getSQLTime(stopTask));
+				ps.setString(7, taskSum);
+				ps.setString(8, tID);
 
 				ps.executeUpdate();
-				response.sendRedirect("startTimeTracker.jsp?userID="+userID);
+				response.sendRedirect("startTimeTracker.jsp?userSID="+userID);
 
 			} catch (Exception e) {
 				out.println(e);

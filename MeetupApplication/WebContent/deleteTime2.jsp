@@ -101,7 +101,7 @@
 		<hr>
 		<br>
 		<div class="editHeader"><%request.getParameter("id");%> Successfully deleted</div>
-		<a class="aButtons" href="startTimeTracker.jsp?userID=${login.userID}">Back</a>
+		<a class="aButtons" href="startTimeTracker.jsp?userSID=${login.userID}">Back</a>
 		<br><br>
 		<hr>
 	</div>

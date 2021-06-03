@@ -30,11 +30,10 @@ public class AddTimeServlet extends HttpServlet {
 		LocalDate date = LocalDate.parse(request.getParameter("date"));
 		LocalTime startTime = LocalTime.parse(request.getParameter("startTime"));
 		LocalTime stopTime = LocalTime.parse(request.getParameter("stopTime"));
-		LocalTime pauseTime = LocalTime.parse(request.getParameter("pauseTime"));
+		String pauseTime = request.getParameter("pauseTime");
 		String duration = request.getParameter("duration");
 		String userSID = request.getParameter("userSID");
-		
-		String userID = request.getParameter("userID");
+
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -45,7 +44,7 @@ public class AddTimeServlet extends HttpServlet {
 			ps.setDate(2, JDBCUtils.getSQLDate(date));
 			ps.setTime(3, JDBCUtils.getSQLTime(startTime));
 			ps.setTime(4, JDBCUtils.getSQLTime(stopTime));
-			ps.setTime(5, JDBCUtils.getSQLTime(pauseTime));
+			ps.setString(5, pauseTime);
 			ps.setString(6, duration);
 			ps.setString(7, userSID);
 			ps.executeUpdate();
