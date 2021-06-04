@@ -33,13 +33,14 @@ public class AddTaskTimeServlet extends HttpServlet {
 		LocalTime stopTask = LocalTime.parse(request.getParameter("stopTask"));
 		String taskSum = request.getParameter("taskSum");
 		String tID  = request.getParameter("tID");
+		String taskSID  = request.getParameter("taskSID");
 		
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 			PreparedStatement ps = con.prepareStatement(
-					"INSERT INTO tasktime (taskName, week, taskDate, startTask, stopTask, taskSum, tID) VALUES (?,?,?,?,?,?,?)");
+					"INSERT INTO tasktime (taskName, week, taskDate, startTask, stopTask, taskSum, tID, taskSID) VALUES (?,?,?,?,?,?,?,?)");
 			ps.setString(1, taskName);
 			ps.setString(2, week);
 			ps.setDate(3, JDBCUtils.getSQLDate(taskDate));
@@ -47,6 +48,7 @@ public class AddTaskTimeServlet extends HttpServlet {
 			ps.setTime(5, JDBCUtils.getSQLTime(stopTask));
 			ps.setString(6, taskSum);
 			ps.setString(7, tID);
+			ps.setString(8, taskSID);
 			ps.executeUpdate();
 			
 			request.getRequestDispatcher("startTimeTracker.jsp?userSID="+tID).forward(request, response);

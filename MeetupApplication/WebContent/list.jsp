@@ -39,7 +39,8 @@
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
 					<form name="vinform">
-						<input id="search" type="text" name="taskName" onkeyup="searchInfo()">
+						<input id="search" type="text" name="taskName"
+							onkeyup="searchInfo()">
 					</form>
 					<span id="taskOutput"></span>
 				</div>
@@ -174,7 +175,8 @@
 							</div>
 							<div>
 								<label>Assignee</label> <select name="userSID"
-									style="margin-left: -2px" id="assignee" onchange="singleSelectChangeText()" required="required">
+									style="margin-left: -2px" id="assignee"
+									onchange="singleSelectChangeText()" required="required">
 									<option value="" disabled selected>Select the assignee</option>
 									<%
 										try {
@@ -196,8 +198,7 @@
 											out.println(e);
 										}
 									%>
-								</select>
-								<input id="selectAssignee" type="text" name="assignee">
+								</select> <input id="selectAssignee" type="hidden" name="assignee">
 							</div>
 							<div>
 								<label>Internal Inquiries</label> <input type="text"
@@ -221,16 +222,16 @@
 			</div>
 		</div>
 		<script>
-		function singleSelectChangeText() {
-			//Getting Value
+			function singleSelectChangeText() {
+				//Getting Value
 
-			var selObj = document.getElementById("assignee");
-			var selValue = selObj.options[selObj.selectedIndex].text;
+				var selObj = document.getElementById("assignee");
+				var selValue = selObj.options[selObj.selectedIndex].text;
 
-			//Setting Value
-			document.getElementById("selectAssignee").value = selValue;
-		}
-	</script>
+				//Setting Value
+				document.getElementById("selectAssignee").value = selValue;
+			}
+		</script>
 		<hr>
 		<br>
 
@@ -273,7 +274,7 @@
 					<th style="width: 200px">Internal Inquiries</th>
 					<th style="width: 150px">Attachment</th>
 					<th style="width: 150px">Completion in %</th>
-					<th style="width: 150px">Settings</th>
+					<th style="width: 200px">Settings</th>
 				</tr>
 			</thead>
 		</table>
@@ -312,14 +313,17 @@
 						src="pictures/settings.png" alt="Settings"
 						style="width: 25px; height: 25px;"></a></td>
 				<td style="width: 150px;"><%=completion%></td>
-				<td style="width: 150px;"><a
+				<td style="width: 200px;"><a
+					href="taskTime.jsp?taskSID=<%=rs.getString("taskID")%>"><img
+						src="pictures/clock.png" alt="Time"
+						style="width: 30px; height: 30px; position: absolute; margin: -15px -55px;" /></a><a
 					href="editTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/settings.png" alt="Settings"
-						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
+						style="width: 40px; height: 40px; position: absolute; margin: -20px -20px;"></a>
 					<a href="deleteTask.jsp?taskID=<%=rs.getString("taskID")%>"><img
 						src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" /></a>
-					</a></td>
+						style="width: 30px; height: 30px; position: absolute; margin: -16px 26px;" /></a>
+				</td>
 			</tr>
 			</tbody>
 		</table>

@@ -223,9 +223,10 @@
 	width: 340px;
 	height: 35px;
 	margin-left: 85px;
-	margin-top: 50px;
+	margin-top: -40px;
 	padding-top: 10px;
 	margin-bottom: -10px;
+	position: absolute;
 }
 
 .workspace {
@@ -235,9 +236,9 @@
 	border-radius: 5px;
 	color: #707070;
 	width: 380px;
-	height: 275px;
 	margin: 0px 50px;
 	padding: 15px 15px;
+	position: absolute;
 }
 
 .workspace .membersImg {
@@ -294,9 +295,10 @@ img.taskImage {
 	width: 340px;
 	height: 35px;
 	margin-left: 995px;
-	margin-top: -355px;
+	margin-top: -60px;
 	padding-top: 10px;
 	margin-bottom: 270px;
+	position: absolute;
 }
 
 .organization {
@@ -306,10 +308,10 @@ img.taskImage {
 	border-radius: 5px;
 	color: #707070;
 	width: 380px;
-	height: 250px;
 	margin: 0px 960px;
-	margin-top: -280px;
+	margin-top: -25px;
 	padding: 15px 15px;
+	position: absolute;
 }
 
 .workingtime {
@@ -357,6 +359,7 @@ input#total,#KWInput {
 .logout {
 	text-transform: uppercase;
 	text-align: right;
+	margin-top: 280px;
 }
 
 .logout a {

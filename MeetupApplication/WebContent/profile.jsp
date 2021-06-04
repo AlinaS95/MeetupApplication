@@ -238,7 +238,7 @@
 						<img class="taskImage" style="position: absolute"
 							src="pictures/workspaceTasks.png" alt="Tasks"> <input
 							type="hidden" name="tID" value="${login.userID}"> <select
-							name="taskName" style="margin: 5px 40px" required="required">
+							name="taskSID" id="taskName" style="margin: 5px 40px" onchange="singleSelectChangeText()" required="required">
 							<option selected="">What are you working on?</option>
 							<%
 								try {
@@ -254,14 +254,14 @@
 										String taskName = rs.getString("taskName");
 										String assignee = rs.getString("assignee");
 							%>
-							<option value="<%=taskName%>"><%=taskName%></option>
+							<option value="<%=taskID%>"><%=taskName%></option>
 							<%
 								}
 								} catch (Exception e) {
 									out.println(e);
 								}
 							%>
-						</select> <br>
+						</select>  <input id="selectTask" type="hidden" name="taskName"><br>
 						<label style="margin-left: 20px;">Date</label> <input type="date"
 							style="margin: 5px 0px; margin-right: 5px" id="theDate"
 							name=taskDate><label>Week</label> <input type="number"
@@ -282,6 +282,18 @@
 					</div>
 				</form>
 			</div>
+			
+			<script>
+			function singleSelectChangeText() {
+				//Getting Value
+
+				var selObj = document.getElementById("taskName");
+				var selValue = selObj.options[selObj.selectedIndex].text;
+
+				//Setting Value
+				document.getElementById("selectTask").value = selValue;
+			}
+		</script>
 
 			<!-- Show current week -->
 			<script> 
@@ -341,11 +353,11 @@
 				function secondsToHHmmSS(secs) {
 					var hours = parseInt(secs / 3600);
 					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(seconds/60);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
 					if (minutes < 10) {
 						minutes = '0' + minutes;
 					}
-					return hours + "," + minutes;
+					return hours + "." + minutes;
 				}
 			}
 		</script>

@@ -171,9 +171,9 @@
 				<div>
 					<img class="taskImage" src="pictures/workspaceTasks.png"
 						alt="Tasks"> <input type="hidden" name="tID"
-						value="${login.userID}"> <select name="taskName"
-						style="margin-left: -2px" required="required">
-						<option selected="" disabled>What are you working on?</option>
+						value="${login.userID}"> <select
+							name="taskSID" id="taskName" style="margin-left:-2px" onchange="singleSelectChangeText()" required="required">
+							<option selected="">What are you working on?</option>
 						<%
 							try {
 								String userSID = request.getParameter("userSID");
@@ -188,14 +188,15 @@
 									String taskName = rs.getString("taskName");
 									String assignee = rs.getString("assignee");
 						%>
-						<option value="<%=taskName%>"><%=taskName%></option>
+						<option value="<%=taskID%>"><%=taskName%></option>
 						<%
 							}
 							} catch (Exception e) {
 								out.println(e);
 							}
 						%>
-					</select> <input type="hidden" id="theDate" name=taskDate> <input
+					</select><input id="selectTask" type="hidden" name="taskName"> <input
+						type="hidden" id="theDate" name=taskDate> <input
 						type="hidden" style="width: 35px" name="week" id="theWeek"
 						required="required"><label style="margin-left: 20px;">Start</label>
 					<input type="time" name="startTask" id="startTask"> <label
@@ -207,6 +208,19 @@
 					<button type="submit">Save</button>
 				</div>
 			</form>
+
+			<script>
+			function singleSelectChangeText() {
+				//Getting Value
+
+				var selObj = document.getElementById("taskName");
+				var selValue = selObj.options[selObj.selectedIndex].text;
+
+				//Setting Value
+				document.getElementById("selectTask").value = selValue;
+			}
+		</script>
+
 			<!-- Show current week -->
 			<script> 
 			Date.prototype.getWeek = function() {
@@ -266,16 +280,102 @@
 				function secondsToHHmmSS(secs) {
 					var hours = parseInt(secs / 3600);
 					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(seconds/60);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
 					if (minutes < 10) {
 						minutes = '0' + minutes;
 					}
-					return hours + "," + minutes;
+					return hours + "." + minutes;
 				}
 			}
 		</script>
 		<br>
+		<!-- Break -->
+		<div class="newTaskTime">
+			<form action="addTaskTime" method="post">
+				<label style="font-weight: bold">Take a break: </label><input
+					type="hidden" name="tID" value="${login.userID}"> <input
+					type="hidden" name="taskName" value="Break"> <input
+					type="hidden" id="theDate2" name=taskDate> <input
+					type="hidden" style="width: 35px" name="week" id="theWeek2">
+				<label style="margin-left: 20px;">Start</label> <input type="time"
+					name="startTask" id="startPause"> <label
+					style="margin-left: 20px;">Stop</label> <input type="time"
+					name="stopTask" id="stopPause"> <a
+					style="margin-left: 15px;">Hours: <input type="text"
+					name="taskSum" id="pauseSum" style="width: 50px"
+					readonly="readonly">
+				</a>
+				<button type="submit">Save</button>
+			</form>
 
+			<!-- Show current week -->
+			<script> 
+			Date.prototype.getWeek = function() {
+				  var onejan = new Date(this.getFullYear(),0,1);
+				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
+				}
+
+				var today = new Date();
+				var weekNumber = today.getWeek();
+				document.getElementById('theWeek2').value = weekNumber;
+		</script>
+
+			<!-- Show current date -->
+			<script>
+		var date = new Date();
+
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+
+		var today = year + "-" + month + "-" + day;
+
+
+		document.getElementById('theDate2').value = today;
+		</script>
+
+			<!-- Calculate time difference  -->
+			<script>
+			window.addEventListener("DOMContentLoaded", function() {
+				document.getElementById("startPause").addEventListener("change",
+						SumHoursPause);
+				document.getElementById("stopPause").addEventListener("change",
+						SumHoursPause);
+			});
+
+			function SumHoursPause() {
+				var startPause = document.getElementById('startPause').value;
+				var stopPause = document.getElementById('stopPause').value;
+				var diff = 0;
+
+				if (startPause && stopPause) {
+					startPause = ConvertToSeconds(startPause);
+					stopPause = ConvertToSeconds(stopPause);
+					diff = Math.abs(stopPause - startPause);
+					document.getElementById('pauseSum').value = secondsToHHmmSS(diff);
+				}
+
+				function ConvertToSeconds(time) {
+					var splitTime = time.split(":");
+					return splitTime[0] * 3600 + splitTime[1] * 60;
+				}
+
+				function secondsToHHmmSS(secs) {
+					var hours = parseInt(secs / 3600);
+					var seconds = parseInt(secs % 3600);
+					var minutes = parseInt(seconds/60);
+					if (minutes < 10) {
+						minutes = '0' + minutes;
+					}
+					return "-"+hours + "," + minutes;
+				}
+			}
+		</script>
+		</div>
+		<br>
 		<table class="taskTime">
 			<thead>
 				<tr>
@@ -358,103 +458,18 @@
 		%>
 		<br>
 
-		<!-- Break -->
-		<div>
-			<form action="addTaskTime" method="post">
-			<label style="font-weight: bold">Break</label><input type="hidden"
-				name="tID" value="${login.userID}"> <input type="hidden"
-				name="taskName" value="Break"> <input type="hidden"
-				id="theDate2" name=taskDate> <input type="hidden"
-				style="width: 35px" name="week" id="theWeek2"> <label
-				style="margin-left: 20px;">Start</label> <input type="time"
-				name="startTask" id="startPause"> <label
-				style="margin-left: 20px;">Stop</label> <input type="time"
-				name="stopTask" id="stopPause"> <a
-				style="margin-left: 15px;">Hours: <input type="text"
-				name="taskSum" id="pauseSum" style="width: 50px" readonly="readonly">
-			</a>
-			<button type="submit">Save</button>
-			</form>
-
-			<!-- Show current week -->
-			<script> 
-			Date.prototype.getWeek = function() {
-				  var onejan = new Date(this.getFullYear(),0,1);
-				  return Math.ceil((((this - onejan) / 86400000) + onejan.getDay()+1)/7);
-				}
-
-				var today = new Date();
-				var weekNumber = today.getWeek();
-				document.getElementById('theWeek2').value = weekNumber;
-		</script>
-
-			<!-- Show current date -->
-			<script>
-		var date = new Date();
-
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
-
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
-
-		var today = year + "-" + month + "-" + day;
-
-
-		document.getElementById('theDate2').value = today;
-		</script>
-
-			<!-- Calculate time difference  -->
-			<script>
-			window.addEventListener("DOMContentLoaded", function() {
-				document.getElementById("startPause").addEventListener("change",
-						SumHoursPause);
-				document.getElementById("stopPause").addEventListener("change",
-						SumHoursPause);
-			});
-
-			function SumHoursPause() {
-				var startPause = document.getElementById('startPause').value;
-				var stopPause = document.getElementById('stopPause').value;
-				var diff = 0;
-
-				if (startPause && stopPause) {
-					startPause = ConvertToSeconds(startPause);
-					stopPause = ConvertToSeconds(stopPause);
-					diff = Math.abs(stopPause - startPause);
-					document.getElementById('pauseSum').value = secondsToHHmmSS(diff);
-				}
-
-				function ConvertToSeconds(time) {
-					var splitTime = time.split(":");
-					return splitTime[0] * 3600 + splitTime[1] * 60;
-				}
-
-				function secondsToHHmmSS(secs) {
-					var hours = parseInt(secs / 3600);
-					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(seconds/60);
-					if (minutes < 10) {
-						minutes = '0' + minutes;
-					}
-					return "-"+hours + "," + minutes;
-				}
-			}
-		</script>
-		</div>
-
 		<hr>
 
 		<!--Working Time -->
-		<br> <a>Finish? Add your working hours to your Timesheet</a> <br>
+		<br> <b>Finish? Add your working hours to your Timesheet</b> <br>
+		<br>
 		<div class="newTime">
 			<form action="addTime" method="post">
 				<div>
 					<input type="hidden" name="kw" id="theWeek3" required="required">
 					<label style="margin-left: 5px">Date</label> <input type="date"
-						name="date" style="width:150px" id="theDate3" required="required"> <label
-						style="margin-left: 15px">Start</label> <input type="text"
+						name="date" style="width: 150px" id="theDate3" required="required">
+					<label style="margin-left: 15px">Start</label> <input type="text"
 						style="width: 45px" name="startTime"
 						value="<%try {
 				String userSID = request.getParameter("userSID");
@@ -470,7 +485,7 @@
 					if (minTime != null) {
 						out.println(minTime);
 					} else {
-						out.println("no tasks available");
+						out.println("");
 					}
 				}
 			} catch (Exception e) {
@@ -493,14 +508,15 @@
 					if (minTime != null) {
 						out.println(minTime);
 					} else {
-						out.println("no tasks available");
+						out.println("");
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}%>">
 					<label style="margin-left: 15px">Pause</label> <input type="text"
-						name="pauseTime" style="width: 70px" id="pausetimeTotal" value="<%try {
+						name="pauseTime" style="width: 70px" id="pausetimeTotal"
+						value="<%try {
 				String userSID = request.getParameter("userSID");
 				Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -642,7 +658,7 @@
 		</script>
 
 	<script>
-		function singleSelectChangeText() {
+		function singleSelectChangeText2() {
 			//Getting Value
 
 			var selObj = document.getElementById("week");

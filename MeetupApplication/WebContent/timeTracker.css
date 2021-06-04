@@ -98,6 +98,91 @@ table.workingtime tbody img {
 	cursor: pointer;
 }
 
+/*show working time */
+a.linkWorktime {
+	text-decoration: none;
+}
+
+a.linkWorktime:hover {
+	text-decoration: underline;
+}
+
+table.selectWorkingtime {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 215px;
+	border-collapse: collapse;
+}
+
+table.selectWorkingtime thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.selectWorkingtime tbody {
+	background: #F0F0F0;
+}
+
+table.selectWorkingtime tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+/* task time */
+table.taskTime2 {
+	border-radius: 5px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	margin: 0px 385px;
+	border-collapse: collapse;
+}
+
+table.taskTime2 thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+
+table.taskTime2 tbody {
+	background: #F0F0F0;
+}
+
+table.taskTime2 tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+.aButtons {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.aButtons:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #707070;
+}
+
+table.taskTime2 td {
+	font-size: 20px;
+	padding: 10px 5px;
+	width: 310px;
+}
+
 /*Table TaskTime */
 table.taskTime {
 	border-radius: 5px 5px 0 0;

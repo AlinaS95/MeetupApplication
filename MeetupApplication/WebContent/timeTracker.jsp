@@ -158,7 +158,7 @@
 			<a href="startTimeTracker.jsp?userSID=${login.userID}"><img
 				src="pictures/back.png" alt="Back"></a>
 		</div>
-		<b class="editHeader">Time Tracker</b>
+		<b class="editHeader">Working Time</b>
 		<div class="list_navigation">
 			<nav>
 				<ul>
@@ -359,7 +359,7 @@
 						value='<%=rs.getString("kw")%>' /><input type="hidden"
 						name="userSID" value='<%=rs.getString("userSID")%>' /></td>
 					<td style="width: 100px; font-weight: bold;"><%=rs.getString("kw")%></td>
-					<td style="width: 200px;"><%=date%></td>
+					<td style="width: 200px;"><a class="linkWorktime" href="showWorktime.jsp?id=<%=rs.getString("id")%>"><%=date%></a></td>
 					<td style="width: 175px;"><%=startTime%></td>
 					<td style="width: 200px;"><%=stopTime%></td>
 					<td style="width: 200px;"><%=pauseTime%></td>
