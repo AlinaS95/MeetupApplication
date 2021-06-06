@@ -45,7 +45,7 @@
 				<option value="1">Marketing</option>
 				<option value="2">Website</option>
 				<option value="3">IT</option>
-			</select> <input id="myWorkspace" type="text" name="workspace">
+			</select> <input id="myWorkspace" type="hidden" name="workspace"><br><br>
 
 			<p>*Password</p>
 			<input type="password" id="password" name="password"

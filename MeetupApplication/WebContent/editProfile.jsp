@@ -144,7 +144,7 @@
 				<div style="margin: 5px 0px">
 					<label style="margin-left: -80px">Password</label><a
 						class="aButtons" style="font-weight: bold"
-						href="changePassword.jsp">Change Password</a>
+						href="changePassword.jsp?userID=${login.userID}">Change Password</a>
 				</div>
 				<br> <a class="aButtons" href="profile.jsp?wID=${login.WID}"
 					style="margin-left: 10px">Back</a>

@@ -366,11 +366,11 @@
 				function secondsToHHmmSS(secs) {
 					var hours = parseInt(secs / 3600);
 					var seconds = parseInt(secs % 3600);
-					var minutes = parseInt(seconds/60);
+					var minutes = parseInt(Math.trunc(seconds/60)/60*100);
 					if (minutes < 10) {
 						minutes = '0' + minutes;
 					}
-					return "-"+hours + "," + minutes;
+					return "-"+hours + "." + minutes;
 				}
 			}
 		</script>

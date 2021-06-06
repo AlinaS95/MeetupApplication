@@ -11,6 +11,7 @@
 	<%
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String wID = request.getParameter("wID");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -19,7 +20,7 @@
 			ps.setString(1, password);
 			int i = ps.executeUpdate();
 			if (i > 0) {
-				response.sendRedirect("adminUser.jsp");
+				response.sendRedirect("profile.jsp?wID="+wID);
 			} else {
 				response.sendRedirect("changePassword.jsp");
 			}
