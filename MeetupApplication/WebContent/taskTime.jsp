@@ -106,6 +106,7 @@
 		<b class="editHeader">Task Time</b>
 		<hr>
 		<br>
+
 		<table class="taskTime2">
 			<thead>
 				<tr>
@@ -190,8 +191,7 @@
 			} catch (Exception e) {
 				out.println("No tasks today");
 			}
-		%><br>
-		<a class="aButtons" style="margin: 20px"
+		%><br> <a class="aButtons" style="margin: 20px"
 			href="startTimeTracker.jsp?userSID=${login.userID}">Add Time</a>
 	</div>
 </body>

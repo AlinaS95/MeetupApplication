@@ -8,7 +8,7 @@
 	String taskName = request.getParameter("val");
 	String wID = request.getParameter("wID");
 	if (taskName == null || taskName.trim().equals("")) {
-		out.print("<p>Search task!</p>");
+		out.print("<p class='defaultSearch'>Search task!</p>");
 	} else {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

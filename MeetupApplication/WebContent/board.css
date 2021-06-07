@@ -569,18 +569,18 @@ popupHeader {
 }
 /* Infocards */
 
-.tooltip {
+.tooltip2 {
 	color: #707070;
 	text-decoration: underline;
 	cursor: help;
 	position: relative;
 }
 
-.tooltip span[role=tooltip] {
+.tooltip2 span[role=tooltip] {
 	display: none;
 }
 
-.tooltip:hover span[role=tooltip] {
+.tooltip2:hover span[role=tooltip] {
 	display: block;
 	position: absolute;
 	bottom: 1em;

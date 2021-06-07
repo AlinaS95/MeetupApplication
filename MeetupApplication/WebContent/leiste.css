@@ -300,7 +300,7 @@ nav ul li {
 	font-weight: bold;
 }
 
-.searchTable td a{
+.searchTable td a {
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -377,7 +377,7 @@ nav ul li {
 	font-family: "Times New Roman";
 	color: #707070;
 	font-size: 25px;
-	padding: 0px 50px;
+	padding: 0px 45px;
 	cursor: pointer;
 }
 
@@ -420,6 +420,37 @@ nav ul li {
 }
 
 /* Background Pop-Up-Window*/
+.profile_popup {
+	display: none;
+	position: fixed; 
+	z-index: 4;
+	padding-top: 150px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%; 
+	overflow: auto; 
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Pop-Up-Window Content */
+.popupBlock {
+	position: relative;
+	background-color: #F0F0F0;
+	margin: auto;
+	padding: 0px;
+	border: 1px solid #707070;
+	border-radius: 5px;
+	width: 30%;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+/* Background Pop-Up-Window*/
 .navigation_addBlock {
 	display: none;
 	position: fixed;
@@ -457,6 +488,25 @@ nav ul li {
 	font-size: 30px;
 	font-weight: bold;
 	cursor: pointer;
+}
+
+.popupBody .aButtons2{
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.popupBody .aButtons2:hover{
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #E3E0E0;
 }
 
 .popupBlock button {
@@ -574,6 +624,90 @@ nav ul li {
 	width:20px;
 	height: 20px;
 	margin-top: -15px;
+}
+
+/* PopUp Add Task */
+.popupBody_list {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding: 2px 15px;
+	text-align: left;
+	font-size: 20px;
+	color: #707070;
+}
+
+.popupBody_list input {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+}
+
+.popupBody_list select {
+	background-color: white;
+	border: none;
+	border-radius: 5px;
+	height: 30px;
+	margin: 5px 5px;
+}
+
+.popupBody_list .listBody fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody_list fieldset {
+	border: none;
+	border-radius: 5px;
+	height: 25px;
+	margin: 5px 0px;
+}
+
+.popupBody_list input {
+	border: none;
+	border-radius: 5px;
+	margin: 5px 55px;
+}
+
+.popupBody_list textarea:focus {
+	border: none;
+	border-radius: 5px;
+	margin: 2px 15px;
+	margin-left: 2px;
+}
+
+.popupBody_list textarea {
+	margin-left: 2px;
+}
+
+.popupBody_list input#file-upload-button {
+	font-size: 19px;
+}
+
+.popupBody_list button {
+	margin: 2px 60px;
+	cursor: pointer
+}
+
+.popupBody_list button:hover {
+	outline: none;
+	background: #E3E0E0;
+	color: #707070;
+	border-color: #707070;
+}
+
+.popupBody_list button {
+	font-size: 20px;
+	background: #fff;
+	border-style: solid;
+	border-color: #E3E0E0;
+	border-width: 2px;
+	border-radius: 5px;
+	padding: 1px 5px;
+	cursor: pointer;
+	margin-left: 190px;
 }
 
 /* Infocards */

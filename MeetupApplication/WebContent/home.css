@@ -497,7 +497,7 @@ nav ul li {
 }
 /* Infocards */
 
-.tooltip {
+.tooltip2 {
 	color: #707070;
 	cursor: fixed;
 	position: relative;
@@ -505,11 +505,11 @@ nav ul li {
 	font-family: "Times New Roman";
 }
 
-.tooltip span[role=tooltip] {
+.tooltip2 span[role=tooltip] {
 	display: none;
 }
 
-.tooltip:hover span[role=tooltip] {
+.tooltip2:hover span[role=tooltip2] {
 	display: block;
 	position: absolute;
 	bottom: 1em;
@@ -583,7 +583,7 @@ h1 {
 	margin-bottom: 160px;
 	padding-top: 10px;
 }
-form {
+form.homeForm {
 	max-width: 800px;
 	height: 100px;
 	box-sizing: border-box;
@@ -707,14 +707,14 @@ button::after {
 	opacity: 1;
 }
 
-textarea {
+/*textarea {
 	background-color: white;
 	border: none;
 	border-radius: 10px;
 	position: absolute;
 	margin-top: 3%;
 	width: 366px;
-}
+}*/
 
 textarea:focus {
 	border: thin #707070;
