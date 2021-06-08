@@ -78,7 +78,7 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="javascript:menue()"><img
+					<li><a href="menu.jsp?wID=${login.WID}"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
 					<li><a href="home.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
 								class="tooltip">
@@ -502,7 +502,7 @@
 
 		<form class="homeForm">
 			<p class="choice">
-				<button id="win" onclick="list()">Add Task</button>
+				<a href="list.jsp?wID=${login.WID}"><button id="win">Add Task</button></a>
 				<button id="and" onclick="inbox()">Inbox</button>
 				<button id="mac" onclick="profile()">Profile</button>
 			</p>

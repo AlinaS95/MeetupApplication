@@ -40,6 +40,7 @@ public class ChangeImageTaskServlet extends HttpServlet {
         String psw = "";
         
         String taskID = request.getParameter("taskID");
+        String wID = request.getParameter("wID");
 
         Part part = request.getPart("file");
         String fileName = extractFileName(part);//file name
@@ -55,14 +56,14 @@ public class ChangeImageTaskServlet extends HttpServlet {
     		try {
     			Class.forName(driverName);
     			con = DriverManager.getConnection(url, user, psw);
-    			String sql = "Update tasks set taskID=?,filenameTask=?, path=? where taskID=" + taskID;
+    			String sql = "Update tasks set taskID=?,filename=?, path=? where taskID=" + taskID;
     			ps = con.prepareStatement(sql);
     			ps.setString(1, taskID);
     			ps.setString(2, fileName);
                 ps.setString(3, savePath);
 
     			ps.executeUpdate();
-    			response.sendRedirect("tasks.jsp");
+    			response.sendRedirect("list.jsp?wID="+wID);
     			
     		} catch (Exception e) {
                 out.println(e);
@@ -77,7 +78,7 @@ public class ChangeImageTaskServlet extends HttpServlet {
         String contentDisp = part.getHeader("content-disposition");
         String[] items = contentDisp.split(";");
         for (String s : items) {
-            if (s.trim().startsWith("filenameTask")) {
+            if (s.trim().startsWith("filename")) {
                 return s.substring(s.indexOf("=") + 2, s.length() - 1);
             }
         }

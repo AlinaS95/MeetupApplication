@@ -16,6 +16,27 @@
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
+<!-- Search Tasks -->
+<script>
+	var request = new XMLHttpRequest();
+	function searchInfo() {
+		var taskName = document.vinform.taskName.value;
+		var url = "search.jsp?val=" + taskName;
+
+		try {
+			request.onreadystatechange = function() {
+				if (request.readyState == 4) {
+					var val = request.responseText;
+					document.getElementById('taskOutput').innerHTML = val;
+				}
+			}//end of function  
+			request.open("GET", url, true);
+			request.send();
+		} catch (e) {
+			alert("Unable to connect to server");
+		}
+	}
+</script>
 </head>
 <body>
 	<div class="background1">
@@ -39,11 +60,15 @@
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<input type="search" id="search" placeholder="Search..." />
+					<form name="vinform">
+						<input id="search" type="text" name="taskName"
+							onkeyup="searchInfo()">
+					</form>
+					<span id="taskOutput"></span>
 				</div>
 				<div class="user">
-					<a href="javascript:profile()"><img src="pictures/usericon.png"
-						alt="Profil Icon" /></a>
+					<a href="profile.jsp?wID=${login.WID}"><img
+						src="pictures/usericon.png" alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -114,23 +139,24 @@
 						value='<%=rs.getString("lastName")%>' />
 				</div>
 				<div>
-					<label style="margin-left:40px">Email</label><input type="text" name="email"
-						value='<%=rs.getString("email")%>' />
+					<label style="margin-left: 40px">Email</label><input type="text"
+						name="email" value='<%=rs.getString("email")%>' />
 				</div>
 				<div>
-					<label style="margin-left:10px">Company</label><input type="text" name="company"
-						value='<%=rs.getString("company")%>' />
+					<label style="margin-left: 10px">Company</label><input type="text"
+						name="company" value='<%=rs.getString("company")%>' />
 				</div>
 				<div>
 					<label>Workspace</label><input type="text" name="workspace"
 						value='<%=rs.getString("workspace")%>' />
 				</div>
-				<div style="margin:5px 0px">
-					<label style="margin-left:-80px">Password</label><a class="aButtons" style="font-weight:bold"
-					href="changePassword.jsp">Change Password</a>
+				<div style="margin: 5px 0px">
+					<label style="margin-left: -80px">Password</label><a
+						class="aButtons" style="font-weight: bold"
+						href="changePassword.jsp">Change Password</a>
 				</div>
-				<br> <a class="aButtons"
-					href="adminUser.jsp" style="margin-left:10px">Back</a>
+				<br> <a class="aButtons" href="adminUser.jsp"
+					style="margin-left: 10px">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

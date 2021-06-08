@@ -31,6 +31,7 @@ public class AddNoteServlet extends HttpServlet {
 
 		String noteTitle = request.getParameter("noteTitle");
 		LocalDate date = LocalDate.parse(request.getParameter("date"));
+		String wID = request.getParameter("wID");
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -40,7 +41,7 @@ public class AddNoteServlet extends HttpServlet {
 			pst.setString(1, noteTitle);
 			pst.setDate(2, JDBCUtils.getSQLDate(date));
 			pst.executeUpdate();
-			request.getRequestDispatcher("home.jsp").forward(request, response);
+			request.getRequestDispatcher("home.jsp?wID="+wID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
 		}

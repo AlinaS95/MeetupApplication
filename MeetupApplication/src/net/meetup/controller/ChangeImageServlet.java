@@ -40,6 +40,7 @@ public class ChangeImageServlet extends HttpServlet {
         String psw = "";
         
         String id = request.getParameter("id");
+        String wID = request.getParameter("wID");
 
         Part part = request.getPart("file");
         String fileName = extractFileName(part);//file name
@@ -62,7 +63,7 @@ public class ChangeImageServlet extends HttpServlet {
                 ps.setString(3, savePath);
 
     			ps.executeUpdate();
-    			response.sendRedirect("socialmedia.jsp");
+    			response.sendRedirect("socialmedia.jsp?wID="+wID);
     			
     		} catch (Exception e) {
                 out.println(e);

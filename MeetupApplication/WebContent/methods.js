@@ -1,7 +1,4 @@
 // links
-function menu() {
-	window.setTimeout('window.location="menu.html", 2000');
-}
 
 function home() {
 	window.setTimeout('window.location="home.jsp", 2000');
