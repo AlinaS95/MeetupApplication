@@ -40,6 +40,7 @@ public class ChangeProfilePictureServlet extends HttpServlet {
         String psw = "";
         
         String userID = request.getParameter("userID");
+        String wID = request.getParameter("wID");
 
         Part part = request.getPart("file");
         String fileName = extractFileName(part);//file name
@@ -55,14 +56,15 @@ public class ChangeProfilePictureServlet extends HttpServlet {
     		try {
     			Class.forName(driverName);
     			con = DriverManager.getConnection(url, user, psw);
-    			String sql = "Update user set userID=?,filename=?, path=? where userID=" + userID;
+    			String sql = "Update user set userID=?,filename=?, path=?, wID=? where userID=" + userID;
     			ps = con.prepareStatement(sql);
     			ps.setString(1, userID);
     			ps.setString(2, fileName);
                 ps.setString(3, savePath);
+                ps.setString(4, wID);
 
     			ps.executeUpdate();
-    			response.sendRedirect("profile.jsp");
+    			response.sendRedirect("profile.jsp?wID="+wID);
     			
     		} catch (Exception e) {
                 out.println(e);

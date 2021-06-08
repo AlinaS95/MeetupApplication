@@ -10,14 +10,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Profile</title>
+<title>Tasks</title>
 <link name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
-<link rel="stylesheet" type="text/css" href="editPost.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script type="text/javascript" src="methods.js"></script>
-<script type="text/javascript" src="socialmedia.js"></script>
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {
@@ -48,7 +47,7 @@
 			</div>
 			<div class="firstBox">
 				<h3>
-					Welcome <a class="workspace">${login.firstName}</a>
+					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
 				<a class="information"
 					onclick="document.getElementById('p_info').style.display='block'"
@@ -79,8 +78,8 @@
 				<ul>
 					<li><a href="javascript:menue()"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"><dfn
-								class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"
+						style="font-weight: bold"><dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
@@ -261,12 +260,12 @@
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Profile Picture</div>
+		<div class="editHeader">Edit Message</div>
 		<hr>
 		<br>
 		<div class="editBody">
 			<%
-				String userID = request.getParameter("userID");
+				String inboxID = request.getParameter("inboxID");
 				String driver = "com.mysql.jdbc.Driver";
 				String connectionUrl = "jdbc:mysql://localhost:3306/";
 				String database = "meetup";
@@ -285,24 +284,37 @@
 				try {
 					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
 					statement = connection.createStatement();
-					String sql = "select * from user where userID=" + userID;
+					String sql = "select * from inbox where inboxID=" + inboxID;
 					rs = statement.executeQuery(sql);
 					while (rs.next()) {
 			%>
-			<form action="ChangeProfilePictue" method="post"
-				enctype="multipart/form-data">
-				<input type="hidden" name="userID"
-					value="<%=rs.getString("userID")%>">
-					<input type="hidden" name="wID"
-					value="<%=rs.getString("wID")%>">
+			<form action="UpdateInbox" method="post">
+				<input type="hidden" name=inboxID
+					value="<%=rs.getString("inboxID")%>"> 
 				<div>
-					<label style="margin-left: -205px">Profile Picture</label>
-					<image style="width:50px; height:50px;"
-						src="pictures/<%=rs.getString("filename")%>" />
-					<br> <input type="file" id="file-upload-button" name="file"
-						style="margin-left: 140px" value="<%=rs.getString("filename")%>" />
+					<label style="margin-left: -40px">Title</label><input type="text"
+						name="title" value='<%=rs.getString("title")%>' />
 				</div>
-				<br> <a class="aButtons" href="profile.jsp?wID=${login.WID}">Back</a>
+				<div>
+					<label>Assignee</label><input type="text" name="assignee"
+						value='<%=rs.getString("assignee")%>' />
+				</div>
+				<div>
+					<label style="margin: 2px -40px;">Workspace</label>
+					<textarea name="workspace" style="margin: 2px 43px;"><%=rs.getString("workspace")%></textarea>
+				</div>
+				<div>
+					<label style="margin-left: -105px">Due Date</label><input
+						type="date" name="duedate"
+						value='<%=rs.getDate("duedate").toLocalDate()%>' />
+				</div>
+				<div>
+					<label style="margin-left: -40px">Description</label><input
+						type="text" name="description"
+						value='<%=rs.getString("description")%>' />
+				</div>
+
+				<a class="aButtons" href="inbox.jsp?wID=${login.WID}">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

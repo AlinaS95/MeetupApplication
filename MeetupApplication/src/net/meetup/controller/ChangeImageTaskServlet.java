@@ -56,11 +56,12 @@ public class ChangeImageTaskServlet extends HttpServlet {
     		try {
     			Class.forName(driverName);
     			con = DriverManager.getConnection(url, user, psw);
-    			String sql = "Update tasks set taskID=?,filename=?, path=? where taskID=" + taskID;
+    			String sql = "Update tasks set taskID=?,filename=?, path=?, wID=? where taskID=" + taskID;
     			ps = con.prepareStatement(sql);
     			ps.setString(1, taskID);
     			ps.setString(2, fileName);
                 ps.setString(3, savePath);
+                ps.setString(4, wID);
 
     			ps.executeUpdate();
     			response.sendRedirect("list.jsp?wID="+wID);

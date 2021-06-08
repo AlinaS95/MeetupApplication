@@ -70,7 +70,7 @@ public class RegisterController extends HttpServlet {
 				if (result == 1) {
 					HttpSession session = request.getSession();
 					session.setAttribute("login", user);
-					destPage = "profile.jsp";
+					destPage = "profile.jsp?wID="+ user.getWID();
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 				dispatcher.forward(request, response);

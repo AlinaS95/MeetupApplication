@@ -159,6 +159,8 @@
 					enctype="multipart/form-data">
 					<input type="hidden" name="taskID"
 						value="<%=rs.getString("taskID")%>">
+						<input type="hidden" name="wID"
+						value="<%=rs.getString("wID")%>">
 					<div>
 						<label style="margin-left: -205px">Design</label> <img
 							style="width: 50px; height: 50px;"

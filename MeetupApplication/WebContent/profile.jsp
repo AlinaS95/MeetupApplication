@@ -82,7 +82,7 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="javascript:menue()"><img
+					<li><a href="menu.jsp?wID=${login.WID}"><img
 							src="pictures/navigation.png" alt="Menu"></a></li>
 					<li><a href="home.jsp?wID=${login.WID}"><dfn
 								class="tooltip">

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.meetup.utils.JDBCUtils;
 
-@WebServlet("/UpdateTnbox")
+@WebServlet("/UpdateInbox")
 
 public class UpdateInboxServlet extends HttpServlet {
 
@@ -32,30 +32,28 @@ public class UpdateInboxServlet extends HttpServlet {
 		String psw = "";
 
 		String inboxID = request.getParameter("inboxID");
-		String fullName = request.getParameter("fullName");
-		String email = request.getParameter("email");
-		String workspace = request.getParameter("workspace");
-		LocalDate dueDate = LocalDate.parse(request.getParameter("dueDate"));
+		String assignee = request.getParameter("assignee");
+		String title = request.getParameter("title");
 		String description = request.getParameter("description");
-		String position = request.getParameter("position");
+		String workspace = request.getParameter("workspace");
+		LocalDate duedate = LocalDate.parse(request.getParameter("duedate"));
 
 		if (inboxID != null) {
 			Connection con = null;
 			PreparedStatement ps = null;
-			int listID = Integer.parseInt(inboxID);
+			int idInbox = Integer.parseInt(inboxID);
 			try {
 				Class.forName(driverName);
 				con = DriverManager.getConnection(url, user, psw);
-				String sql = "Update tasks set taskID=?,fullName=?,description=?,dueDate=?, email=?, position=?, workspace=? where inboxID="
+				String sql = "Update inbox set inboxID=?,assignee=?,title=?,description=?, workspace=?, duedate=? where inboxID="
 						+ inboxID;
 				ps = con.prepareStatement(sql);
 				ps.setString(1, inboxID);
-				ps.setString(2, fullName);
-				ps.setString(3, description);
-				ps.setDate(4, JDBCUtils.getSQLDate(dueDate));
-				ps.setString(5, email);
-				ps.setString(6, position);
-				ps.setString(6, workspace);
+				ps.setString(2, assignee);
+				ps.setString(3, title);
+				ps.setString(4, description);
+				ps.setString(5, workspace);
+				ps.setDate(6, JDBCUtils.getSQLDate(duedate));
 
 				ps.executeUpdate();
 				response.sendRedirect("inbox.jsp");
