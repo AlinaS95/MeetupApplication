@@ -1,3 +1,4 @@
+@charset "ISO-8859-1";
 
 * {
 	font-size: 20px;
@@ -157,7 +158,7 @@ ul#navigation li a:hover {
     margin-top: -56px;
 }
   /* Drop Down */
-select {
+select2 {
     -moz-appearance: none;
     -webkit-appearance: none;
     appearance: none;
@@ -176,15 +177,15 @@ select {
     cursor: pointer;
 }
 
-select::-ms-expand {
+select2::-ms-expand {
   display: none;
 }
 
-select option {
+select2 option {
   color: #666;
 }
 
-select:focus::-ms-value {
+select2:focus::-ms-value {
   background-color: transparent;
 }
 

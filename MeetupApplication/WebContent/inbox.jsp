@@ -40,27 +40,6 @@
 		}
 	}
 </script>
-<!-- Search Tasks -->
-<script>
-	var request = new XMLHttpRequest();
-	function searchInfo() {
-		var taskName = document.vinform.taskName.value;
-		var url = "search.jsp?val=" + taskName;
-
-		try {
-			request.onreadystatechange = function() {
-				if (request.readyState == 4) {
-					var val = request.responseText;
-					document.getElementById('taskOutput').innerHTML = val;
-				}
-			}//end of function  
-			request.open("GET", url, true);
-			request.send();
-		} catch (e) {
-			alert("Unable to connect to server");
-		}
-	}
-</script>
 </head>
 <body>
 
@@ -72,28 +51,20 @@
 			</div>
 			<div class="welcome">
 				<h3>
-					Workspace: <a class="workspace">${login.workspace}</a>
+					Workspace: <a class="firstname">${login.workspace}</a>
 				</h3>
-				<a class="information"
-					onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png"
-					alt="Information"></a> <a class="status"
-					href="javascript:progress()"><img
-					src="pictures/greenCircle.png" alt="Status"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
+					alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
-					<form name="vinform">
-						<input id="search" type="text" name="taskName"
-							onkeyup="searchInfo()">
-					</form>
-					<span id="taskOutput"></span>
+					<input type="search" id="search" placeholder="Search..." />
 				</div>
 				<div class="user">
-					<a href="profile.jsp?wID=${login.WID}"><img
-						src="pictures/${login.fileName}" alt="Profile Picture" /></a>
+					<a href="profile.jsp"><img src="pictures/usericon.png"
+						alt="Profil Icon" /></a>
 				</div>
 			</div>
 			<br>
@@ -102,9 +73,11 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="menu.jsp?wID=${login.WID}"><img
-							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"><dfn
+					<li><button id="start">
+							<img src="pictures/navigation.png" height="50" width="50"
+								align="left" alt="navigation">
+						</button> </a></li>
+					<li><a href="home.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
 								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
@@ -147,145 +120,140 @@
 					</ul>
 				</div>
 			</nav>
-
-			<!-- Pop-Up-Window New Task -->
-			<div id="add_task" class="navigation_addBlock">
-				<!-- Window content -->
-				<div class="addBlock">
-					<div class="popupHeader">
-						Add new Task <span
-							onclick="document.getElementById('add_task').style.display='none'
+		</div>
+	</div>
+	<!-- Pop-Up-Window New Task -->
+	<div id="add_task" class="navigation_addBlock">
+		<!-- Window content -->
+		<div class="popupBlock">
+			<div class="popupHeader">
+				Add new Task <span
+					onclick="document.getElementById('add_task').style.display='none'
 					"
-							class="close" title="Schließen">&times;</span>
-					</div>
-					<div class="popupBody_list">
-						<div class="popupInfo">
-							<form action="UploadTask" method="post"
-								enctype="multipart/form-data">
-								<div>
-									<label>Title</label> <input type="text" name="taskName"
-										required="required" /> <input type="hidden" name="wID"
-										value="${login.WID}" />
-								</div>
-								<div>
-									<label>Description</label>
-									<textarea name="description"></textarea>
-								</div>
-								<div>
-									<label>Due Date</label> <input type="date" name="dueDate"
-										style="margin-left: 33px;" required="required">
-								</div>
-								<div>
-									<label>Status</label> <select name="taskStatus"
-										style="margin-left: -2px">
-										<option selected="">Select the category</option>
-										<option value="To do">To do</option>
-										<option value="In Progress">In Progress</option>
-										<option value="Done">Done</option>
-									</select>
-								</div>
-								<div>
-									<label>Assignee</label> <select name="userSID"
-										style="margin-left: -2px" id="assignee"
-										onchange="singleSelectChangeText()" required="required">
-										<option value="" disabled selected>Select the
-											assignee</option>
-										<%
-											try {
-												String wID = request.getParameter("wID");
-												Class.forName("com.mysql.cj.jdbc.Driver");
-												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-												Statement st = con.createStatement();
-												String sql = "SELECT * FROM user WHERE user.wID=" + wID;
-												ResultSet rs = st.executeQuery(sql);
-												int i = 0;
-												while (rs.next()) {
-													String userID = rs.getString("userID");
-													String firstName = rs.getString("firstName");
-										%>
-										<option value="<%=userID%>"><%=firstName%></option>
-										<%
-											}
-											} catch (Exception e) {
-												out.println(e);
-											}
-										%>
-									</select> <input id="selectAssignee" type="hidden" name="assignee">
-								</div>
-								<div>
-									<label>Internal Inquiries</label> <input type="text"
-										name="internalInquiries" required="required" />
-								</div>
-
-								<div>
-									<label>Attachment</label> <input type="file"
-										id="file-upload-button" name="file" required="required" />
-								</div>
-
-								<div>
-									<label>Completion in %</label> <input type="number"
-										name="completion" required="required" />
-								</div>
-
-								<button type="submit">Save</button>
-							</form>
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody_list">
+				<div class="popupInfo">
+					<form action="UploadTask" method="post"
+						enctype="multipart/form-data">
+						<div>
+							<label>Title</label> <input type="text" name="taskName"
+								required="required" /> <input type="hidden" name="wID"
+								value="${login.WID}" />
 						</div>
-					</div>
+						<div>
+							<label>Description</label>
+							<textarea name="description"></textarea>
+						</div>
+						<div>
+							<label>Due Date</label> <input type="date" name="dueDate"
+								style="margin-left: 33px;" required="required">
+						</div>
+						<div>
+							<label>Status</label> <select name="taskStatus"
+								style="margin-left: -2px">
+								<option selected="">Select the category</option>
+								<option value="To do">To do</option>
+								<option value="In Progress">In Progress</option>
+								<option value="Done">Done</option>
+							</select>
+						</div>
+						<div>
+							<label>Assignee</label> <select name="userSID"
+								style="margin-left: -2px" id="assignee"
+								onchange="singleSelectChangeText()" required="required">
+								<option value="" disabled selected>Select the assignee</option>
+								<%
+									try {
+										String wID = request.getParameter("wID");
+										Class.forName("com.mysql.cj.jdbc.Driver");
+										Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+										Statement st = con.createStatement();
+										String sql = "SELECT * FROM user WHERE user.wID=" + wID;
+										ResultSet rs = st.executeQuery(sql);
+										int i = 0;
+										while (rs.next()) {
+											String userID = rs.getString("userID");
+											String firstName = rs.getString("firstName");
+								%>
+								<option value="<%=userID%>"><%=firstName%></option>
+								<%
+									}
+									} catch (Exception e) {
+										out.println(e);
+									}
+								%>
+							</select> <input id="selectAssignee" type="hidden" name="assignee">
+						</div>
+						<div>
+							<label>Internal Inquiries</label> <input type="text"
+								name="internalInquiries" required="required" />
+						</div>
+
+						<div>
+							<label>Attachment</label> <input type="file"
+								id="file-upload-button" name="file" required="required" />
+						</div>
+
+						<div>
+							<label>Completion in %</label> <input type="number"
+								name="completion" required="required" />
+						</div>
+
+						<button type="submit">Save</button>
+					</form>
 				</div>
 			</div>
-			<script>
-				function singleSelectChangeText() {
-					//Getting Value
+		</div>
+	</div>
+	<script>
+		function singleSelectChangeText() {
+			//Getting Value
 
-					var selObj = document.getElementById("assignee");
-					var selValue = selObj.options[selObj.selectedIndex].text;
+			var selObj = document.getElementById("assignee");
+			var selValue = selObj.options[selObj.selectedIndex].text;
 
-					//Setting Value
-					document.getElementById("selectAssignee").value = selValue;
-				}
-			</script>
+			//Setting Value
+			document.getElementById("selectAssignee").value = selValue;
+		}
+	</script>
 
-			<!-- Pop-Up-Window Profile Settings-->
-			<div id="p_settings" class="profile_popup">
+	<!-- Pop-Up-Window Profile Settings-->
+	<div id="p_settings" class="profile_popup">
 
-				<!-- Window content -->
-				<div class="popupBlock">
-					<div class="popupHeader">
-						Settings <span
-							onclick="document.getElementById('p_settings').style.display='none'
+		<!-- Window content -->
+		<div class="popupBlock">
+			<div class="popupHeader">
+				Settings <span
+					onclick="document.getElementById('p_settings').style.display='none'
 					"
-							class="close" title="Schließen">&times;</span>
-					</div>
-					<div class="popupBody">
-						<input type="hidden" name="userID" value="${login.userID}" /> <input
-							type="hidden" name="wID" value="${login.WID}" /> <img
-							src="pictures/${login.fileName}"
-							style="width: 65px; height: 65px" /><br> <a
-							class="aButtons2"
-							href="editProfilePicture.jsp?userID=${login.userID}"
-							style="margin-left: 70px">Upload new photo</a> <br> <br>
-						<hr>
-						<div class="popupInfo">
-							<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
-							<a style="font-weight: bold">Last Name: </a><a>${login.lastName}</a><br>
-							<a style="font-weight: bold">Email: </a><a>${login.email}</a><br>
-							<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
-							<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
-						</div>
-						<div style="margin: 15px 25px">
-							<a class="aButtons2"
-								href="editProfile.jsp?userID=${login.userID}"><img
-								src="pictures/settings.png" alt="Settings"
-								style="width: 30px; height: 30px; margin: -4px -35px;">Edit
-								User</a> <a class="aButtons2" href="logout.jsp"
-								style="margin-left: 135px"><img src="pictures/logout.png"
-								style="width: 25px; height: 25px; margin-left: -30px"
-								alt="Logout" />Save and Logout</a>
-						</div>
-					</div>
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody">
+				<input type="hidden" name="userID" value="${login.userID}" /> <input
+					type="hidden" name="wID" value="${login.WID}" /> <img
+					src="pictures/${login.fileName}" style="width: 65px; height: 65px" /><br>
+				<a class="aButtons2"
+					href="editProfilePicture.jsp?userID=${login.userID}"
+					style="margin-left: 70px">Upload new photo</a> <br> <br>
+				<hr>
+				<div class="popupInfo">
+					<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
+					<a style="font-weight: bold">Last Name: </a><a>${login.lastName}</a><br>
+					<a style="font-weight: bold">Email: </a><a>${login.email}</a><br>
+					<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
+					<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
+				</div>
+				<div style="margin: 15px 25px">
+					<a class="aButtons2" href="editProfile.jsp?userID=${login.userID}"><img
+						src="pictures/settings.png" alt="Settings"
+						style="width: 30px; height: 30px; margin: -4px -35px;">Edit
+						User</a> <a class="aButtons2" href="logout.jsp"
+						style="margin-left: 135px"><img src="pictures/logout.png"
+						style="width: 25px; height: 25px; margin-left: -30px" alt="Logout" />Save
+						and Logout</a>
 				</div>
 			</div>
-
 		</div>
 	</div>
 	<div class="background2">
@@ -310,21 +278,21 @@
 		<nav>
 			<ul>
 				<li><a class="socialmediaPopup"
-					onclick="document.getElementById('add_post').style.display='block'"
+					onclick="document.getElementById('add_message').style.display='block'"
 					style="width: auto;"><img src="pictures/add.png" alt="Add">New
 						Message</a></li>
 			</ul>
 		</nav>
 	</div>
 
-	<!-- Pop-Up-Window New Post -->
-	<div id="add_post" class="list_addBlock">
+	<!-- Pop-Up-Window New Message -->
+	<div id="add_message" class="navigation_addBlock">
 
 		<!-- Window content -->
 		<div class="addBlock">
 			<div class="popupHeader">
 				Add new Message <span
-					onclick="document.getElementById('add_post').style.display='none'
+					onclick="document.getElementById('add_message').style.display='none'
 					"
 					class="close" title="Schließen">&times;</span>
 			</div>
@@ -387,8 +355,8 @@
 	
 			<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 5px -35px;">To: <%=assignee%></a>
 			<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 40px -200px">Title: <%=title%></a>
-			<a style="width: 200px; position: absolute; margin: 70px -230px"">Description: <%=description%></a>
-			<a style="width: 200px; position: absolute; margin: 100px -223px"">Workspace: <%=workspace%></a>
+			<a style="width: 235px; position: absolute; margin: 70px -200px; text-align:left">Description: <%=description%></a>
+			<a style="width: 225px; position: absolute; margin: 40px 0px"">Workspace: <%=workspace%></a>
 			<a style="width: 115px; height: 35px; position: absolute; margin: -54px -215px;"><%=dueDate%></a>
 			<a href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 					src="pictures/settings.png" alt="Settings"
@@ -411,7 +379,7 @@
 	<br>
 
 	<!-- Pop-Up-Window Delete Info -->
-	<div id="delete_info" class="list_addBlock">
+	<div id="delete_info" class="navigation_addBlock">
 
 		<!-- Window content -->
 		<div class="addBlock">
@@ -517,7 +485,6 @@ function myFunction() {
   document.getElementById("demo").innerHTML = x;
 }
 </script>
-
 	
 </body>
 </html>

@@ -123,12 +123,8 @@
 				<h3>
 					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
-				<a class="information"
-					onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png"
-					alt="Information"></a> <a class="status"
-					href="javascript:progress()"><img
-					src="pictures/greenCircle.png" alt="Status"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
+					alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">

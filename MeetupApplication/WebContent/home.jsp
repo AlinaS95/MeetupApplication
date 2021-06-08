@@ -51,12 +51,8 @@
 				<h3>
 					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
-				<a class="information"
-					onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png"
-					alt="Information"></a> <a class="status"
-					href="javascript:progress()"><img
-					src="pictures/greenCircle.png" alt="Status"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
+					alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
@@ -503,7 +499,7 @@
 		<form class="homeForm">
 			<p class="choice">
 				<a href="list.jsp?wID=${login.WID}"><button id="win">Add Task</button></a>
-				<button id="and" onclick="inbox()">Inbox</button>
+				<a href="inbox.jsp?wID=${login.WID}"><button id="and">Inbox</button></a>
 				<button id="mac" onclick="profile()">Profile</button>
 			</p>
 		</form>

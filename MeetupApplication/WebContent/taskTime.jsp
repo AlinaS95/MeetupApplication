@@ -50,12 +50,8 @@
 				<h3>
 					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
-				<a class="information"
-					onclick="document.getElementById('p_info').style.display='block'"
-					style="width: auto;"><img src="pictures/infoicon.png"
-					alt="Information"></a> <a class="status"
-					href="javascript:progress()"><img
-					src="pictures/greenCircle.png" alt="Status"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
+					alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
@@ -326,11 +322,15 @@
 				Statement st = con.createStatement();
 
 				String taskSID = request.getParameter("taskSID");
-				String sql = "select * from tasktime WHERE taskSID=" + taskSID;
+				String sql = "select * from tasktime,user WHERE tasktime.tID=user.userID AND tasktime.taskSID=" + taskSID;
 
 				ResultSet rs = st.executeQuery(sql);
 
 				while (rs.next()) {
+					String userID = rs.getString("userID");
+					String fileName = rs.getString("filename");
+					String lastName = rs.getString("lastName");
+					String firstName = rs.getString("firstName");
 					String taskTimeID = rs.getString("taskTimeID");
 					LocalDate taskDate = rs.getDate("taskDate").toLocalDate();
 					LocalTime startTask = rs.getTime("startTask").toLocalTime();
@@ -342,6 +342,10 @@
 			value='<%=rs.getString("taskTimeID")%>' />
 		<table class="taskTime2">
 			<tr>
+				<td style="width: 200px;"><img class="membersImg"
+				style="border-radius: 100%; width: 50px; height: 50px"
+				src="pictures/<%=fileName%>" title="<%=firstName%> <%=lastName%>" /></td>
+				<td style="width: 200px;"><%=taskDate%></td>
 				<td style="width: 200px;"><%=startTask%></td>
 				<td style="width: 200px;"><%=stopTask%></td>
 				<td style="width: 220px;"><%=taskSum%>h</td>

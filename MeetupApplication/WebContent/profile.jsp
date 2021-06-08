@@ -55,12 +55,8 @@
 				<h3>
 					Welcome <a class="firstname">${login.firstName}</a>
 				</h3>
-				<a class="favorites"
-					onclick="document.getElementById('p_favorites').style.display='block'"
-					style="width: auto;"><img src="pictures/favorite.png"
-					alt="Favorites"></a> <a class="status"
-					href="javascript:progress()"><img
-					src="pictures/greenCircle.png" alt="Status"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
+					alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
