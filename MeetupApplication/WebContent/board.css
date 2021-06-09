@@ -165,11 +165,11 @@ html {
 
 section,
 aside {
-	border: 2px solid #d7d7d7;
-	padding: 5px;
-	width: 320px;
-	height: 335px;
-	margin-left: -143px;
+    border: 2px solid #d7d7d7;
+    padding: 5px;
+    width: 299px;
+    height: 174px;
+    margin-left: -143px;
     margin-top: -138px;
 }
 
@@ -569,18 +569,18 @@ popupHeader {
 }
 /* Infocards */
 
-.tooltip2 {
+.tooltip {
 	color: #707070;
 	text-decoration: underline;
 	cursor: help;
 	position: relative;
 }
 
-.tooltip2 span[role=tooltip] {
+.tooltip span[role=tooltip] {
 	display: none;
 }
 
-.tooltip2:hover span[role=tooltip] {
+.tooltip:hover span[role=tooltip] {
 	display: block;
 	position: absolute;
 	bottom: 1em;
@@ -592,4 +592,89 @@ popupHeader {
 	background-color: #eee;
 	border: solid 1px #707070;
 	border-radius: 0.2em;
+}
+
+table.homeTask thead th {
+	background: #E3E0E0;
+	border-bottom: 1px solid #dddddd;
+	padding: 5px 5px;
+	width: 80px;
+}
+table.homeTask td#taskName{
+	hyphens: auto; 
+	word-break: break-word; 
+	width: 200px; 
+	cursor:pointer;
+}
+table.homeTask tr.tableTask:hover td{
+	font-weight: bold;
+}
+
+
+table.homeTask tbody td {
+	font-size: 20px;
+	font-weight: 450;
+	padding: 10px 5px;
+}
+
+table.homeTask tbody img {
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+}
+.taskbox {
+    border-radius: -20px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: -150px -140px;
+    width: 278px;
+    height: 210px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 454;
+    padding: -5px -23px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
+}
+.taskbox1 {
+    border-radius: -20px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: -150px -140px;
+    width: 278px;
+    height: 210px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 454;
+    padding: -5px -23px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
+}
+.taskbox2 {
+    border-radius: -20px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: -150px -140px;
+    width: 278px;
+    height: 210px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 454;
+    padding: -5px -23px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
+}
+.taskbox3 {
+    border-radius: -20px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
+    margin: -150px -140px;
+    width: 278px;
+    height: 210px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 454;
+    padding: -5px -23px;
+    background: #F0F0F0;
+    border-bottom: 1px solid #dddddd;
 }
