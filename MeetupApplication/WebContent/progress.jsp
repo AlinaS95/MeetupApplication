@@ -12,35 +12,35 @@
 <%@ page import="com.google.gson.Gson"%>
 <%@ page import="com.google.gson.JsonObject"%>
 <%
-	Gson gsonObj = new Gson();//Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
-	Map<Object, Object> map = null;
-	List<Map<Object, Object>> list = new ArrayList<Map<Object, Object>>();
-	String dataPoints = null;
+Gson gsonObj = new Gson(); //Gson:Open Source-Java-Bibliothek mit der Java-Objekte in ihre JSON-Darstellung konvertiert werden können
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+String dataPoints = null;
 
-	try {
-		Class.forName("com.mysql.jdbc.Driver");
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+try {
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root",
+			"");
+	Statement statement = connection.createStatement();
+	String xVal, yVal;
 
-		Statement statement = connection.createStatement();
-		String xVal, yVal;
+	ResultSet resultSet = statement.executeQuery("SELECT * FROM tasks");
 
-		ResultSet rs = statement.executeQuery("select * from datapoints");
-
-		while (rs.next()) {
-			xVal = rs.getString("x");
-			yVal = rs.getString("y");
-			map = new HashMap<Object, Object>();
-			map.put("x", Double.parseDouble(xVal));
-			map.put("label", yVal);
-			list.add(map);
-			dataPoints = gsonObj.toJson(list);
-		}
-		connection.close();
-	} catch (SQLException e) {
-		out.println(
-				"<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Could not connect to the database. Please check if you have mySQL Connector installed on the machine - if not, try installing the same.</div>");
-		dataPoints = null;
+	while (resultSet.next()) {
+		xVal = resultSet.getString("taskName");
+		yVal = resultSet.getString("completion");
+		map = new HashMap<Object, Object>();
+		map.put("label", (xVal));
+		map.put("y", Double.parseDouble(yVal));
+		list.add(map);
+		dataPoints = gsonObj.toJson(list);
 	}
+	connection.close();
+} catch (SQLException e) {
+	out.println(
+			"<div  style='width: 50%; margin-left: auto; margin-right: auto; margin-top: 200px;'>Could not connect to the database. Please check if you have mySQL Connector installed on the machine - if not, try installing the same.</div>");
+	dataPoints = null;
+}
 %>
 <!DOCTYPE html>
 <html>
@@ -73,42 +73,40 @@
 	}
 </script>
 <script type="text/javascript">
-	window.onload = function() {
-
-		var chart = new CanvasJS.Chart("chartContainer", {
-			width : "1400",
-			theme : "light2",
-			title : {
-				text : "Task Progress"
-			},
-			axisY : {
-				title : "Task Status",
-				labelFormatter : addSymbols
-			},
-			data : [ {
-				type : "bar",
-				indexLabel : "{y}",
-				indexLabelFontColor : "#444",
-				indexLabelPlacement : "inside",
-				dataPoints :
-<%out.print(dataPoints);%>
-	} ]
-		});
-		chart.render();
-
-		function addSymbols(e) {
-			var suffixes = [ "", "K", "M", "B" ];
-
-			var order = Math.max(
-					Math.floor(Math.log(e.value) / Math.log(1000)), 0);
-			if (order > suffixes.length - 1)
-				order = suffixes.length - 1;
-
-			var suffix = suffixes[order];
-			return CanvasJS.formatNumber(e.value / Math.pow(1000, order))
-					+ suffix;
-		}
-
+window.onload = function() { 
+	 
+	var chart = new CanvasJS.Chart("chartContainer", {
+		width: "1400",
+		theme: "light2",
+		title: {
+			text: "Task Progress"
+		},
+		
+		axisY: {
+			title: "Task Status",
+			labelFormatter: addSymbols
+		},
+		data: [{
+			type: "bar",
+			indexLabel: "{y}",
+			indexLabelFontColor: "#444",
+			indexLabelPlacement: "inside",
+			dataPoints: <%out.print(dataPoints);%>
+		}]
+	});
+	chart.render();
+	 
+	function addSymbols(e) {
+		var suffixes = ["", "K", "M", "B"];
+	 
+		var order = Math.max(Math.floor(Math.log(e.value) / Math.log(100)), 0);
+		if(order > suffixes.length - 1)
+		order = suffixes.length - 1;
+	 
+		var suffix = suffixes[order];
+		return CanvasJS.formatNumber(e.value / Math.pow(100, order)) + suffix;
+	}
+	 
 	}
 </script>
 </head>
