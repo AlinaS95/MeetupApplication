@@ -42,15 +42,15 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="javascript:home()"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
 					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
-				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
-					alt="Information"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img
+					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
@@ -72,8 +72,10 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="javascript:menue()"><img
-							src="pictures/navigation.png" alt="Menu"></a></li>
+					<li><a><button id="start" class="buttonStart">
+								<img src="pictures/navigation.png"
+									style="width: 50px; height: 50px" alt="Menu">
+							</button></a></li>
 					<li><a href="home.jsp?wID=${login.WID}"><dfn
 								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
@@ -117,6 +119,87 @@
 					</ul>
 				</div>
 			</nav>
+			<dialog id="dialog"> <img src="pictures/meetup_logo.png"
+				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
+			<hr>
+
+			<ul class="navMenu">
+				<li><img src="pictures/home.png" height="40" width="40"
+					hspace="1" vspace="1" alt="home"><a
+					href="home.jsp?wID=${login.WID}" style="text-decoration: none">Home</a></li>
+				<li><img src="pictures/task.png" height="40" width="40"
+					hspace="1" vspace="1" alt="task"><a
+					href="list.jsp?wID=${login.WID}" style="text-decoration: none">My
+						Tasks</a></li>
+				<li><img src="pictures/inbox.png" height="40" width="40"
+					hspace="1" vspace="1" alt="inbox"><a
+					href="inbox.jsp?wID=${login.WID}" style="text-decoration: none">Inbox</a></li>
+				<li><img src="pictures/person.png" height="40" width="40"
+					hspace="1" vspace="1" alt="person"><a
+					href="profile.jsp?wID=${login.WID}" style="text-decoration: none">Profile</a></li>
+
+				<hr>
+				<a href="progress.jsp?wID=${login.WID}">Reports:</a>
+				<li><a href="progress.jsp?wID=${login.WID}"
+					style="text-decoration: none">Tasks I created</a></li>
+				<li><a href="list.jsp?wID=${login.WID}"
+					style="text-decoration: none">Tasks I assigned to others</a></li>
+				<li><a href="progress.jsp?wID=${login.WID}"
+					style="text-decoration: none">Recently completed Tasks</a></li>
+				<br>
+				<hr>
+				<p>Team:</p>
+				<%
+					try {
+						String wID = request.getParameter("wID");
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM user WHERE wID=" + wID;
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String firstName = rs.getString("firstName");
+							String lastName = rs.getString("lastName");
+							String workspace = rs.getString("workspace");
+							String fileName = rs.getString("filename");
+				%>
+				<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+				<img class="membersImg"
+					style="border-radius: 100%; width: 50px; height: 50px"
+					src="pictures/<%=fileName%>" title="<%=firstName%> <%=lastName%>" />
+				<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+
+			</ul>
+			<div id="Abbruch">
+				<img src="pictures/baseline_close_black_18dp.png">
+			</div>
+			<br>
+			<div id="punkte"></div>
+			</dialog>
+
+			<script>
+				var startbutton = document.getElementById("start"), dialog = document
+						.getElementById('dialog'), Abbruch = document
+						.getElementById("Abbruch");
+				startbutton.addEventListener('click', zeigeFenster);
+				Abbruch.addEventListener('click', schlieﬂeFenster);
+
+				function zeigeFenster() {
+					dialog.showModal();
+				}
+
+				function schlieﬂeFenster() {
+					dialog.close();
+				}
+			</script>
 		</div>
 	</div>
 	<!-- Pop-Up-Window New Task -->
@@ -287,9 +370,8 @@
 			<form action="UpdateTask" method="post">
 				<input type="hidden" name="taskID"
 					value="<%=rs.getString("taskID")%>"> <input type="hidden"
-					name="wID" value="<%=rs.getString("wID")%>">
-					<input type="hidden"
-					name="userSID" value="<%=rs.getString("userSID")%>">
+					name="wID" value="<%=rs.getString("wID")%>"> <input
+					type="hidden" name="userSID" value="<%=rs.getString("userSID")%>">
 				<div>
 					<label>Title</label><input type="text" name="taskName"
 						value='<%=rs.getString("taskName")%>' />

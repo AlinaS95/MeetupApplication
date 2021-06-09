@@ -51,8 +51,8 @@
 				<h3>
 					Workspace: <a class="workspace">${login.workspace}</a>
 				</h3>
-				<a class="information" href="profile.jsp?wID=${login.WID}"><img src="pictures/infoicon.png"
-					alt="Information"></a>
+				<a class="information" href="profile.jsp?wID=${login.WID}"><img
+					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
 			<div class="secondblock">
@@ -74,15 +74,17 @@
 		<div class="mainmenu">
 			<nav>
 				<ul>
-					<li><a href="menu.jsp?wID=${login.WID}"><img
-							src="pictures/navigation.png" alt="Menu"></a></li>
-					<li><a href="home.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
+					<li><a><button id="start" class="buttonStart">
+								<img src="pictures/navigation.png"
+									style="width: 50px; height: 50px" alt="Menu">
+							</button></a></li>
+					<li><a href="home.jsp?wID=${login.WID}"><dfn
 								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}"><dfn
-								class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"
+						style="font-weight: bold"><dfn class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn></a></li>
@@ -119,90 +121,87 @@
 					</ul>
 				</div>
 			</nav>
-		</div>
-	</div>
-	<!-- Pop-Up-Window New Task -->
-	<div id="add_task" class="navigation_addBlock">
-		<!-- Window content -->
-		<div class="popupBlock">
-			<div class="popupHeader">
-				Add new Task <span
-					onclick="document.getElementById('add_task').style.display='none'
-					"
-					class="close" title="Schließen">&times;</span>
+			<dialog id="dialog"> <img src="pictures/meetup_logo.png"
+				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
+			<hr>
+
+			<ul class="navMenu">
+				<li><img src="pictures/home.png" height="40" width="40"
+					hspace="1" vspace="1" alt="home"><a
+					href="home.jsp?wID=${login.WID}" style="text-decoration: none">Home</a></li>
+				<li><img src="pictures/task.png" height="40" width="40"
+					hspace="1" vspace="1" alt="task"><a
+					href="list.jsp?wID=${login.WID}" style="text-decoration: none">My
+						Tasks</a></li>
+				<li><img src="pictures/inbox.png" height="40" width="40"
+					hspace="1" vspace="1" alt="inbox"><a
+					href="inbox.jsp?wID=${login.WID}" style="text-decoration: none">Inbox</a></li>
+				<li><img src="pictures/person.png" height="40" width="40"
+					hspace="1" vspace="1" alt="person"><a
+					href="profile.jsp?wID=${login.WID}" style="text-decoration: none">Profile</a></li>
+
+				<hr>
+				<a href="progress.jsp?wID=${login.WID}">Reports:</a>
+				<li><a href="progress.jsp?wID=${login.WID}"
+					style="text-decoration: none">Tasks I created</a></li>
+				<li><a href="list.jsp?wID=${login.WID}"
+					style="text-decoration: none">Tasks I assigned to others</a></li>
+				<li><a href="progress.jsp?wID=${login.WID}"
+					style="text-decoration: none">Recently completed Tasks</a></li>
+				<br>
+				<hr>
+				<p>Team:</p>
+				<%
+					try {
+						String wID = request.getParameter("wID");
+						Class.forName("com.mysql.cj.jdbc.Driver");
+						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+						Statement st = con.createStatement();
+						String sql = "SELECT * FROM user WHERE wID=" + wID;
+						ResultSet rs = st.executeQuery(sql);
+						int i = 0;
+						while (rs.next()) {
+							String firstName = rs.getString("firstName");
+							String lastName = rs.getString("lastName");
+							String workspace = rs.getString("workspace");
+							String fileName = rs.getString("filename");
+				%>
+				<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+				<img class="membersImg"
+					style="border-radius: 100%; width: 50px; height: 50px"
+					src="pictures/<%=fileName%>" title="<%=firstName%> <%=lastName%>" />
+				<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
+
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+
+			</ul>
+			<div id="Abbruch">
+				<img src="pictures/baseline_close_black_18dp.png">
 			</div>
-			<div class="popupBody_list">
-				<div class="popupInfo">
-					<form action="UploadTask" method="post"
-						enctype="multipart/form-data">
-						<div>
-							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
-						</div>
-						<div>
-							<label>Description</label>
-							<textarea name="description"></textarea>
-						</div>
-						<div>
-							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
-						</div>
-						<div>
-							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
-								<option selected="">Select the category</option>
-								<option value="To do">To do</option>
-								<option value="In Progress">In Progress</option>
-								<option value="Done">Done</option>
-							</select>
-						</div>
-						<div>
-							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
-								onchange="singleSelectChangeText()" required="required">
-								<option value="" disabled selected>Select the assignee</option>
-								<%
-									try {
-										String wID = request.getParameter("wID");
-										Class.forName("com.mysql.cj.jdbc.Driver");
-										Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-										Statement st = con.createStatement();
-										String sql = "SELECT * FROM user WHERE user.wID=" + wID;
-										ResultSet rs = st.executeQuery(sql);
-										int i = 0;
-										while (rs.next()) {
-											String userID = rs.getString("userID");
-											String firstName = rs.getString("firstName");
-								%>
-								<option value="<%=userID%>"><%=firstName%></option>
-								<%
-									}
-									} catch (Exception e) {
-										out.println(e);
-									}
-								%>
-							</select> <input id="selectAssignee" type="hidden" name="assignee">
-						</div>
-						<div>
-							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries" required="required" />
-						</div>
+			<br>
+			<div id="punkte"></div>
+			</dialog>
 
-						<div>
-							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
-						</div>
+			<script>
+				var startbutton = document.getElementById("start"), dialog = document
+						.getElementById('dialog'), Abbruch = document
+						.getElementById("Abbruch");
+				startbutton.addEventListener('click', zeigeFenster);
+				Abbruch.addEventListener('click', schließeFenster);
 
-						<div>
-							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
-						</div>
+				function zeigeFenster() {
+					dialog.showModal();
+				}
 
-						<button type="submit">Save</button>
-					</form>
-				</div>
-			</div>
+				function schließeFenster() {
+					dialog.close();
+				}
+			</script>
 		</div>
 	</div>
 	<script>
@@ -498,8 +497,8 @@
 
 		<form class="homeForm">
 			<p class="choice">
-				<a href="list.jsp?wID=${login.WID}"><button id="win">Add Task</button></a>
-				<a href="inbox.jsp?wID=${login.WID}"><button id="and">Inbox</button></a>
+				<a href="list.jsp?wID=${login.WID}"><button id="win">Add
+						Task</button></a> <a href="inbox.jsp?wID=${login.WID}"><button id="and">Inbox</button></a>
 				<button id="mac" onclick="profile()">Profile</button>
 			</p>
 		</form>
@@ -549,39 +548,39 @@
 				popup.classList.toggle("show");
 			}
 		</script> <script>
-			var startbutton = document.getElementById("start"), dialog = document
-					.getElementById('dialog'), Abbruch = document
-					.getElementById("Abbruch");
-			startbutton.addEventListener('click', zeigeFenster);
-			Abbruch.addEventListener('click', schließeFenster);
+				var startbutton = document.getElementById("start"), dialog = document
+						.getElementById('dialog'), Abbruch = document
+						.getElementById("Abbruch");
+				startbutton.addEventListener('click', zeigeFenster);
+				Abbruch.addEventListener('click', schließeFenster);
 
-			function zeigeFenster() {
-				dialog.showModal();
-			}
-
-			function schließeFenster() {
-				dialog.close();
-			}
-		</script> <!-- Watch --> <script>
-			'use strict';
-			(function() {
-				function uhrzeit() {
-					var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
-							.getMinutes(), s = jetzt.getSeconds();
-					m = fuehrendeNull(m);
-					s = fuehrendeNull(s);
-					document.getElementById('uhr').innerHTML = h + ':' + m
-							+ ':' + s;
-					setTimeout(uhrzeit, 500);
+				function zeigeFenster() {
+					dialog.showModal();
 				}
 
-				function fuehrendeNull(zahl) {
-					zahl = (zahl < 10 ? '0' : '') + zahl;
-					return zahl;
+				function schließeFenster() {
+					dialog.close();
 				}
-				document.addEventListener('DOMContentLoaded', uhrzeit);
-			}());
-		</script>
+			</script> <!-- Watch --> <script>
+				'use strict';
+				(function() {
+					function uhrzeit() {
+						var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+								.getMinutes(), s = jetzt.getSeconds();
+						m = fuehrendeNull(m);
+						s = fuehrendeNull(s);
+						document.getElementById('uhr').innerHTML = h + ':' + m
+								+ ':' + s;
+						setTimeout(uhrzeit, 500);
+					}
+
+					function fuehrendeNull(zahl) {
+						zahl = (zahl < 10 ? '0' : '') + zahl;
+						return zahl;
+					}
+					document.addEventListener('DOMContentLoaded', uhrzeit);
+				}());
+			</script>
 	</div>
 	</div>
 	</div>

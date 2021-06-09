@@ -264,6 +264,81 @@ nav ul li {
 	width: 0px;
 }
 
+/*Menü seitlich*/
+
+button.buttonStart {
+	border: none;
+	cursor: pointer;
+}
+
+dialog {
+	border-radius: 0 .5rem .5rem;
+	margin: 1rem;
+}
+
+.button #menuebutton {
+	padding: 0.5em 1em;
+	font-size: 1em;
+	background-color: #F0F0F0;
+	border: 1px solid #F0F0F0;
+	color: #707070;
+	cursor: pointer;
+}
+
+dialog {
+	width: 20em;
+	background-color: #F0F0F0;
+	border: 1px solid #707070;
+	position: absolute;
+	top: 10%;
+	right: 80%;
+	margin: auto;
+	padding: 1em;
+	display: none;
+}
+
+dialog::backdrop {
+	background-color: rgba(0, 0, 0, 0.6);
+}
+
+dialog[open] {
+	display: block;
+}
+
+#Abbruch {
+	position: absolute;
+	top: 2%;
+	right: 5%;
+	cursor: pointer;
+}
+#punkte ul {
+	margin-top:10px;
+
+}
+#punkte ul li {
+	float:left;
+	width:260px;
+	padding-left:20px;
+	font-size:16px;
+	color:#333;
+	font-weight:bold;
+	margin:5px 0;
+	padding-bottom:1px;
+}
+
+ul.navMenu li{
+	margin-top:5px;
+}
+
+ul.navMenu li a{
+	text-decoration: none;
+}
+
+ul.navMenu li a:hover{
+	font-weight:bold;
+}
+
+
 /*search */
 .searchbox {
 	width: 300px;
