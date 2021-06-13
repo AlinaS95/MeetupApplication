@@ -341,8 +341,6 @@
 	<div class="background2">
 		<br>
 
-		<hr>
-
 		<div class="box1">
 			<dfn class="tooltip2">
 				To Do <span role="tooltip">In this column you will find all
@@ -371,12 +369,12 @@
 		</div>
 
 
-	<div class="tasksHome">
-		<div class="task1">
+		<div class="tasksHome">
+			<div class="task1">
 
-					<hr>
-					<%
-						try {
+
+				<%
+					try {
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 						Statement st = con.createStatement();
@@ -387,124 +385,134 @@
 							String taskID = rs.getString("taskID");
 							String taskName = rs.getString("taskName");
 							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							
-					%>
-					<input type="hidden" name="taskID"
-						value='<%=rs.getString("taskID")%>' />
-					
-						<div class="taskbox">
-						<p>New Task, which is to do</p><hr> 
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px -128px;">Task: <%=taskName%></a>
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px -126px;">Date: <%=dueDate%></a>
-					</div>
-					<%
-						}
-					} catch (Exception e) {
-					out.println(e);
-					}
-					%>
+				%>
+				<input type="hidden" name="taskID"
+					value='<%=rs.getString("taskID")%>' />
+
+				<div class="taskbox">
+					<p>New Task, which is to do</p>
+					<hr>
+					<a
+						style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px -128px;">Task:
+						<%=taskName%></a> <a
+						style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px -126px;">Date:
+						<%=dueDate%></a>
 				</div>
-		
+				<%
+					}
+					} catch (Exception e) {
+						out.println(e);
+					}
+				%>
+			</div>
+
 		</div>
-			
-		</div>
+
+
 		<div class="task2">
-		<hr>
-					<%
-						try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Progress'";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							
-					%>
-					<input type="hidden" name="taskID"
-						value='<%=rs.getString("taskID")%>' />
-					<div class="taskbox1">
-						<p>New Task, which is in Progress</p><hr> 
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 20px;">Task: <%=taskName%></a>
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px 20px;">Date: <%=dueDate%></a>
-					</div>
-					<%
-						}
-					} catch (Exception e) {
+
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Progress'";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = rs.getString("taskName");
+						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+			%>
+			<input type="hidden" name="taskID"
+				value='<%=rs.getString("taskID")%>' />
+			<div class="taskbox1">
+				<p>New Task, which is in Progress</p>
+				<hr>
+				<a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px -125px;">Task:
+					<%=taskName%></a> <a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px -125px;">Date:
+					<%=dueDate%></a>
+			</div>
+			<%
+				}
+				} catch (Exception e) {
 					out.println(e);
-					}
-					%>
-				</div>
+				}
+			%>
+		</div>
 		<div class="task3">
 
-					<hr>
-					<%
-						try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Review'";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							
-					%>
-					<input type="hidden" name="taskID"
-						value='<%=rs.getString("taskID")%>' />
-						<div class="taskbox2">
-						<p>New Task, which is in Review</p><hr> 
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 20px;">Task: <%=taskName%></a>
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px 20px;">Date: <%=dueDate%></a>
-					</div>
-					<%
-						}
-					} catch (Exception e) {
-					out.println(e);
-					}
-					%>
-				</div>
-				
-		<div class="task4">
-	
-					<hr>
-					<%
-						try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks WHERE taskStatus = 'Done'";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String taskID = rs.getString("taskID");
-							String taskName = rs.getString("taskName");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-							
-					%>
-					<input type="hidden" name="taskID"
-						value='<%=rs.getString("taskID")%>' />
-					
-						<div class="taskbox3">
-						<p>New Task, which is done</p><hr> 
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 17px;">Task: <%=taskName%></a>
-							<a style="hyphens: auto; word-break: break-word; position: absolute; margin: 7px 19px;">Date: <%=dueDate%></a>
-					</div>
-					<%
-						}
-					} catch (Exception e) {
-					out.println(e);
-					}
-					%>
-				</div>
-	
-		</div>
-	</div>
 
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Review'";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = rs.getString("taskName");
+						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+			%>
+			<input type="hidden" name="taskID"
+				value='<%=rs.getString("taskID")%>' />
+			<div class="taskbox2">
+				<p>New Task, which is in Review</p>
+				<hr>
+				<a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 20px;">Task:
+					<%=taskName%></a> <a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px 20px;">Date:
+					<%=dueDate%></a>
+			</div>
+			<%
+				}
+				} catch (Exception e) {
+					out.println(e);
+				}
+			%>
+		</div>
+
+		<div class="task4">
+			<%
+				try {
+					Class.forName("com.mysql.cj.jdbc.Driver");
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+					Statement st = con.createStatement();
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'Done'";
+					ResultSet rs = st.executeQuery(sql);
+					int i = 0;
+					while (rs.next()) {
+						String taskID = rs.getString("taskID");
+						String taskName = rs.getString("taskName");
+						LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
+			%>
+			<input type="hidden" name="taskID"
+				value='<%=rs.getString("taskID")%>' />
+
+			<div class="taskbox3">
+				<p>New Task, which is done</p>
+				<hr>
+				<a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 17px;">Task:
+					<%=taskName%></a> <a
+					style="hyphens: auto; word-break: break-word; position: absolute; margin: 7px 19px;">Date:
+					<%=dueDate%></a>
+			</div>
+			<%
+				}
+				} catch (Exception e) {
+					out.println(e);
+				}
+			%>
+		</div>
+
+	</div>
+	</div>
+	</div>
 </body>
 </html>

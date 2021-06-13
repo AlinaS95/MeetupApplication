@@ -409,8 +409,6 @@ window.onload = function() {
 		</div>
 	</div>
 
-
-
 	<h4>This Project is</h4>
 	<a style="position: absolute; margin: -48px 135px" class="workspace">${login.workspace}</a>
 
@@ -474,13 +472,7 @@ window.onload = function() {
  	}
  %></a>
 	</div>
-	<h5>Project Status</h5>
 
-	<div class="projectstatus">
-		<div id="myProgress">
-			<div id="myBar"></div>
-		</div>
-	</div>
 
 	<h6>Team Status</h6>
 	<div class="teamstatus">

@@ -21,7 +21,7 @@ import net.meetup.utils.JDBCUtils;
 
 @WebServlet("/UploadInbox")
 
-public class UploadInboxServlet extends HttpServlet {
+public class AddInboxServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

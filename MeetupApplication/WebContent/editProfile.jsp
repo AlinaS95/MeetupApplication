@@ -408,6 +408,8 @@
 						href="changePassword.jsp?userID=${login.userID}">Change
 						Password</a>
 				</div>
+				<a class="aButtons" href="deleteUser.jsp?userID=${login.userID}"
+						style="margin-left: 10px">Delete</a>
 				<div style="margin: 5px 0px">
 					<a class="aButtons" href="profile.jsp?wID=${login.WID}"
 						style="margin-left: 10px">Back</a>

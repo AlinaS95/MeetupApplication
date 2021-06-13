@@ -1,8 +1,10 @@
 @charset "ISO-8859-1";
+
 html {
-  background-color: #E3E0E0;
+	background-color: #E3E0E0;
 }
-.archive{
+
+.archive {
 	width: 320px;
 	height: 100px;
 	background: #F0F0F0;
@@ -14,19 +16,19 @@ html {
 	box-sizing: border-box;
 	padding: 20px 20px;
 }
-.archive p{
+
+.archive p {
 	margin: 0;
 	padding: 0;
 	font-weight: bold;
 }
 
-.archive input{
+.archive input {
 	width: 100%;
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 }
 
-.archive input[type="text"], input[type="password"]
-{
+.archive input[type="text"], input[type="password"] {
 	border: none;
 	border-bottom: 1px solid #fff;
 	background: transparent;
@@ -36,39 +38,33 @@ html {
 	font-size: 16px;
 }
 
-.archive input[type="submit"]
-{
+.archive input[type="submit"] {
 	border: none;
 	height: 40px;
 	background: #fff;
 	color: black;
 	font-size: 18px;
 	border-radius: 20px;
-	
 }
 
-.archive input[type="submit"]:hover
-{
+.archive input[type="submit"]:hover {
 	cursor: pointer;
 	background: #E3E0E0;
 	color: black;
-	
 }
 
-.archive a{
+.archive a {
 	text-decoration: none;
 	font-size: 12px;
 	line-height: 20px;
 	color: black;
-	
 }
 
 .archive a:hover {
 	color: darkgrey;
-	
-	
 }
-.archive1{
+
+.archive1 {
 	width: 320px;
 	height: 100px;
 	background: #F0F0F0;
@@ -79,19 +75,19 @@ html {
 	box-sizing: border-box;
 	padding: 20px 20px;
 }
-.archive1 p{
+
+.archive1 p {
 	margin: 0;
 	padding: 0;
 	font-weight: bold;
 }
 
-.archive1 input{
+.archive1 input {
 	width: 100%;
-	margin-bottom: 20px;	
+	margin-bottom: 20px;
 }
 
-.archive1 input[type="text"], input[type="password"]
-{
+.archive1 input[type="text"], input[type="password"] {
 	border: none;
 	border-bottom: 1px solid #fff;
 	background: transparent;
@@ -101,273 +97,285 @@ html {
 	font-size: 16px;
 }
 
-.archive1 input[type="submit"]
-{
+.archive1 input[type="submit"] {
 	border: none;
 	height: 40px;
 	background: #fff;
 	color: black;
 	font-size: 18px;
 	border-radius: 20px;
-	
 }
 
-.archive1 input[type="submit"]:hover
-{
+.archive1 input[type="submit"]:hover {
 	cursor: pointer;
 	background: #E3E0E0;
 	color: black;
-	
 }
 
-.archive1 a{
+.archive1 a {
 	text-decoration: none;
 	font-size: 12px;
 	line-height: 20px;
 	color: black;
-	
 }
 
 .archive1 a:hover {
 	color: darkgrey;
-	
 }
 
 .box1, .box2, .box3, .box4 {
-    float: left;
-    width: 23%;
-    margin-right: 2%;
-    margin-top: -1%;
-    padding: 20px;
-    background: #eee;
-    box-shadow: 10px 10px 15px silver;
-    box-sizing: border-box;
+	float: left;
+	width: 23%;
+	margin-right: 2%;
+	margin-top: -1%;
+	padding: 20px;
+	background: #eee;
+	box-shadow: 10px 10px 15px silver;
+	box-sizing: border-box;
 }
+
 .box4 {
-     margin-right: 0;
+	margin-right: 0;
 }
+
 .task1, .task2, .task3, .task4 {
-    float: left;
-    width: 23%;
-    height: 22%;
-    margin-right: 2%;
-    margin-top: 1%;
-    padding: 149px;
-    background: #eee;
-    box-sizing: border-box;
-    box-shadow: 10px 10px 15px silver;
+	float: left;
+	width: 23%;
+	height: 22%;
+	margin-right: 2%;
+	margin-top: 1%;
+	padding: 149px;
+	background: #eee;
+	box-sizing: border-box;
+	box-shadow: 10px 10px 15px silver;
 }
+
 .task4 {
-     margin-right: 0;
+	margin-right: 0;
 }
-
-
 
 section,
 aside {
-    border: 2px solid #d7d7d7;
-    padding: 5px;
-    width: 299px;
-    height: 174px;
-    margin-left: -143px;
-    margin-top: -138px;
+	border: 2px solid #d7d7d7;
+	padding: 5px;
+	width: 299px;
+	height: 174px;
+	margin-left: -143px;
+	margin-top: -138px;
 }
 
 .rechteck1 {
-    background-color: #A3F5A8;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: -25px;
-    left: 119px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck2 {
-    background-color: #FFDEAD;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: 190px;
-    left: 119px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck3 {
-    background-color:#A3F5A8;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: -22px;
-    left: 491px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck4 {
-    background-color: #FFDEAD;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: 190px;
-    left: 491px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck5 {
-    background-color: #FAFAD2;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: 190px;
-    left: 870px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck6 {
-    background-color: #FAFAD2;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: -22px;
-    left: 870px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck7 {
-    background-color: #FFDEAD;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: -158px;
-    left: 870px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-.rechteck8 {
-    background-color:#A3F5A8;
-    position: absolute;
-    width: 123px;
-    height: 9px;
-    bottom: -158px;
-    left: 491px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
+	background-color: #A3F5A8;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: -25px;
+	left: 119px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
 }
 
+.rechteck2 {
+	background-color: #FFDEAD;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: 190px;
+	left: 119px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck3 {
+	background-color:#A3F5A8;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: -22px;
+	left: 491px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck4 {
+	background-color: #FFDEAD;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: 190px;
+	left: 491px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck5 {
+	background-color: #FAFAD2;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: 190px;
+	left: 870px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck6 {
+	background-color: #FAFAD2;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: -22px;
+	left: 870px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck7 {
+	background-color: #FFDEAD;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: -158px;
+	left: 870px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
+
+.rechteck8 {
+	background-color:#A3F5A8;
+	position: absolute;
+	width: 123px;
+	height: 9px;
+	bottom: -158px;
+	left: 491px;
+	border: 1px solid #d7d7d7;
+	text-align: center;
+	border-radius: 80px;
+}
 
 .profiletask {
 	margin-left: 20px;
 	margin-top: 90px;
 	position: absolute;
 }
+
 .profiletask1 {
 	margin-left: 390px;
 	margin-top: 90px;
 	position: absolute;
 }
+
 .profiletask2 {
 	margin-left: 770px;
 	margin-top: 90px;
 	position: absolute;
 }
+
 .profiletask3 {
 	margin-left: 20px;
 	margin-top: 300px;
 	position: absolute;
 }
+
 .profiletask4 {
 	margin-left: 390px;
 	margin-top: 300px;
 	position: absolute;
 }
+
 .profiletask5 {
 	margin-left: 770px;
 	margin-top: 300px;
 	position: absolute;
 }
+
 .profiletask6 {
 	margin-left: 1150px;
 	margin-top: 300px;
 	position: absolute;
 }
+
 .profiletask7 {
 	margin-left: 1150px;
 	margin-top: 90px;
 	position: absolute;
 }
+
 .profiletask8 {
 	margin-left: 20px;
 	margin-top: 440px;
 	position: absolute;
 }
+
 .profiletask9 {
 	margin-left: 770px;
 	margin-top: 440px;
 	position: absolute;
 }
+
 .profiletask10 {
 	margin-left: 1150px;
 	margin-top: 440px;
 	position: absolute;
 }
+
 .profiletask11 {
 	margin-left: 390px;
 	margin-top: 440px;
 	position: absolute;
 }
+
 /* add and settings */
 .addnewtask img {
-    margin-left: -1179px;
-    margin-top: -2px;
-    width: 37px;
-    height: 37px;
-    position: absolute;
+	margin-left: -1179px;
+	margin-top: -2px;
+	width: 37px;
+	height: 37px;
+	position: absolute;
 }
 
 .addnewtask1 img {
-    margin-left: -800px;
-    margin-top: -2px;
-    width: 37px;
-    height: 37px;
-    position: absolute;
+	margin-left: -800px;
+	margin-top: -2px;
+	width: 37px;
+	height: 37px;
+	position: absolute;
 }
+
 .addnewtask2 img {
-    margin-left: -423px;
-    margin-top: -2px;
-    width: 37px;
-    height: 37px;
-    position: absolute;
+	margin-left: -423px;
+	margin-top: -2px;
+	width: 37px;
+	height: 37px;
+	position: absolute;
 }
+
 .addnewtask3 img {
-    margin-left: -48px;
-    margin-top: -2px;
-    width: 37px;
-    height: 37px;
-    position: absolute;
+	margin-left: -48px;
+	margin-top: -2px;
+	width: 37px;
+	height: 37px;
+	position: absolute;
 }
-
-
-
 
 /* Background Pop-Up-Window*/
 .list_addnewtaskBlock {
 	display: none;
-	position: fixed; 
+	position: fixed;
 	z-index: 4;
 	padding-top: 150px;
 	left: 0;
 	top: 0;
-	width: 100%; 
-	height: 100%; 
-	overflow: auto; 
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -391,14 +399,14 @@ aside {
 /* Background Pop-Up-Window*/
 .navigation_addnewtaskBlock {
 	display: none;
-	position: fixed; 
+	position: fixed;
 	z-index: 4;
 	padding-top: 150px;
 	left: 0;
 	top: 0;
-	width: 100%; 
-	height: 100%; 
-	overflow: auto; 
+	width: 100%;
+	height: 100%;
+	overflow: auto;
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
@@ -425,14 +433,15 @@ textarea {
 	border-radius: 10px;
 	position: absolute;
 	margin: 68.575px -5px 0px;
-    width: 234px;
-    height: 84px;
+	width: 234px;
+	height: 84px;
 }
 
 textarea:focus {
 	border: thin #707070;
 	border-radius: 5px;
 }
+
 /*Datum*/
 form {
 	width: 5em;
@@ -446,7 +455,7 @@ form {
 	height: 1em;
 	position: absolute;
 	margin-left: 3px;
-    margin-top: 33px;
+	margin-top: 33px;
 }
 
 label {
@@ -455,7 +464,6 @@ label {
 	margin-bottom: 1em;
 	line-height: 1em;
 	text-align: right;
-
 }
 
 /* ArchiveButtons */
@@ -467,17 +475,17 @@ label {
 }
 
 .category_socialmedia {
-    background-color: #F0F0F0;
-    text-align: left;
-    border: solid 1px #707070;
-    border-radius: 5px;
-    color: #707070;
-    width: 104px;
-    height: 30px;
-    font-size: 20px;
-    font-weight: 500;
-    padding-top: 6px;
-    padding-left: 6px;
+	background-color: #F0F0F0;
+	text-align: left;
+	border: solid 1px #707070;
+	border-radius: 5px;
+	color: #707070;
+	width: 104px;
+	height: 30px;
+	font-size: 20px;
+	font-weight: 500;
+	padding-top: 6px;
+	padding-left: 6px;
 }
 
 .category_socialmedia img {
@@ -501,7 +509,7 @@ label {
 	float: right;
 }
 
-.socialmedia_navigation nav ul li a { 
+.socialmedia_navigation nav ul li a {
 	text-decoration: none;
 	display: flex;
 	font-family: "Times New Roman";
@@ -513,12 +521,13 @@ label {
 }
 
 /* add and settings */
-.socialmedia_navigation img{
+.socialmedia_navigation img {
 	margin-top: -3px;
 	width: 25px;
 	height: 25px;
 	margin: 0px 5px;
 }
+
 /* Pop-Up-Window Content */
 .addBlock {
 	position: relative;
@@ -544,6 +553,7 @@ label {
 	font-weight: bold;
 	cursor: pointer;
 }
+
 popupHeader {
 	text-align: center;
 	padding: 5px 15px;
@@ -565,22 +575,22 @@ popupHeader {
 	text-align: left;
 	font-size: 20px;
 	color: #707070;
-	/* Style the Image Used to Trigger the Modal */
+/* Style the Image Used to Trigger the Modal */
 }
-/* Infocards */
 
-.tooltip {
+/* Infocards */
+.tooltip2 {
 	color: #707070;
 	text-decoration: underline;
 	cursor: help;
 	position: relative;
 }
 
-.tooltip span[role=tooltip] {
+.tooltip2 span[role=tooltip] {
 	display: none;
 }
 
-.tooltip:hover span[role=tooltip] {
+.tooltip2:hover span[role=tooltip] {
 	display: block;
 	position: absolute;
 	bottom: 1em;
@@ -600,16 +610,17 @@ table.homeTask thead th {
 	padding: 5px 5px;
 	width: 80px;
 }
-table.homeTask td#taskName{
-	hyphens: auto; 
-	word-break: break-word; 
-	width: 200px; 
+
+table.homeTask td#taskName {
+	hyphens: auto;
+	word-break: break-word;
+	width: 200px;
 	cursor:pointer;
 }
-table.homeTask tr.tableTask:hover td{
+
+table.homeTask tr.tableTask:hover td {
 	font-weight: bold;
 }
-
 
 table.homeTask tbody td {
 	font-size: 20px;
@@ -622,59 +633,64 @@ table.homeTask tbody img {
 	height: 100px;
 	cursor: pointer;
 }
+
 .taskbox {
-    border-radius: -20px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-    margin: -150px -140px;
-    width: 278px;
-    height: 210px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 454;
-    padding: -5px -23px;
-    background: #F0F0F0;
-    border-bottom: 1px solid #dddddd;
+	border-radius: -20px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 10px 10px 15px silver;
+	margin: -130px -120px;
+	width: 278px;
+	height: 210px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: 454;
+	padding: -5px -23px;
+	background: #F0F0F0;
+	border-bottom: 1px solid #dddddd;
 }
+
 .taskbox1 {
-    border-radius: -20px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-    margin: -150px -140px;
-    width: 278px;
-    height: 210px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 454;
-    padding: -5px -23px;
-    background: #F0F0F0;
-    border-bottom: 1px solid #dddddd;
+	border-radius: -20px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 10px 10px 15px silver;
+	margin: -130px -120px;
+	width: 278px;
+	height: 210px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: 454;
+	padding: -5px -23px;
+	background: #F0F0F0;
+	border-bottom: 1px solid #dddddd;
 }
+
 .taskbox2 {
-    border-radius: -20px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-    margin: -150px -140px;
-    width: 278px;
-    height: 210px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 454;
-    padding: -5px -23px;
-    background: #F0F0F0;
-    border-bottom: 1px solid #dddddd;
+	border-radius: -20px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 10px 10px 15px silver;
+	margin: -130px -120px;
+	width: 278px;
+	height: 210px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: 454;
+	padding: -5px -23px;
+	background: #F0F0F0;
+	border-bottom: 1px solid #dddddd;
 }
+
 .taskbox3 {
-    border-radius: -20px 5px 0 0;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-    margin: -150px -140px;
-    width: 278px;
-    height: 210px;
-    cursor: pointer;
-    font-size: 20px;
-    font-weight: 454;
-    padding: -5px -23px;
-    background: #F0F0F0;
-    border-bottom: 1px solid #dddddd;
+	border-radius: -20px 5px 0 0;
+	overflow: hidden;
+	box-shadow: 10px 10px 15px silver;
+	margin: -130px -120px;
+	width: 278px;
+	height: 210px;
+	cursor: pointer;
+	font-size: 20px;
+	font-weight: 454;
+	padding: -5px -23px;
+	background: #F0F0F0;
+	border-bottom: 1px solid #dddddd;
 }
+

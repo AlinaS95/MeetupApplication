@@ -24,7 +24,7 @@ import net.meetup.utils.JDBCUtils;
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50)
 
-public class UploadTaskServlet extends HttpServlet {
+public class AddTaskServlet extends HttpServlet {
 
 	// private static final String SAVE_DIR=*pictures*; //this is our folder name
 
@@ -46,7 +46,7 @@ public class UploadTaskServlet extends HttpServlet {
 		
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
-		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\tasks\\"
+		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\"
 				+ File.separator + fileName;
 		File fileSaveDir = new File(savePath);
 

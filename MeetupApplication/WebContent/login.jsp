@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-	<%@page import="net.meetup.usermanagement.model.common"%>
+<%@page import="net.meetup.usermanagement.model.common"%>
 <!DOCTYPE html>
 <html>
 <head>

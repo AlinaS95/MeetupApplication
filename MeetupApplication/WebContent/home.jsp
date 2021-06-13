@@ -78,13 +78,13 @@
 								<img src="pictures/navigation.png"
 									style="width: 50px; height: 50px" alt="Menu">
 							</button></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"><dfn
-								class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"
+						style="font-weight: bold"><dfn class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
-					<li><a href="list.jsp?wID=${login.WID}"
-						style="font-weight: bold"><dfn class="tooltip">
+					<li><a href="list.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								List <span role="tooltip" style="font-weight: normal">Here
 									you can find your tasks and create them</span>
 							</dfn></a></li>
@@ -548,20 +548,20 @@
 				popup.classList.toggle("show");
 			}
 		</script> <script>
-				var startbutton = document.getElementById("start"), dialog = document
-						.getElementById('dialog'), Abbruch = document
-						.getElementById("Abbruch");
-				startbutton.addEventListener('click', zeigeFenster);
-				Abbruch.addEventListener('click', schließeFenster);
+			var startbutton = document.getElementById("start"), dialog = document
+					.getElementById('dialog'), Abbruch = document
+					.getElementById("Abbruch");
+			startbutton.addEventListener('click', zeigeFenster);
+			Abbruch.addEventListener('click', schließeFenster);
 
-				function zeigeFenster() {
-					dialog.showModal();
-				}
+			function zeigeFenster() {
+				dialog.showModal();
+			}
 
-				function schließeFenster() {
-					dialog.close();
-				}
-			</script> <!-- Watch --> <script>
+			function schließeFenster() {
+				dialog.close();
+			}
+		</script> <!-- Watch --> <script>
 				'use strict';
 				(function() {
 					function uhrzeit() {

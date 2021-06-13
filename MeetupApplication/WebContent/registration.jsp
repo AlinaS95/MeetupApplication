@@ -61,6 +61,7 @@
 		</form>
 		<a class="buttonL" href="login.jsp">Already a member?</a>
 	</div>
+	<br><br>
 	<script>
 		function singleSelectChangeText() {
 			//Getting Value

@@ -24,7 +24,7 @@ import net.meetup.utils.JDBCUtils;
 		maxFileSize = 1024 * 1024 * 10, // 10MB
 		maxRequestSize = 1024 * 1024 * 50)
 
-public class UploadPostServlet extends HttpServlet {
+public class AddPostServlet extends HttpServlet {
 
 	// private static final String SAVE_DIR=*pictures*; //this is our folder name
 
