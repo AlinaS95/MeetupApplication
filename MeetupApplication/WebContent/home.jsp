@@ -204,6 +204,90 @@
 			</script>
 		</div>
 	</div>
+	<!-- Pop-Up-Window New Task -->
+	<div id="add_task" class="navigation_addBlock">
+		<!-- Window content -->
+		<div class="popupBlock">
+			<div class="popupHeader">
+				Add new Task <span
+					onclick="document.getElementById('add_task').style.display='none'
+					"
+					class="close" title="Schließen">&times;</span>
+			</div>
+			<div class="popupBody_list">
+				<div class="popupInfo">
+					<form action="UploadTask" method="post"
+						enctype="multipart/form-data">
+						<div>
+							<label>Title</label> <input type="text" name="taskName"
+								required="required" /> <input type="hidden" name="wID"
+								value="${login.WID}" />
+						</div>
+						<div>
+							<label>Description</label>
+							<textarea name="description"></textarea>
+						</div>
+						<div>
+							<label>Due Date</label> <input type="date" name="dueDate"
+								style="margin-left: 33px;" required="required">
+						</div>
+						<div>
+							<label>Status</label> <select name="taskStatus"
+								style="margin-left: -2px">
+								<option selected="">Select the category</option>
+								<option value="To do">To do</option>
+								<option value="In Progress">In Progress</option>
+								<option value="Done">Done</option>
+							</select>
+						</div>
+						<div>
+							<label>Assignee</label> <select name="userSID"
+								style="margin-left: -2px" id="assignee"
+								onchange="singleSelectChangeText()" required="required">
+								<option value="" disabled selected>Select the assignee</option>
+								<%
+									try {
+										String wID = request.getParameter("wID");
+										Class.forName("com.mysql.cj.jdbc.Driver");
+										Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+										Statement st = con.createStatement();
+										String sql = "SELECT * FROM user WHERE user.wID=" + wID;
+										ResultSet rs = st.executeQuery(sql);
+										int i = 0;
+										while (rs.next()) {
+											String userID = rs.getString("userID");
+											String firstName = rs.getString("firstName");
+								%>
+								<option value="<%=userID%>"><%=firstName%></option>
+								<%
+									}
+									} catch (Exception e) {
+										out.println(e);
+									}
+								%>
+							</select> <input id="selectAssignee" type="hidden" name="assignee">
+						</div>
+						<div>
+							<label>Internal Inquiries</label> <input type="text"
+								name="internalInquiries" />
+						</div>
+
+						<div>
+							<label>Attachment</label> <input type="file"
+								id="file-upload-button" name="file" required="required" />
+						</div>
+
+						<div>
+							<label>Completion in %</label> <input type="number"
+								name="completion" required="required" />
+						</div>
+
+						<button type="submit">Save</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<script>
 		function singleSelectChangeText() {
 			//Getting Value
@@ -562,25 +646,25 @@
 				dialog.close();
 			}
 		</script> <!-- Watch --> <script>
-				'use strict';
-				(function() {
-					function uhrzeit() {
-						var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
-								.getMinutes(), s = jetzt.getSeconds();
-						m = fuehrendeNull(m);
-						s = fuehrendeNull(s);
-						document.getElementById('uhr').innerHTML = h + ':' + m
-								+ ':' + s;
-						setTimeout(uhrzeit, 500);
-					}
+			'use strict';
+			(function() {
+				function uhrzeit() {
+					var jetzt = new Date(), h = jetzt.getHours(), m = jetzt
+							.getMinutes(), s = jetzt.getSeconds();
+					m = fuehrendeNull(m);
+					s = fuehrendeNull(s);
+					document.getElementById('uhr').innerHTML = h + ':' + m
+							+ ':' + s;
+					setTimeout(uhrzeit, 500);
+				}
 
-					function fuehrendeNull(zahl) {
-						zahl = (zahl < 10 ? '0' : '') + zahl;
-						return zahl;
-					}
-					document.addEventListener('DOMContentLoaded', uhrzeit);
-				}());
-			</script>
+				function fuehrendeNull(zahl) {
+					zahl = (zahl < 10 ? '0' : '') + zahl;
+					return zahl;
+				}
+				document.addEventListener('DOMContentLoaded', uhrzeit);
+			}());
+		</script>
 	</div>
 	</div>
 	</div>

@@ -272,7 +272,7 @@
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries" required="required" />
+								name="internalInquiries"/>
 						</div>
 
 						<div>
