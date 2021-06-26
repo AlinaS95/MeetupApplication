@@ -338,6 +338,7 @@
 		</div>
 	</div>
 
+	<!-- main content-->
 	<div class="background2">
 		<br>
 		<div class="backIcon">

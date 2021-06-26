@@ -21,6 +21,8 @@
 <script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="socialmedia.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<!--Search Tasks -->
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {
@@ -45,6 +47,8 @@
 </head>
 <body>
 	<div class="background1">
+
+		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -58,6 +62,8 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
+
+			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
@@ -74,6 +80,8 @@
 			</div>
 			<br>
 		</div>
+
+		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
 				<ul>
@@ -112,6 +120,8 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
+
+				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
@@ -128,6 +138,7 @@
 				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
 			<hr>
 
+			<!-- second menu -->
 			<ul class="navMenu">
 				<li><img src="pictures/home.png" height="40" width="40"
 					hspace="1" vspace="1" alt="home"><a
@@ -207,6 +218,7 @@
 			</script>
 		</div>
 	</div>
+
 	<!-- Pop-Up-Window New Task -->
 	<div id="add_task" class="navigation_addBlock">
 		<!-- Window content -->
@@ -272,7 +284,7 @@
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
+								name="internalInquiries" />
 						</div>
 
 						<div>
@@ -342,19 +354,13 @@
 		</div>
 	</div>
 
+	<!-- main content-->
 	<div class="background2">
 		<br>
 		<div class="header2">Social Media Schedule</div>
 		<div class="socialmedia_navigation">
 			<nav>
 				<ul>
-					<li><a class="sortPosts"
-						onclick="document.getElementById('posts_sort').style.display='block'"
-						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
-					<li><a class="filterDate"
-						onclick="document.getElementById('date_filter').style.display='block'"
-						style="width: auto;"><img src="pictures/filter.png"
-							alt="Settings">Filter</a></li>
 					<li><a class="socialmediaPopup"
 						onclick="document.getElementById('add_post').style.display='block'"
 						style="width: auto;"><img src="pictures/add.png" alt="Add">New
@@ -379,8 +385,31 @@
 						<form action="UploadPost" method="post"
 							enctype="multipart/form-data">
 							<div>
-								<label>Person</label> <input type="text" name="person"
-									required="required" />
+								<label>Person</label> <select name="userSID"
+									style="margin-left: -2px" id="person"
+									onchange="singleSelectChangeText2()" required="required">
+									<option value="" disabled selected>Select person</option>
+									<%
+										try {
+											String wID = request.getParameter("wID");
+											Class.forName("com.mysql.cj.jdbc.Driver");
+											Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+											Statement st = con.createStatement();
+											String sql = "SELECT * FROM user WHERE user.wID=" + wID;
+											ResultSet rs = st.executeQuery(sql);
+											int i = 0;
+											while (rs.next()) {
+												String userID = rs.getString("userID");
+												String firstName = rs.getString("firstName");
+									%>
+									<option value="<%=userID%>"><%=firstName%></option>
+									<%
+										}
+										} catch (Exception e) {
+											out.println(e);
+										}
+									%>
+								</select> <input id="selectPerson" type="hidden" name="person" required>
 							</div>
 							<div>
 								<label>Channel</label> <select name="channel">
@@ -425,6 +454,17 @@
 				</div>
 			</div>
 		</div>
+		<script>
+		function singleSelectChangeText2() {
+			//Getting Value
+
+			var selObj = document.getElementById("person");
+			var selValue = selObj.options[selObj.selectedIndex].text;
+
+			//Setting Value
+			document.getElementById("selectPerson").value = selValue;
+		}
+	</script>
 
 		<hr>
 		<br>
@@ -479,8 +519,7 @@
 					href="editPost.jsp?id=<%=rs.getString("id")%>"><img
 						src="pictures/settings.png" alt="Settings"
 						style="width: 35px; height: 35px; position: absolute; margin: -17px -45px;"></a>
-					<a
-					onclick="document.getElementById('delete_info').style.display='block'"
+					<a href="deletePost.jsp?id=<%=rs.getString("id")%>"
 					<%=rs.getString("id")%> style="width: auto;"><img
 						src="pictures/delete2.png" alt="Delete post"
 						style="width: 30px; height: 30px; position: absolute; margin: -17px 5px;" />
@@ -497,54 +536,6 @@
 		<br>
 		<hr>
 		<br>
-
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="socialmedia_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Post <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM socialmedia";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String id = rs.getString("id");
-							String person = rs.getString("person");
-							String channel = rs.getString("channel");
-							String category = rs.getString("category");
-							String filename = rs.getString("filename");
-							String status = rs.getString("status");
-							LocalDate postDate = rs.getDate("postDate").toLocalDate();
-							String text = rs.getString("text");
-				%>
-				<div class="popupBody_SocialMedia">
-
-					<div class="popupInfo">
-						<input type="text" name="id" value='<%=rs.getString("id")%>' /> <a
-							class="aButtons" href="deletePost.jsp?id=<%=rs.getString("id")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
 	</div>
 </body>
 </html>
