@@ -356,13 +356,6 @@
 		<div class="list_navigation">
 			<nav>
 				<ul>
-					<li><a class="sortPosts"
-						onclick="document.getElementById('posts_sort').style.display='block'"
-						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
-					<li><a class="filterDate"
-						onclick="document.getElementById('date_filter').style.display='block'"
-						style="width: auto;"><img src="pictures/filter.png"
-							alt="Settings">Filter</a></li>
 					<li><a class="socialmediaPopup"
 						onclick="document.getElementById('add_task').style.display='block'"
 						style="width: auto;"><img src="pictures/add.png" alt="Add">New
@@ -382,9 +375,9 @@
 					<th style="width: 150px">Due Date</th>
 					<th style="width: 150px">Status</th>
 					<th style="width: 150px">Assignee</th>
-					<th style="width: 200px">Internal Inquiries</th>
+					<th style="hyphens: auto; word-break: break-word;width: 200px">Internal Inquiries</th>
 					<th style="width: 150px">Attachment</th>
-					<th style="width: 150px">Completion in %</th>
+					<th style="hyphens: auto; word-break: break-word;width: 150px">Completion in %</th>
 					<th style="width: 200px">Settings</th>
 				</tr>
 			</thead>
@@ -413,8 +406,8 @@
 		<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
 		<table class="list">
 			<tr>
-				<td style="width: 200px;"><%=taskName%></td>
-				<td style="width: 200px;"><%=description%></td>
+				<td style="hyphens: auto; word-break: break-word;width: 200px;"><%=taskName%></td>
+				<td style="hyphens: auto; word-break: break-word;width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
 				<td style="width: 150px;"><%=taskStatus%></td>
 				<td style="width: 150px;"><%=assignee%></td>
@@ -444,8 +437,8 @@
 				out.println(e);
 			}
 		%>
-		<hr>
 		<br>
+		<hr>
 	</div>
 </body>
 </html>

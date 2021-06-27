@@ -14,8 +14,8 @@ body{
 	height: 520px;
 	background: #F0F0F0;
 	color: black;
-	top: 40%;
-	left: 70%;
+	top: 35%;
+	left: 60%;
 	position: absolute;
 	transform: translate(-50%,-50%);
 	box-sizing: border-box;
@@ -107,9 +107,8 @@ h1{
 
 .logo img{
 	width: 25%;
-	left: 60%;
-	right: 50%;
+	right: 52%;
 	border-radius: 90px;
-	margin: 120px;
-	margin-top: 140px;
+	margin-top: 170px;
+	position: absolute;
 }

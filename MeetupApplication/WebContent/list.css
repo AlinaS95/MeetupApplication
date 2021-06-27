@@ -63,7 +63,6 @@ table.list {
 	border-radius: 5px 5px 0 0;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-	margin: 0px 110px;
 }
 
 table.list thead th {
@@ -84,9 +83,8 @@ table.list tbody td {
 }
 
 table.list tbody img {
-	width: 100px;
-	height: 100px;
-	cursor: pointer;
+	width: 85px;
+	height: 85px;
 }
 
 .popupHeader {

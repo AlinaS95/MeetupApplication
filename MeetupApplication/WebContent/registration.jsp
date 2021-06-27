@@ -59,9 +59,9 @@
 				required="required" /> <input type="submit" name="btn_register"
 				value="Register">
 		</form>
-		<a class="buttonL" href="login.jsp">Already a member?</a>
+		<a class="buttonL" href="login.jsp">Already a member?</a><br><br>
 	</div>
-	<br><br>
+
 	<script>
 		function singleSelectChangeText() {
 			//Getting Value
