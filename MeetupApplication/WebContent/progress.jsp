@@ -412,7 +412,7 @@ window.onload = function() {
 	<h4>This Project is</h4>
 	<a style="position: absolute; margin: -48px 135px" class="workspace">${login.workspace}</a>
 
-
+<!-- Task Counter -->
 	<div class="box1">
 		New Task<br> <a> <%
  	try {
