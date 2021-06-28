@@ -16,17 +16,6 @@
 	rel="stylesheet">
 <link href="${pageContext.request.contextPath}/assets/css/style.css"
 	rel="stylesheet">
-	
-<!-- scripts -->
-
-<!--[if lt IE 9 ]>
-<script
-	 src="${pageContext.request.contextPath}/assets/script/html5shiv.min.js"
-	 type="text/javascript"></script>
-<script
-	 src="${pageContext.request.contextPath}/assets/script/respond.min.js"
-	 type="text/javascript"></script>
-<![endif]-->
 
 <script
 	src="${pageContext.request.contextPath}/assets/script/jquery-1.12.4.min.js"

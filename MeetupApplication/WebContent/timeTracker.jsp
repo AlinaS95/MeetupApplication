@@ -20,7 +20,6 @@
 <link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="timeTracker.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
 <script type="text/javascript" src="list.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
