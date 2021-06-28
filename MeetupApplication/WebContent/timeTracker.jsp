@@ -20,7 +20,6 @@
 <link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="timeTracker.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="list.js"></script>
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
@@ -234,8 +233,8 @@
 						enctype="multipart/form-data">
 						<div>
 							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
+								required="required" style="margin-left: 55px" /> <input
+								type="hidden" name="wID" value="${login.WID}" />
 						</div>
 						<div>
 							<label>Description</label>
@@ -243,11 +242,11 @@
 						</div>
 						<div>
 							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
+								style="margin-left: 18px;" required="required">
 						</div>
 						<div>
 							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
+								style="margin-left: 45px">
 								<option selected="">Select the category</option>
 								<option value="To do">To do</option>
 								<option value="In Progress">In Progress</option>
@@ -256,7 +255,7 @@
 						</div>
 						<div>
 							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
+								style="margin-left: 20px" id="assignee"
 								onchange="singleSelectChangeText()" required="required">
 								<option value="" disabled selected>Select the assignee</option>
 								<%
@@ -288,13 +287,15 @@
 
 						<div>
 							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
+								style="margin-left: -1px" id="file-upload-button" name="file"
+								required="required" />
 						</div>
 
 						<div>
 							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
+								style="width: 50px" name="completion" required="required" />
 						</div>
+
 
 						<button type="submit">Save</button>
 					</form>

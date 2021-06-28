@@ -22,6 +22,7 @@
 
 	<div class="loginbox">
 		<h1>Create a Account</h1>
+		<br>
 		<form action="register" method="post" onsubmit="return validate();"
 			id="registerForm" enctype="multipart/form-data">
 			<p>*First Name</p>
@@ -45,7 +46,8 @@
 				<option value="1">Marketing</option>
 				<option value="2">Website</option>
 				<option value="3">IT</option>
-			</select> <input id="myWorkspace" type="hidden" name="workspace"><br><br>
+			</select> <input id="myWorkspace" type="hidden" name="workspace"><br>
+			<br>
 
 			<p>*Password</p>
 			<input type="password" id="password" name="password"
@@ -59,7 +61,8 @@
 				required="required" /> <input type="submit" name="btn_register"
 				value="Register">
 		</form>
-		<a class="buttonL" href="login.jsp">Already a member?</a><br><br>
+		<a class="buttonL" href="login.jsp">Already a member?</a><br>
+		<br>
 	</div>
 
 	<script>

@@ -1,20 +1,24 @@
 @charset "ISO-8859-1";
 
-body{
+* {
+	font-size: 20px;
+	font-family: Times New Roman;
+}
+
+body {
 	margin: 0;
 	padding: 0;
 	background: #F0F0F0;
 	background-size: cover;
 	background-position: center;
-	font-family: Times New Roman;
 }
 
-.loginbox{
+.loginbox {
 	width: 320px;
 	height: 520px;
 	background: #F0F0F0;
 	color: black;
-	top: 35%;
+	top: 32%;
 	left: 60%;
 	position: absolute;
 	transform: translate(-50%,-50%);
@@ -23,89 +27,73 @@ body{
 	font-family: Times New Roman;
 }
 
-h1{
+h1 {
 	margin: 0;
 	padding: 0 0 20px;
 	text-align: center;
-	font-size: 22px;
+	font-size: 25px;
 }
 
-.loginbox p{
+.loginbox p {
 	margin: 0;
 	padding: 0;
 	font-weight: bold;
 }
 
-.loginbox input{
-	width: 100%;
+.loginbox input {
 	margin-bottom: 20px;
-	font-family: Times New Roman;	
 }
 
-.loginbox input[type="text"], input[type="password"]
-{
+.loginbox input[type="text"], input[type="password"] {
 	border: none;
 	border-bottom: 1px solid #fff;
 	background: transparent;
 	outline: none;
 	height: 40px;
 	color: #000000;
-	font-size: 16px;
-	font-family: Times New Roman;
 }
 
-.loginbox input[type="submit"],[type="reset"]
-{
+.loginbox input[type="submit"],[type="reset"] {
 	border: none;
 	height: 40px;
 	background: #fff;
 	color: black;
-	font-size: 18px;
 	border-radius: 20px;
-	font-family: Times New Roman;
+	padding: 10px 88px;
 }
 
-.loginbox input[type="submit"]:hover,[type="reset"]:hover
-{
+.loginbox input[type="submit"]:hover,[type="reset"]:hover {
 	cursor: pointer;
 	background: #E3E0E0;
 	color: black;
 }
 
-
-
-.loginbox a{
+.loginbox a {
 	text-decoration: none;
-	font-size: 12px;
 	line-height: 20px;
 	color: black;
 }
 
 .loginbox a:hover {
 	color: darkgrey;
-
 }
 
-.loginbox .buttonL 
-{
+.loginbox .buttonL {
 	border: none;
 	height: 40px;
 	background: #fff;
 	color: black;
-	font-size: 18px;
 	border-radius: 20px;
-	font-family: Times New Roman;
-	padding: 10px 59px;
+	padding: 10px 50px;
 }
 
-.loginbox .buttonL:hover
-{
+.loginbox .buttonL:hover {
 	cursor: pointer;
 	background: #E3E0E0;
 	color: black;
 }
 
-.logo img{
+.logo img {
 	width: 25%;
 	right: 52%;
 	border-radius: 90px;

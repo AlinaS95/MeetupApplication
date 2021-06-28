@@ -743,7 +743,7 @@ ul.navMenu li a:hover{
 .popupBody_list input {
 	border: none;
 	border-radius: 5px;
-	margin: 5px 55px;
+	margin: 5px 5px;
 }
 
 .popupBody_list textarea:focus {
@@ -754,11 +754,12 @@ ul.navMenu li a:hover{
 }
 
 .popupBody_list textarea {
-	margin-left: 2px;
+	border: none;
+	width: 58%;
 }
 
 .popupBody_list input#file-upload-button {
-	font-size: 19px;
+	font-size: 18px;
 }
 
 .popupBody_list button {

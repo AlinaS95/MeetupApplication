@@ -197,6 +197,7 @@ table.socialmedia tbody img {
 
 .popupBody_SocialMedia textarea {
 	margin-left: 77px;
+	border:none;
 }
 
 .popupBody_SocialMedia input#file-upload-button {

@@ -142,7 +142,7 @@ table.list tbody img {
 .popupBody_list input {
 	border: none;
 	border-radius: 5px;
-	margin: 5px 55px;
+	margin: 5px 5px;
 }
 
 .popupBody_list textarea:focus {

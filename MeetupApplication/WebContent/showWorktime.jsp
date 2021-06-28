@@ -17,7 +17,6 @@
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="stylesheet" type="text/css" href="timeTracker.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {

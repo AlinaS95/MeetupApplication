@@ -44,7 +44,7 @@
 </head>
 <body>
 	<div class="background1">
-	
+
 		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
@@ -59,7 +59,7 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
-			
+
 			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
@@ -77,7 +77,7 @@
 			</div>
 			<br>
 		</div>
-		
+
 		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
@@ -117,7 +117,7 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
-				
+
 				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
@@ -231,8 +231,8 @@
 						enctype="multipart/form-data">
 						<div>
 							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
+								required="required" style="margin-left: 55px" /> <input
+								type="hidden" name="wID" value="${login.WID}" />
 						</div>
 						<div>
 							<label>Description</label>
@@ -240,11 +240,11 @@
 						</div>
 						<div>
 							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
+								style="margin-left: 18px;" required="required">
 						</div>
 						<div>
 							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
+								style="margin-left: 45px">
 								<option selected="">Select the category</option>
 								<option value="To do">To do</option>
 								<option value="In Progress">In Progress</option>
@@ -253,7 +253,7 @@
 						</div>
 						<div>
 							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
+								style="margin-left: 20px" id="assignee"
 								onchange="singleSelectChangeText()" required="required">
 								<option value="" disabled selected>Select the assignee</option>
 								<%
@@ -280,18 +280,20 @@
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
+								name="internalInquiries" />
 						</div>
 
 						<div>
 							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
+								style="margin-left: -1px" id="file-upload-button" name="file"
+								required="required" />
 						</div>
 
 						<div>
 							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
+								style="width: 50px" name="completion" required="required" />
 						</div>
+
 
 						<button type="submit">Save</button>
 					</form>
@@ -375,9 +377,11 @@
 					<th style="width: 150px">Due Date</th>
 					<th style="width: 150px">Status</th>
 					<th style="width: 150px">Assignee</th>
-					<th style="hyphens: auto; word-break: break-word;width: 200px">Internal Inquiries</th>
+					<th style="hyphens: auto; word-break: break-word; width: 200px">Internal
+						Inquiries</th>
 					<th style="width: 150px">Attachment</th>
-					<th style="hyphens: auto; word-break: break-word;width: 150px">Completion in %</th>
+					<th style="hyphens: auto; word-break: break-word; width: 150px">Completion
+						in %</th>
 					<th style="width: 200px">Settings</th>
 				</tr>
 			</thead>
@@ -406,8 +410,8 @@
 		<input type="hidden" name="wID" value='<%=rs.getString("wID")%>' />
 		<table class="list">
 			<tr>
-				<td style="hyphens: auto; word-break: break-word;width: 200px;"><%=taskName%></td>
-				<td style="hyphens: auto; word-break: break-word;width: 200px;"><%=description%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
+				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
 				<td style="width: 150px;"><%=taskStatus%></td>
 				<td style="width: 150px;"><%=assignee%></td>
