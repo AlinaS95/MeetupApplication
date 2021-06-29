@@ -370,6 +370,7 @@
 			window.onload = datum
 		</script> <main> <br>
 
+		<!-- Box short messages -->
 		<div class="box1">
 			Short Messages: <br> <br>
 			<table class="list">
@@ -397,9 +398,9 @@
 			<input type="hidden" name="inboxID"
 				value='<%=rs.getString("inboxID")%>' />
 			<table class="homeTask">
-				<tr class="tableTask" onclick="inbox()">
-					<td id="title"><%=title%></td>
-					<td style="width: 150px;"><%=dueDate%></td>
+				<tr class="tableTask">
+					<td id="title"><a href="inbox.jsp?wID=${login.WID}" style="text-decoration: none"><%=title%></a></td>
+					<td style="width: 150px;"><a href="inbox.jsp?wID=${login.WID}" style="text-decoration: none"><%=dueDate%></a></td>
 				</tr>
 				</tbody>
 			</table>
@@ -411,6 +412,7 @@
 			%>
 		</div>
 
+		<!-- Box tasks -->
 		<div class="box2">
 			Most recently edited tasks: <br> <br>
 			<table class="list">
@@ -440,10 +442,13 @@
 			<input type="hidden" name="taskID"
 				value='<%=rs.getString("taskID")%>' />
 			<table class="homeTask">
-				<tr class="tableTask" onclick="list()">
-					<td id="filename"><img src="pictures/<%=filename%>" /></td>
-					<td id="taskName"><%=taskName%></td>
-					<td style="width: 150px;"><%=dueDate%></td>
+				<tr class="tableTask">
+					<td id="filename"><a href="list.jsp?wID=${login.WID}"><img
+							src="pictures/<%=filename%>" /></a></td>
+					<td id="taskName"><a style="text-decoration: none"
+						href="list.jsp?wID=${login.WID}"><%=taskName%></a></td>
+					<td style="width: 200px;"><a style="text-decoration: none"
+						href="list.jsp?wID=${login.WID}"><%=dueDate%></a></td>
 				</tr>
 				</tbody>
 			</table>
@@ -454,19 +459,22 @@
 				}
 			%>
 		</div>
+
+		<!-- Box notes -->
 		<div class="box3">
-			<a
+			<a style="margin-right: 160px">Notes:</a><a
 				onclick="document.getElementById('add_note').style.display='block'"
-				style="width: auto;"><img src="pictures/add.png" alt="Add">Notes</a>
-			<br> <br>
+				style="width: auto;"><img src="pictures/add.png" alt="Add"></a><br>
+			<br>
 			<table class="list">
 				<thead>
 					<tr>
-						<th style="width: 350px">Note</th>
-						<th style="width: 400px">Date</th>
+						<th style="width: 180px">Note</th>
+						<th style="width: 150px">Date</th>
 					</tr>
 				</thead>
 			</table>
+			<hr>
 			<%
 				try {
 					Class.forName("com.mysql.cj.jdbc.Driver");
@@ -481,19 +489,18 @@
 						LocalDate date = rs.getDate("date").toLocalDate();
 			%>
 			<input type="hidden" name="id" value='<%=rs.getString("id")%>' />
-			<table class="list">
-				<tr>
-					<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=noteTitle%></td>
-					<td style="width: 200px;"><%=date%></td>
+			<table class="homeTask">
+				<tr class="tableTask">
+					<td id="taskName"
+						style="hyphens: auto; word-break: break-word; width: 180px;"><%=noteTitle%></td>
+					<td style="width: 150px;"><%=date%></td>
 					<td style="width: 10px;"><a
 						href="editNote.jsp?id=<%=rs.getString("id")%>"><img
 							src="pictures/settings.png" alt="Settings"
-							style="width: 25px; height: 25px; position: absolute; margin: -14px -37px;"></a>
-						<a
-						onclick="document.getElementById('delete_info').style.display='block'"
-						<%=rs.getString("id")%> style="width: auto;"><img
-							src="pictures/delete2.png" alt="Delete post"
-							style="width: 25px; height: 25px; position: absolute; margin: -17px -8px;" />
+							style="width: 35px; height: 35px; position: absolute; margin: -18px -15px;"></a>
+						<a href="deleteNote.jsp?id=<%=rs.getString("id")%>"><img
+							src="pictures/delete2.png" alt="Delete Note"
+							style="width: 25px; height: 25px; position: absolute; margin: -14px 25px;" />
 					</a></td>
 				</tr>
 				</tbody>
@@ -527,7 +534,7 @@
 							</div>
 							<div>
 								<label>Date</label> <input type="date" name="date"
-									style="margin-left: 20px;" required="required">
+									style="margin-left: 57px;" required="required">
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -536,57 +543,16 @@
 			</div>
 		</div>
 
-		<!-- Pop-Up-Window Delete Note -->
-		<div id="delete_info" class="note_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Note <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM notes";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String id = rs.getString("id");
-							String noteTitle = rs.getString("noteTitle");
-							LocalDate date = rs.getDate("date").toLocalDate();
-				%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="id" value='<%=rs.getString("id")%>' /> <a
-							class="aButtons" href="deleteNote.jsp?id=<%=rs.getString("id")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
-
 		<h1 class="separator">Favorites</h1>
 
 		<form class="homeForm">
 			<p class="choice">
-				<a href="list.jsp?wID=${login.WID}"></a><button class="home" id="win">Add
-						Task</button> <a href="inbox.jsp?wID=${login.WID}"><button class="home" id="and">Inbox</button></a>
-			
-				<button class="home" id="mac" onclick="location.href='profile.jsp';">Profile</button>
+				<a class="win" style="text-decoration: none"
+					href="list.jsp?wID=${login.WID}">Add Task</a><a class="and"
+					style="text-decoration: none" href="inbox.jsp?wID=${login.WID}">Inbox</a>
+
+				<a style="text-decoration: none" class="mac"
+					href="profile.jsp?wID=${login.WID}">Profile</a>
 			</p>
 		</form>
 

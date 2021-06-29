@@ -13,7 +13,7 @@
 <title>Notes</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="list.css">
-<link rel="stylesheet" type="text/css" href="editPost.css">
+<link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
 <script>
@@ -372,7 +372,7 @@
 						value='<%=rs.getString("noteTitle")%>' />
 				</div>
 				<div>
-					<label style="margin-left: -105px">Date</label><input type="date"
+					<label style="margin-left: -70px">Date</label><input type="date"
 						name="date" value='<%=rs.getDate("date").toLocalDate()%>' />
 				</div>
 				<a class="aButtons" href="home.jsp">Back</a>

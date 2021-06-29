@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {
@@ -398,12 +397,12 @@
 						type="text" name="assignee" value='<%=rs.getString("assignee")%>' />
 				</div>
 				<div>
-					<label style="margin-left: -40px">Internal Inquiries</label><input
+					<label style="margin-left: -105px">Internal Inquiries</label><input
 						type="text" name="internalInquiries"
 						value='<%=rs.getString("internalInquiries")%>' />
 				</div>
 				<div>
-					<label style="margin-left: -40px">Completion in %</label><input
+					<label style="margin-left: -102px">Completion in %</label><input
 						type="number" name="completion"
 						value='<%=rs.getString("completion")%>' />
 				</div>

@@ -2,15 +2,16 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.*,java.util.*"%>
 <%
+	String userSID = request.getParameter("userSID");
 	String id = request.getParameter("id");
-try {
-	Class.forName("com.mysql.jdbc.Driver");
-	Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-	Statement st = conn.createStatement();
-	int i = st.executeUpdate("DELETE FROM notes WHERE id=" + id);
-	request.getRequestDispatcher("home.jsp").forward(request, response);
-} catch (Exception e) {
-	System.out.print(e);
-	e.printStackTrace();
-}
+	try {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+		Statement st = conn.createStatement();
+		int i = st.executeUpdate("DELETE FROM notes WHERE id=" + id);
+		request.getRequestDispatcher("deleteNote2.jsp").forward(request, response);
+	} catch (Exception e) {
+		System.out.print(e);
+		e.printStackTrace();
+	}
 %>

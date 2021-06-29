@@ -412,15 +412,6 @@ nav ul li {
 	animation-duration: 0.4s
 }
 
-/* Schlieﬂ-Button */
-.close {
-	color: #707070;
-	float: right;
-	font-size: 30px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
 .popupBlock button {
 	font-size: 20px;
 	background: #fff;
@@ -439,62 +430,6 @@ nav ul li {
 	border-color: #E3E0E0;
 }
 
-.popupHeader {
-	text-align: center;
-	padding: 5px 15px;
-	color: #707070;
-	font-size: 28px;
-	letter-spacing: 2px;
-}
-
-.popupHeader img {
-	width: 35px;
-	height: 35px;
-	margin-bottom: -10px;
-}
-
-.popupBody {
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding: 2px 15px;
-	text-align: left;
-	font-size: 20px;
-	color: #707070;
-	/* Style the Image Used to Trigger the Modal */
-}
-
-.popupBody button {
-    margin: 2px 60px;
-}
-
-.popupBody img {
-	width: 55px;
-	height: 55px;
-	position: absolute;
-}
-
-.popupFooter button {
-    margin: 5px;
-    border-width: 5px;
-}
-
-.popupBody textarea {
-	background-color: white;
-	border: none;
-	border-radius: 5px;
-	height: 30px;
-}
-
-.popupBody textarea:focus {
-	border: none;
-	border-radius: 5px;
-}
-
-.popupInfo img {
-	width:20px;
-	height: 20px;
-	margin-top: -15px;
-}
 /* Infocards */
 
 .tooltip2 {
@@ -559,8 +494,6 @@ h1 {
 	letter-spacing: 40px;
 }
 
-
-
 .welcome {
 	text-align: left;
 	background-color: #F0F0F0;
@@ -611,21 +544,19 @@ form.homeForm {
 }
 
 .box3 img {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
-    margin-right: -95%;
-    margin-top: -4px;
-    margin-bottom: 0em;
-    margin-left: 32px;
+    margin-right: -47%;
+    margin-top: -10px;
 }
 
 
 p.choice {
-	margin-top: -3em;
+	margin-top: -1em;
 }
 
-form .choice button {
+form .choice a {
     position: relative;
     right: 10px;
     margin: 1em;
@@ -637,6 +568,65 @@ form .choice button {
     border-radius: 3px;
     cursor: pointer;
     transition: all ease 2s;
+}
+
+.choice a:hover,
+.choice a:active {
+	outline: none;
+	background: white;
+	color: #707070;
+}
+
+.choice a::before,
+.choice a::after {
+	position: absolute;
+	width: 115%;
+	height: 150px;
+	left: 0;
+	color: #707070;
+}
+
+.choice a::before {
+	content: " ";
+	top: -120px;
+	background: none center no-repeat transparent;
+	background-size: 30px 30px;
+	transition: all ease 1s;
+	transform: rotate(0deg);
+}
+
+.choice a:hover::before {
+	background-size: 80px 80px;
+	transform: rotate(360deg);
+}
+
+.choice a::after {
+	bottom: -520%;
+	transition: transform ease-in .5s, opacity ease-out 1s;
+}
+
+.win::after {
+	content: "Add a new Task ";
+	transform: translatex(-200%);
+	opacity: 0;
+}
+
+.win:hover::after {
+	transform: translatex(0);
+	opacity: 1;
+}
+
+
+.mac::after {
+	content: "Do you need a break?";
+	transform: translatex(200%);
+	opacity: 0;
+	transition: transform ease-in .5s, opacity ease-out 1s;
+}
+
+.mac:hover::after {
+	transform: translatex(0);
+	opacity: 1;
 }
 
 textarea:focus {
@@ -753,11 +743,12 @@ table.homeTask tbody td {
 	font-size: 20px;
 	font-weight: 450;
 	padding: 10px 5px;
+	cursor: pointer;
 }
 
 table.homeTask tbody img {
-	width: 50px;
-	height: 50px;
+	width: 40px;
+	height: 40px;
 	border-radius: 100%;
 	cursor: pointer;
 }
@@ -767,18 +758,6 @@ table.homeTask tbody img {
 	height: 45px;
 	border-radius: 100%;
 	margin: -30px -15px;
-}
-
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
-  to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity:1 ;}
 }
 
 .chip {
@@ -1004,46 +983,6 @@ nav .icon img {
 	background-color: rgba(0, 0, 0, 0.6);
 }
 
-/* Pop-Up-Window Content */
-.addBlock {
-	position: relative;
-	background-color: #F0F0F0;
-	margin: auto;
-	padding: 0px;
-	border: 1px solid #707070;
-	border-radius: 5px;
-	width: 30%;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
-		rgba(0, 0, 0, 0.19);
-	-webkit-animation-name: animatetop;
-	-webkit-animation-duration: 0.4s;
-	animation-name: animatetop;
-	animation-duration: 0.4s
-}
-
-/* Schlieﬂ-Button */
-.close {
-	color: #707070;
-	float: right;
-	font-size: 30px;
-	font-weight: bold;
-	cursor: pointer;
-}
-
-.popupHeader {
-	text-align: center;
-	padding: 5px 15px;
-	color: #707070;
-	font-size: 28px;
-	letter-spacing: 2px;
-}
-
-.popupHeader img {
-	width: 35px;
-	height: 35px;
-	margin-bottom: -10px;
-}
-
 .popupBody_note {
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -1122,19 +1061,6 @@ nav .icon img {
 	border-radius: 5px;
 	padding: 1px 5px;
 	cursor: pointer;
-	margin-left: 123px;
-	margin-top:  30px;
-}
-
-.popupInfo form.noteForm {
-	max-width: 800px;
-	height: auto;
-	box-sizing: border-box;
-	font-family: sans-serif;
-	color: white;
-	background: #F0F0F0;
-	margin: 1em auto -1em;
-	padding: 3em;
-	border-radius: 0 1em 1em;
-	box-shadow: 10px 10px 15px silver;
+	margin-left: 165px;
+	margin-top:  20px;
 }
