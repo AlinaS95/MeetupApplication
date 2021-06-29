@@ -359,11 +359,8 @@
 		</div>
 		<ul id="navigation">
 			<li><a onclick="myFunction()">All</a></li>
-			<p id="demo"></p>
-			<li><a href="news.html">Assigned by me</a></li>
-			<li><a href="infos.html">Assigned to me</a></li>
 		</ul>
-		<br> <br>
+		<br>
 
 
 		<!-- Messages -->
@@ -394,11 +391,11 @@
 					<div class="popupInfo">
 						<form action="UploadInbox" method="post">
 							<div>
-								<label>Assignee</label> <input type="text" name="assignee"
+								<label style="margin-left:20px">Assignee</label> <input type="text" name="assignee"
 									required="required" />
 							</div>
 							<div>
-								<label>Title</label> <input type="text" name="title"
+								<label style="margin-left:57px">Title</label> <input type="text" name="title"
 									required="required" />
 							</div>
 							<div>
@@ -406,12 +403,12 @@
 									required="required" />
 							</div>
 							<div>
-								<label>Workspace</label> <input type="text" name="workspace"
+								<label style="margin-left:5px">Workspace</label> <input type="text" name="workspace"
 									required="required" />
 							</div>
 							<div>
-								<label>Due Date</label> <input type="date" name="dueDate"
-									style="margin-left: 20px;" required="required">
+								<label style="margin-left: 18px;">Due Date</label> <input type="date" name="dueDate"
+									required="required">
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -461,11 +458,9 @@
 			<a href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 				src="pictures/settings.png" alt="Settings"
 				style="width: 25px; height: 25px; position: absolute; margin: -55px 200px;"></a>
-			<a
-				onclick="document.getElementById('delete_info').style.display='block'"
-				<%=rs.getString("inboxID")%> style="width: auto;"><img
+			<a href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 				src="pictures/delete2.png" alt="Delete post"
-				style="width: 15px; height: 15px; position: absolute; margin: -50px 170px;" />
+				style="width: 15px; height: 15px; position: absolute; margin: -50px 170px; cursor:pointer" />
 			</a>
 		</div>
 		<%
@@ -477,64 +472,6 @@
 		<br>
 		<hr>
 		<br>
-
-		<!-- Pop-Up-Window Delete Info -->
-		<div id="delete_info" class="navigation_addBlock">
-
-			<!-- Window content -->
-			<div class="addBlock">
-				<div class="popupHeader">
-					<img src="pictures/delete2.png" alt="Delete post"
-						style="width: 30px; height: 30px; margin: -4px -2px;" /> Delete
-					Post <span
-						onclick="document.getElementById('delete_info').style.display='none'
-					"
-						class="close" title="Schließen">&times;</span>
-				</div>
-				<%
-					try {
-						Class.forName("com.mysql.cj.jdbc.Driver");
-						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-						Statement st = con.createStatement();
-						String sql = "SELECT * FROM inbox";
-						ResultSet rs = st.executeQuery(sql);
-						int i = 0;
-						while (rs.next()) {
-							String inboxID = rs.getString("inboxID");
-							String assignee = rs.getString("assignee");
-							String title = rs.getString("title");
-							String description = rs.getString("description");
-							String workspace = rs.getString("workspace");
-							LocalDate dueDate = rs.getDate("dueDate").toLocalDate();
-				%>
-				<div class="popupBody_list">
-
-					<div class="popupInfo">
-						<input type="text" name="inboxID"
-							value='<%=rs.getString("inboxID")%>' /> <a class="aButtons"
-							href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>">Delete</a>
-						<br>
-					</div>
-				</div>
-				<%
-					}
-					} catch (Exception e) {
-						out.println(e);
-					}
-				%>
-			</div>
-		</div>
-
-		<div class="inboxbox1">
-			<br>
-			<h3>Friday Meeting: Project x at 10am</h3>
-			<p>
-				Hello Mr. Mustermann, <br>I would like to remind you that there
-				will be a meeting tomorrow at 10:00 am for project x. It would be
-				very nice if you bring all the necessary documents with you. <br>Until
-				then and best regards <br>Jana Podschaske
-			</p>
-		</div>
 
 	</div>
 

@@ -10,12 +10,13 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Tasks</title>
+<title>Inbox</title>
 <link name="viewport" content="width=device-width">
 <link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
+<!-- Search Tasks -->
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {
@@ -41,8 +42,8 @@
 	<div class="background1">
 		<div class="headliner_block">
 			<div class="logo">
-				<a href="home.jsp?wID=${login.WID}"><img src="pictures/meetup_logo.png"
-					alt="Home"></a>
+				<a href="home.jsp?wID=${login.WID}"><img
+					src="pictures/meetup_logo.png" alt="Home"></a>
 			</div>
 			<div class="firstBox">
 				<h3>
@@ -75,8 +76,8 @@
 								<img src="pictures/navigation.png"
 									style="width: 50px; height: 50px" alt="Menu">
 							</button></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"
-						style="font-weight: bold"><dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
@@ -199,210 +200,160 @@
 					dialog.close();
 				}
 			</script>
-		</div>
-	</div>
-	<!-- Pop-Up-Window New Task -->
-	<div id="add_task" class="navigation_addBlock">
-		<!-- Window content -->
-		<div class="popupBlock">
-			<div class="popupHeader">
-				Add new Task <span
-					onclick="document.getElementById('add_task').style.display='none'
+
+			<!-- Pop-Up-Window New Task -->
+			<div id="add_task" class="navigation_addBlock">
+				<!-- Window content -->
+				<div class="addBlock">
+					<div class="popupHeader">
+						Add new Task <span
+							onclick="document.getElementById('add_task').style.display='none'
 					"
-					class="close" title="Schließen">&times;</span>
-			</div>
-			<div class="popupBody_list">
-				<div class="popupInfo">
-					<form action="UploadTask" method="post"
-						enctype="multipart/form-data">
-						<div>
-							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
-						</div>
-						<div>
-							<label>Description</label>
-							<textarea name="description"></textarea>
-						</div>
-						<div>
-							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
-						</div>
-						<div>
-							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
-								<option selected="">Select the category</option>
-								<option value="To do">To do</option>
-								<option value="In Progress">In Progress</option>
-								<option value="Done">Done</option>
-							</select>
-						</div>
-						<div>
-							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
-								onchange="singleSelectChangeText()" required="required">
-								<option value="" disabled selected>Select the assignee</option>
-								<%
-									try {
-										String wID = request.getParameter("wID");
-										Class.forName("com.mysql.cj.jdbc.Driver");
-										Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-										Statement st = con.createStatement();
-										String sql = "SELECT * FROM user WHERE user.wID=" + wID;
-										ResultSet rs = st.executeQuery(sql);
-										int i = 0;
-										while (rs.next()) {
-											String userID = rs.getString("userID");
-											String firstName = rs.getString("firstName");
-								%>
-								<option value="<%=userID%>"><%=firstName%></option>
-								<%
-									}
-									} catch (Exception e) {
-										out.println(e);
-									}
-								%>
-							</select> <input id="selectAssignee" type="hidden" name="assignee">
-						</div>
-						<div>
-							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
-						</div>
+							class="close" title="Schließen">&times;</span>
+					</div>
+					<div class="popupBody_list">
+						<div class="popupInfo">
+							<form action="UploadTask" method="post"
+								enctype="multipart/form-data">
+								<div>
+									<label>Title</label> <input type="text" name="taskName"
+										required="required" /> <input type="hidden" name="wID"
+										value="${login.WID}" />
+								</div>
+								<div>
+									<label>Description</label>
+									<textarea name="description"></textarea>
+								</div>
+								<div>
+									<label>Due Date</label> <input type="date" name="dueDate"
+										style="margin-left: 33px;" required="required">
+								</div>
+								<div>
+									<label>Status</label> <select name="taskStatus"
+										style="margin-left: -2px">
+										<option selected="">Select the category</option>
+										<option value="To do">To do</option>
+										<option value="In Progress">In Progress</option>
+										<option value="Done">Done</option>
+									</select>
+								</div>
+								<div>
+									<label>Assignee</label> <select name="userSID"
+										style="margin-left: -2px" id="assignee"
+										onchange="singleSelectChangeText()" required="required">
+										<option value="" disabled selected>Select the
+											assignee</option>
+										<%
+											try {
+												String wID = request.getParameter("wID");
+												Class.forName("com.mysql.cj.jdbc.Driver");
+												Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
+												Statement st = con.createStatement();
+												String sql = "SELECT * FROM user WHERE user.wID=" + wID;
+												ResultSet rs = st.executeQuery(sql);
+												int i = 0;
+												while (rs.next()) {
+													String userID = rs.getString("userID");
+													String firstName = rs.getString("firstName");
+										%>
+										<option value="<%=userID%>"><%=firstName%></option>
+										<%
+											}
+											} catch (Exception e) {
+												out.println(e);
+											}
+										%>
+									</select> <input id="selectAssignee" type="hidden" name="assignee">
+								</div>
+								<div>
+									<label>Internal Inquiries</label> <input type="text"
+										name="internalInquiries"/>
+								</div>
 
-						<div>
-							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
-						</div>
+								<div>
+									<label>Attachment</label> <input type="file"
+										id="file-upload-button" name="file" required="required" />
+								</div>
 
-						<div>
-							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
-						</div>
+								<div>
+									<label>Completion in %</label> <input type="number"
+										name="completion" required="required" />
+								</div>
 
-						<button type="submit">Save</button>
-					</form>
+								<button type="submit">Save</button>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<script>
-		function singleSelectChangeText() {
-			//Getting Value
+			<script>
+				function singleSelectChangeText() {
+					//Getting Value
 
-			var selObj = document.getElementById("assignee");
-			var selValue = selObj.options[selObj.selectedIndex].text;
+					var selObj = document.getElementById("assignee");
+					var selValue = selObj.options[selObj.selectedIndex].text;
 
-			//Setting Value
-			document.getElementById("selectAssignee").value = selValue;
-		}
-	</script>
+					//Setting Value
+					document.getElementById("selectAssignee").value = selValue;
+				}
+			</script>
 
-	<!-- Pop-Up-Window Profile Settings-->
-	<div id="p_settings" class="profile_popup">
+			<!-- Pop-Up-Window Profile Settings-->
+			<div id="p_settings" class="profile_popup">
 
-		<!-- Window content -->
-		<div class="popupBlock">
-			<div class="popupHeader">
-				Settings <span
-					onclick="document.getElementById('p_settings').style.display='none'
+				<!-- Window content -->
+				<div class="popupBlock">
+					<div class="popupHeader">
+						Settings <span
+							onclick="document.getElementById('p_settings').style.display='none'
 					"
-					class="close" title="Schließen">&times;</span>
-			</div>
-			<div class="popupBody">
-				<input type="hidden" name="userID" value="${login.userID}" /> <input
-					type="hidden" name="wID" value="${login.WID}" /> <img
-					src="pictures/${login.fileName}" style="width: 65px; height: 65px" /><br>
-				<a class="aButtons2"
-					href="editProfilePicture.jsp?userID=${login.userID}"
-					style="margin-left: 70px">Upload new photo</a> <br> <br>
-				<hr>
-				<div class="popupInfo">
-					<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
-					<a style="font-weight: bold">Last Name: </a><a>${login.lastName}</a><br>
-					<a style="font-weight: bold">Email: </a><a>${login.email}</a><br>
-					<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
-					<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
+							class="close" title="Schließen">&times;</span>
+					</div>
+					<div class="popupBody">
+						<input type="hidden" name="userID" value="${login.userID}" /> <input
+							type="hidden" name="wID" value="${login.WID}" /> <img
+							src="pictures/${login.fileName}"
+							style="width: 65px; height: 65px" /><br> <a
+							class="aButtons2"
+							href="editProfilePicture.jsp?userID=${login.userID}"
+							style="margin-left: 70px">Upload new photo</a> <br> <br>
+						<hr>
+						<div class="popupInfo">
+							<a style="font-weight: bold">First Name: </a><a>${login.firstName}</a><br>
+							<a style="font-weight: bold">Last Name: </a><a>${login.lastName}</a><br>
+							<a style="font-weight: bold">Email: </a><a>${login.email}</a><br>
+							<a style="font-weight: bold">Company: </a><a>${login.company}</a><br>
+							<a style="font-weight: bold">Workspace: </a><a>${login.workspace}</a><br>
+						</div>
+						<div style="margin: 15px 25px">
+							<a class="aButtons2"
+								href="editProfile.jsp?userID=${login.userID}"><img
+								src="pictures/settings.png" alt="Settings"
+								style="width: 30px; height: 30px; margin: -4px -35px;">Edit
+								User</a> <a class="aButtons2" href="logout.jsp"
+								style="margin-left: 135px"><img src="pictures/logout.png"
+								style="width: 25px; height: 25px; margin-left: -30px"
+								alt="Logout" />Save and Logout</a>
+						</div>
+					</div>
 				</div>
-				<div style="margin: 15px 25px">
-					<a class="aButtons2" href="editProfile.jsp?userID=${login.userID}"><img
-						src="pictures/settings.png" alt="Settings"
-						style="width: 30px; height: 30px; margin: -4px -35px;">Edit
-						User</a> <a class="aButtons2" href="logout.jsp"
-						style="margin-left: 135px"><img src="pictures/logout.png"
-						style="width: 25px; height: 25px; margin-left: -30px" alt="Logout" />Save
-						and Logout</a>
-				</div>
 			</div>
+
 		</div>
 	</div>
 
 	<div class="background2">
 		<br>
-		<div class="editHeader">Edit Message</div>
 		<hr>
 		<br>
-		<div class="editBody">
+		<div class="editHeader">
 			<%
-				String inboxID = request.getParameter("inboxID");
-				String driver = "com.mysql.jdbc.Driver";
-				String connectionUrl = "jdbc:mysql://localhost:3306/";
-				String database = "meetup";
-				String userid = "root";
-				String password = "";
-				try {
-					Class.forName(driver);
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				}
-				Connection connection = null;
-				Statement statement = null;
-				ResultSet rs = null;
+				request.getParameter("inboxID");
 			%>
-			<%
-				try {
-					connection = DriverManager.getConnection(connectionUrl + database, userid, password);
-					statement = connection.createStatement();
-					String sql = "select * from inbox where inboxID=" + inboxID;
-					rs = statement.executeQuery(sql);
-					while (rs.next()) {
-			%>
-			<form action="UpdateInbox" method="post">
-				<input type="hidden" name=inboxID
-					value="<%=rs.getString("inboxID")%>">
-				<div>
-					<label style="margin-left: 35px">Title</label><input type="text"
-						name="title" value='<%=rs.getString("title")%>' />
-				</div>
-				<div>
-					<label>Assignee</label><input type="text" name="assignee"
-						value='<%=rs.getString("assignee")%>' />
-				</div>
-				<div>
-					<label style="margin-left: -21px;">Workspace</label>
-					<input type="text" name="workspace" value='<%=rs.getString("workspace")%>'/>
-				</div>
-				<div>
-					<label style="margin-left: -72px">Due Date</label><input
-						type="date" name="duedate"
-						value='<%=rs.getDate("duedate").toLocalDate()%>' />
-				</div>
-				<div>
-					<label style="margin-left: -40px">Description</label><textarea
-						name="description" style="hyphens: auto; word-break: break-word; border: none"><%=rs.getString("description")%></textarea>
-				</div>
-
-				<a class="aButtons" href="inbox.jsp?wID=${login.WID}">Back</a>
-				<button type="submit">Update</button>
-			</form>
-
-			<%
-				}
-					connection.close();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			%>
+			Successfully deleted
 		</div>
+		<a class="aButtons" href="inbox.jsp?wID=${login.WID}">Back</a> <br>
+		<br>
 		<hr>
 	</div>
 </body>

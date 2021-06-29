@@ -351,7 +351,6 @@ select2:focus::-ms-value {
     margin: 20px 110px;
     width: 477px;
     height: 210px;
-    cursor: pointer;
     font-size: 20px;
     font-weight: 450;
     padding: 10px 5px;
@@ -405,4 +404,14 @@ table.notifi-item1 {
     position: absolute;
     margin-top: 3%;
     margin-left: 7%;
+}
+
+.backIcon {
+	position: absolute;
+	margin: 0px 5px;
+}
+
+.backIcon img {
+	width:25px;
+	height: 25px;
 }
