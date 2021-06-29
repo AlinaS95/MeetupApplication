@@ -381,12 +381,11 @@
 
 			window.onload = datum
 		</script> <main> <br>
-<<<<<<< HEAD
+
 
 		<!-- Box short messages -->
-=======
+
 		<!-- inbox-->
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
 		<div class="box1">
 			Short Messages: <br> <br>
 			<table class="list">
@@ -428,11 +427,9 @@
 			%>
 		</div>
 
-<<<<<<< HEAD
 		<!-- Box tasks -->
-=======
+
 		<!-- edited tasks-->
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
 		<div class="box2">
 			Most recently edited tasks: <br> <br>
 			<table class="list">
@@ -479,13 +476,10 @@
 				}
 			%>
 		</div>
-<<<<<<< HEAD
 
 		<!-- Box notes -->
-=======
 		
 		<!-- notes-->
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
 		<div class="box3">
 			<a style="margin-right: 160px">Notes:</a><a
 				onclick="document.getElementById('add_note').style.display='block'"
@@ -568,8 +562,6 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
-=======
 		<!-- Pop-Up-Window Delete Note -->
 		<div id="delete_info" class="note_addBlock">
 
@@ -615,7 +607,7 @@
 
 
 	<!-- Favorites-->
->>>>>>> branch 'master' of https://github.com/AlinaS95/MeetupApplication.git
+
 		<h1 class="separator">Favorites</h1>
 
 		<form class="homeForm">
