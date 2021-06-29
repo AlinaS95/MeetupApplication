@@ -19,7 +19,8 @@
 <link rel="stylesheet" type="text/css" href="list.css">
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
+
+<!-- Search Tasks -->
 <script>
 	var request = new XMLHttpRequest();
 	function searchInfo() {
@@ -43,6 +44,8 @@
 </head>
 <body>
 	<div class="background1">
+	
+	<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -56,6 +59,8 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
+			
+			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
@@ -72,6 +77,8 @@
 			</div>
 			<br>
 		</div>
+		
+		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
 				<ul>
@@ -110,6 +117,8 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
+				
+				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
@@ -126,6 +135,7 @@
 				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
 			<hr>
 
+			<!-- second menu -->
 			<ul class="navMenu">
 				<li><img src="pictures/home.png" height="40" width="40"
 					hspace="1" vspace="1" alt="home"><a
@@ -340,6 +350,7 @@
 		</div>
 	</div>
 
+	<!-- main content-->
 	<div class="background2">
 
 		<h1>Inbox</h1>

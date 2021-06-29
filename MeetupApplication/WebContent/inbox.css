@@ -1,5 +1,5 @@
 @charset "ISO-8859-1";
-
+/*all items */
 * {
 	font-size: 20px;
 	font-family: "Times New Roman";
@@ -34,7 +34,6 @@ dialog[open="open"] {
 }*/
 
 dialog::backdrop {
-	/* Ebene zwischen Hintergrund und Dialog-Box, Pseudoelement noch nicht implementiert */
 	
 	position: fixed;
 	top: 0;
