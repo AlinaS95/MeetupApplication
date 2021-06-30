@@ -111,6 +111,8 @@ window.onload = function() {
 </head>
 <body>
 	<div class="background1">
+
+		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -124,6 +126,8 @@ window.onload = function() {
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
+
+			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
@@ -140,6 +144,8 @@ window.onload = function() {
 			</div>
 			<br>
 		</div>
+
+		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
 				<ul>
@@ -167,17 +173,19 @@ window.onload = function() {
 								Time Tracker <span role="tooltip" style="font-weight: normal">You
 									can track your working time here </span>
 							</dfn></a></li>
-					<li><a href="progress.jsp?wID=${login.WID}"
-						style="font-weight: bold"><dfn class="tooltip">
+					<li><a href="progress.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
-					<li><a href="socialmedia.jsp?wID=${login.WID}"><dfn
-								class="tooltip">
+					<li><a href="socialmedia.jsp?wID=${login.WID}"
+						style="font-weight: bold"><dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
+
+				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
@@ -194,6 +202,7 @@ window.onload = function() {
 				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
 			<hr>
 
+			<!-- second menu -->
 			<ul class="navMenu">
 				<li><img src="pictures/home.png" height="40" width="40"
 					hspace="1" vspace="1" alt="home"><a
@@ -273,6 +282,7 @@ window.onload = function() {
 			</script>
 		</div>
 	</div>
+
 	<!-- Pop-Up-Window New Task -->
 	<div id="add_task" class="navigation_addBlock">
 		<!-- Window content -->
@@ -289,8 +299,8 @@ window.onload = function() {
 						enctype="multipart/form-data">
 						<div>
 							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
+								required="required" style="margin-left: 55px" /> <input
+								type="hidden" name="wID" value="${login.WID}" />
 						</div>
 						<div>
 							<label>Description</label>
@@ -298,11 +308,11 @@ window.onload = function() {
 						</div>
 						<div>
 							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
+								style="margin-left: 18px;" required="required">
 						</div>
 						<div>
 							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
+								style="margin-left: 45px">
 								<option selected="">Select the category</option>
 								<option value="To do">To do</option>
 								<option value="In Progress">In Progress</option>
@@ -311,7 +321,7 @@ window.onload = function() {
 						</div>
 						<div>
 							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
+								style="margin-left: 20px" id="assignee"
 								onchange="singleSelectChangeText()" required="required">
 								<option value="" disabled selected>Select the assignee</option>
 								<%
@@ -338,18 +348,20 @@ window.onload = function() {
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
+								name="internalInquiries" />
 						</div>
 
 						<div>
 							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
+								style="margin-left: -1px" id="file-upload-button" name="file"
+								required="required" />
 						</div>
 
 						<div>
 							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
+								style="width: 50px" name="completion" required="required" />
 						</div>
+
 
 						<button type="submit">Save</button>
 					</form>
