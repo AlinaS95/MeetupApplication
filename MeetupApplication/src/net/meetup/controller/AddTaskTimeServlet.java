@@ -32,10 +32,9 @@ public class AddTaskTimeServlet extends HttpServlet {
 		LocalTime startTask = LocalTime.parse(request.getParameter("startTask"));
 		LocalTime stopTask = LocalTime.parse(request.getParameter("stopTask"));
 		String taskSum = request.getParameter("taskSum");
-		String tID  = request.getParameter("tID");
-		String taskSID  = request.getParameter("taskSID");
-		
-		
+		String tID = request.getParameter("tID");
+		String taskSID = request.getParameter("taskSID");
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -50,8 +49,8 @@ public class AddTaskTimeServlet extends HttpServlet {
 			ps.setString(7, tID);
 			ps.setString(8, taskSID);
 			ps.executeUpdate();
-			
-			request.getRequestDispatcher("startTimeTracker.jsp?userSID="+tID).forward(request, response);
+
+			request.getRequestDispatcher("startTimeTracker.jsp?userSID=" + tID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
 		}

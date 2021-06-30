@@ -363,19 +363,6 @@
 				src="pictures/back.png" alt="Back"></a>
 		</div>
 		<div class="header2">Working Time</div>
-		<div class="list_navigation">
-			<nav>
-				<ul>
-					<li><a class="sortPosts"
-						onclick="document.getElementById('posts_sort').style.display='block'"
-						style="width: auto;"><img src="pictures/sort.png" alt="Sort">Sort</a></li>
-					<li><a class="filterDate"
-						onclick="document.getElementById('date_filter').style.display='block'"
-						style="width: auto;"><img src="pictures/filter.png"
-							alt="Settings">Filter</a></li>
-				</ul>
-			</nav>
-		</div>
 		<hr>
 		<%
 			Date dNow = new Date();

@@ -4,7 +4,6 @@ import net.meetup.bean.User;
 import net.meetup.dao.LoginDAO;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;

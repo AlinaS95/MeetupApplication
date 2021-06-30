@@ -390,7 +390,7 @@
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 				Statement st = con.createStatement();
-				String sql = "SELECT * FROM tasks,user WHERE user.firstName = tasks.assignee AND tasks.wID=" + wID;
+				String sql = "SELECT * FROM tasks WHERE tasks.wID=" + wID;
 				ResultSet rs = st.executeQuery(sql);
 				int i = 0;
 				while (rs.next()) {
@@ -411,7 +411,7 @@
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=taskName%></td>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=description%></td>
 				<td style="width: 150px;"><p align="center"><%=dueDate%></td>
-				<td style="width: 150px;"><%=taskStatus%></td>
+				<td style="width: 160px;"><%=taskStatus%></td>
 				<td style="width: 150px;"><%=assignee%></td>
 				<td style="hyphens: auto; word-break: break-word; width: 200px;"><%=internalInquiries%></td>
 				<td style="width: 150px;"><img src="pictures/<%=filenameTask%>" /><a

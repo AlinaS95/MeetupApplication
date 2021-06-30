@@ -43,8 +43,8 @@
 </head>
 <body>
 	<div class="background1">
-	
-	<!-- workspace -->
+
+		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -58,7 +58,7 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
-			
+
 			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
@@ -76,7 +76,7 @@
 			</div>
 			<br>
 		</div>
-		
+
 		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
@@ -116,7 +116,7 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
-				
+
 				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
@@ -214,7 +214,7 @@
 			</script>
 		</div>
 	</div>
-	
+
 	<!-- Pop-Up-Window New Task -->
 	<div id="add_task" class="navigation_addBlock">
 		<!-- Window content -->
@@ -231,8 +231,8 @@
 						enctype="multipart/form-data">
 						<div>
 							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
+								required="required" style="margin-left: 55px" /> <input
+								type="hidden" name="wID" value="${login.WID}" />
 						</div>
 						<div>
 							<label>Description</label>
@@ -240,11 +240,11 @@
 						</div>
 						<div>
 							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
+								style="margin-left: 18px;" required="required">
 						</div>
 						<div>
 							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
+								style="margin-left: 45px">
 								<option selected="">Select the category</option>
 								<option value="To do">To do</option>
 								<option value="In Progress">In Progress</option>
@@ -253,7 +253,7 @@
 						</div>
 						<div>
 							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
+								style="margin-left: 20px" id="assignee"
 								onchange="singleSelectChangeText()" required="required">
 								<option value="" disabled selected>Select the assignee</option>
 								<%
@@ -280,18 +280,20 @@
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
+								name="internalInquiries" />
 						</div>
 
 						<div>
 							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
+								style="margin-left: -1px" id="file-upload-button" name="file"
+								required="required" />
 						</div>
 
 						<div>
 							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
+								style="width: 50px" name="completion" required="required" />
 						</div>
+
 
 						<button type="submit">Save</button>
 					</form>
@@ -349,7 +351,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- main content-->
 	<div class="background2">
 		<br>
@@ -388,10 +390,11 @@
 
 				<%
 					try {
+						String wID = request.getParameter("wID");
 						Class.forName("com.mysql.cj.jdbc.Driver");
 						Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 						Statement st = con.createStatement();
-						String sql = "SELECT * FROM tasks WHERE taskStatus = 'To Do'";
+						String sql = "SELECT * FROM tasks WHERE taskStatus = 'To Do' AND wID="+ wID;
 						ResultSet rs = st.executeQuery(sql);
 						int i = 0;
 						while (rs.next()) {
@@ -403,11 +406,12 @@
 					value='<%=rs.getString("taskID")%>' />
 
 				<div class="taskbox">
-					<p>New Task, which is to do</p>
 					<hr>
-					<a
+					<a style="text-decoration: none" href="list.jsp?wID=${login.WID}"
 						style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px -128px;">Task:
-						<%=taskName%></a> <a
+						<%=taskName%></a><br>
+					<br> <a style="text-decoration: none; margin-left: -60px"
+						href="list.jsp?wID=${login.WID}"
 						style="hyphens: auto; word-break: break-word; position: absolute; margin: 4px -126px;">Date:
 						<%=dueDate%></a>
 				</div>
@@ -426,10 +430,11 @@
 
 			<%
 				try {
+					String wID = request.getParameter("wID");
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Progress'";
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Progress' AND wID="+ wID;
 					ResultSet rs = st.executeQuery(sql);
 					int i = 0;
 					while (rs.next()) {
@@ -440,7 +445,6 @@
 			<input type="hidden" name="taskID"
 				value='<%=rs.getString("taskID")%>' />
 			<div class="taskbox1">
-				<p>New Task, which is in Progress</p>
 				<hr>
 				<a
 					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px -125px;">Task:
@@ -460,10 +464,11 @@
 
 			<%
 				try {
+					String wID = request.getParameter("wID");
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Review'";
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'In Review' AND wID="+ wID;
 					ResultSet rs = st.executeQuery(sql);
 					int i = 0;
 					while (rs.next()) {
@@ -474,7 +479,6 @@
 			<input type="hidden" name="taskID"
 				value='<%=rs.getString("taskID")%>' />
 			<div class="taskbox2">
-				<p>New Task, which is in Review</p>
 				<hr>
 				<a
 					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 20px;">Task:
@@ -493,10 +497,11 @@
 		<div class="task4">
 			<%
 				try {
+					String wID = request.getParameter("wID");
 					Class.forName("com.mysql.cj.jdbc.Driver");
 					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 					Statement st = con.createStatement();
-					String sql = "SELECT * FROM tasks WHERE taskStatus = 'Done'";
+					String sql = "SELECT * FROM tasks WHERE taskStatus = 'Done' AND wID="+ wID;
 					ResultSet rs = st.executeQuery(sql);
 					int i = 0;
 					while (rs.next()) {
@@ -508,7 +513,6 @@
 				value='<%=rs.getString("taskID")%>' />
 
 			<div class="taskbox3">
-				<p>New Task, which is done</p>
 				<hr>
 				<a
 					style="hyphens: auto; word-break: break-word; position: absolute; margin: 42px 17px;">Task:

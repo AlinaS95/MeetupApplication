@@ -3,7 +3,6 @@ package net.meetup.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -26,8 +25,6 @@ import net.meetup.utils.JDBCUtils;
 
 public class AddTaskServlet extends HttpServlet {
 
-	// private static final String SAVE_DIR=*pictures*; //this is our folder name
-
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -43,7 +40,7 @@ public class AddTaskServlet extends HttpServlet {
 		String completion = request.getParameter("completion");
 		String wID = request.getParameter("wID");
 		String userSID = request.getParameter("userSID");
-		
+
 		Part part = request.getPart("file");
 		String fileName = extractFileName(part);// file name
 		String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\"
@@ -68,19 +65,16 @@ public class AddTaskServlet extends HttpServlet {
 			pst.setString(9, completion);
 			pst.setString(10, wID);
 			pst.setString(11, userSID);
-			
+
 			pst.executeUpdate();
-			request.getRequestDispatcher("list.jsp?wID="+wID).forward(request, response);
+			request.getRequestDispatcher("list.jsp?wID=" + wID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
 		}
 
 	}
-	// file name of the upload file is included in content-disposition header like
-	// this:
-	// form-data; name="dataFile"; filename="PHOTO.JPG"
 
-	private String extractFileName(Part part) {// This method will print the file name.
+	private String extractFileName(Part part) { // This method will print the file name.
 		String contentDisp = part.getHeader("content-disposition");
 		String[] items = contentDisp.split(";");
 		for (String s : items) {

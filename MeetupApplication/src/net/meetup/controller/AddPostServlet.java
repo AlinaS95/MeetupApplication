@@ -3,7 +3,6 @@ package net.meetup.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -25,8 +24,6 @@ import net.meetup.utils.JDBCUtils;
 		maxRequestSize = 1024 * 1024 * 50)
 
 public class AddPostServlet extends HttpServlet {
-
-	// private static final String SAVE_DIR=*pictures*; //this is our folder name
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -71,11 +68,8 @@ public class AddPostServlet extends HttpServlet {
 		}
 
 	}
-	// file name of the upload file is included in content-disposition header like
-	// this:
-	// form-data; name="dataFile"; filename="PHOTO.JPG"
 
-	private String extractFileName(Part part) {// This method will print the file name.
+	private String extractFileName(Part part) { // This method will print the file name.
 		String contentDisp = part.getHeader("content-disposition");
 		String[] items = contentDisp.split(";");
 		for (String s : items) {

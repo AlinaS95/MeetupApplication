@@ -34,7 +34,6 @@ public class AddTimeServlet extends HttpServlet {
 		String duration = request.getParameter("duration");
 		String userSID = request.getParameter("userSID");
 
-		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
@@ -48,8 +47,8 @@ public class AddTimeServlet extends HttpServlet {
 			ps.setString(6, duration);
 			ps.setString(7, userSID);
 			ps.executeUpdate();
-			
-			request.getRequestDispatcher("timeTracker.jsp?userID="+userSID).forward(request, response);
+
+			request.getRequestDispatcher("timeTracker.jsp?userID=" + userSID).forward(request, response);
 		} catch (Exception e) {
 			out.println(e);
 		}

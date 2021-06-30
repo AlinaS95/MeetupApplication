@@ -21,7 +21,7 @@
 	</div>
 	<div class="loginbox">
 	<br><br><br>
-		<h1>Already a Member?</h1>
+		<h1>Welcome, ${login.firstName}</h1>
 		<h1>Login here</h1><br>
 		<form name="form" action="login" method="post" id=loginForm>
 			<p>E-Mail</p>
@@ -37,7 +37,6 @@
 			</select>${message}<br><br>
 			
 			<input type="submit" name="btn_login" value="Login">
-			<a class="buttonL" href="registration.jsp">Not a member?</a><br>
 		</form>
 	</div>
 	<script type="text/javascript">

@@ -15,7 +15,6 @@
 <link rel="stylesheet" type="text/css" href="leiste.css">
 <link rel="stylesheet" type="text/css" href="editor.css">
 <link rel="icon" type="image/png" href="pictures/meetup_logo.png">
-<script type="text/javascript" src="methods.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>

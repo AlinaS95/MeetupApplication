@@ -124,8 +124,7 @@
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
-							onclick="document.getElementById('add_task').style.display='block'"
-							style="width: auto;"><img src="pictures/add.png" alt="Add"></a></li>
+							href="list.jsp?wID=${login.WID}"><img src="pictures/add.png" alt="Add"></a></li>
 						<li><a
 							onclick="document.getElementById('p_settings').style.display='block'"
 							style="width: auto;"><img src="pictures/settings.png"
@@ -217,104 +216,6 @@
 			</script>
 		</div>
 	</div>
-	<!-- Pop-Up-Window New Task -->
-	<div id="add_task" class="navigation_addBlock">
-		<!-- Window content -->
-		<div class="popupBlock">
-			<div class="popupHeader">
-				Add new Task <span
-					onclick="document.getElementById('add_task').style.display='none'
-					"
-					class="close" title="Schließen">&times;</span>
-			</div>
-			<div class="popupBody_list">
-				<div class="popupInfo">
-					<form action="UploadTask" method="post"
-						enctype="multipart/form-data">
-						<div>
-							<label>Title</label> <input type="text" name="taskName"
-								required="required" style="margin-left: 55px" /> <input
-								type="hidden" name="wID" value="${login.WID}" />
-						</div>
-						<div>
-							<label>Description</label>
-							<textarea name="description"></textarea>
-						</div>
-						<div>
-							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 18px;" required="required">
-						</div>
-						<div>
-							<label>Status</label> <select name="taskStatus"
-								style="margin-left: 45px">
-								<option selected="">Select the category</option>
-								<option value="To do">To do</option>
-								<option value="In Progress">In Progress</option>
-								<option value="Done">Done</option>
-							</select>
-						</div>
-						<div>
-							<label>Assignee</label> <select name="userSID"
-								style="margin-left: 20px" id="assignee"
-								onchange="singleSelectChangeText()" required="required">
-								<option value="" disabled selected>Select the assignee</option>
-								<%
-									try {
-										String wID = request.getParameter("wID");
-										Class.forName("com.mysql.cj.jdbc.Driver");
-										Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
-										Statement st = con.createStatement();
-										String sql = "SELECT * FROM user WHERE user.wID=" + wID;
-										ResultSet rs = st.executeQuery(sql);
-										int i = 0;
-										while (rs.next()) {
-											String userID = rs.getString("userID");
-											String firstName = rs.getString("firstName");
-								%>
-								<option value="<%=userID%>"><%=firstName%></option>
-								<%
-									}
-									} catch (Exception e) {
-										out.println(e);
-									}
-								%>
-							</select> <input id="selectAssignee" type="hidden" name="assignee">
-						</div>
-						<div>
-							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries" />
-						</div>
-
-						<div>
-							<label>Attachment</label> <input type="file"
-								style="margin-left: -1px" id="file-upload-button" name="file"
-								required="required" />
-						</div>
-
-						<div>
-							<label>Completion in %</label> <input type="number"
-								style="width: 50px" name="completion" required="required" />
-						</div>
-
-
-
-						<button type="submit">Save</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-	<script>
-		function singleSelectChangeText() {
-			//Getting Value
-
-			var selObj = document.getElementById("assignee");
-			var selValue = selObj.options[selObj.selectedIndex].text;
-
-			//Setting Value
-			document.getElementById("selectAssignee").value = selValue;
-		}
-	</script>
 
 	<!-- Pop-Up-Window Profile Settings-->
 	<div id="p_settings" class="profile_popup">

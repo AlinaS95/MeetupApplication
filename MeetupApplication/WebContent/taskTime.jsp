@@ -40,6 +40,7 @@
 </head>
 <body>
 	<div class="background1">
+		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -53,6 +54,8 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
+			
+			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
 					<span class="searchicon"><img src="pictures/search.png"></span>
@@ -69,6 +72,8 @@
 			</div>
 			<br>
 		</div>
+		
+		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
 				<ul>
@@ -107,6 +112,7 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
+				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
 						<li><a class="add"
@@ -122,7 +128,8 @@
 			<dialog id="dialog"> <img src="pictures/meetup_logo.png"
 				height="70" width="80" alt="Meetup Logo" hspace="100" vspace="10">
 			<hr>
-
+			
+			<!-- second menu -->
 			<ul class="navMenu">
 				<li><img src="pictures/home.png" height="40" width="40"
 					hspace="1" vspace="1" alt="home"><a
@@ -373,7 +380,7 @@
 								out.println("No tasks today");
 							}
 						%></td>
-					<td style="text-align: right; padding: 0px 10px">
+					<td style="text-align: right; padding: 0px 10px; width: 600px">
 						<%
 							try {
 								String taskSID = request.getParameter("taskSID");

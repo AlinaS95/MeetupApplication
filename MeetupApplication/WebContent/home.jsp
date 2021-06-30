@@ -414,7 +414,7 @@
 				value='<%=rs.getString("inboxID")%>' />
 			<table class="homeTask">
 				<tr class="tableTask">
-					<td id="title"><a href="inbox.jsp?wID=${login.WID}" style="text-decoration: none"><%=title%></a></td>
+					<td id="title" style="width: 200px"><a href="inbox.jsp?wID=${login.WID}" style="text-decoration: none"><%=title%></a></td>
 					<td style="width: 150px;"><a href="inbox.jsp?wID=${login.WID}" style="text-decoration: none"><%=dueDate%></a></td>
 				</tr>
 				</tbody>

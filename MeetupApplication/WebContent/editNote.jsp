@@ -375,7 +375,7 @@
 					<label style="margin-left: -70px">Date</label><input type="date"
 						name="date" value='<%=rs.getDate("date").toLocalDate()%>' />
 				</div>
-				<a class="aButtons" href="home.jsp">Back</a>
+				<a class="aButtons" href="home.jsp?wID=${login.WID}">Back</a>
 				<button type="submit">Update</button>
 			</form>
 

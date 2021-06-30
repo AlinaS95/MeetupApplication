@@ -5,80 +5,8 @@
 	font-family: "Times New Roman";
 	color: #707070;
 }
-/*Pop-up new notification
-dialog.inbox {
-	display: none;
-	position: relative;
-	background: white;
-	border: 1px solid grey;
-	border-radius: 0 .5em .5em;
-	z-index: 1002;
-	padding: .5em 1em;
-	width: 100%;
-	height: auto;
-}
 
-dialog[open="open"] {
-	display: block;
-}
-
-@media (min-width: 30em) {
-	dialog.inbox {
-		position: absolute;
-		top: 50%;
-		margin-top: -10em;
-		left: 50%;
-		margin-left: -10em;
-		width: 20em;
-	}
-}*/
-
-dialog::backdrop {
-	
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-#mybackdrop {
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-}
-
-dialog #close-dialog {
-    position: absolute;
-    right: 0;
-    top: 0;
-    height: 2em;
-    cursor: pointer;
-    background-color: #e5e5e5;
-    color: white;
-    font-weight: bold;
-    font-size: 1.5em;
-    border-radius: 0 0 .5em 0.5em;
-    border-color: white;
-}
-
-/*Wichtigkeits-Balken*/
-.inboxbox3 #rechteck7 {
-    background-color: #FFDEAD;
-    position: absolute;
-    width: 354px;
-    height: 9px;
-    bottom: 12px;
-    left: 125px;
-    border: 1px solid #d7d7d7;
-    text-align: center;
-    border-radius: 80px;
-}
-/*Leiste Einstellungen*/
+/*settings leiste*/
 ul#navigation {
     margin: 0px;
     padding: 0px;
@@ -86,7 +14,7 @@ ul#navigation {
   
 }
 ul#navigation li {
-	padding: 0px;
+	padding: -15px;
 	margin: 0px;
 	display: inline;
 }
@@ -107,157 +35,6 @@ ul#navigation li a:hover {
 	background-color: #707070;
 	padding: 2px 5px 2px 5px;
 	color: #fff;
-}
-/*Line */
-.bl {
-    padding: 8px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -2px;
-}
-.bl1 {
-    padding: 8px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -56px;
-}
-  /*Time Posting*/
-.bl2 {
-    padding: 2px;
-    font-size: 12px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -56px;
-}
-.bl3 {
-    padding: 2px;
-    font-size: 12px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -56px;
-}
-.bl4 {
-    padding: 2px;
-    font-size: 12px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -56px;
-}
-.bl5 {
-    padding: 2px;
-    font-size: 12px;
-    border-left: 2px solid #aca9a9;
-    position: absolute;
-    margin-left: 10px;
-    margin-top: -56px;
-}
-  /* Drop Down */
-select2 {
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    appearance: none;
-    border: none;
-    position: absolute;
-    margin-top: 1%;
-    margin-left: -50%;
-    width: 99%;
-    height: 40px;
-    -moz-padding-start: calc(10px-3px);
-    padding-left: 10px;
-    background: url(fff-0-2.png) repeat;
-    box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 30%);
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
-}
-
-select2::-ms-expand {
-  display: none;
-}
-
-select2 option {
-  color: #666;
-}
-
-select2:focus::-ms-value {
-  background-color: transparent;
-}
-
-.select-wrapper {
-  /* ... */
-  position: relative;
-}
-
-.select-wrapper::before {
-  font-family: fontello;
-  content: url(pictures/splitButton);
-  font-size: 20px;
-  position: absolute;
-  right: 15px;
-  top: 10px;
-  color: #eaeaea;
-  pointer-events: none;
-}
-
-
-.select-wrapper .signtonavigate img {
-    position: relative;
-    margin-top: 1.5%;
-    margin-left: 94%;
-    width: 23px;
-    height: 28px;
-}
-/* profile*/
-.inboxbox3 #avatar img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -10%;
-    margin-left: -9%;
-    border: 1px solid #aca9a9;
-    border-radius: 100px;
-}
-/* delete*/
-.inboxbox3 #delete img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -11%;
-    margin-left: 60%;
-}
-/* reply*/
-.inboxbox3 #reply img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -10%;
-    margin-left: 69%;
-}
-.inboxbox #reply img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -15%;
-    margin-left: 69%;
-}
-.inboxbox1 #reply img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -15%;
-    margin-left: 69%;
-}
-.inboxbox2 #reply img {
-    display: block;
-    width: 41px;
-    position: absolute;
-    margin-top: -15%;
-    margin-left: 69%;
 }
 
 /* Kreise */
@@ -342,14 +119,14 @@ select2:focus::-ms-value {
     margin-top: -15%;
     margin-left: 79%;
 }
-/* Boxen*/
 
+/* Boxen*/
 .inboxbox {
     border-radius: 5px 5px 0 0;
     overflow: hidden;
     box-shadow: 0 0 20px rgb(0 0 0 / 15%);
-    margin: 20px 110px;
-    width: 477px;
+    margin: 20px 420px;
+    width: 570px;
     height: 210px;
     font-size: 20px;
     font-weight: 450;

@@ -46,7 +46,7 @@ public class RegisterController extends HttpServlet {
 			Integer wID = Integer.parseInt(request.getParameter("wID"));
 			
 			Part part = request.getPart("file");
-			String fileName = extractFileName(part);// file name
+			String fileName = extractFileName(part); // file name
 			String savePath = "C:\\Users\\alina\\git\\MeetupApplication\\MeetupApplication\\WebContent\\pictures\\"
 					+ File.separator + fileName;
 			File fileSaveDir = new File(savePath);
@@ -70,7 +70,7 @@ public class RegisterController extends HttpServlet {
 				if (result == 1) {
 					HttpSession session = request.getSession();
 					session.setAttribute("login", user);
-					destPage = "profile.jsp?wID="+ user.getWID();
+					destPage = "welcome.jsp";
 				}
 				RequestDispatcher dispatcher = request.getRequestDispatcher(destPage);
 				dispatcher.forward(request, response);
@@ -79,7 +79,7 @@ public class RegisterController extends HttpServlet {
 			}
 	}
 	
-	private String extractFileName(Part part) {// This method will print the file name.
+	private String extractFileName(Part part) { // This method will print the file name.
 		String contentDisp = part.getHeader("content-disposition");
 		String[] items = contentDisp.split(";");
 		for (String s : items) {

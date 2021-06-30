@@ -309,77 +309,6 @@ nav ul li {
 	position: absolute;
 }
 
-/* navigation*/
-.mainmenu nav {
-	height: 80px;
-	letter-spacing: 2px;
-	background-color: #F0F0F0;
-	padding: 10px 10px;
-}
-
-.mainmenu nav ul {
-	float: left;
-	flex-direction: column;
-	background-color: #F0F0F0;
-	padding: 0px 0px;
-}
-
-.mainmenu nav ul li { /* menu bar */
-	float: left;
-	list-style: none;
-	position: relative;
-	z-index: 2;
-}
-
-.mainmenu nav ul li a { /* menu bar a */
-	text-decoration: none;
-	display: flex;
-	font-family: "Times New Roman";
-	color: #707070;
-	font-size: 25px;
-	padding: 0px 50px;
-	cursor: pointer;
-}
-
-.mainmenu nav ul li a img {
-	width: 50px;
-	height: 50px;
-	margin-top: -8px;
-	margin-left: -25px;
-}
-
-/* add and settings */
-.mainmenu nav .secondNavigation ul { /* menu bar a */
-	float: right;
-	flex-direction: column;
-	background-color: #F0F0F0;
-	padding: 0px 0px;
-}
-
-.mainmenu nav .secondNavigation ul li a { /* menu bar a */
-	text-decoration: none;
-	display: flex;
-	font-family: "Times New Roman";
-	color: #707070;
-	font-size: 25px;
-	padding: 0px 10px;
-	cursor: pointer;
-}
-
-.mainmenu nav .secondNavigation img{
-	margin: 0px 15px;
-	margin-top: -3px;
-	width: 35px;
-	height: 35px;
-}
-
-.mainmenu nav .secondNavigation .add img{
-	width: 30px;
-	height: 30px;
-	margin-top: 0px;
-}
-
-
 /* Background Pop-Up-Window*/
 .navigation_addBlock {
 	display: none;
@@ -879,29 +808,7 @@ table.homeTask tbody img {
   width: 50px;
   border-radius: 50%;
 }
-/*Inbox-Pop Up*/
 
-nav  {
-    display: flex;
-    align-items: center;
-    background: #F0F0F0;
-    height: 1px;
-    position: relative;
-}
-nav .icon {
-	cursor: pointer;
-	margin-right: 85px;
-	line-height: 25px;
-	font-size: 20px;
-
-}
-nav .icon img {
-    display: inline-block;
-    position: absolute;
-    width: 84px;
-    margin-top: 340px;
-    margin-left: 1081px;
-}
 .icon:hover {
 	opacity: .7;
 }

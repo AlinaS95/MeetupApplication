@@ -18,12 +18,13 @@
 	String dataPoints = null;
 
 	try {
+		String wID = request.getParameter("wID");
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/meetup", "root", "");
 		Statement statement = connection.createStatement();
 		String xVal, yVal;
 
-		ResultSet resultSet = statement.executeQuery("SELECT * FROM tasks");
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM tasks WHERE wID="+ wID);
 
 		while (resultSet.next()) {
 			xVal = resultSet.getString("taskName");
@@ -82,7 +83,7 @@
 			},
 
 			axisY : {
-				title : "Task Status",
+				title : "Task Status in %",
 				labelFormatter : addSymbols
 			},
 			data : [ {
@@ -176,13 +177,13 @@
 								Time Tracker <span role="tooltip" style="font-weight: normal">You
 									can track your working time here </span>
 							</dfn></a></li>
-					<li><a href="progress.jsp?wID=${login.WID}"><dfn
+					<li><a href="progress.jsp?wID=${login.WID}" style="font-weight: bold"><dfn
 								class="tooltip">
 								Progress <span role="tooltip" style="font-weight: normal">Here
 									you can find your project and team status</span>
 							</dfn></a></li>
 					<li><a href="socialmedia.jsp?wID=${login.WID}"
-						style="font-weight: bold"><dfn class="tooltip">
+						><dfn class="tooltip">
 								Social Media <span role="tooltip" style="font-weight: normal">Here
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>

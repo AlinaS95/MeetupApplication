@@ -64,7 +64,6 @@ dialog[open] {
 	padding-bottom:1px;
 }
 .select-wrapper {
-  /* ... */
   position: relative;
 }
 .select-wrapper::before {

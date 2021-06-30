@@ -25,10 +25,10 @@
 							+ rs.getString(5) + "</a></td></tr>");
 				}
 				out.print("</table>");
-			} //end of else for rs.isBeforeFirst  
+			}
 			con.close();
 		} catch (Exception e) {
 			out.print(e);
 		}
-	} //end of else
+	}
 %>

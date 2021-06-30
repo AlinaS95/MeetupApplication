@@ -44,8 +44,8 @@
 </head>
 <body>
 	<div class="background1">
-	
-	<!-- workspace -->
+
+		<!-- workspace -->
 		<div class="headliner_block">
 			<div class="logo">
 				<a href="home.jsp?wID=${login.WID}"><img
@@ -59,7 +59,7 @@
 					src="pictures/infoicon.png" alt="Information"></a>
 			</div>
 			<br>
-			
+
 			<!-- search block -->
 			<div class="secondblock">
 				<div class="searchbox">
@@ -77,7 +77,7 @@
 			</div>
 			<br>
 		</div>
-		
+
 		<!-- main menu -->
 		<div class="mainmenu">
 			<nav>
@@ -86,8 +86,8 @@
 								<img src="pictures/navigation.png"
 									style="width: 50px; height: 50px" alt="Menu">
 							</button></a></li>
-					<li><a href="home.jsp?wID=${login.WID}"
-						style="font-weight: bold"><dfn class="tooltip">
+					<li><a href="home.jsp?wID=${login.WID}"><dfn
+								class="tooltip">
 								Home <span role="tooltip" style="font-weight: normal">You
 									can find the home area here </span>
 							</dfn></a></li>
@@ -117,7 +117,7 @@
 									you can find everything about your social media tasks</span>
 							</dfn></a></li>
 				</ul>
-				
+
 				<!-- second navigation -->
 				<div class="secondNavigation">
 					<ul>
@@ -215,6 +215,7 @@
 			</script>
 		</div>
 	</div>
+
 	<!-- Pop-Up-Window New Task -->
 	<div id="add_task" class="navigation_addBlock">
 		<!-- Window content -->
@@ -231,8 +232,8 @@
 						enctype="multipart/form-data">
 						<div>
 							<label>Title</label> <input type="text" name="taskName"
-								required="required" /> <input type="hidden" name="wID"
-								value="${login.WID}" />
+								required="required" style="margin-left: 55px" /> <input
+								type="hidden" name="wID" value="${login.WID}" />
 						</div>
 						<div>
 							<label>Description</label>
@@ -240,11 +241,11 @@
 						</div>
 						<div>
 							<label>Due Date</label> <input type="date" name="dueDate"
-								style="margin-left: 33px;" required="required">
+								style="margin-left: 18px;" required="required">
 						</div>
 						<div>
 							<label>Status</label> <select name="taskStatus"
-								style="margin-left: -2px">
+								style="margin-left: 45px">
 								<option selected="">Select the category</option>
 								<option value="To do">To do</option>
 								<option value="In Progress">In Progress</option>
@@ -253,7 +254,7 @@
 						</div>
 						<div>
 							<label>Assignee</label> <select name="userSID"
-								style="margin-left: -2px" id="assignee"
+								style="margin-left: 20px" id="assignee"
 								onchange="singleSelectChangeText()" required="required">
 								<option value="" disabled selected>Select the assignee</option>
 								<%
@@ -280,18 +281,20 @@
 						</div>
 						<div>
 							<label>Internal Inquiries</label> <input type="text"
-								name="internalInquiries"/>
+								name="internalInquiries" />
 						</div>
 
 						<div>
 							<label>Attachment</label> <input type="file"
-								id="file-upload-button" name="file" required="required" />
+								style="margin-left: -1px" id="file-upload-button" name="file"
+								required="required" />
 						</div>
 
 						<div>
 							<label>Completion in %</label> <input type="number"
-								name="completion" required="required" />
+								style="width: 50px" name="completion" required="required" />
 						</div>
+
 
 						<button type="submit">Save</button>
 					</form>
@@ -391,24 +394,24 @@
 					<div class="popupInfo">
 						<form action="UploadInbox" method="post">
 							<div>
-								<label style="margin-left:20px">Assignee</label> <input type="text" name="assignee"
-									required="required" />
+								<label style="margin-left: 20px">Assignee</label> <input
+									type="text" name="assignee" required="required" />
 							</div>
 							<div>
-								<label style="margin-left:57px">Title</label> <input type="text" name="title"
-									required="required" />
+								<label style="margin-left: 57px">Title</label> <input
+									type="text" name="title" required="required" />
 							</div>
 							<div>
 								<label>Description</label> <input type="text" name="description"
 									required="required" />
 							</div>
 							<div>
-								<label style="margin-left:5px">Workspace</label> <input type="text" name="workspace"
-									required="required" />
+								<label style="margin-left: 5px">Workspace</label> <input
+									type="text" name="workspace" required="required" />
 							</div>
 							<div>
-								<label style="margin-left: 18px;">Due Date</label> <input type="date" name="dueDate"
-									required="required">
+								<label style="margin-left: 18px;">Due Date</label> <input
+									type="date" name="dueDate" required="required">
 							</div>
 							<button type="submit">Save</button>
 						</form>
@@ -442,7 +445,7 @@
 			value='<%=rs.getString("inboxID")%>' />
 
 		<div class="inboxbox" name="new message">
-			<p>New Message</p>
+			<p style="font-weight: bold">New Message</p>
 			<hr>
 
 			<a
@@ -452,15 +455,15 @@
 				<%=title%></a> <a
 				style="width: 235px; position: absolute; margin: 70px -200px; text-align: left">Description:
 				<%=description%></a> <a
-				style="width: 225px; position: absolute; margin: 40px 0px"">Workspace:
+				style="width: 225px; position: absolute; margin: 40px 50px">Workspace:
 				<%=workspace%></a> <a
 				style="width: 115px; height: 35px; position: absolute; margin: -54px -215px;"><%=dueDate%></a>
 			<a href="editInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 				src="pictures/settings.png" alt="Settings"
-				style="width: 25px; height: 25px; position: absolute; margin: -55px 200px;"></a>
+				style="width: 35px; height: 35px; position: absolute; margin: -60px 230px;"></a>
 			<a href="deleteInbox.jsp?inboxID=<%=rs.getString("inboxID")%>"><img
 				src="pictures/delete2.png" alt="Delete post"
-				style="width: 15px; height: 15px; position: absolute; margin: -50px 170px; cursor:pointer" />
+				style="width: 25px; height: 25px; position: absolute; margin: -55px 190px; cursor: pointer" />
 			</a>
 		</div>
 		<%
